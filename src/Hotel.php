@@ -71,7 +71,7 @@ class Hotel extends DB
 
     public function updateHotel()
     {
-
+        // TODO
     }
 
     public function deleteHotel($hotelID, $hotelName)
