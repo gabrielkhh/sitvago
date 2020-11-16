@@ -23,6 +23,16 @@ else if ($dataFromClient['option'] === 'updateHotel')
 {
     //TODO
 }
+else if ($dataFromClient['option'] === 'deleteHotel')
+{
+    $hotel = new Hotel();
+
+    $hotelID = $dataFromClient['id'];
+    $hotelName = $dataFromClient['name'];
+
+    $result = $hotel->deleteHotel($hotelID, $hotelName);
+    echo json_encode($result);
+}
 
 
 

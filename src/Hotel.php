@@ -74,8 +74,35 @@ class Hotel extends DB
 
     }
 
-    public function deleteHotel($hotelID)
+    public function deleteHotel($hotelID, $hotelName)
     {
         $results = [];
+        $success = true;
+        $preparedSQL = "DELETE FROM Hotel WHERE id=?";
+
+
+        if ($this->conn->connect_error) {
+            $errorMsg = "Connection failed: " . $this->conn->connect_error;
+            $success = false;
+            $response['success'] = $success;
+            $response['message'] = "Connection Error";
+            $response['error'] = $errorMsg;
+        } else {
+            $stmt = $this->conn->prepare($preparedSQL);
+            $stmt->bind_param("i", $hotelID);
+            if (!$stmt->execute()) {
+                $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
+                $response['success'] = $success;
+                $response['message'] = "Hotel Hellll";
+                $response['error'] = $errorMsg;
+            } else {
+                $response['success'] = $success;
+                $response['message'] = $hotelName . " has been successfully deleted from the database.";
+                $response['error'] = "";
+            }
+            $stmt->close();
+        }
+        $this->conn->close();
+        return $response;
     }
 }

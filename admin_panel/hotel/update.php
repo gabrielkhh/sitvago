@@ -1,11 +1,4 @@
 <?php
-// $servername = "localhost";
-// $username = "root";
-// $password = "";
-// $dbname = "sample_hotel_db";
-
-// $conn = mysqli_connect($servername, $username, $password, $dbname);
-
 $id = $_GET['key'];
 
 require '../../vendor/autoload.php';
@@ -124,7 +117,9 @@ and open the template in the editor.
 </body>
 
 </html>
-
+<script type="text/javascript">
+    var hotelName = "<?= $rowHotel['name']; ?>";
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
         var buttonSave = document.getElementById("btnSave");
@@ -180,7 +175,7 @@ and open the template in the editor.
         var deleteHotel = function(e) {
             var id = $(this).attr("value");
 
-            var webFormData = new WebFormInfo("updateHotel", id, "", "", "");
+            var webFormData = new WebFormInfo("deleteHotel", id, hotelName, "", "");
             var webFormDataInString = JSON.stringify(webFormData);
 
 

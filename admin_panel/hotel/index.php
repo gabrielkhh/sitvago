@@ -45,7 +45,7 @@ and open the template in the editor.
                             <h3>Manage Hotels</h3>
                         </div>
                         <div class="col-md-2">
-                            <a role="button" class="float-right btn btn-info" href="/hotel/create.php">Add Hotel</a>
+                            <a role="button" class="float-right btn btn-info" href="create.php">Add Hotel</a>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -69,7 +69,7 @@ and open the template in the editor.
                                                 <td><?= $row['area_name'] ?></td>
                                                 <td><?= $row['created_by'] ?></td>
                                                 <td><?= $row['updated_by'] ?></td>
-                                                <td><a role="button" class="btn btn-primary updateBtn" href="/hotel/update.php?key=<?= $row['id'] ?>" value="<?= $row['id'] ?>">Update</a></td>
+                                                <td><a role="button" class="btn btn-primary updateBtn" href="update.php?key=<?= $row['id'] ?>" value="<?= $row['id'] ?>">Update</a></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
