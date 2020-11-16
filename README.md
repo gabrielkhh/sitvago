@@ -1,2 +1,2 @@
-# sitvago
+# SITVAGO
 Hotel? Sitvago!!
