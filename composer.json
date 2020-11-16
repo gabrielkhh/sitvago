@@ -1,0 +1,10 @@
+{
+    "name": "p4team8/sitvago",
+    "type": "project",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "sitvago\\": "src/"
+        }
+    }
+}
