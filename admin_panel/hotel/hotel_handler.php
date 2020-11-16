@@ -21,7 +21,7 @@ if ($dataFromClient['option'] === 'createHotel')
 }
 else if ($dataFromClient['option'] === 'updateHotel')
 {
-    
+    //TODO
 }
 
 
