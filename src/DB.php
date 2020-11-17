@@ -11,7 +11,7 @@ class DB
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "sitvago_test_db";
+        $dbname = "sitvago_db";
         $this->conn = mysqli_connect($servername, $username, $password, $dbname);
     }
 

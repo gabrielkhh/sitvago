@@ -21,7 +21,17 @@ if ($dataFromClient['option'] === 'createHotel')
 }
 else if ($dataFromClient['option'] === 'updateHotel')
 {
-    //TODO
+    $hotel = new Hotel();
+
+    $hotelID = $dataFromClient['id'];
+    $hotelName = $dataFromClient['name'];
+    $hotelGeoLocation = $dataFromClient['geoLocation'];
+    $hotelDescription = $dataFromClient['description'];
+    $rating = 5.00;
+    $userID = 1;
+
+    $result = $hotel->updateHotel($hotelID, $hotelName, $hotelDescription, $hotelGeoLocation, $rating, $userID);
+    echo json_encode($result);
 }
 else if ($dataFromClient['option'] === 'deleteHotel')
 {
@@ -33,8 +43,6 @@ else if ($dataFromClient['option'] === 'deleteHotel')
     $result = $hotel->deleteHotel($hotelID, $hotelName);
     echo json_encode($result);
 }
-
-
 
 
 

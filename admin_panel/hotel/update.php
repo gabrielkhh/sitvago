@@ -70,7 +70,7 @@ and open the template in the editor.
                                                     <option value="" disabled>Choose a region</option>
                                                     <?php
                                                     foreach ($resultsGeo as $row) {
-                                                        if ($row['id'] === $rowHotel['area_id']) {
+                                                        if ($row['id'] === $rowHotel['geo_id']) {
                                                             echo "<option value='" . $row['name'] . "' selected>";
                                                             echo $row['name'];
                                                             echo "</option>";
@@ -118,6 +118,7 @@ and open the template in the editor.
 
 </html>
 <script type="text/javascript">
+    var hotelID = <?= $id; ?>;
     var hotelName = "<?= $rowHotel['name']; ?>";
 </script>
 <script>
@@ -126,22 +127,23 @@ and open the template in the editor.
         var buttonDelete = document.getElementById("btnDelete");
         var buttonCancel = document.getElementById("btnCancel");
 
-        function WebFormInfo(option, hotelID, hotelName, hotelArea, hotelDescription) {
-            this.option = option;
+        function WebFormInfo(inOption, hotelID, hotelName, hotelGeoLocation, hotelDescription) {
+            this.option = inOption;
             this.id = hotelID;
             this.name = hotelName;
-            this.area = hotelArea;
+            this.geoLocation = hotelGeoLocation;
             this.description = hotelDescription;
         }
 
         var saveHotel = function(e) {
             var collectedHotelName = $("#inputHotelName").val();
-            var collectedArea = $("#selectArea").val();
+            var collectedGeoLocation = $("#selectArea").val();
             var collectedHotelDescription = encodeURI(CKEDITOR.instances.hotelDescription.getData());
             var id = $(this).attr("value");
 
-            var webFormData = new WebFormInfo("updateHotel", id, collectedHotelName, collectedArea, collectedHotelDescription);
+            var webFormData = new WebFormInfo("updateHotel", id, collectedHotelName, collectedGeoLocation, collectedHotelDescription);
             var webFormDataInString = JSON.stringify(webFormData);
+            console.log(webFormDataInString);
 
             // If statement for future validation checks.
             if (true) {
@@ -165,7 +167,7 @@ and open the template in the editor.
                 $saveHotelHandler.fail(function(jqXHR, textStatus, error) {
                     swal({
                         title: "Something Went Wrong :(",
-                        text: "Test",
+                        text: textStatus,
                         icon: "error"
                     });
                 });
@@ -173,11 +175,8 @@ and open the template in the editor.
         }
 
         var deleteHotel = function(e) {
-            var id = $(this).attr("value");
-
-            var webFormData = new WebFormInfo("deleteHotel", id, hotelName, "", "");
+            var webFormData = new WebFormInfo("deleteHotel", hotelID, hotelName, "", "");
             var webFormDataInString = JSON.stringify(webFormData);
-
 
             swal({
                     title: "Are You Sure?",

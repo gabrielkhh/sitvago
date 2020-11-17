@@ -1,6 +1,6 @@
-CREATE SCHEMA `sitvago_test_db` DEFAULT CHARACTER SET utf8 ;
--- USE `sitvago_test_db`;
-CREATE TABLE `sitvago_test_db`.`User` (
+CREATE SCHEMA `sitvago_db` DEFAULT CHARACTER SET utf8 ;
+-- USE `sitvago_db`;
+CREATE TABLE `sitvago_db`.`User` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `first_name` varchar(100),
   `last_name` varchar(100),
@@ -16,12 +16,12 @@ CREATE TABLE `sitvago_test_db`.`User` (
   `created_at` datetime,
   `updated_at` datetime
 );
-CREATE TABLE `sitvago_test_db`.`Role` (
+CREATE TABLE `sitvago_db`.`Role` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(100),
   `created_at` datetime
 );
-CREATE TABLE `sitvago_test_db`.`HotelRoomCategory` (
+CREATE TABLE `sitvago_db`.`HotelRoomCategory` (
   `hotel_id` int,
   `room_category_id` int,
   `availability` bit,
@@ -33,7 +33,7 @@ CREATE TABLE `sitvago_test_db`.`HotelRoomCategory` (
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
-CREATE TABLE `sitvago_test_db`.`RoomCategory` (
+CREATE TABLE `sitvago_db`.`RoomCategory` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `category_name` varchar(100),
   `created_at` datetime,
@@ -43,7 +43,7 @@ CREATE TABLE `sitvago_test_db`.`RoomCategory` (
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
-CREATE TABLE `sitvago_test_db`.`Room` (
+CREATE TABLE `sitvago_db`.`Room` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `room_number` varchar(100),
   `created_at` datetime,
@@ -53,7 +53,7 @@ CREATE TABLE `sitvago_test_db`.`Room` (
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
-CREATE TABLE `sitvago_test_db`.`Hotel` (
+CREATE TABLE `sitvago_db`.`Hotel` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
   `description` mediumtext,
@@ -68,7 +68,7 @@ CREATE TABLE `sitvago_test_db`.`Hotel` (
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
-CREATE TABLE `sitvago_test_db`.`HotelImage` (
+CREATE TABLE `sitvago_db`.`HotelImage` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `url` varchar(255),
   `hotel_id` int,
@@ -78,7 +78,7 @@ CREATE TABLE `sitvago_test_db`.`HotelImage` (
   `width` int,
   `height` int
 );
-CREATE TABLE `sitvago_test_db`.`UserImage` (
+CREATE TABLE `sitvago_db`.`UserImage` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `user_id` int NOT NULL UNIQUE,
   `url` varchar(255),
@@ -88,7 +88,7 @@ CREATE TABLE `sitvago_test_db`.`UserImage` (
   `height` int,
   FOREIGN KEY (`user_id`) REFERENCES `User` (`id`)
 );
-CREATE TABLE `sitvago_test_db`.`AboutUs` (
+CREATE TABLE `sitvago_db`.`AboutUs` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `description` mediumtext,
   `created_at` datetime,
@@ -98,7 +98,7 @@ CREATE TABLE `sitvago_test_db`.`AboutUs` (
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
-CREATE TABLE `sitvago_test_db`.`GeoLocation` (
+CREATE TABLE `sitvago_db`.`GeoLocation` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
   `created_at` datetime,
@@ -108,7 +108,7 @@ CREATE TABLE `sitvago_test_db`.`GeoLocation` (
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
-CREATE TABLE `sitvago_test_db`.`Booking` (
+CREATE TABLE `sitvago_db`.`Booking` (
   `hotel_id` int,
   `user_id` int,
   `price` float,
@@ -122,7 +122,7 @@ CREATE TABLE `sitvago_test_db`.`Booking` (
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
-CREATE TABLE `sitvago_test_db`.`FAQ` (
+CREATE TABLE `sitvago_db`.`FAQ` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `question` varchar(255),
   `answer` varchar(255),
@@ -133,7 +133,7 @@ CREATE TABLE `sitvago_test_db`.`FAQ` (
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
-CREATE TABLE `sitvago_test_db`.`Review` (
+CREATE TABLE `sitvago_db`.`Review` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `user_id` int,
   `hotel_id` int,
@@ -147,24 +147,28 @@ CREATE TABLE `sitvago_test_db`.`Review` (
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
-ALTER TABLE `sitvago_test_db`.`User`
+ALTER TABLE `sitvago_db`.`User`
 ADD FOREIGN KEY (`role_id`) REFERENCES `Role` (`id`);
-ALTER TABLE `sitvago_test_db`.`Hotel`
+ALTER TABLE `sitvago_db`.`Hotel`
 ADD FOREIGN KEY (`geo_id`) REFERENCES `GeoLocation` (`id`);
-ALTER TABLE `sitvago_test_db`.`HotelImage`
+ALTER TABLE `sitvago_db`.`HotelImage`
 ADD FOREIGN KEY (`hotel_id`) REFERENCES `Hotel` (`id`);
-ALTER TABLE `sitvago_test_db`.`Booking`
+ALTER TABLE `sitvago_db`.`Booking`
 ADD FOREIGN KEY (`hotel_id`) REFERENCES `Hotel` (`id`);
-ALTER TABLE `sitvago_test_db`.`Booking`
+ALTER TABLE `sitvago_db`.`Booking`
 ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
-ALTER TABLE `sitvago_test_db`.`Review`
+ALTER TABLE `sitvago_db`.`Review`
 ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
-ALTER TABLE `sitvago_test_db`.`Review`
+ALTER TABLE `sitvago_db`.`Review`
 ADD FOREIGN KEY (`hotel_id`) REFERENCES `Hotel` (`id`);
 
 -- Seed Data
-USE `sitvago_test_db`;
+USE `sitvago_db`;
 INSERT INTO Role (name, created_at) VALUES("Administrator", now());
 INSERT INTO Role (name, created_at) VALUES("User", now());
 
 INSERT INTO User (first_name, last_name, username, email, phone_number, country, password, billing_address, card_number, role_id, is_confirmed, created_at, updated_at) VALUES("Towkay", NULL, "admin", "admin@sitvago.com", NULL, NULL, NULL, NULL, NULL, (SELECT id from Role WHERE name="administrator"), 1, now(), now());
+
+INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("Orchard", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("Marina Bay", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("Sentosa", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
