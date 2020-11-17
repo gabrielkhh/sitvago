@@ -179,34 +179,45 @@ and open the template in the editor.
             var webFormDataInString = JSON.stringify(webFormData);
 
 
-            $saveHotelHandler = jQuery.ajax({
-                type: 'DELETE',
-                url: 'hotel_handler.php',
-                dataType: 'json',
-                contentType: 'application/json;',
-                data: webFormDataInString
-            })
+            swal({
+                    title: "Are You Sure?",
+                    text: "You are about to remove " + hotelName + " from existence.",
+                    icon: "warning",
+                    buttons: ["Nope", "Confirm Plus Chop"],
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $saveHotelHandler = jQuery.ajax({
+                            type: 'DELETE',
+                            url: 'hotel_handler.php',
+                            dataType: 'json',
+                            contentType: 'application/json;',
+                            data: webFormDataInString
+                        })
 
-            $saveHotelHandler.done(function(data) {
-                swal({
-                    title: "Saved Hotel",
-                    text: data.message,
-                    icon: "success"
-                }).then(function() {
-                    window.location = "index.php";
+                        $saveHotelHandler.done(function(data) {
+                            swal({
+                                title: "Deleted!",
+                                text: data.message,
+                                icon: "success"
+                            }).then(function() {
+                                window.location = "index.php";
+                            });
+                            console.log(data);
+                        });
+                        $saveHotelHandler.fail(function(jqXHR, textStatus, error) {
+                            swal({
+                                title: "Something Went Wrong :(",
+                                text: "There seems to be a problem with deletion.",
+                                icon: "error"
+                            });
+                            console.log(error);
+                            console.log(textStatus);
+                            console.log(jqXHR);
+                        });
+                    }
                 });
-                console.log(data);
-            });
-            $saveHotelHandler.fail(function(jqXHR, textStatus, error) {
-                swal({
-                    title: "Something Went Wrong :(",
-                    text: "Test",
-                    icon: "error"
-                });
-                console.log(error);
-                console.log(textStatus);
-                console.log(jqXHR);
-            });
         }
 
         var cancelHotel = function(e) {

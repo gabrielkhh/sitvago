@@ -62,8 +62,7 @@ and open the template in the editor.
                                         </tr>
                                     </thead>
                                     <tbody id="hotelTableBody" class="">
-                                        <?php
-                                        foreach ($results as $row) : ?>
+                                        <?php foreach ($results as $row) : ?>
                                             <tr>
                                                 <td><?= $row['name'] ?></td>
                                                 <td><?= $row['area_name'] ?></td>
@@ -84,8 +83,8 @@ and open the template in the editor.
 
     </main>
     <!-- <?php
-            include "../../footer.inc.php";
-            ?> -->
+        include "../../footer.inc.php";
+    ?> -->
 </body>
 
 
