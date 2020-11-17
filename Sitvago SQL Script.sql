@@ -80,7 +80,7 @@ CREATE TABLE `sitvago_test_db`.`HotelImage` (
 );
 CREATE TABLE `sitvago_test_db`.`UserImage` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `user_id` int,
+  `user_id` int NOT NULL UNIQUE,
   `url` varchar(255),
   `image_extension` varchar(10),
   `alt_text` varchar(100),
