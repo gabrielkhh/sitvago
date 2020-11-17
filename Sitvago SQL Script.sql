@@ -4,12 +4,12 @@ CREATE TABLE `sitvago_test_db`.`User` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `first_name` varchar(100),
   `last_name` varchar(100),
+  `username` varchar(255) UNIQUE,
   `email` varchar(255) UNIQUE NOT NULL,
   `phone_number` varchar(30),
   `country` varchar(255),
-  `image_url` varchar(255),
   `password` nvarchar(255),
-  `billing address` varchar(255),
+  `billing_address` varchar(255),
   `card_number` varchar(50),
   `role_id` int,
   `is_confirmed` bit,
@@ -18,13 +18,8 @@ CREATE TABLE `sitvago_test_db`.`User` (
 );
 CREATE TABLE `sitvago_test_db`.`Role` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `role_name` varchar(100),
-  `created_at` datetime,
-  `created_by` int,
-  `updated_at` datetime,
-  `updated_by` int,
-  FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
-  FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
+  `name` varchar(100),
+  `created_at` datetime
 );
 CREATE TABLE `sitvago_test_db`.`HotelRoomCategory` (
   `hotel_id` int,
@@ -82,6 +77,16 @@ CREATE TABLE `sitvago_test_db`.`HotelImage` (
   `alt_text` varchar(100),
   `width` int,
   `height` int
+);
+CREATE TABLE `sitvago_test_db`.`UserImage` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int,
+  `url` varchar(255),
+  `image_extension` varchar(10),
+  `alt_text` varchar(100),
+  `width` int,
+  `height` int,
+  FOREIGN KEY (`user_id`) REFERENCES `User` (`id`)
 );
 CREATE TABLE `sitvago_test_db`.`AboutUs` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
@@ -156,3 +161,10 @@ ALTER TABLE `sitvago_test_db`.`Review`
 ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 ALTER TABLE `sitvago_test_db`.`Review`
 ADD FOREIGN KEY (`hotel_id`) REFERENCES `Hotel` (`id`);
+
+-- Seed Data
+USE `sitvago_test_db`;
+INSERT INTO Role (name, created_at) VALUES("Administrator", now());
+INSERT INTO Role (name, created_at) VALUES("User", now());
+
+INSERT INTO User (first_name, last_name, username, email, phone_number, country, password, billing_address, card_number, role_id, is_confirmed, created_at, updated_at) VALUES("Towkay", NULL, "admin", "admin@sitvago.com", NULL, NULL, NULL, NULL, NULL, (SELECT id from Role WHERE name="administrator"), 1, now(), now());
