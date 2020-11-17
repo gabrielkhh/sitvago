@@ -1,7 +1,9 @@
 {
     "name": "p4team8/sitvago",
     "type": "project",
-    "require": {},
+    "require": {
+        "cloudinary/cloudinary_php": "dev-master"
+    },
     "autoload": {
         "psr-4": {
             "sitvago\\": "src/"
