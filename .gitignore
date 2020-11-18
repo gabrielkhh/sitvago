@@ -4,5 +4,5 @@
 # Composer Vendor
 vendor/
 
-$ Config
+# Config Folder
 config/
