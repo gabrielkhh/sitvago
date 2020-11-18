@@ -8,10 +8,12 @@ class DB
 
     public function __construct()
     {
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "sitvago_db";
+        $config = parse_ini_file('../../config/db.ini');
+
+        $servername = $config['servername'];
+        $username = $config['username'];
+        $password = $config['password'];
+        $dbname = $config['dbname'];
         $this->conn = mysqli_connect($servername, $username, $password, $dbname);
     }
 
