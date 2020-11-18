@@ -3,3 +3,6 @@
 
 # Composer Vendor
 vendor/
+
+$ Config
+config/
