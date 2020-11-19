@@ -6,3 +6,6 @@ vendor/
 
 # Config Folder
 config/
+
+# Netbeans Config
+nbproject/
