@@ -25,6 +25,7 @@ CREATE TABLE `sitvago_db`.`HotelRoomCategory` (
   `hotel_id` int,
   `room_category_id` int,
   `availability` bit,
+  `price_per_night` float,
   `created_at` datetime,
   `created_by` int,
   `updated_at` datetime,
@@ -36,16 +37,6 @@ CREATE TABLE `sitvago_db`.`HotelRoomCategory` (
 CREATE TABLE `sitvago_db`.`RoomCategory` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `category_name` varchar(100),
-  `created_at` datetime,
-  `created_by` int,
-  `updated_at` datetime,
-  `updated_by` int,
-  FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
-  FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
-);
-CREATE TABLE `sitvago_db`.`Room` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `room_number` varchar(100),
   `created_at` datetime,
   `created_by` int,
   `updated_at` datetime,
@@ -88,16 +79,6 @@ CREATE TABLE `sitvago_db`.`UserImage` (
   `height` int,
   FOREIGN KEY (`user_id`) REFERENCES `User` (`id`)
 );
-CREATE TABLE `sitvago_db`.`AboutUs` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `description` mediumtext,
-  `created_at` datetime,
-  `created_by` int,
-  `updated_at` datetime,
-  `updated_by` int,
-  FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
-  FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
-);
 CREATE TABLE `sitvago_db`.`GeoLocation` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
@@ -109,8 +90,10 @@ CREATE TABLE `sitvago_db`.`GeoLocation` (
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
 CREATE TABLE `sitvago_db`.`Booking` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `hotel_id` int,
   `user_id` int,
+  `room_category_id` int,
   `price` float,
   `check_in` datetime,
   `check_out` datetime,
@@ -118,7 +101,6 @@ CREATE TABLE `sitvago_db`.`Booking` (
   `created_by` int,
   `updated_at` datetime,
   `updated_by` int,
-  PRIMARY KEY (`hotel_id`, `user_id`),
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
