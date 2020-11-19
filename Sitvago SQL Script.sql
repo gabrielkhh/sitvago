@@ -103,7 +103,7 @@ CREATE TABLE `sitvago_db`.`Booking` (
   `updated_by` int,
   FOREIGN KEY (`hotel_id`) REFERENCES `Hotel` (`id`),
   FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
-  FOREIGN KEY (`room_category_id`) REFERENCES `HotelRoomCategory` (`id`),
+  FOREIGN KEY (`room_category_id`) REFERENCES `RoomCategory` (`id`),
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
@@ -124,7 +124,7 @@ CREATE TABLE `sitvago_db`.`Review` (
   `hotel_id` int,
   `title` varchar(255),
   `rating` float,
-  `description` mediumtext,
+  `content` mediumtext,
   `created_at` datetime,
   `created_by` int,
   `updated_at` datetime,
@@ -157,3 +157,6 @@ INSERT INTO User (first_name, last_name, username, email, phone_number, country,
 INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("Orchard", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
 INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("Marina Bay", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
 INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("Sentosa", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+
+INSERT INTO RoomCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Deluxe", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+INSERT INTO RoomCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Executive Suite", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
