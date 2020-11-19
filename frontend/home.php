@@ -9,7 +9,7 @@ and open the template in the editor.
 <html>
     <head>
 
-        <title>Singapore Tourism Attraction </title>
+        <title>Sitvago's Home </title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -57,7 +57,7 @@ and open the template in the editor.
                 }
             }
             .jumbotron{
-                background: url(./images/home_cover.jpg) no-repeat center center fixed;
+                background: url(images/home_cover.jpg) no-repeat center center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 background-size: cover;
@@ -86,7 +86,7 @@ and open the template in the editor.
 
             <div class="jumbotron">
                 <div class="container text-center text-white">
-                    <h1 class="display-2" >Welcome to SITVAGO</h1>
+                    <h1 class="display-2" >Welcome to SITVAGO!</h1>
                     <p>Book a Hotel with us! Your satisfaction matters to us </p>
                     <section class="search-sec">
                         <div class="container">
@@ -140,7 +140,7 @@ and open the template in the editor.
                                     <p class="card-text">Ratings: 3/5</p>
                                     <div class="d-flex justify-content-between align-items-center">     
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <a href="barrackhotel_preview.php" class="btn btn-light" role="button">View</a>
                                         </div>
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@ and open the template in the editor.
                                     <p class="card-text">Ratings: 4.5/5</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <a href="barrackhotel_preview.php" class="btn btn-light" role="button">View</a>
                                         </div>
                                     </div>
                                 </div>
@@ -172,7 +172,7 @@ and open the template in the editor.
                                     <p class="card-text">Ratings: 1/5</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <a href="barrackhotel_preview.php" class="btn btn-light" role="button">View</a>
                                         </div>
                                     </div>
                                 </div>
@@ -187,7 +187,7 @@ and open the template in the editor.
                                     <p class="card-text">Hotel Goodwood Park</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <a href="barrackhotel_preview.php" class="btn btn-light" role="button">View</a>
                                         </div>
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@ and open the template in the editor.
                                     <p class="card-text">Hilton Singapore</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <a href="barrackhotel_preview.php" class="btn btn-light" role="button">View</a>
                                         </div>
                                     </div>
                                 </div>
@@ -217,7 +217,7 @@ and open the template in the editor.
                                     <p class="card-text">M Social Singapore</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <a href="barrackhotel_preview.php" class="btn btn-light" role="button">View</a>
                                         </div>
                                     </div>
                                 </div>
@@ -232,7 +232,7 @@ and open the template in the editor.
                                     <p class="card-text">Carlton Hotel Singapore</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <a href="barrackhotel_preview.php" class="btn btn-light" role="button">View</a>
                                         </div>
                                     </div>
                                 </div>
@@ -247,7 +247,7 @@ and open the template in the editor.
                                     <p class="card-text">Village Hotel Bugis</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <a href="barrackhotel_preview.php" class="btn btn-light" role="button">View</a>
                                         </div>
                                     </div>
                                 </div>
@@ -262,7 +262,7 @@ and open the template in the editor.
                                     <p class="card-text">Shangri-La Hotel</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <a href="barrackhotel_preview.php" class="btn btn-light" role="button">View</a>
                                         </div>
                                     </div>
                                 </div>
