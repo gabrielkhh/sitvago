@@ -101,6 +101,9 @@ CREATE TABLE `sitvago_db`.`Booking` (
   `created_by` int,
   `updated_at` datetime,
   `updated_by` int,
+  FOREIGN KEY (`hotel_id`) REFERENCES `Hotel` (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
+  FOREIGN KEY (`room_category_id`) REFERENCES `HotelRoomCategory` (`id`),
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
