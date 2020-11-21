@@ -7,7 +7,7 @@ Hotel? Sitvago!!
 [Admin Panel (/admin_panel)](https://admin.sitvago.com)
 
 ### Useful Git Commands:
-Check what is in the working tree (What files that you have modified/created/deleted) (Red is not added for staging yet, green is added already)
+Check what is in the working tree (What files that you have modified/created/deleted) (Red is not added for staging yet, green is added already)  
 ```git status```
 
 ### Basic workflow:
@@ -16,7 +16,7 @@ Check what is in the working tree (What files that you have modified/created/del
 
 2. Code and test your feature  
 
-3. Add (aka staging) your changes to your branch (best practice to add the files that you modified only)  To add a **SINGLE** file,
+3. Add (aka staging) your changes to your branch (best practice to add the files that you modified only)  To add a **SINGLE** file,  
 ```git add <file name>```
 
 4. Commit your changes  
