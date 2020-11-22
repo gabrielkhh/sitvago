@@ -140,7 +140,7 @@ and open the template in the editor.
                                     <p class="card-text">Ratings: 3/5</p>
                                     <div class="d-flex justify-content-between align-items-center">     
                                         <div class="btn-group">
-                                            <a href="barrackhotel_preview.php" class="btn btn-light" role="button">View</a>
+                                            <a href="hotelpreview.php" class="btn btn-light" role="button">View</a>
                                         </div>
                                     </div>
                                 </div>

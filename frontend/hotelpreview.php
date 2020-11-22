@@ -25,20 +25,22 @@
         <link rel="stylesheet" href="external_css/flaticon.css">
         <link rel="stylesheet" href="external_css/icomoon.css">
         <link rel="stylesheet" href="external_css/style.css">
+        
+        <!-- For Calender --> 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+         <!-- Own Script -->
+        <script defer src="js/booking.js"></script>
 
-        <style>
-            .carousel-item img {
-                width: auto;
-                height: 450px;
-                max-height: 450px;
-            }
-        </style>
+         
     </head>
     <body>
         <?php
         include "navbar.php";
-        ?>
-
+        ?>       
+        <link rel="stylesheet" href="css/booking.css">
         <section class="ftco-section">
             <div class="container">
                 <div class="row">
@@ -66,15 +68,16 @@
                                 </a>
                             </div>
                             <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
-                                <h2 class="mb-4">Barrack Hotel Rooms <span>- (x Available rooms； x will be updated via sql)</span></h2>
-                                <p>This hotel very nice, very nice room, wide toilet, expensive</p>
+                                <h2 class="mb-4"></h2>
+                                    <p><i class='fas fa-glass-martini-alt' style='font-size:24px'> Drinking Lounge.</i></p>
+                                    <p><i class='fas fa-bath' style='font-size:24px'> Relaxing Bathtub.</i></p>
+                                    <p><i class='fas fa-smoking-ban' style='font-size:24px'> No Smoking Room.</i></p>
+                                    <p><i class='fas fa-utensils' style='font-size:24px'> Breakfast Buffet Included.</i></p>
+                                    <p><i class='fas fa-wifi' style='font-size:24px'> Free Wi-fi.</i></p>
+                                    <p><h2 id="price">For only $99.99 per night!</h2></p>
                                 <div class="d-md-flex mt-5 mb-5">
                                     <ul class="list">
                                         <li><span>Max:</span> 3 Persons (value retreive from SQL)</li>
-                                        <li><span>Bed:</span> 1</li>
-                                    </ul>
-                                    <ul class="list ml-md-5">
-                                        <li><span>View:</span> Sea View</li>
                                     </ul>
                                 </div>
                                 <p>Some description about the hotel? This hotel is in Singapore, expensive but confirm worth</p>
@@ -83,10 +86,18 @@
                     </div> 
                     <div class="col-lg-4 sidebar ftco-animate pl-md-5">
                         <div class="sidebar-box ftco-animate">
-                            <h3>Put the reservations stuff here</h3>
-                            <p>Check in from date to date?</p>
-                            <p>Tabulate price based on how many days selected</p>
-                            <p>Submit button to check out</p>
+                            <h3 class="hotel_selected">Barrack Hotel Rooms</h3>
+                            <form action="confirmation.php">       
+                                <div class ="form-group">
+                                     <input class="form-control" type="text" id="checkin" placeholder="Check-in-date" required>                       
+                                </div>
+                                <div class ="form-group">
+                                    <input class="form-control" type="text" id="checkout" placeholder="Check-out-date" required>                                     
+                                </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit" id="submit">Book Now!</button></a>
+                                </div>            
+                            </form>
                         </div>
                     </div>
                 </div>

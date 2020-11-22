@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+/* 
+    Created on : Nov 13, 2020, 3:39:35 PM
+    Author     : JingX
+*/
+
+.display-1{
+    /*margin-top:30px;*/
+    font-size:40px;
+    margin-left:14px; 
+    font-weight: bold;
+}
+
+/*
+body{
+    margin:40px;
+    font-family: Verdana, sans-serif;
+    background-image:url("../images/bg-2.jpg");
+    background-size:cover;
+}
+
+.my-row1{
+    margin-left:2px; 
+
+}
+*/
+
+#price{
+    color:red;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.carousel-item img {
+    width: auto;
+    height: 450px;
+    max-height: 450px;
+}
+
+.hotel_selected{
+   font-weight: bold;
+}
