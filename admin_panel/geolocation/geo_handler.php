@@ -16,29 +16,26 @@ if ($dataFromClient['option'] === 'createRegion')
     $result = $geoLocation->addGeoLocation($userID, $geoName);
     echo json_encode($result);
 }
-else if ($dataFromClient['option'] === 'updateHotel')
+else if ($dataFromClient['option'] === 'updateRegion')
 {
-    // $hotel = new Hotel();
+    $geoLocation = new GeoLocation();
+
+    $geoID = $dataFromClient['geoID'];
+    $geoName = $dataFromClient['name'];
+    $userID = $dataFromClient['userID'];
  
-    // $hotelID = $dataFromClient['id'];
-    // $hotelName = $dataFromClient['name'];
-    // $hotelGeoLocation = $dataFromClient['geoLocation'];
-    // $hotelDescription = $dataFromClient['description'];
-    // $rating = 5.00;
-    // $userID = 1;
- 
-    // $result = $hotel->updateHotel($hotelID, $hotelName, $hotelDescription, $hotelGeoLocation, $rating, $userID);
-    // echo json_encode($result);
+    $result = $geoLocation->updateGeoLocation($geoID, $geoName, $userID);
+    echo json_encode($result);
 }
-else if ($dataFromClient['option'] === 'deleteHotel')
+else if ($dataFromClient['option'] === 'deleteRegion')
 {
-    // $hotel = new Hotel();
+    $geoLocation = new GeoLocation();
  
-    // $hotelID = $dataFromClient['id'];
-    // $hotelName = $dataFromClient['name'];
+    $geoID = $dataFromClient['geoID'];
+    $regionName = $dataFromClient['name'];
  
-    // $result = $hotel->deleteHotel($hotelID, $hotelName);
-    // echo json_encode($result);
+    $result = $hotel->deleteGeoLocation($geoID, $regionName);
+    echo json_encode($result);
 }
  
  
