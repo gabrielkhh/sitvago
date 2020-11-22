@@ -1,10 +1,5 @@
 <?php
 require '../../vendor/autoload.php';
-
-use sitvago\GeoLocation;
-
-$geo = new GeoLocation();
-$results = $geo->getGeoLocations();
 ?>
 <!DOCTYPE html>
 <!--
@@ -16,7 +11,7 @@ and open the template in the editor.
 
 <head>
     <meta charset="UTF-8">
-    <title>Hotel Sitvago CMS - Create Hotel</title>
+    <title>Hotel Sitvago CMS - Create Geo Location</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--CSS Sources-->
@@ -37,7 +32,7 @@ and open the template in the editor.
     include "../navbar.php";
     ?>
     <main class="container main-content mt-2">
-        <h1>Add a New Hotel</h1>
+        <h1>Add a New Geo Location</h1>
 
         <div class="row">
             <div class="col-md-12">
@@ -52,33 +47,15 @@ and open the template in the editor.
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="inputHotelName">Hotel Name</label>
-                                                <input class="form-control" id="inputHotelName" placeholder="Hotel Name">
+                                                <label for="inputRegionName">Region Name</label>
+                                                <input class="form-control" id="inputRegionName" placeholder="Region Name">
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="selectArea">Region</label>
-                                                <select class="form-control" id="selectArea">
-                                                    <option value="" selected disabled>Choose a region</option>
-                                                    <?php foreach ($results as $row) : ?>
-                                                        <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="hotelDescription">Hotel Description</label>
-                                        <textarea class="form-control" id="hotelDescription"></textarea>
-                                        <script>
-                                            CKEDITOR.replace('hotelDescription');
-                                        </script>
                                     </div>
                                 </form>
                                 <div class="float-right">
                                     <button id="btnCancel" class="btn btn-danger">Cancel</button>
-                                    <button id="btnSave" class="btn btn-primary">Add Hotel</button>
+                                    <button id="btnSave" class="btn btn-primary">Add Region</button>
                                 </div>
                             </div>
                         </div>
@@ -92,38 +69,29 @@ and open the template in the editor.
             include "../../footer.inc.php";
             ?> -->
 </body>
-
 </html>
-
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
         var buttonSave = document.getElementById("btnSave");
         var buttonCancel = document.getElementById("btnCancel");
 
-        function WebFormInfo(hotelName, hotelArea, hotelDescription) {
-            this.option = "createHotel";
-            this.name = hotelName;
-            this.geoLocation = hotelArea;
-            this.description = hotelDescription;
+        function WebFormInfo(geoName, id) {
+            this.option = "createRegion";
+            this.name = geoName;
+            this.id = id;
         }
 
-        var saveHotel = function(e) {
-            var collectedHotelName = $("#inputHotelName").val();
-            var collectedArea = $("#selectArea").val();
-            var collectedHotelDescription = encodeURI(CKEDITOR.instances.hotelDescription.getData());
+        var saveRegion = function(e) {
+            var collectedRegionName = $("#inputRegionName").val();
 
-
-            var webFormData = new WebFormInfo(collectedHotelName, collectedArea, collectedHotelDescription);
+            var webFormData = new WebFormInfo(collectedRegionName, 1);
             var webFormDataInString = JSON.stringify(webFormData);
-            console.log(webFormDataInString);
-
-            // CKEDITOR.instances['hotelDescription'].dataProcessor.toHtml("<p>Something just like this</p>");
 
             // If statement for future validation checks.
             if (true) {
                 $saveHotelHandler = jQuery.ajax({
                     type: 'POST',
-                    url: 'hotel_handler.php',
+                    url: 'geo_handler.php',
                     dataType: 'json',
                     contentType: 'application/json;',
                     data: webFormDataInString
@@ -131,13 +99,12 @@ and open the template in the editor.
 
                 $saveHotelHandler.done(function(data) {
                     swal({
-                        title: "Saved Hotel",
+                        title: "Saved Geo-Location!",
                         text: data.message,
                         icon: "success"
                     }).then(function() {
                         window.location = "index.php";
                     });
-                    console.log(data);
                 });
                 $saveHotelHandler.fail(function(jqXHR, textStatus, error) {
                     swal({
@@ -145,14 +112,11 @@ and open the template in the editor.
                         text: "Test",
                         icon: "error"
                     });
-                    console.log(error);
-                    console.log(textStatus);
-                    console.log(jqXHR);
                 });
             }
         }
 
-        var cancelHotel = function(e) {
+        var cancelGeo = function(e) {
             swal({
                     title: "Are You Sure?",
                     text: "Leave this page and return to the previous page?",
@@ -167,7 +131,7 @@ and open the template in the editor.
                 });
         }
 
-        buttonSave.addEventListener('click', saveHotel, false);
-        buttonCancel.addEventListener('click', cancelHotel, false);
+        buttonSave.addEventListener('click', saveRegion, false);
+        buttonCancel.addEventListener('click', cancelGeo, false);
     });
 </script>

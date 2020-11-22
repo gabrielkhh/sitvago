@@ -1,10 +1,12 @@
 <?php
+$id = $_GET['key'];
+
 require '../../vendor/autoload.php';
 
 use sitvago\GeoLocation;
 
 $geo = new GeoLocation();
-$results = $geo->getGeoLocations();
+$resultGeo = $geo->getSingleGeoLocation($id);
 ?>
 <!DOCTYPE html>
 <!--
@@ -16,7 +18,7 @@ and open the template in the editor.
 
 <head>
     <meta charset="UTF-8">
-    <title>Hotel Sitvago CMS - Create Hotel</title>
+    <title>Hotel Sitvago CMS - Update Geo-Location</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--CSS Sources-->
@@ -33,11 +35,11 @@ and open the template in the editor.
 </head>
 
 <body>
-    <?php
-    include "../navbar.php";
-    ?>
+    <!-- <?php
+            include "../../nav.inc.php";
+            ?> -->
     <main class="container main-content mt-2">
-        <h1>Add a New Hotel</h1>
+        <?php echo "<h1>Update details for " . $resultGeo['name'] . "</h1>"; ?>
 
         <div class="row">
             <div class="col-md-12">
@@ -52,40 +54,25 @@ and open the template in the editor.
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="inputHotelName">Hotel Name</label>
-                                                <input class="form-control" id="inputHotelName" placeholder="Hotel Name">
+                                                <label for="inputRegionName">Region Name</label>
+                                                <?php
+                                                echo "<input class='form-control' id='inputRegionName' placeholder='Region Name' value='" . $resultGeo['name'] . "'>";
+                                                ?>
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="selectArea">Region</label>
-                                                <select class="form-control" id="selectArea">
-                                                    <option value="" selected disabled>Choose a region</option>
-                                                    <?php foreach ($results as $row) : ?>
-                                                        <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="hotelDescription">Hotel Description</label>
-                                        <textarea class="form-control" id="hotelDescription"></textarea>
-                                        <script>
-                                            CKEDITOR.replace('hotelDescription');
-                                        </script>
                                     </div>
                                 </form>
                                 <div class="float-right">
-                                    <button id="btnCancel" class="btn btn-danger">Cancel</button>
-                                    <button id="btnSave" class="btn btn-primary">Add Hotel</button>
+                                    <?php echo "<button id='btnDelete' class='btn btn-danger' value='" . $id . "'>Delete</button>"; ?>
+                                    <button id="btnCancel" class="btn btn-warning">Cancel</button>
+                                    <?php echo "<button id='btnSave' class='btn btn-primary' value='" . $id . "'>Save Changes</button>"; ?>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- end of div element with class="panel-body" -->
-                </div><!-- end of div element with class="panel" -->
-            </div> <!-- end of div element with  class="col-md-offset-2  col-md-8"-->
-        </div><!-- end of div element with class="row"-->
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
     <!-- <?php
@@ -94,36 +81,37 @@ and open the template in the editor.
 </body>
 
 </html>
-
+<script type="text/javascript">
+    var geoID = <?= $id; ?>;
+    var regionName = "<?= $resultGeo['name']; ?>";
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
         var buttonSave = document.getElementById("btnSave");
+        var buttonDelete = document.getElementById("btnDelete");
         var buttonCancel = document.getElementById("btnCancel");
 
-        function WebFormInfo(hotelName, hotelArea, hotelDescription) {
-            this.option = "createHotel";
-            this.name = hotelName;
-            this.geoLocation = hotelArea;
-            this.description = hotelDescription;
+        function WebFormInfo(inOption, geoID, geoName, userID) {
+            this.option = inOption;
+            this.geoID = geoID;
+            this.name = geoName;
+            this.userID = userID;
         }
 
         var saveHotel = function(e) {
-            var collectedHotelName = $("#inputHotelName").val();
-            var collectedArea = $("#selectArea").val();
-            var collectedHotelDescription = encodeURI(CKEDITOR.instances.hotelDescription.getData());
+            var collectedRegionName = $("#inputRegionName").val();
+            //var id = $(this).attr("value");
+            var UserID = 1;
 
-
-            var webFormData = new WebFormInfo(collectedHotelName, collectedArea, collectedHotelDescription);
+            var webFormData = new WebFormInfo("updateRegion", geoID, collectedRegionName, UserID);
             var webFormDataInString = JSON.stringify(webFormData);
             console.log(webFormDataInString);
-
-            // CKEDITOR.instances['hotelDescription'].dataProcessor.toHtml("<p>Something just like this</p>");
 
             // If statement for future validation checks.
             if (true) {
                 $saveHotelHandler = jQuery.ajax({
-                    type: 'POST',
-                    url: 'hotel_handler.php',
+                    type: 'PUT',
+                    url: 'geo_handler.php',
                     dataType: 'json',
                     contentType: 'application/json;',
                     data: webFormDataInString
@@ -131,33 +119,70 @@ and open the template in the editor.
 
                 $saveHotelHandler.done(function(data) {
                     swal({
-                        title: "Saved Hotel",
+                        title: "Updated Geo-Location Information",
                         text: data.message,
                         icon: "success"
                     }).then(function() {
                         window.location = "index.php";
                     });
-                    console.log(data);
                 });
                 $saveHotelHandler.fail(function(jqXHR, textStatus, error) {
                     swal({
                         title: "Something Went Wrong :(",
-                        text: "Test",
+                        text: textStatus,
                         icon: "error"
                     });
-                    console.log(error);
-                    console.log(textStatus);
-                    console.log(jqXHR);
                 });
             }
+        }
+
+        var deleteHotel = function(e) {
+            var webFormData = new WebFormInfo("deleteRegion", geoID, regionName, 1);
+            var webFormDataInString = JSON.stringify(webFormData);
+
+            swal({
+                    title: "Are You Sure?",
+                    text: "You are about to remove " + regionName + " from existence.",
+                    icon: "warning",
+                    buttons: ["Nope", "Confirm Plus Chop"],
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $saveHotelHandler = jQuery.ajax({
+                            type: 'DELETE',
+                            url: 'geo_handler.php',
+                            dataType: 'json',
+                            contentType: 'application/json;',
+                            data: webFormDataInString
+                        })
+
+                        $saveHotelHandler.done(function(data) {
+                            swal({
+                                title: "Deleted!",
+                                text: data.message,
+                                icon: "success"
+                            }).then(function() {
+                                window.location = "index.php";
+                            });
+                        });
+                        $saveHotelHandler.fail(function(jqXHR, textStatus, error) {
+                            swal({
+                                title: "Something Went Wrong :(",
+                                text: "There seems to be a problem with deletion.",
+                                icon: "error"
+                            });
+                        });
+                    }
+                });
         }
 
         var cancelHotel = function(e) {
             swal({
                     title: "Are You Sure?",
-                    text: "Leave this page and return to the previous page?",
+                    text: "You are about to discard any changes made and return back to the geo-location lists page.",
                     icon: "warning",
-                    buttons: ["Nope", "Yes Of Course!"],
+                    buttons: ["Nope", "Confirm Plus Chop"],
                     dangerMode: false,
                 })
                 .then((willCancel) => {
@@ -169,5 +194,6 @@ and open the template in the editor.
 
         buttonSave.addEventListener('click', saveHotel, false);
         buttonCancel.addEventListener('click', cancelHotel, false);
+        buttonDelete.addEventListener('click', deleteHotel, false);
     });
 </script>

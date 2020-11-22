@@ -5,7 +5,6 @@ use sitvago\Overview;
 
 $overview = new Overview();
 $results = $overview->getCount();
-$la = 65;
 ?>
 <!DOCTYPE html>
 <!--
@@ -46,7 +45,6 @@ and open the template in the editor.
                     <div class="card-body text-center">
                         <h1 id="hotelCounter" class="card-title text-center">Number</h5>
                             <a href="hotel/index.php" class="btn btn-primary">View Hotels</a>
-                            <!-- <h4  class="card-text"></h4> -->
                     </div>
                 </div>
             </div>
@@ -54,13 +52,21 @@ and open the template in the editor.
                 <div class="card text-white bg-dark mb-3">
                     <div class="card-header text-center">Registered Users to Date</div>
                     <div class="card-body text-center">
-                        <h1 id="userCounter" class="card-title text-center">Dark card title</h5>
+                        <h1 id="userCounter" class="card-title text-center">Number</h5>
                             <a href="#" class="btn btn-primary">View Users</a>
-                            <!-- <h4  class="card-text"></h4> -->
                     </div>
                 </div>
             </div>
-        </div><!-- end of div element with class="row"-->
+            <div class="col-md-3">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-header text-center">Active Geo-Locations to Date</div>
+                    <div class="card-body text-center">
+                        <h1 id="geoCounter" class="card-title text-center">Number</h5>
+                            <a href="geolocation/index.php" class="btn btn-primary">View Geo-Locations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
     <!-- <?php
@@ -73,6 +79,7 @@ and open the template in the editor.
 <script type="text/javascript">
     var hotelNumbers = <?= $results[0]['HotelCount']; ?>;
     var userNumbers = <?= $results[1]['UserCount']; ?>;
+    var geoNumbers = <?= $results[2]['GeoCount']; ?>;
 </script>
 <script>
     let counterHotel = new CountUp('hotelCounter', 0, hotelNumbers);
@@ -87,5 +94,12 @@ and open the template in the editor.
         counterUser.start();
     } else {
         console.error(counterUser.error);
+    }
+
+    let counterGeo = new CountUp('geoCounter', 0, geoNumbers);
+    if (!counterGeo.error) {
+        counterGeo.start();
+    } else {
+        console.error(counterGeo.error);
     }
 </script>
