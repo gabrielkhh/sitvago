@@ -7,7 +7,10 @@ class GeoLocation extends DB
     public function getGeoLocations()
     {
         $results = [];
-        $sql = "SELECT * FROM GeoLocation";
+        $sql = "SELECT GeoLocation.id, GeoLocation.name, GeoLocation.created_at, c.first_name AS created_by, 
+        GeoLocation.updated_at, u.first_name AS updated_by FROM GeoLocation LEFT JOIN User c ON GeoLocation.created_by = c.id 
+        LEFT JOIN User u ON GeoLocation.updated_by = u.id;";
+
         $resultsSQL = mysqli_query($this->conn, $sql);
 
         if (mysqli_num_rows($resultsSQL) > 0) {
