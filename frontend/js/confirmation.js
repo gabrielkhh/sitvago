@@ -11,20 +11,6 @@ $(document).ready(function()
     registerEventHandlers();
 });
 
-
-function registerEventHandlers()
-{
-    var check_details = document.getElementById("details_check_box");
-    if (check_details !==null)
-    {
-        check_details.addEventListener('change', checkDetails());
-    }
-    else
-    {
-        console.log("No images found");
-    }   
-}
-
 function disableForm() {
     for (var i=0; i<all_inputs.length; i++)
     {
@@ -39,14 +25,24 @@ function enableForm() {
     }
 }
 
-
-function checkDetails(){
-    // If true disable inputs
-    if (check_details.checked){
-        //disable input elements
-        disableForm();
-    }else{
-        enableForm();
+function registerEventHandlers()
+{
+    var check_details = document.getElementById("details_check_box");
+    if (check_details !==null)
+    {
+        check_details.addEventListener("click", function(){
+        // If true disable inputs
+        if (check_details.checked){
+            //disable input elements
+            disableForm();
+        }else{
+            enableForm();
     }
+        });
+    }
+    else
+    {
+        console.log("No images found");
+    }   
 }
 
