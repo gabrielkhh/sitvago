@@ -54,7 +54,7 @@ and open the template in the editor.
                                     </div>
                                 </form>
                                 <div class="float-right">
-                                    <button class="btn btn-danger">Cancel</button>
+                                    <button id="btnCancel" class="btn btn-danger">Cancel</button>
                                     <button id="btnSave" class="btn btn-primary">Add Region</button>
                                 </div>
                             </div>
@@ -72,7 +72,8 @@ and open the template in the editor.
 </html>
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
-        var button = document.getElementById("btnSave");
+        var buttonSave = document.getElementById("btnSave");
+        var buttonCancel = document.getElementById("btnCancel");
 
         function WebFormInfo(geoName, id) {
             this.option = "createRegion";
@@ -115,6 +116,22 @@ and open the template in the editor.
             }
         }
 
-        button.addEventListener('click', saveRegion, false);
+        var cancelGeo = function(e) {
+            swal({
+                    title: "Are You Sure?",
+                    text: "Leave this page and return to the previous page?",
+                    icon: "warning",
+                    buttons: ["Nope", "Yes Of Course!"],
+                    dangerMode: false,
+                })
+                .then((willCancel) => {
+                    if (willCancel) {
+                        window.location = "index.php";
+                    }
+                });
+        }
+
+        buttonSave.addEventListener('click', saveRegion, false);
+        buttonCancel.addEventListener('click', cancelGeo, false);
     });
 </script>
