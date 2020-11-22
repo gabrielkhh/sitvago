@@ -34,7 +34,7 @@ else if ($dataFromClient['option'] === 'deleteRegion')
     $geoID = $dataFromClient['geoID'];
     $regionName = $dataFromClient['name'];
  
-    $result = $hotel->deleteGeoLocation($geoID, $regionName);
+    $result = $geoLocation->deleteGeoLocation($geoID, $regionName);
     echo json_encode($result);
 }
  
