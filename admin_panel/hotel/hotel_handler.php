@@ -45,8 +45,7 @@ else if ($dataFromClient['option'] === 'deleteHotel')
     echo json_encode($result);
 }
  
- 
- 
+
  
  
  

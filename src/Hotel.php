@@ -59,9 +59,12 @@ class Hotel extends DB
                 $response['message'] = "Hotel Hellll";
                 $response['error'] = $errorMsg;
             } else {
+                $newHotelID = mysqli_insert_id($this->conn);
                 $response['success'] = $success;
                 $response['message'] = $hotelName . " has been successfully added into the database!!";
                 $response['error'] = "";
+                $response['insertedID'] = $newHotelID;
+                $response['insertedName'] = $hotelName;
             }
             $stmt->close();
         }
@@ -124,6 +127,40 @@ class Hotel extends DB
             } else {
                 $response['success'] = $success;
                 $response['message'] = $hotelName . " has been successfully deleted from the database.";
+                $response['error'] = "";
+            }
+            $stmt->close();
+        }
+        $this->conn->close();
+        return $response;
+    }
+
+    public function addHotelImage($hotelID, $url, $width, $height, $extension)
+    {
+        $response = [];
+        $success = true;
+        $preparedSQL = "INSERT INTO HotelImage (url, hotel_id, is_thumbnail, image_extension, width, height) SELECT ?, Hotel.id,
+        0, ?, ?, ? FROM Hotel WHERE Hotel.id=?";
+
+
+        if ($this->conn->connect_error) {
+            $errorMsg = "Connection failed: " . $this->conn->connect_error;
+            $success = false;
+            $response['success'] = $success;
+            $response['message'] = "Conn Failed";
+            $response['error'] = $errorMsg;
+        } else {
+            $stmt = $this->conn->prepare($preparedSQL);
+            $stmt->bind_param("ssiii", $url, $extension, $width, $height, $hotelID);
+            if (!$stmt->execute()) {
+                $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
+                $response['success'] = $success;
+                $response['message'] = "Execute Failed.";
+                $response['error'] = $errorMsg;
+            } else {
+                $newHotelID = mysqli_insert_id($this->conn);
+                $response['success'] = $success;
+                $response['message'] = "Image saved successfully.";
                 $response['error'] = "";
             }
             $stmt->close();
