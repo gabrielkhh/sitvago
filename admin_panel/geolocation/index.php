@@ -1,10 +1,10 @@
 <?php
 require '../../vendor/autoload.php';
 
-use sitvago\Hotel;
+use sitvago\GeoLocation;
 
-$hotel = new Hotel();
-$results = $hotel->getHotels();
+$geolocation = new GeoLocation();
+$results = $geolocation->getGeoLocations();
 ?>
 <!DOCTYPE html>
 <!--
@@ -27,6 +27,7 @@ and open the template in the editor.
     <script src="https://kit.fontawesome.com/ebd40a1317.js" crossorigin="anonymous"></script>
     <script defer src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/dayjs.min.js" integrity="sha512-C2m821NxMpJ4Df47O4P/17VPqt0yiK10UmGl59/e5ynRRYiCSBvy0KHJjhp2XIjUJreuR+y3SIhVyiVilhCmcQ==" crossorigin="anonymous"></script>
     <script defer src="/js/main.js"></script>
 </head>
 
@@ -35,17 +36,17 @@ and open the template in the editor.
             include "../../nav.inc.php";
             ?> -->
     <main class="container main-content">
-        <h1>Viewing All Hotels</h1>
+        <h1>Viewing All Geo-Locations</h1>
 
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="row mb-2">
                         <div class="col-md-10">
-                            <h3>Manage Hotels</h3>
+                            <h3>Manage Geo-Locations (Regions)</h3>
                         </div>
                         <div class="col-md-2">
-                            <a role="button" class="float-right btn btn-info" href="create.php">Add Hotel</a>
+                            <a role="button" class="float-right btn btn-info" href="create.php">Add Geo-Location</a>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -54,19 +55,25 @@ and open the template in the editor.
                                 <table class="table table-striped table-dark">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th scope="col">Hotel Name</th>
-                                            <th scope="col">Area</th>
+                                            <th scope="col">Region Name</th>
+                                            <th scope="col">Created At</th>
                                             <th scope="col">Created By</th>
+                                            <th scope="col">Updated At</th>
                                             <th scope="col">Updated By</th>
                                             <th>&nbsp;</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="hotelTableBody" class="">
+                                    <tbody id="regionTableBody" class="">
                                         <?php foreach ($results as $row) : ?>
+                                            <script>
+                                                var createdAt = dayjs('<?= $row['created_at'] ?>').format('D MMM YYYY h:mm A');
+                                                var updatedAt = dayjs('<?= $row['updated_at'] ?>').format('D MMM YYYY h:mm A');
+                                            </script>
                                             <tr>
                                                 <td><?= $row['name'] ?></td>
-                                                <td><?= $row['area_name'] ?></td>
+                                                <td id="created<?= $row['id'] ?>"><script>document.getElementById('created<?= $row['id'] ?>').innerHTML = createdAt;</script></td>
                                                 <td><?= $row['created_by'] ?></td>
+                                                <td id="updated<?= $row['id'] ?>"><script>document.getElementById('updated<?= $row['id'] ?>').innerHTML = updatedAt;</script></td>
                                                 <td><?= $row['updated_by'] ?></td>
                                                 <td><a role="button" class="btn btn-primary updateBtn" href="update.php?key=<?= $row['id'] ?>" value="<?= $row['id'] ?>">Update</a></td>
                                             </tr>

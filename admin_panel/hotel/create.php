@@ -1,6 +1,9 @@
 <?php
 require '../../vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../../");
+$dotenv->load();
+
 use sitvago\GeoLocation;
 
 $geo = new GeoLocation();
@@ -22,6 +25,8 @@ and open the template in the editor.
     <!--CSS Sources-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="../css/fileinput.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 
     <!--JS Sources-->
     <script src="https://kit.fontawesome.com/ebd40a1317.js" crossorigin="anonymous"></script>
@@ -29,6 +34,10 @@ and open the template in the editor.
     <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
     <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+    <script src="../js/plugins/piexif.min.js"></script>
+    <script src="../js/plugins/sortable.min.js"></script>
+    <script defer src="../js/fileinput.min.js"></script>
+    <script defer src="../js/theme.min.js"></script>
     <script defer src="/js/main.js"></script>
 </head>
 
@@ -48,7 +57,7 @@ and open the template in the editor.
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form>
+                                <form enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
@@ -75,9 +84,15 @@ and open the template in the editor.
                                             CKEDITOR.replace('hotelDescription');
                                         </script>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="hotelImages">Hotel Photos</label>
+                                        <div>
+                                            <input id="fileInput" name="fileInput[]" type="file" class="file input-group-lg" multiple />
+                                        </div>
+                                    </div>
                                 </form>
                                 <div class="float-right">
-                                    <button class="btn btn-danger">Cancel</button>
+                                    <button id="btnCancel" class="btn btn-danger">Cancel</button>
                                     <button id="btnSave" class="btn btn-primary">Add Hotel</button>
                                 </div>
                             </div>
@@ -97,7 +112,11 @@ and open the template in the editor.
 
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
-        var button = document.getElementById("btnSave");
+        var insertedHotelId;
+        var insertedHotelName;
+
+        var buttonSave = document.getElementById("btnSave");
+        var buttonCancel = document.getElementById("btnCancel");
 
         function WebFormInfo(hotelName, hotelArea, hotelDescription) {
             this.option = "createHotel";
@@ -105,6 +124,46 @@ and open the template in the editor.
             this.geoLocation = hotelArea;
             this.description = hotelDescription;
         }
+
+        window.$hotelImageInputElement = $('#fileInput');
+
+        $('#fileInput').fileinput({
+            theme: 'fas',
+            previewFileType: 'image',
+            allowedFileTypes: ['image'],
+            uploadUrl: 'hotel_image_handler.php',
+            validateInitialCount: true,
+            uploadAsync: false,
+            maxFileCount: 10,
+            // layoutTemplates: { footer: footerTemplate, actions: actionTemplate },
+            type: 'post',
+            msgInvalidFileType: 'Invalid type for file "{name}". Only "{types}" files are supported.',
+            autoReplace: true,/*http://plugins.krajee.com/file-auto-replace-demo*/
+            overwriteInitial: false,
+            showUploadedThumbs: false,
+            showUpload: false,
+            showRemove: false,
+            browseClass: 'btn btn-primary btn-md pull-right',
+            previewFileIcon: '<i class="glyphicon glyphicon-king"></i>',
+            allowedFileTypes: ['image'],
+            allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif', 'tiff'],
+            uploadExtraData: function () {  // callback example
+                var out = {"id": insertedHotelId, "hotelName": insertedHotelName};
+                return out;
+            }
+        })
+        window.$hotelImageInputElement.on('filebatchuploadsuccess',
+            function (event, data, previewId, index) {
+
+
+                swal({
+                        title: "Saved Hotel",
+                        text: data.message,
+                        icon: "success"
+                    }).then(function() {
+                        window.location = "index.php";
+                    });
+            });
 
         var saveHotel = function(e) {
             var collectedHotelName = $("#inputHotelName").val();
@@ -129,14 +188,12 @@ and open the template in the editor.
                 })
 
                 $saveHotelHandler.done(function(data) {
-                    swal({
-                        title: "Saved Hotel",
-                        text: data.message,
-                        icon: "success"
-                    }).then(function() {
-                        window.location = "index.php";
-                    });
-                    console.log(data);
+                    //Upload photos after saving basic entries about the hotel.
+                    insertedHotelId = data.insertedID;
+                    insertedHotelName = data.insertedName;
+                    window.$hotelImageInputElement.fileinput('upload');
+
+
                 });
                 $saveHotelHandler.fail(function(jqXHR, textStatus, error) {
                     swal({
@@ -151,8 +208,22 @@ and open the template in the editor.
             }
         }
 
-        button.addEventListener('click', saveHotel, false);
-    });
+        var cancelHotel = function(e) {
+            swal({
+                    title: "Are You Sure?",
+                    text: "Leave this page and return to the previous page?",
+                    icon: "warning",
+                    buttons: ["Nope", "Yes Of Course!"],
+                    dangerMode: false,
+                })
+                .then((willCancel) => {
+                    if (willCancel) {
+                        window.location = "index.php";
+                    }
+                });
+        }
 
-    // Your code to save "data", usually through Ajax.
+        buttonSave.addEventListener('click', saveHotel, false);
+        buttonCancel.addEventListener('click', cancelHotel, false);
+    });
 </script>
