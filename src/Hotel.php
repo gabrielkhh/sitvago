@@ -135,12 +135,12 @@ class Hotel extends DB
         return $response;
     }
 
-    public function addHotelImage($hotelID, $url, $width, $height, $extension)
+    public function addHotelImage($hotelID, $url, $width, $height, $extension, $isThumbnail)
     {
         $response = [];
         $success = true;
         $preparedSQL = "INSERT INTO HotelImage (url, hotel_id, is_thumbnail, image_extension, width, height) SELECT ?, Hotel.id,
-        0, ?, ?, ? FROM Hotel WHERE Hotel.id=?";
+        ?, ?, ?, ? FROM Hotel WHERE Hotel.id=?";
 
 
         if ($this->conn->connect_error) {
@@ -151,7 +151,7 @@ class Hotel extends DB
             $response['error'] = $errorMsg;
         } else {
             $stmt = $this->conn->prepare($preparedSQL);
-            $stmt->bind_param("ssiii", $url, $extension, $width, $height, $hotelID);
+            $stmt->bind_param("sisiii", $url, $isThumbnail, $extension, $width, $height, $hotelID);
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
                 $response['success'] = $success;

@@ -18,12 +18,6 @@ class DB
         $password = $_SERVER['password'];
         $dbname = $_SERVER['dbname'];
         
-        // $config = parse_ini_file(__DIR__ . '/../config/db.ini');
-
-        // $servername = $config['servername'];
-        // $username = $config['username'];
-        // $password = $config['password'];
-        // $dbname = $config['dbname'];
         $this->conn = mysqli_connect($servername, $username, $password, $dbname);
     }
 
