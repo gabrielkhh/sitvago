@@ -48,7 +48,7 @@ body{
 }
 
 .col-icon{
-    font-size:24px;
+    font-size:20px;
     color:black;
     font-weight:bold;
     border-style:dotted;
@@ -56,5 +56,4 @@ body{
     border-color:#FF1493;
     border-radius:25px;
     text-align:center;
-    position:relative;
 }

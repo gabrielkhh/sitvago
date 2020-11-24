@@ -35,7 +35,22 @@
         <!--<script src='https://kit.fontawesome.com/a076d05399.js'></script>-->
          <!-- Own Script -->
         <script defer src="js/confirmation.js"></script>
+        <script defer src="js/booking.js"></script>
         
+ <?php
+ 
+ $cout_date = $cin_date = $type = $price ="";
+ 
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    //$cout_date = $_GET['checkin'];
+    //$cin_date = $_GET['checkout'];
+    $type = $_GET['TypeOfRooms'];
+    //echo "cout". $cout_date . "and" . $cin_date;
+}
+
+
+ 
+ ?>
 
  <?php
     include "navbar.php"
@@ -80,9 +95,13 @@
 
           <div class="col-50">
             <label for="check-in-confirm"><i class="fa fa-calendar-check-o"></i> Check In Date</label>
-            <input class="confirm_input" type="text" id="ci_date" name="check-in-confirm" value="">
+                <input class="confirm_input" type="text" id="ci_date" name="check-in-confirm" value="">
             <label for="check-out-confirm"><i class="fa fa-calendar-check-o"></i> Check Out Date</label>
-            <input class="confirm_input" type="text" id="co_date" name="check-out-confirm" value="">
+                <input class="confirm_input" type="text" id="co_date" name="check-out-confirm" value="">
+            <label for="room-type"><i class="fa fa-bed"></i> Room Type</label>
+                <input class="confirm_input" type="text" id="room-type" name="room-type" value="<?php echo $type;?>">
+            <label for="room-type"><i class="fa fa-exclamation-circle"></i> Notice</label>
+                 <p>Do take not that we are only reserving the room for you!<br> Availability is up to the hotel. Have a nice day :) </p>
           </div>
           
         </div>

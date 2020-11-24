@@ -12,7 +12,9 @@
  //Ensure check out must be the next date
  var minCoutDate = new Date();
  minCoutDate.setDate(minCoutDate.getDate() +1);
-
+ 
+ var checkInValue = checkInDate.value;
+ var checkOutValue = checkOutDate.value;
 
 //Make the function available after the document is loaded
 $(document).ready(function()
@@ -33,8 +35,6 @@ function calenderHandler1(){
     flatpickr(checkInDate,{ 
         allowInput: true,
         minDate: "today",
-        minTime: "9:00",
-        maxTime: "22:30",
         dateFormat: "d-m-Y",
         /*
         disable:[
@@ -47,14 +47,11 @@ function calenderHandler1(){
     });
 }
 
-
 function calenderHandler2(){
     flatpickr(checkOutDate,{ 
         allowInput: true,
         minDate: minCoutDate,
-        minTime: "9:00",
         dateFormat: "d-m-Y",
-        maxTime: "22:30"
     });
 }
 
