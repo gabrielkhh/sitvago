@@ -1,6 +1,5 @@
 <?php 
 require '../../vendor/autoload.php';
-require_once '../../CloudinaryAPI.php';
  
 //Namespace
 use sitvago\Hotel;
@@ -44,10 +43,7 @@ else if ($dataFromClient['option'] === 'deleteHotel')
     $result = $hotel->deleteHotel($hotelID, $hotelName);
     echo json_encode($result);
 }
- 
 
- 
- 
  
  
 ?>

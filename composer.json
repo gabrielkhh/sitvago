@@ -2,7 +2,9 @@
     "name": "p4team8/sitvago",
     "type": "project",
     "require": {
-        "cloudinary/cloudinary_php": "dev-master"
+        "cloudinary/cloudinary_php": "dev-master",
+        "stripe/stripe-php": "dev-master",
+        "vlucas/phpdotenv": "dev-master"
     },
     "autoload": {
         "psr-4": {

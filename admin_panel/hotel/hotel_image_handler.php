@@ -1,13 +1,15 @@
 <?php
 require '../../vendor/autoload.php';
-require_once '../../CloudinaryAPI.php';
 
 use sitvago\Hotel;
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../../");
+$dotenv->load();
+
 \Cloudinary::config(array(
-    "cloud_name" => "redacted",
-    "api_key" => "redacted",
-    "api_secret" => "tRyHaRdErNeXtTiMe",
+    "cloud_name" => $_SERVER['cloud_name'],
+    "api_key" => $_SERVER['cloudinary_api_key'],
+    "api_secret" => $_SERVER['cloudinary_secret_key'],
     "secure" => true
 ));
 

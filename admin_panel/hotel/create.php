@@ -1,6 +1,9 @@
 <?php
 require '../../vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../../");
+$dotenv->load();
+
 use sitvago\GeoLocation;
 
 $geo = new GeoLocation();
