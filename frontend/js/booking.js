@@ -8,6 +8,10 @@
 //Get element with check in and check out ID
  const checkInDate = document.querySelector('#checkin')
  const checkOutDate = document.querySelector('#checkout')
+ 
+ //Ensure check out must be the next date
+ var minCoutDate = new Date();
+ minCoutDate.setDate(minCoutDate.getDate() +1);
 
 
 //Make the function available after the document is loaded
@@ -15,7 +19,6 @@ $(document).ready(function()
 {
     calenderHandler1();
     calenderHandler2();
-    disableDates();
 });
 
 //Disable specific dates that are blocked
@@ -33,12 +36,14 @@ function calenderHandler1(){
         minTime: "9:00",
         maxTime: "22:30",
         dateFormat: "d-m-Y",
+        /*
         disable:[
         function(date) {
             //Test
             return !(date.getDate() % 8);
         }
         ]
+         */
     });
 }
 
@@ -46,7 +51,7 @@ function calenderHandler1(){
 function calenderHandler2(){
     flatpickr(checkOutDate,{ 
         allowInput: true,
-        minDate: "today",
+        minDate: minCoutDate,
         minTime: "9:00",
         dateFormat: "d-m-Y",
         maxTime: "22:30"

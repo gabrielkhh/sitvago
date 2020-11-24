@@ -34,6 +34,7 @@ body{
     color:red;
     font-weight: bold;
     text-decoration: underline;
+    font-size:20px;
 }
 
 .carousel-item img {
@@ -44,4 +45,16 @@ body{
 
 .hotel_selected{
    font-weight: bold;
+}
+
+.col-icon{
+    font-size:24px;
+    color:black;
+    font-weight:bold;
+    border-style:dotted;
+    border-width:2px;
+    border-color:#FF1493;
+    border-radius:25px;
+    text-align:center;
+    position:relative;
 }

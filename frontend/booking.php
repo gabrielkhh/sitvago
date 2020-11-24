@@ -33,13 +33,12 @@
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
          <!-- Own Script -->
         <script defer src="js/booking.js"></script>
-
-         
+        
     </head>
     <body>
-        <?php
-        include "navbar.php";
-        ?>       
+    <?php
+    include "navbar.php";
+    ?>       
         <link rel="stylesheet" href="css/booking.css">
         <section class="ftco-section">
             <div class="container">
@@ -69,35 +68,63 @@
                             </div>
                             <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
                                 <h2 class="mb-4"></h2>
-                                    <p><i class='fas fa-glass-martini-alt' style='font-size:24px'> Drinking Lounge.</i></p>
-                                    <p><i class='fas fa-bath' style='font-size:24px'> Relaxing Bathtub.</i></p>
-                                    <p><i class='fas fa-smoking-ban' style='font-size:24px'> No Smoking Room.</i></p>
-                                    <p><i class='fas fa-utensils' style='font-size:24px'> Breakfast Buffet Included.</i></p>
-                                    <p><i class='fas fa-wifi' style='font-size:24px'> Free Wi-fi.</i></p>
-                                    <p><h2 id="price">For only $99.99 per night!</h2></p>
-                                <div class="d-md-flex mt-5 mb-5">
-                                    <ul class="list">
-                                        <li><span>Max:</span> 3 Persons (value retreive from SQL)</li>
-                                    </ul>
-                                </div>
-                                <p>Some description about the hotel? This hotel is in Singapore, expensive but confirm worth</p>
+                                    <div class="container icon-containers">
+                                        <div class="row icon-row">
+                                            <div class="col-sm-2 col-icon">
+                                                <i class='fas fa-glass-martini-alt'></i>
+                                                    <p>Drinking<br>Lounge.</p>
+                                            </div>
+                                            <div class="col-sm-2 col-icon">
+                                                <i class='fas fa-bath'> </i>
+                                                     <p>Relaxing<br>Bathtub.</p>
+                                            </div>
+                                            <div class="col-sm-2 col-icon">
+                                                <i class="fas fa-smoking"></i>
+                                                      <p>Smoking<br>Room.</p>
+                                            </div>
+                                            <div class="col-sm-2 col-icon">
+                                                <i class='fas fa-utensils'></i>
+                                                      <p>Breakfast<br>Buffet.</p>
+                                            </div>
+                                             <div class="col-sm-2 col-icon">
+                                                 <i class='fas fa-wifi'></i>
+                                                     <p>Free<br>Wi-Fi.</p>                                                        
+                                             </div>
+                                             <div class="col-sm-2 col-icon">
+                                                 <i class="fas fa-dumbbell"></i> 
+                                                      <p>Free<br>Gym.</p>
+                                             </div>
+                                         </div>
+                                    </div>   
+                                
+                                <!-- <div class="d-md-flex mt-5 mb-5"><ul class="list"> <li><span>Max:</span></li></ul></div> -->
+                                                                     
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="col-lg-4 sidebar ftco-animate pl-md-5">
                         <div class="sidebar-box ftco-animate">
                             <h3 class="hotel_selected">Barrack Hotel Rooms</h3>
                             <form action="confirmation.php">       
                                 <div class ="form-group">
-                                     <input class="form-control" type="text" id="checkin" placeholder="Check-in-date" required>                       
+                                     <input class="form-control" type="text" id="checkin" placeholder="Check-In-Date" required>                       
                                 </div>
                                 <div class ="form-group">
-                                    <input class="form-control" type="text" id="checkout" placeholder="Check-out-date" required>                                     
+                                    <input class="form-control" type="text" id="checkout" placeholder="Check-Out-Date" required>                                     
                                 </div>
-                                    <div class="form-group">
+                                <div class ="form-group">
+                                    <input class="form-control" list="browsers" id="TypeOfRooms" name="TypeOfRooms" placeholder="Type-Of-Room" required>
+                                        <datalist id="browsers">
+                                            <option value="Single Room"></option>
+                                            <option value="Double Room"></option>
+                                        </datalist>                                     
+                                </div>
+                                <div class="form-group">
                                         <button class="btn btn-primary" type="submit" id="submit">Book Now!</button></a>
                                 </div>            
                             </form>
+                            <p><h3 id="price">For only $99.99 per night!</h3></p>
+                            <p>Some description about the hotel. This hotel is in Singapore, expensive but confirm worth it for $99.99 per night!</p>
                         </div>
                     </div>
                 </div>
