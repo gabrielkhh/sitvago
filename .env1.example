@@ -1,10 +1,13 @@
-#DATABASE STUFF
+# DATABASE STUFF
 servername = "localhost"
 username = "yourusername"
 password = "yourpassword"
 dbname = "sitvago_db"
 
-#CLOUDINARY API
+# CLOUDINARY API
 cloud_name="cloudnamegoeshere"
 cloudinary_api_key="apikeygoeshere"
 cloudinary_secret_key="secretkeygoeshere"
+
+# STRIPE API
+stripe_secret_key="abcdefghijklmnopqrstuvwxyzyoushallnothavemykey"

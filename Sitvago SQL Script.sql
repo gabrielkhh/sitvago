@@ -13,6 +13,7 @@ CREATE TABLE `sitvago_db`.`User` (
   `card_number` varchar(50),
   `role_id` int,
   `is_confirmed` bit,
+  `stripe_customer_id` varchar(255),
   `created_at` datetime,
   `updated_at` datetime
 );
@@ -97,15 +98,11 @@ CREATE TABLE `sitvago_db`.`Booking` (
   `price` float,
   `check_in` datetime,
   `check_out` datetime,
+  `stripe_payment_id` varchar(255),
   `created_at` datetime,
-  `created_by` int,
-  `updated_at` datetime,
-  `updated_by` int,
   FOREIGN KEY (`hotel_id`) REFERENCES `Hotel` (`id`),
   FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
-  FOREIGN KEY (`room_category_id`) REFERENCES `RoomCategory` (`id`),
-  FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
-  FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
+  FOREIGN KEY (`room_category_id`) REFERENCES `RoomCategory` (`id`)
 );
 CREATE TABLE `sitvago_db`.`FAQ` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
