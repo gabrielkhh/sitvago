@@ -66,6 +66,44 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-header text-center">Total Bookings for all users</div>
+                    <div class="card-body text-center">
+                        <h1 id="hotelCounter" class="card-title text-center">Number</h5>
+                            <a href="hotel/index.php" class="btn btn-primary">View Bookings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-header text-center">Total Reviews for all Hotels</div>
+                    <div class="card-body text-center">
+                        <h1 id="hotelCounter" class="card-title text-center">Number</h5>
+                            <a href="hotel/index.php" class="btn btn-primary">View Reviews</a>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="col-md-3">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-header text-center">Registered Users to Date</div>
+                    <div class="card-body text-center">
+                        <h1 id="userCounter" class="card-title text-center">Number</h5>
+                            <a href="#" class="btn btn-primary">View Users</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-header text-center">Active Geo-Locations to Date</div>
+                    <div class="card-body text-center">
+                        <h1 id="geoCounter" class="card-title text-center">Number</h5>
+                            <a href="geolocation/index.php" class="btn btn-primary">View Geo-Locations</a>
+                    </div>
+                </div>
+            </div>-->
         </div>
 
     </main>
