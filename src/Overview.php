@@ -12,7 +12,7 @@ class Overview extends DB
         $sqlGeo = "SELECT COUNT(id) AS 'GeoCount' FROM GeoLocation;";
         $sqlBooking = "SELECT COUNT(id) AS 'BookingCount' FROM Booking;";
         $sqlReview = "SELECT COUNT(id) AS 'ReviewCount' FROM Review;";
-        
+
         $resultHotel = mysqli_query($this->conn, $sqlHotel);
         $resultUser = mysqli_query($this->conn, $sqlUser);
         $resultGeo = mysqli_query($this->conn, $sqlGeo);
