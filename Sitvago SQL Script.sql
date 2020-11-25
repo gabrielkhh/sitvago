@@ -13,7 +13,7 @@ CREATE TABLE `sitvago_db`.`User` (
   `card_number` varchar(50),
   `role_id` int,
   `is_confirmed` bit,
-  `stripe_customer_id` varchar(255);
+  `stripe_customer_id` varchar(255),
   `created_at` datetime,
   `updated_at` datetime
 );
