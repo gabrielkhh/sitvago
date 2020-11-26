@@ -6,16 +6,16 @@
  
 
 //Get element with check in and check out ID
- const checkInDate = document.querySelector('#checkin')
- const checkOutDate = document.querySelector('#checkout')
+ const checkInDate = document.querySelector('#checkin');
+ const checkOutDate = document.querySelector('#checkout');
+ const bookBtn = document.getElementById("submit");
  
  //Ensure check out must be the next date
  var minCoutDate = new Date();
  minCoutDate.setDate(minCoutDate.getDate() +1);
  
- var checkInValue = checkInDate.value;
- var checkOutValue = checkOutDate.value;
-
+ 
+ 
 //Make the function available after the document is loaded
 $(document).ready(function()
 {
@@ -23,18 +23,22 @@ $(document).ready(function()
     calenderHandler2();
 });
 
+ if(bookBtn.clicked == true){
+     checkDateRange();
+ }
+    
+
 //Disable specific dates that are blocked
 function disableDates(date){
     //Testing, need to get dates from DB instead
     return date.getDate();
 }
 
-
 //Create calender object with flatpickr
 function calenderHandler1(){
     flatpickr(checkInDate,{ 
         allowInput: true,
-        minDate: "today",
+        minDate:"today",
         dateFormat: "d-m-Y",
         /*
         disable:[
@@ -53,6 +57,16 @@ function calenderHandler2(){
         minDate: minCoutDate,
         dateFormat: "d-m-Y",
     });
+}
+
+
+//Check if date range is correct
+function checkDateRange(){
+    alert("Check out date must be next day");
+    if (checkInDate.selectedDates[0] <= checkOutDate.selectedDates[0])
+    {
+        alert("Check out date must be next day");
+    }  
 }
 
 

@@ -15,6 +15,23 @@ class User extends DB
         return "";
     }
 
+    public function getAllUsers()
+    {
+        $results = [];
+        $sql = "SELECT * FROM Users";
+
+        $resultsSQL = mysqli_query($this->conn, $sql);
+
+        if (mysqli_num_rows($resultsSQL) > 0) {
+            while ($row = mysqli_fetch_assoc($resultsSQL)) {
+                $results[] = $row;
+            }
+        }
+
+        return $results;
+
+    }
+
     public function loginUser($username, $password)
     {
         $query = "SELECT * FROM user WHERE username=? AND password=?";
