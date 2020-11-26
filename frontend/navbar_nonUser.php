@@ -17,10 +17,10 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="home.php">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="aboutus.php">About Us</a>
+                <a class="nav-link" href="#">About Us</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="loginpage.php">Login</a>

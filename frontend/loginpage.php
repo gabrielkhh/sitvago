@@ -1,3 +1,4 @@
+<?php include('User.php') ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -68,19 +69,22 @@ and open the template in the editor.
                 </div>
             </header>
 
-            <form class="form-signin">
-                <img class="mb-4" src="images/logo_nobackground.png" alt="mainpagelogo" width="300" height="110">
+            <div class="form-signin">
+                <form action="loginpage.php" method="post">
+                    <img class="mb-4" src="images/logo_nobackground.png" alt="mainpagelogo" width="300" height="110">
+
+                    <p> Login to access our site or <a href="register.php" class="font-weight-bolder" >Register</a> with us </p>
+
+                    <!-- Remember to add 'required' field later, currently remove for demo purpose -->
+                    <label for="inputUsername" class="sr-only">Username</label>
+                    <input type="text" id="inputUsername" class="form-control" placeholder="Username"  name="username" autofocus>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password">
+
                 
-                <p> Login to access our site or <a href="register.php" class="font-weight-bolder" >Register</a> with us </p>
-             
-                <!-- Remember to add 'required' field later, currently remove for demo purpose -->
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address"  autofocus>
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" >
-                
-                <a href="home.php" class="btn btn-lg btn-primary btn-block" role="button">Login</a>
-            </form>
+                    <button type="submit" id="submitBtn" name="login_user" class="btn btn-lg btn-primary btn-block">Login</button>
+                </form>
+            </div>
 
 
             <footer class="mastfoot mt-auto">
