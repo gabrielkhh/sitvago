@@ -2,6 +2,7 @@
 require '../vendor/autoload.php';
 
 use sitvago\User;
+use Mailgun\Mailgun;
 
 session_start();
 
@@ -19,7 +20,8 @@ $redirect = "";
 $errors = array();
 
 //Helper function that checks input for malicious or unwanted content.
-function sanitize_input($data) {
+function sanitize_input($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -102,11 +104,21 @@ if (isset($_POST['reg_user'])) {
     // Finally, register user if there are no errors in the form
     if (count($errors) == 0) {
         $password = md5($password_1); //encrypt the password before saving in the database
-      
+
         $saveUser = new User();
         $saveUserResult = $saveUser->registerUser($first_name, $last_name, $username, $email, $phone_number, $country, $password, $billing_address);
         $_SESSION['username'] = $username;
         $_SESSION['success'] = "You are now logged in";
+        # Instantiate the client.
+        $mg = Mailgun::create('40e8726dbad000cafb5eed0698218294-360a0b2c-a5e58e14');
+        // Now, compose and send your message.
+        // $mg->messages()->send($domain, $params);
+        $mg->messages()->send('mg.sitvago.com', [
+            'from'    => 'Sitvago noreply@sitvago.com',
+            'to'      => 'freezingheat97@gmail.com',
+            'subject' => 'Thank you for signing up with us!',
+            'html'    => 'We hope you will have a great time!'
+        ]);
         header('location: home.php');
     }
 }
@@ -125,7 +137,7 @@ if (isset($_POST['login_user'])) {
 
     if (count($errors) == 0) {
         $password = md5($password);
-        
+
         $loginUser = new User();
         $result = $loginUser->loginUser($username, $password);
 
@@ -161,7 +173,7 @@ if (isset($_POST['login_user'])) {
 
 //UPDATE USER
 if (isset($_POST['update_user'])) {
-    
+
     $userObj = new User();
 
     // receive all input values from the form
@@ -173,7 +185,7 @@ if (isset($_POST['update_user'])) {
     $country = $_POST['country'];
     $billing_address = $_POST['billing_address'];
 
-// form validation: ensure that the form is correctly filled ...
+    // form validation: ensure that the form is correctly filled ...
     // by adding (array_push()) corresponding error unto $errors array
     if (empty($first_name)) {
         array_push($errors, "First name is required");
@@ -259,11 +271,10 @@ if (isset($_POST['update_password'])) {
         if (count($checkPasswordResult) > 0) {
             $password_new = md5($password2);
             $updatePasswordQuery = $userObj->updateUserPassword($password_new, $username);
-   
+
             header("location: home.php?logout='1'");
         } else {
             array_push($errors, "Invalid Password");
         }
     }
 }
-?>

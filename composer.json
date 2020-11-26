@@ -4,7 +4,10 @@
     "require": {
         "cloudinary/cloudinary_php": "dev-master",
         "stripe/stripe-php": "dev-master",
-        "vlucas/phpdotenv": "dev-master"
+        "vlucas/phpdotenv": "dev-master",
+        "mailgun/mailgun-php": "dev-master",
+        "kriswallsmith/buzz": "dev-master",
+        "nyholm/psr7": "dev-master"
     },
     "autoload": {
         "psr-4": {
