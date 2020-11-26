@@ -76,10 +76,10 @@ and open the template in the editor.
 
                             </div>
                         </div>
-                    </div> <!-- end of div element with class="panel-body" -->
-                </div><!-- end of div element with class="panel" -->
-            </div> <!-- end of div element with  class="col-md-offset-2  col-md-8"-->
-        </div><!-- end of div element with class="row"-->
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
     <!-- <?php

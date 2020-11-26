@@ -9,3 +9,6 @@ config/
 
 # Netbeans Config
 nbproject/
+
+# Environment Variables
+.env
