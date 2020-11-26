@@ -77,10 +77,43 @@ class User extends DB
 
     public function updateUserPassword($password_new, $username)
     {
-        $stmt = $this->conn->prepare("UPDATE user SET password=? where username =?");
+        $sqlStatement = "UPDATE user SET password=? where username=?";
+        $stmt = $this->conn->prepare($sqlStatement);
         $stmt->bind_param("ss", $password_new, $username);
         $stmt->execute();
 
         return "";
+    }
+
+    public function getStripeCustID($userID)
+    {
+        $status = false;
+        $sql = "SELECT stripe_customer_id FROM User WHERE id=?";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $userID);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $stmt->close();
+
+        return $result->fetch_array(MYSQLI_ASSOC);
+    }
+
+    public function saveStripeCustID($userID, $stripeCustomerID)
+    {
+        $response = [];
+        $sql = "UPDATE User SET stripe_customer_id = '" . $stripeCustomerID . "' WHERE User.id = " . $userID;
+
+        if (mysqli_query($this->conn, $sql))
+        {
+            $response['message'] = "Updated Stripe CustID successfully";
+        }
+        else
+        {
+            $response['message'] = "Stripe CustID failed to update";
+        }
+        return $response;
     }
 }

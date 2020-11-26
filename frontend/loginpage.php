@@ -1,4 +1,4 @@
-<?php include('User.php') ?>
+<?php include('user.php') ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.

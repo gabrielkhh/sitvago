@@ -1,6 +1,5 @@
 <?php 
 require '../../vendor/autoload.php';
-require_once '../../CloudinaryAPI.php';
  
 //Namespace
 use sitvago\GeoLocation;

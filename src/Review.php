@@ -2,12 +2,12 @@
 
 namespace sitvago;
 
-class Hotel extends DB
+class Review extends DB
 {
-    public function getHotels()
+    public function getReviews()
     {
         $results = [];
-        $sql = "SELECT Hotel.id, Hotel.name, Hotel.description, Hotel.rating, Hotel.created_at, 
+        $sql = "SELECT Review.id, user.id, Hotel.id, Hotel.rating, Review.title, Review description,Hotel.created_at, 
         c.first_name AS created_by, Hotel.updated_at, u.first_name AS updated_by, GeoLocation.name AS area_name 
         FROM Hotel LEFT JOIN GeoLocation ON Hotel.geo_id = GeoLocation.id LEFT JOIN User c ON Hotel.created_by = c.id 
         LEFT JOIN User u ON Hotel.updated_by = u.id;";
@@ -23,7 +23,7 @@ class Hotel extends DB
         return $results;
     }
 
-    public function getSingleHotel($hotelID)
+    public function getSingleHotelReview($reviewID)
     {
         $results = [];
         $success = true;
@@ -36,7 +36,7 @@ class Hotel extends DB
         return $rowHotel;
     }
 
-    public function addHotel($hotelName, $hotelDescription, $rating, $userID, $hotelGeoLocation)
+    public function addReview($hotelName, $hotelDescription, $rating, $userID, $hotelGeoLocation)
     {
         $response = [];
         $success = true;
@@ -72,7 +72,7 @@ class Hotel extends DB
         return $response;
     }
 
-    public function updateHotel($hotelID, $hotelName, $hotelDescription, $hotelGeoLocation, $rating, $userID)
+    public function updateReview($hotelID, $hotelName, $hotelDescription, $hotelGeoLocation, $rating, $userID)
     {
         $response = [];
         $success = true;
@@ -103,7 +103,7 @@ class Hotel extends DB
         return $response;
     }
 
-    public function deleteHotel($hotelID, $hotelName)
+    public function deleteReview($hotelID, $hotelName)
     {
         $results = [];
         $success = true;
@@ -135,82 +135,4 @@ class Hotel extends DB
         return $response;
     }
 
-    public function addHotelImage($hotelID, $url, $width, $height, $extension, $isThumbnail)
-    {
-        $response = [];
-        $success = true;
-        $preparedSQL = "INSERT INTO HotelImage (url, hotel_id, is_thumbnail, image_extension, width, height) SELECT ?, Hotel.id,
-        ?, ?, ?, ? FROM Hotel WHERE Hotel.id=?";
-
-
-        if ($this->conn->connect_error) {
-            $errorMsg = "Connection failed: " . $this->conn->connect_error;
-            $success = false;
-            $response['success'] = $success;
-            $response['message'] = "Conn Failed";
-            $response['error'] = $errorMsg;
-        } else {
-            $stmt = $this->conn->prepare($preparedSQL);
-            $stmt->bind_param("sisiii", $url, $isThumbnail, $extension, $width, $height, $hotelID);
-            if (!$stmt->execute()) {
-                $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
-                $response['success'] = $success;
-                $response['message'] = "Execute Failed.";
-                $response['error'] = $errorMsg;
-            } else {
-                $newHotelID = mysqli_insert_id($this->conn);
-                $response['success'] = $success;
-                $response['message'] = "Image saved successfully.";
-                $response['error'] = "";
-            }
-            $stmt->close();
-        }
-        $this->conn->close();
-        return $response;
-    }
-
-    public function getRoomCategoryRate($hotelName, $roomCategoryName)
-    {
-        $results = [];
-        $success = true;
-        $SQL = "SELECT price_per_night AS rate FROM HotelRoomCategory WHERE (SELECT h.id FROM Hotel h WHERE h.name = ?) = hotel_id 
-        AND (SELECT rc.id FROM RoomCategory rc WHERE rc.category_name = ?) = room_category_id;";
-
-        $stmt = $this->conn->prepare($SQL);
-        $stmt->bind_param("ss", $hotelName, $roomCategoryName);
-
-        if (!$stmt->execute()) {
-            $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
-            $response['success'] = $success;
-            $response['message'] = "There was an issue retrieving the rate.";
-            $response['error'] = $errorMsg;
-        } else {
-            $response['success'] = $success;
-            $response['message'] = "Rate has been received";
-            $response['error'] = "";
-        }
-        $rowRate = $stmt->get_result();
-
-        $stmt->close();
-
-        return $rowRate->fetch_array(MYSQLI_ASSOC);
-    }
-
-    public function getRoomCategories()
-    {
-        $results = [];
-        $sql = "SELECT RoomCategory.id, RoomCategory.category_name FROM RoomCategory;";
-
-        $resultsSQL = mysqli_query($this->conn, $sql);
-
-        if (mysqli_num_rows($resultsSQL) > 0) {
-            while ($row = mysqli_fetch_assoc($resultsSQL)) {
-                $results[] = $row;
-            }
-        }
-
-        return $results;
-    }
-
-    //INSERT INTO HotelRoomCategory (hotel_id, room_category_id, availability, price_per_night, created_at) VALUES (2, 1, 1, 210.00, now());
 }
