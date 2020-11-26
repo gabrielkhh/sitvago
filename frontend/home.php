@@ -1,4 +1,22 @@
 <!DOCTYPE html>
+<?php
+session_start();
+
+
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['username']);
+    header("location: home.php");
+}
+
+//Ending a php session after 30 minutes of inactivity
+$minutesBeforeSessionExpire = 30;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    session_unset();     // unset $_SESSION   
+    session_destroy();   // destroy session data  
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+?>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -78,7 +96,12 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        include "navbar.php";
+        if (isset($_SESSION['username'])) {
+            include "navbar_User.php";
+
+        } else if (!isset($_SESSION['username'])) {
+            include "navbar_nonUser.php";
+        }
         ?>
 
 
