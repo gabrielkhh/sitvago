@@ -1,30 +1,27 @@
 <?php
+require '../vendor/autoload.php';
+
+use sitvago\User;
+use Mailgun\Mailgun;
 
 session_start();
 
-// initializing variables
-$first_name = "";
-$last_name = "";
-$username = "";
-$email = "";
-$country = "";
-$billing_address = "";
-$phone_number = "";
-$role_id = "";
+// // initializing variables
+// $first_name = "";
+// $last_name = "";
+// $username = "";
+// $email = "";
+// $country = "";
+// $billing_address = "";
+// $phone_number = "";
+// $role_id = "";
 $redirect = "";
-$password = "";
+// $password = "";
 $errors = array();
 
-
-// connect to the database
-$db = new mysqli('localhost', 'root', 'Password123!', 'sitvago_db');
-// Check connection
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
-}
-
 //Helper function that checks input for malicious or unwanted content.
-function sanitize_input($data) {
+function sanitize_input($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -35,19 +32,17 @@ function sanitize_input($data) {
 if (isset($_POST['reg_user'])) {
 
     // prepare and bind for register
-    $stmt = $db->prepare("INSERT INTO user (first_name, last_name, username, email, phone_number, country, password, billing_address, role_id, is_confirmed, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?,'1', 1, now(), now())");
-    $stmt->bind_param("ssssssss", $first_name, $last_name, $username, $email, $phone_number, $country, $password, $billing_address);
 
     // receive all input values from the form
-    $first_name = mysqli_real_escape_string($db, $_POST['fname']);
-    $last_name = mysqli_real_escape_string($db, $_POST['lname']);
-    $username = mysqli_real_escape_string($db, $_POST['username']);
-    $email = mysqli_real_escape_string($db, $_POST['email']);
-    $phone_number = mysqli_real_escape_string($db, $_POST['phone_number']);
-    $country = mysqli_real_escape_string($db, $_POST['country']);
-    $billing_address = mysqli_real_escape_string($db, $_POST['billing_address']);
-    $password_1 = mysqli_real_escape_string($db, $_POST['pwd']);
-    $password_2 = mysqli_real_escape_string($db, $_POST['pwd_confirm']);
+    $first_name = $_POST['fname'];
+    $last_name = $_POST['lname'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $phone_number = $_POST['phone_number'];
+    $country = $_POST['country'];
+    $billing_address = $_POST['billing_address'];
+    $password_1 = $_POST['pwd'];
+    $password_2 = $_POST['pwd_confirm'];
 
     // form validation: ensure that the form is correctly filled ...
     // by adding (array_push()) corresponding error unto $errors array
@@ -93,9 +88,8 @@ if (isset($_POST['reg_user'])) {
 
     // first check the database to make sure 
     // a user does not already exist with the same username and/or email
-    $user_check_query = "SELECT * FROM user WHERE username='$username' OR email='$email' LIMIT 1";
-    $result = mysqli_query($db, $user_check_query);
-    $user = mysqli_fetch_assoc($result);
+    $checkUserNameAndEmail = new User();
+    $user = $checkUserNameAndEmail->userNameEmail($username, $email);
 
     if ($user) { // if user exists
         if ($user['username'] === $username) {
@@ -110,18 +104,29 @@ if (isset($_POST['reg_user'])) {
     // Finally, register user if there are no errors in the form
     if (count($errors) == 0) {
         $password = md5($password_1); //encrypt the password before saving in the database
-      
-        $stmt->execute();
+
+        $saveUser = new User();
+        $saveUserResult = $saveUser->registerUser($first_name, $last_name, $username, $email, $phone_number, $country, $password, $billing_address);
         $_SESSION['username'] = $username;
         $_SESSION['success'] = "You are now logged in";
+        # Instantiate the client.
+        $mg = Mailgun::create('40e8726dbad000cafb5eed0698218294-360a0b2c-a5e58e14');
+        // Now, compose and send your message.
+        // $mg->messages()->send($domain, $params);
+        $mg->messages()->send('mg.sitvago.com', [
+            'from'    => 'Sitvago noreply@sitvago.com',
+            'to'      => 'freezingheat97@gmail.com',
+            'subject' => 'Thank you for signing up with us!',
+            'html'    => 'We hope you will have a great time!'
+        ]);
         header('location: home.php');
     }
 }
 
 // LOGIN USER
 if (isset($_POST['login_user'])) {
-    $username = mysqli_real_escape_string($db, $_POST['username']);
-    $password = mysqli_real_escape_string($db, $_POST['password']);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
     if (empty($username)) {
         array_push($errors, "Username is required");
@@ -132,35 +137,28 @@ if (isset($_POST['login_user'])) {
 
     if (count($errors) == 0) {
         $password = md5($password);
-        $query = "SELECT * FROM user WHERE username=? AND password=?";
-        $stmt = $db->prepare($query);
-        $stmt->bind_param("ss", $username, $password);
-        $stmt->execute();
-        $result = $stmt->get_result();
+
+        $loginUser = new User();
+        $result = $loginUser->loginUser($username, $password);
 
         if ($result->num_rows > 0) {
-            $_SESSION['username'] = $username;
+            $retrieveUserData = new User();
+            $UserData = $retrieveUserData->getUserDataForSession($username);
 
-            $role_id = $db->query("SELECT role_id FROM user WHERE username = '$username'")->fetch_object()->role_id;
-            $first_name = $db->query("SELECT first_name FROM user WHERE username = '$username'")->fetch_object()->first_name;
-            $last_name = $db->query("SELECT last_name FROM user WHERE username = '$username'")->fetch_object()->last_name;
-            $email = $db->query("SELECT email FROM user WHERE username = '$username'")->fetch_object()->email;
-            $phone_number = $db->query("SELECT phone_number FROM user WHERE username = '$username'")->fetch_object()->phone_number;
-            $country = $db->query("SELECT country FROM user WHERE username = '$username'")->fetch_object()->country;
-            $billing_address = $db->query("SELECT billing_address FROM user WHERE username = '$username'")->fetch_object()->billing_address;
-
-            $_SESSION['role_id'] = $role_id;
-            $_SESSION['first_name'] = $first_name;
-            $_SESSION['last_name'] = $last_name;
-            $_SESSION['email'] = $email;
-            $_SESSION['phone_number'] = $phone_number;
-            $_SESSION['country'] = $country;
-            $_SESSION['billing_address'] = $billing_address;
+            $_SESSION['username'] = $UserData['username'];
+            $_SESSION['user_id'] = $UserData['id'];
+            $_SESSION['role_id'] = $UserData['role_id'];
+            $_SESSION['first_name'] = $UserData['first_name'];
+            $_SESSION['last_name'] = $UserData['last_name'];
+            $_SESSION['email'] = $UserData['email'];
+            $_SESSION['phone_number'] = $UserData['phone_number'];
+            $_SESSION['country'] = $UserData['country'];
+            $_SESSION['billing_address'] = $UserData['billing_address'];
 
             $_SESSION['success'] = "You are now logged in";
-            if ($role_id == 1) {
+            if ($UserData['role_id'] == 1) {
                 $redirect = 'home.php';
-            } else if ($role_id == 2) {
+            } else if ($UserData['role_id'] == 2) {
 
                 $redirect = 'home.php';
             }
@@ -176,27 +174,18 @@ if (isset($_POST['login_user'])) {
 //UPDATE USER
 if (isset($_POST['update_user'])) {
 
-
+    $userObj = new User();
 
     // receive all input values from the form
-    $first_name = mysqli_real_escape_string($db, $_POST['fname']);
-    $last_name = mysqli_real_escape_string($db, $_POST['lname']);
-    $username = mysqli_real_escape_string($db, $_POST['username']);
-    $email = mysqli_real_escape_string($db, $_POST['email']);
-    $phone_number = mysqli_real_escape_string($db, $_POST['phone_number']);
-    $country = mysqli_real_escape_string($db, $_POST['country']);
-    $billing_address = mysqli_real_escape_string($db, $_POST['billing_address']);
+    $first_name = $_POST['fname'];
+    $last_name = $_POST['lname'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $phone_number = $_POST['phone_number'];
+    $country = $_POST['country'];
+    $billing_address = $_POST['billing_address'];
 
-    // prepare and bind for register
-    $stmt = $db->prepare("UPDATE user SET first_name=?, last_name=?, email=?, phone_number=?, country=?, billing_address=?, updated_at=now() WHERE username=?");
-    //$stmt = $db->prepare("UPDATE user SET first_name=?, last_name=?, email=?, phone_number=?, country=?, billing_address=?, updated_at=now() WHERE username=?");
-    if ($stmt === false) {
-        trigger_error($db->mysqli->error, E_USER_ERROR);
-        return;
-    }
-    $stmt->bind_param("sssssss", $first_name, $last_name, $email, $phone_number, $country, $billing_address, $username);
-
-// form validation: ensure that the form is correctly filled ...
+    // form validation: ensure that the form is correctly filled ...
     // by adding (array_push()) corresponding error unto $errors array
     if (empty($first_name)) {
         array_push($errors, "First name is required");
@@ -232,12 +221,10 @@ if (isset($_POST['update_user'])) {
 
     // first check the database to make sure 
     // a user does not already exist with the same username and/or email
-    $user_check_query = "SELECT * FROM user WHERE username='$username' OR email='$email' LIMIT 1";
-    $result = mysqli_query($db, $user_check_query);
-    $user = mysqli_fetch_assoc($result);
+    $checkUserResult = $userObj->userNameEmail($username, $email);
 
-    if ($user) { // if user exists
-        if ($user['email'] === $email) {
+    if ($checkUserResult) { // if user exists
+        if ($checkUserResult['email'] === $email) {
             array_push($errors, "email already exists");
         }
     }
@@ -245,7 +232,7 @@ if (isset($_POST['update_user'])) {
     // Finally, register user if there are no errors in the form
     if (count($errors) == 0) {
 
-        $stmt->execute();
+        $updateUserResult = $userObj->updateUser($first_name, $last_name, $email, $phone_number, $country, $billing_address, $username);
         $_SESSION['username'] = $username;
         $_SESSION['success'] = "You are now logged in";
         header("location: home.php?logout='1'");
@@ -253,12 +240,13 @@ if (isset($_POST['update_user'])) {
 }
 
 
-// LOGIN USER
+// UPDATE USER PASSWORD
 if (isset($_POST['update_password'])) {
-    $username = mysqli_real_escape_string($db, $_POST['username']);
-    $password = mysqli_real_escape_string($db, $_POST['password']);
-    $password2 = mysqli_real_escape_string($db, $_POST['new_password']);
-    $password3 = mysqli_real_escape_string($db, $_POST['confirmed_password']);
+    $userObj = new User();
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $password2 = $_POST['new_password'];
+    $password3 = $_POST['confirmed_password'];
 
     if (empty($username)) {
         array_push($errors, "Username is required");
@@ -278,22 +266,15 @@ if (isset($_POST['update_password'])) {
 
     if (count($errors) == 0) {
         $password = md5($password);
-        $query = "SELECT * FROM user WHERE username=? AND password=?";
-        $stmt = $db->prepare($query);
-        $stmt->bind_param("ss", $username, $password);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $checkPasswordResult = $userObj->loginUser($username, $password);
 
-        if ($result->num_rows > 0) {
+        if (count($checkPasswordResult) > 0) {
             $password_new = md5($password2);
-            $stmt = $db->prepare("UPDATE user SET password=? where username =?");
-            $stmt->bind_param("ss", $password_new, $username);
-            $stmt->execute();
-   
+            $updatePasswordQuery = $userObj->updateUserPassword($password_new, $username);
+
             header("location: home.php?logout='1'");
         } else {
             array_push($errors, "Invalid Password");
         }
     }
 }
-?>
