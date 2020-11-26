@@ -168,4 +168,49 @@ class Hotel extends DB
         $this->conn->close();
         return $response;
     }
+
+    public function getRoomCategoryRate($hotelName, $roomCategoryName)
+    {
+        $results = [];
+        $success = true;
+        $SQL = "SELECT price_per_night AS rate FROM HotelRoomCategory WHERE (SELECT h.id FROM Hotel h WHERE h.name = ?) = hotel_id 
+        AND (SELECT rc.id FROM RoomCategory rc WHERE rc.category_name = ?) = room_category_id;";
+
+        $stmt = $this->conn->prepare($SQL);
+        $stmt->bind_param("ss", $hotelName, $roomCategoryName);
+
+        if (!$stmt->execute()) {
+            $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
+            $response['success'] = $success;
+            $response['message'] = "There was an issue retrieving the rate.";
+            $response['error'] = $errorMsg;
+        } else {
+            $response['success'] = $success;
+            $response['message'] = "Rate has been received";
+            $response['error'] = "";
+        }
+        $rowRate = $stmt->get_result();
+
+        $stmt->close();
+
+        return $rowRate->fetch_array(MYSQLI_ASSOC);
+    }
+
+    public function getRoomCategories()
+    {
+        $results = [];
+        $sql = "SELECT RoomCategory.id, RoomCategory.category_name FROM RoomCategory;";
+
+        $resultsSQL = mysqli_query($this->conn, $sql);
+
+        if (mysqli_num_rows($resultsSQL) > 0) {
+            while ($row = mysqli_fetch_assoc($resultsSQL)) {
+                $results[] = $row;
+            }
+        }
+
+        return $results;
+    }
+
+    //INSERT INTO HotelRoomCategory (hotel_id, room_category_id, availability, price_per_night, created_at) VALUES (2, 1, 1, 210.00, now());
 }

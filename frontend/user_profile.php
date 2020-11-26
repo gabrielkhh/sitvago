@@ -1,4 +1,4 @@
-<?php include('User.php') ?>
+<?php include('user.php') ?>
 <!DOCTYPE html>
 <?php
 if (!isset($_SESSION['username'])) {

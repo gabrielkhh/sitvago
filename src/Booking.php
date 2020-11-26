@@ -40,32 +40,32 @@ class Booking extends DB
         return $rowBooking;
     }
     //user make a new booking
-    public function addBooking($hotelID, $userID, $roomcategoryID, $price, $check_in,$check_out)
+    public function addBooking($userID, $hotelName, $roomCategoryName, $price, $check_in, $check_out)
     {
         $response = [];
         $success = true;
-        $preparedSQL = "INSERT INTO Booking (hotel_id, user_id, room_category_id, price, check_in, check_out, created_at) SELECT Hotel.id, User.id,
-        RoomCategory.id, ?, ?, ?,now() FROM LEFT JOIN Hotel ON Booking.hotel_id = Hotel.id LEFT JOIN RoomCategory
-            ON Booking.room_category_id = RoomCategory.id WHERE Booking.user_id=?";
-
+        $preparedSQL = "INSERT INTO Booking (hotel_id, user_id, room_category_id, price, check_in, check_out, created_at)
+        VALUES ((SELECT h.id FROM Hotel h WHERE h.name=?), ?, (SELECT rc.id FROM RoomCategory rc WHERE rc.category_name=?), ?, ?, ?, now())";
 
         if ($this->conn->connect_error) {
             $errorMsg = "Connection failed: " . $this->conn->connect_error;
             $success = false;
             $response['success'] = $success;
-            $response['message'] = "Hotel Hellll";
+            $response['message'] = "Something went wrong while connecting..";
             $response['error'] = $errorMsg;
         } else {
             $stmt = $this->conn->prepare($preparedSQL);
-            $stmt->bind_param("ssdiis", $hotelName, $hotelDescription, $rating, $userID, $userID, $hotelGeoLocation);
+            $stmt->bind_param("sisdss", $hotelName, $userID, $roomCategoryName, $price, $check_in, $check_out);
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
                 $response['success'] = $success;
-                $response['message'] = "Hotel Hellll";
+                $response['message'] = "There was an issue saving the information to the database.";
                 $response['error'] = $errorMsg;
             } else {
+                $newBookingID = mysqli_insert_id($this->conn);
                 $response['success'] = $success;
-                $response['message'] = $bookingID . " has been successfully added into the database!!";
+                $response['message'] = "Your booking has been successfully added into the database!!";
+                $response['insertedID'] = $newBookingID;
                 $response['error'] = "";
             }
             $stmt->close();
@@ -130,6 +130,37 @@ class Booking extends DB
             } else {
                 $response['success'] = $success;
                 $response['message'] = $bookingID . " has been successfully deleted from the database.";
+                $response['error'] = "";
+            }
+            $stmt->close();
+        }
+        $this->conn->close();
+        return $response;
+    }
+
+    public function updateBookingWithStripeTxID($bookingID, $stripePaymentID)
+    {
+        $response = [];
+        $success = true;
+        $preparedSQL = "UPDATE Booking SET stripe_payment_id=? WHERE id=?";
+
+        if ($this->conn->connect_error) {
+            $errorMsg = "Connection failed: " . $this->conn->connect_error;
+            $success = false;
+            $response['success'] = $success;
+            $response['message'] = $errorMsg;
+            $response['error'] = $errorMsg;
+        } else {
+            $stmt = $this->conn->prepare($preparedSQL);
+            $stmt->bind_param("si", $stripePaymentID, $bookingID);
+            if (!$stmt->execute()) {
+                $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
+                $response['success'] = $success;
+                $response['message'] = $errorMsg;
+                $response['error'] = $errorMsg;
+            } else {
+                $response['success'] = $success;
+                $response['message'] = "Stripe Info has been updated into the Booking.";
                 $response['error'] = "";
             }
             $stmt->close();

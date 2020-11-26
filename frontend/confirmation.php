@@ -3,15 +3,10 @@ require '../vendor/autoload.php';
 
 session_start();
 
-use sitvago\User;
-
-//$userObj = new User();
 $userFName = $_SESSION['first_name'];
 $userLName = $_SESSION['last_name'];
 $userEmail = $_SESSION['email'];
 $userBillingAddress = $_SESSION['billing_address'];
-echo $userFName;
-
 ?>
 <html>
 
@@ -49,7 +44,6 @@ echo $userFName;
 
 
     <?php
-    session_start();
     if (isset($_SESSION['username'])) {
         include "navbar_User.php";
     } else if (!isset($_SESSION['username'])) {
@@ -77,7 +71,6 @@ echo $userFName;
                             <label for="city"><i class="fa fa-user"></i> Last Name</label>
                             <input class="confirm_input" type="text" id="lname" name="lname" placeholder="Auto-Fill" value="<?= $userLName ?>   ">
                         </div>
-
                         <div class="col-50">
                             <label for="check-in-confirm"><i class="fa fa-calendar-check-o"></i> Check In Date</label>
                             <input class="confirm_input" type="text" id="ci_date" name="ci_date" value="<?= $_POST['checkin'] ?>">
@@ -86,17 +79,16 @@ echo $userFName;
                             <label for="room-type"><i class="fa fa-bed"></i> Room Type</label>
                             <input class="confirm_input" type="text" id="room-type" name="room-type" value="<?= $_POST['TypeOfRooms'] ?>">
                             <label for="hotel-name"><i class="fa fa-building"></i> Hotel Name</label>
-                            <input class="confirm_input" type="text" id="hotel-name" name="hotel-name" value="Hotel Barrack" disabled>
+                            <input class="confirm_input" type="text" id="hotel-name" name="hotel-name" value="Hotel Barrack" readonly>
+                            <!-- <input class="confirm_input" type="text" id="hotel-name" name="hotel-name" value="Hotel Barrack" disabled> -->
                         </div>
                         <div class="col-50">
                             <label for="card-element">
                                 Credit or debit card
                             </label>
-
                             <div id="card-element" class="form-control">
                                 <!-- A Stripe Element will be inserted here. -->
                             </div>
-
                             <!-- Used to display form errors. -->
                             <div id="card-errors" role="alert"></div>
                         </div>
