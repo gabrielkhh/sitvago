@@ -109,7 +109,7 @@ and open the template in the editor.
 
             <div class="jumbotron">
                 <div class="container text-center text-white">
-                    <h1 class="display-2" >Welcome to SITVAGO!</h1>
+                    <h1 class="display-2" >Welcome to SITVAGO</h1>
                     <p>Book a Hotel with us! Your satisfaction matters to us </p>
                     <section class="search-sec">
                         <div class="container">
