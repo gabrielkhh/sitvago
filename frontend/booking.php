@@ -107,20 +107,20 @@
                             <h3 class="hotel_selected">Barrack Hotel Rooms</h3>
                             <form action="confirmation.php">       
                                 <div class ="form-group">
-                                     <input class="form-control" type="text" id="checkin" placeholder="Check-In-Date" required>                       
+                                     <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>                       
                                 </div>
                                 <div class ="form-group">
-                                    <input class="form-control" type="text" id="checkout" placeholder="Check-Out-Date" required>                                     
+                                    <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>                                     
                                 </div>
                                 <div class ="form-group">
                                     <input class="form-control" list="browsers" id="TypeOfRooms" name="TypeOfRooms" placeholder="Type-Of-Room" required>
                                         <datalist id="browsers">
-                                            <option value="Single Room"></option>
-                                            <option value="Double Room"></option>
+                                            <option value="King Bed"></option>
+                                            <option value="Double Queen Bed"></option>
                                         </datalist>                                     
                                 </div>
                                 <div class="form-group">
-                                        <button class="btn btn-primary" type="submit" id="submit">Book Now!</button></a>
+                                        <button class="btn btn-primary" type="submit" name="submit" id="submit">Book Now!</button></a>
                                 </div>            
                             </form>
                             <p><h3 id="price">For only $99.99 per night!</h3></p>

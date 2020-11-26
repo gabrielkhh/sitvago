@@ -1,50 +1,39 @@
 <?php
+require '../vendor/autoload.php';
 
-$errors ="";
- 
- 
-      
-if(empty($_POST["name"]) || empty($_POST["email"]))
-{
-        $errors .= "\n Error: all fields are required";   
-}
+use Dotenv\Dotenv;
 
-$name = $_POST["name"];
-$email_address = $_POST["email"];
+$dotenv = Dotenv::createImmutable(__DIR__ . "/../");
+$dotenv->load();
+
+$stripe = new \Stripe\StripeClient($_SERVER['stripe_secret_key']);
+
+// Sanitize POST Array
+$POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+
+$first_name = $POST['fname'];
+$email = "somekindofemail@example.com";
+$token = $POST['stripeToken'];
+
+//Create a customer in stripe
+$customer = $stripe->customers->create(array(
+    "email" => $email,
+    "source" => $token
+));
+
+// Charge Customer
+$charge = $stripe->paymentIntents->create(array(
+    "amount" => 5000,
+    "currency" => "SGD",
+    "description" => "Test description of payment",
+    "receipt_email" => $email,
+    "confirm" => true,
+    "customer" => $customer->id
+));
 
 
-// the message
-$msg = "$name\n Your booking is confirmed";
+//Redirect to Success
+print_r($charge);
 
-// use wordwrap() if lines are longer than 70 characters
-$msg = wordwrap($msg,70);
-
-// send email
-mail($email_address,"Booking Confirmed",$msg);
-
-
-/*
- *$myemail = "jingxuan-trinity@hotmail.com";//Put Your email address here.
-if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i", $email_address))
-{
-    $errors .= "\n Error: Invalid email address";
-}
- */
-/*
-if(empty($errors))
-{
-    $to = $myemail;
-
-    $email_subject = "Contact form submission: $name";
-
-    $email_body = "You have received a new message. ". "Here are the details:\n Name: $name \n ". "Email: $email_address\n Message";
-
-    $headers = "From: $myemail\n";
-
-    $headers .= "Reply-To: $email_address";
-
-    mail($to,$email_subject,$email_body,$headers);
-}
-*/
 
 ?>

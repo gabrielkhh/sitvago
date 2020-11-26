@@ -1,3 +1,15 @@
+<?php
+require '../vendor/autoload.php';
+
+use sitvago\User;
+
+//$userObj = new User();
+$userFName = $_SESSION('first_name');
+$userLName = $_SESSION('last_name');
+$userEmail = $_SESSION('email');
+$userBillingAddress = $_SESSION('billing_address');
+
+?>
 <html>
     <head>
 
@@ -31,26 +43,14 @@
         
         <!-- For Calender --> 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>-->
         <!--<script src='https://kit.fontawesome.com/a076d05399.js'></script>-->
          <!-- Own Script -->
+         <script src="https://js.stripe.com/v3/"></script>
         <script defer src="js/confirmation.js"></script>
         <script defer src="js/booking.js"></script>
         
- <?php
  
- $cout_date = $cin_date = $type = $price ="";
- 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    //$cout_date = $_GET['checkin'];
-    //$cin_date = $_GET['checkout'];
-    $type = $_GET['TypeOfRooms'];
-    //echo "cout". $cout_date . "and" . $cin_date;
-}
-
-
- 
- ?>
 
  <?php
     include "navbar.php"
@@ -78,49 +78,67 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 <div class="row">
   <div class="col-75">
     <div class="container">
-    <form action="confirmationProcess.php" method ="post" id="booking_form" autocomplete="on">
+    <form action="confirmationProcess.php" method ="POST" id="booking_form">
         <link rel="stylesheet" href="css/confirmation.css">     
         <h1 class="book_confirm">Booking Confirmation</h1>
         <div class="row">
           <div class="col-50">
-            <label for="name"><i class="fa fa-user"></i> Full Name</label>
-            <input class="confirm_input" type="text" id="name" name="name" placeholder="Auto-Fill">
+            <label for="name"><i class="fa fa-user"></i> First Name</label>
+            <input class="confirm_input" type="text" id="fname" name="fname" placeholder="Auto-Fill" value="<?= $userFName ?>">
             <label for="email"><i class="fa fa-envelope"></i> Email</label>
             <input class="confirm_input" type="text" id="email" name="email" placeholder="Auto-Fill" required name="email">
-            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+            <label for="adr"><i class="fa fa-address-card-o"></i> Billing Address</label>
             <input class="confirm_input" type="text" id="adr" name="address" placeholder="Auto-Fill">
-            <label for="city"><i class="fa fa-institution"></i> Country</label>
-            <input class="confirm_input" type="text" id="city" name="city" placeholder="Auto-Fill">
+            <label for="city"><i class="fa fa-user"></i> Last Name</label>
+            <input class="confirm_input" type="text" id="lname" name="lname" placeholder="Auto-Fill">
           </div>
 
           <div class="col-50">
             <label for="check-in-confirm"><i class="fa fa-calendar-check-o"></i> Check In Date</label>
-                <input class="confirm_input" type="text" id="ci_date" name="check-in-confirm" value="">
+                <input class="confirm_input" type="text" id="ci_date" name="check-in-confirm" value="<?php echo $cout_date;?>">
             <label for="check-out-confirm"><i class="fa fa-calendar-check-o"></i> Check Out Date</label>
-                <input class="confirm_input" type="text" id="co_date" name="check-out-confirm" value="">
+                <input class="confirm_input" type="text" id="co_date" name="check-out-confirm" value="<?php echo $cin_date;?>">
             <label for="room-type"><i class="fa fa-bed"></i> Room Type</label>
                 <input class="confirm_input" type="text" id="room-type" name="room-type" value="<?php echo $type;?>">
-            <label for="room-type"><i class="fa fa-exclamation-circle"></i> Notice</label>
-                 <p>Do take not that we are only reserving the room for you!<br> Availability is up to the hotel. Have a nice day :) </p>
+            <label for="hotel-name"><i class="fa fa-building"></i> Hotel Name</label>
+                <input class="confirm_input" type="text" id="hotel-name" name="hotel-name" value="Hotel Barrack" disabled>
           </div>
-          
-        </div>
+          <div class="col-50">
+                        <label for="card-element">
+                            Credit or debit card
+                        </label>
+
+                        <div id="card-element" class="form-control">
+                            <!-- A Stripe Element will be inserted here. -->
+                        </div>
+
+                        <!-- Used to display form errors. -->
+                        <div id="card-errors" role="alert"></div>
+                    </div>
+            </div>
         <label>
             <input type="checkbox" name="accDetails" id="details_check_box"> Confirm Details
         </label>
-        <input type="submit" value="Confirm Booking" class="btn" id="confirm_book_btn">
+        <input type="submit" value="Confirm Booking" class="btn" name="confirm_book_btn" id="confirm_book_btn">
     </form>
     </div>
   </div>
     
   <div class="col-25">
-    <div class="container">
-      <p>Room Fee<span class="price">$99.9</span></p>
-      <p>Booking Fee<span class="price">$0.01</span></p>
-      <p>Total <span class="price" style="color:black"><b>$100</b></span></p>
+    <div class ="row">
+        <div class="container">
+            <p>Room Fee<span class="price">$99.9</span></p>
+            <p>Booking Fee<span class="price">$0.01</span></p>
+            <p>Total <span class="price" style="color:black"><b>$100</b></span></p>
+        </div>
     </div>
-  </div>
-</div>
+      <div class ="row">
+          <label for="room-type"><i class="fa fa-exclamation-circle"></i> Notice</label>
+            <p>Do take not that we are only reserving the room for you! Availability is up to the hotel. Have a nice day :) </p>
 
+      </div>
+  
+</div>
+    
 </body>
 </html>
