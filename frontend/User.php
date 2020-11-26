@@ -110,7 +110,7 @@ if (isset($_POST['reg_user'])) {
         $_SESSION['username'] = $username;
         $_SESSION['success'] = "You are now logged in";
         # Instantiate the client.
-        $mg = Mailgun::create('40e8726dbad000cafb5eed0698218294-360a0b2c-a5e58e14');
+        $mg = Mailgun::create($_SERVER['mailgun_api_key']);
         // Now, compose and send your message.
         // $mg->messages()->send($domain, $params);
         $mg->messages()->send('mg.sitvago.com', [

@@ -63,6 +63,8 @@ CREATE TABLE `sitvago_db`.`Hotel` (
 CREATE TABLE `sitvago_db`.`HotelImage` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `url` varchar(255),
+  `secure_url` varchar(255),
+  `original_src` varchar(255),
   `hotel_id` int,
   `is_thumbnail` bit,
   `image_extension` varchar(10),
@@ -155,5 +157,6 @@ INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) V
 INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("Marina Bay", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
 INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("Sentosa", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
 
-INSERT INTO RoomCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Deluxe", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
-INSERT INTO RoomCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Executive Suite", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+INSERT INTO RoomCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Deluxe Double Room", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+INSERT INTO RoomCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Premium Queen Room", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+INSERT INTO RoomCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Twin Room", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
