@@ -37,8 +37,13 @@
     </head>
     <body>
     <?php
-    include "navbar.php";
-    ?>       
+        session_start();
+        if (isset($_SESSION['username'])) {
+            include "navbar_User.php";
+        } else if (!isset($_SESSION['username'])) {
+            include "navbar_nonUser.php";
+        }
+    ?>
         <link rel="stylesheet" href="css/booking.css">
         <section class="ftco-section">
             <div class="container">
@@ -105,7 +110,7 @@
                     <div class="col-lg-4 sidebar ftco-animate pl-md-5">
                         <div class="sidebar-box ftco-animate">
                             <h3 class="hotel_selected">Barrack Hotel Rooms</h3>
-                            <form action="confirmation.php">       
+                            <form action="confirmation.php" method="POST">       
                                 <div class ="form-group">
                                      <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>                       
                                 </div>

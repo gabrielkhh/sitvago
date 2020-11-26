@@ -12,8 +12,18 @@ $stripe = new \Stripe\StripeClient($_SERVER['stripe_secret_key']);
 $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
 
 $first_name = $POST['fname'];
-$email = "somekindofemail@example.com";
+$last_name = $POST['lname'];
+$email = $POST['email'];
+$checkinDate = $POST['ci_date'];
+$checkoutDate = $POST['co_date'];
 $token = $POST['stripeToken'];
+
+echo $first_name;
+echo $last_name;
+echo $email;
+echo $checkinDate;
+echo $checkoutDate;
+echo $token;
 
 //Create a customer in stripe
 $customer = $stripe->customers->create(array(
@@ -34,6 +44,3 @@ $charge = $stripe->paymentIntents->create(array(
 
 //Redirect to Success
 print_r($charge);
-
-
-?>
