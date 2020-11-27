@@ -22,48 +22,46 @@ class Review extends DB
         return $results;
     }
 
-    public function getSingleHotelReview($reviewID)
+    public function getSingleHotelReview($hotelID)
     {
         $results = [];
         $success = true;
-        $SQL = "SELECT Hotel.id, Hotel.name, Hotel.description, Hotel.rating, Hotel.geo_id, GeoLocation.name AS geo_name 
-        FROM Hotel LEFT JOIN GeoLocation ON Hotel.geo_id = GeoLocation.id WHERE Hotel.id=" . $hotelID . ";";
+        $SQL = "SELECT Review.id, Review.title, User.username, Review.rating, Review.content,
+            Review.created_at FROM Review LEFT JOIN User ON Review.user_id = User.id  
+            WHERE Review.hotel_id=?";
 
-        $resultHotel = mysqli_query($this->conn, $SQL);
-        $rowHotel = mysqli_fetch_assoc($resultHotel);
+        $resultReview = mysqli_query($this->conn, $SQL);
+        $rowReview = mysqli_fetch_assoc($resultReview);
 
         return $rowHotel;
     }
 
-    public function addReview($hotelName, $hotelDescription, $rating, $userID, $hotelGeoLocation)
+    public function addReview($userID, $hotelID, $title, $rating, $content)
     {
         $response = [];
         $success = true;
-        $preparedSQL = "INSERT INTO Hotel (name, description, rating, geo_id, created_at, created_by, updated_at, updated_by) SELECT ?, ?,
-        ?, GeoLocation.id, now(), ?, now(), ? FROM GeoLocation WHERE GeoLocation.name=?";
+        $preparedSQL = "INSERT INTO Review (user_id, hotel_id, title, rating, content, created_at) VALUES ( ?, ?,
+        ?, ?, ?, now())";
 
 
         if ($this->conn->connect_error) {
             $errorMsg = "Connection failed: " . $this->conn->connect_error;
             $success = false;
             $response['success'] = $success;
-            $response['message'] = "Hotel Hellll";
+            $response['message'] = "Failed to connect";
             $response['error'] = $errorMsg;
         } else {
             $stmt = $this->conn->prepare($preparedSQL);
-            $stmt->bind_param("ssdiis", $hotelName, $hotelDescription, $rating, $userID, $userID, $hotelGeoLocation);
+            $stmt->bind_param("iisds", $userID, $hotelID, $title, $rating, $content);
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
                 $response['success'] = $success;
-                $response['message'] = "Hotel Hellll";
+                $response['message'] = "Failed to execute";
                 $response['error'] = $errorMsg;
             } else {
-                $newHotelID = mysqli_insert_id($this->conn);
                 $response['success'] = $success;
-                $response['message'] = $hotelName . " has been successfully added into the database!!";
+                $response['message'] = "Review has been successfully added into the database!!";
                 $response['error'] = "";
-                $response['insertedID'] = $newHotelID;
-                $response['insertedName'] = $hotelName;
             }
             $stmt->close();
         }
