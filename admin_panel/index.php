@@ -132,7 +132,7 @@ and open the template in the editor.
     } else {
         console.error(counterBooking.error);
     }
-    let counterReview = new CountUp('reviewCounter', 0, bookingNumbers);
+    let counterReview = new CountUp('reviewCounter', 0, reviewNumbers);
     if (!counter.error) {
         counterReview.start();
     } else {
