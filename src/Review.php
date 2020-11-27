@@ -7,10 +7,9 @@ class Review extends DB
     public function getReviews()
     {
         $results = [];
-        $sql = "SELECT Review.id, user.id, Hotel.id, Hotel.rating, Review.title, Review description,Hotel.created_at, 
-        c.first_name AS created_by, Hotel.updated_at, u.first_name AS updated_by, GeoLocation.name AS area_name 
-        FROM Hotel LEFT JOIN GeoLocation ON Hotel.geo_id = GeoLocation.id LEFT JOIN User c ON Hotel.created_by = c.id 
-        LEFT JOIN User u ON Hotel.updated_by = u.id;";
+        $sql = "SELECT Review.id, Review.title, Review.user_id, Review.hotel_id, Review.rating, Review.content,
+            Review.created_at FROM Review LEFT JOIN Hotel ON Review.hotel_id = Hotel.id  
+            WHERE Review.user_id=?";
 
         $resultsSQL = mysqli_query($this->conn, $sql);
 
