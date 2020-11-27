@@ -175,6 +175,10 @@ and open the template in the editor.
             previewFileIcon: '<i class="glyphicon glyphicon-king"></i>',
             allowedFileTypes: ['image'],
             allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif', 'tiff'],
+            ajaxSettings: {
+                dataType: 'jsonp',
+                crossDomain: true
+            },
             uploadExtraData: function() { // callback example
                 var obj = {};
 
