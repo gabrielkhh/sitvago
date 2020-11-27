@@ -163,7 +163,6 @@ and open the template in the editor.
                 '{TAG_CSS_NEW}': '', // new thumbnail input
             },
             // layoutTemplates: { footer: footerTemplate, actions: actionTemplate },
-            type: 'post',
             msgInvalidFileType: 'Invalid type for file "{name}". Only "{types}" files are supported.',
             autoReplace: true,
             /*http://plugins.krajee.com/file-auto-replace-demo*/
@@ -176,7 +175,8 @@ and open the template in the editor.
             allowedFileTypes: ['image'],
             allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif', 'tiff'],
             ajaxSettings: {
-                dataType: 'jsonp',
+                // dataType: 'jsonp',
+                type: 'post',
                 crossDomain: true
             },
             uploadExtraData: function() { // callback example
