@@ -2,9 +2,12 @@
 require '../../vendor/autoload.php';
 
 use sitvago\GeoLocation;
+use sitvago\Hotel;
 
 $geo = new GeoLocation();
+$roomCat = new Hotel();
 $results = $geo->getGeoLocations();
+$resultsRoomCat = $roomCat->getRoomCategories();
 ?>
 <!DOCTYPE html>
 <!--
@@ -83,9 +86,22 @@ and open the template in the editor.
                                     </div>
                                     <div class="form-group">
                                         <label for="hotelImages">Hotel Photos</label>
-                                        <div>
+                                        <div class="forFileUploads">
                                             <input id="fileInput" name="fileInput[]" type="file" class="file input-group-lg" multiple />
                                         </div>
+                                    </div>
+                                    <div class="form-group price-room-category">
+                                        <?php foreach ($resultsRoomCat as $rowRoomCat) : ?>
+                                            <div class="row col-md-4">
+                                                <label for="hotelImages">Set price per night for <?= $rowRoomCat['category_name'] ?></label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">$</span>
+                                                    </div>
+                                                    <input class="amount-class" type="number" step=".01" name="<?= $rowRoomCat['category_name'] ?>" class="form-control" aria-label="Amount">
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
                                 </form>
                                 <div class="float-right">
@@ -115,14 +131,21 @@ and open the template in the editor.
         var buttonSave = document.getElementById("btnSave");
         var buttonCancel = document.getElementById("btnCancel");
 
-        function WebFormInfo(hotelName, hotelArea, hotelDescription) {
+        function WebFormInfo(hotelName, hotelArea, hotelDescription, amounts) {
             this.option = "createHotel";
             this.name = hotelName;
             this.geoLocation = hotelArea;
             this.description = hotelDescription;
+            this.amounts = amounts;
         }
 
         window.$hotelImageInputElement = $('#fileInput');
+
+        var footerTemplate = '<div class="file-thumbnail-footer" style ="height:94px">\n' +
+            '  <input class="kv-input kv-new form-control input-sm form-control-sm text-center {TAG_CSS_NEW}" value="{caption}" placeholder="Enter caption..." readonly>\n' +
+            '  <input class="kv-input kv-init form-control input-sm form-control-sm text-center {TAG_CSS_INIT}" value="{TAG_VALUE}" placeholder="Enter Original Source URL">\n' +
+            '   <div class="small" style="margin:15px 0 2px 0">{size}</div> {progress}\n{indicator}\n{actions}\n' +
+            '</div>';
 
         $('#fileInput').fileinput({
             theme: 'fas',
@@ -131,11 +154,19 @@ and open the template in the editor.
             uploadUrl: 'hotel_image_handler.php',
             validateInitialCount: true,
             uploadAsync: false,
-            maxFileCount: 10,
+            maxFileCount: 20,
+            layoutTemplates: {
+                footer: footerTemplate
+            },
+            previewThumbTags: {
+                '{TAG_VALUE}': '', // no value
+                '{TAG_CSS_NEW}': '', // new thumbnail input
+            },
             // layoutTemplates: { footer: footerTemplate, actions: actionTemplate },
             type: 'post',
             msgInvalidFileType: 'Invalid type for file "{name}". Only "{types}" files are supported.',
-            autoReplace: true,/*http://plugins.krajee.com/file-auto-replace-demo*/
+            autoReplace: true,
+            /*http://plugins.krajee.com/file-auto-replace-demo*/
             overwriteInitial: false,
             showUploadedThumbs: false,
             showUpload: false,
@@ -144,22 +175,31 @@ and open the template in the editor.
             previewFileIcon: '<i class="glyphicon glyphicon-king"></i>',
             allowedFileTypes: ['image'],
             allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif', 'tiff'],
-            uploadExtraData: function () {  // callback example
-                var out = {"id": insertedHotelId, "hotelName": insertedHotelName};
-                return out;
+            uploadExtraData: function() { // callback example
+                var obj = {};
+
+                $('.kv-init:visible').each(function(i) {
+                    var val = $(this).val();
+                    obj[i] = val;
+                });
+                obj["id"] = insertedHotelId;
+                obj["hotelName"] = insertedHotelName;
+                console.log(obj);
+                return obj;
+                // return out;
             }
         })
         window.$hotelImageInputElement.on('filebatchuploadsuccess',
-            function (event, data, previewId, index) {
+            function(event, data, previewId, index) {
 
 
                 swal({
-                        title: "Saved Hotel",
-                        text: data.message,
-                        icon: "success"
-                    }).then(function() {
-                        window.location = "index.php";
-                    });
+                    title: "Saved Hotel",
+                    text: data.message,
+                    icon: "success"
+                }).then(function() {
+                    window.location = "index.php";
+                });
             });
 
         var saveHotel = function(e) {
@@ -167,8 +207,17 @@ and open the template in the editor.
             var collectedArea = $("#selectArea").val();
             var collectedHotelDescription = encodeURI(CKEDITOR.instances.hotelDescription.getData());
 
+            var collectedAmt = {};
 
-            var webFormData = new WebFormInfo(collectedHotelName, collectedArea, collectedHotelDescription);
+            $('.amount-class').each(function(i) {
+                var nameType = $(this).attr('name');
+                var val = $(this).val();
+                collectedAmt[nameType] = val;
+            });
+            console.log(collectedAmt);
+
+
+            var webFormData = new WebFormInfo(collectedHotelName, collectedArea, collectedHotelDescription, JSON.stringify(collectedAmt));
             var webFormDataInString = JSON.stringify(webFormData);
             console.log(webFormDataInString);
 
