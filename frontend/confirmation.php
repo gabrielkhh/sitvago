@@ -49,6 +49,32 @@ $userBillingAddress = $_SESSION['billing_address'];
     } else if (!isset($_SESSION['username'])) {
         include "navbar_nonUser.php";
     }
+    //Get var necessary for price
+    $roomType = $_POST['TypeOfRooms'];
+    $checkIn = $_POST['checkin'];
+    $checkOut = $_POST['checkout'];
+    $origin = new DateTime($checkIn);
+    $target = new DateTime($checkOut);
+    //Difference between dates
+    $days =  $origin ->diff($target)->format('%a');
+    
+    //Price of rooms
+    $deluxe = 150;
+    $suite = 200;
+    $bookingFee = 10;
+    $price= 0;
+    $roomFee =0;
+
+    //Cal price based on type of room
+    if ($roomType == "Deluxe"){
+        $roomFee = $deluxe;
+        $price = ($roomFee * $days) + $bookingFee;
+    }
+    if ($roomType == "Executive Suite"){
+        $roomFee = $suite;
+        $price = ($roomFee * $days) + $bookingFee;
+    }
+
     ?>
 </head>
 
@@ -56,35 +82,41 @@ $userBillingAddress = $_SESSION['billing_address'];
 
     <div class="row">
         <div class="col-75">
-            <div class="container">
+            <div class="container confirm-box">
                 <form action="confirmationProcess.php" method="post" id="booking_form">
                     <link rel="stylesheet" href="css/confirmation.css">
                     <h1 class="book_confirm">Booking Confirmation</h1>
                     <div class="row">
                         <div class="col-50">
                             <label for="name"><i class="fa fa-user"></i> First Name</label>
-                            <input class="confirm_input" type="text" id="fname" name="fname" placeholder="Auto-Fill" value="<?= $userFName ?>">
+                            <input class="confirm_input" type="text" id="fname" name="fname" placeholder="Auto-Fill" value="<?= $userFName ?>"readonly>
+                            <label for="check-in-confirm"><i class="fa fa-calendar-check-o"></i> Check In Date</label>
+                            <input class="confirm_input" type="text" id="ci_date" name="ci_date" value="<?= $_POST['checkin'] ?>"readonly>
+                            <label for="hotel-name"><i class="fa fa-building"></i> Hotel Name</label>
+                            <input class="confirm_input" type="text" id="hotel-name" name="hotel-name" value="Hotel Barrack" readonly>  
                             <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                            <input class="confirm_input" type="text" id="email" name="email" placeholder="Auto-Fill" required name="email" value="<?= $userEmail ?>">
-                            <label for="adr"><i class="fa fa-address-card-o"></i> Billing Address</label>
-                            <input class="confirm_input" type="text" id="adr" name="address" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>">
-                            <label for="city"><i class="fa fa-user"></i> Last Name</label>
-                            <input class="confirm_input" type="text" id="lname" name="lname" placeholder="Auto-Fill" value="<?= $userLName ?>   ">
+                            <input class="confirm_input" type="text" id="email" name="email" placeholder="Auto-Fill" required name="email" value="<?= $userEmail ?>"readonly>
+                                
+                            
                         </div>
                         <div class="col-50">
-                            <label for="check-in-confirm"><i class="fa fa-calendar-check-o"></i> Check In Date</label>
-                            <input class="confirm_input" type="text" id="ci_date" name="ci_date" value="<?= $_POST['checkin'] ?>">
+                            <label for="city"><i class="fa fa-user"></i> Last Name</label>
+                            <input class="confirm_input" type="text" id="lname" name="lname" placeholder="Auto-Fill" value="<?= $userLName ?>"readonly>                                        
                             <label for="check-out-confirm"><i class="fa fa-calendar-check-o"></i> Check Out Date</label>
-                            <input class="confirm_input" type="text" id="co_date" name="co_date" value="<?= $_POST['checkout'] ?>">
+                            <input class="confirm_input" type="text" id="co_date" name="co_date" value="<?= $_POST['checkout'] ?>"readonly>
                             <label for="room-type"><i class="fa fa-bed"></i> Room Type</label>
-                            <input class="confirm_input" type="text" id="room-type" name="room-type" value="<?= $_POST['TypeOfRooms'] ?>">
-                            <label for="hotel-name"><i class="fa fa-building"></i> Hotel Name</label>
-                            <input class="confirm_input" type="text" id="hotel-name" name="hotel-name" value="Hotel Barrack" readonly>
-                            <!-- <input class="confirm_input" type="text" id="hotel-name" name="hotel-name" value="Hotel Barrack" disabled> -->
+                            <input class="confirm_input" type="text" id="room-type" name="room-type" value="<?= $_POST['TypeOfRooms'] ?>"readonly>                                       
+                            <label for="adr"><i class="fa fa-address-card-o"></i> Billing Address</label>
+                            <input class="confirm_input" type="text" id="adr" name="address" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>"readonly>
+                            
                         </div>
                         <div class="col-50">
                             <label for="card-element">
-                                Credit or debit card
+                                Credit Or Debit Card
+                                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                <i class="fa fa-cc-discover" style="color:orange;"></i>
                             </label>
                             <div id="card-element" class="form-control">
                                 <!-- A Stripe Element will be inserted here. -->
@@ -93,30 +125,32 @@ $userBillingAddress = $_SESSION['billing_address'];
                             <div id="card-errors" role="alert"></div>
                         </div>
                     </div>
-                    <label>
-                        <input type="checkbox" name="accDetails" id="details_check_box"> Confirm Details
-                    </label>
+                   <!-- <label>-->
+                       <!-- <input type="checkbox" name="accDetails" id="details_check_box"> Confirm Details-->
+                    <!-- </label>-->
                     <input type="submit" value="Confirm Booking" class="btn" name="confirm_book_btn" id="confirm_book_btn">
                 </form>
             </div>
         </div>
-
         <div class="col-25">
             <div class="row">
-                <div class="container">
-                    <p>Room Fee<span class="price">$99.9</span></p>
-                    <p>Booking Fee<span class="price">$0.01</span></p>
-                    <p>Total <span class="price" style="color:black"><b>$100</b></span></p>
+                <div class="container confirm-box">
+                    <h1 class="price_confirm">Total Price</h1>
+                    <p>Room Fee: <span class="price"><?=$roomFee?></span></p>
+                    <p>Booking Fee: <span class="price"><?=$bookingFee?></span></p>
+                    <p>Total Days: <span class="price"><?=$days?></span></p>
+                    <p>Total: <span class="price"><?=$price?></span></p>
                 </div>
             </div>
             <div class="row">
-                <label for="room-type"><i class="fa fa-exclamation-circle"></i> Notice</label>
-                <p>Do take not that we are only reserving the room for you! Availability is up to the hotel. Have a nice day :) </p>
+                <label for="notice" class="notice"><i class="fa fa-exclamation-circle"></i> Notice</label>
+                <p><span class="notice">Do take not that we are only reserving the room for you! Availability is up to the hotel. Have a nice day :)</span></p>
 
             </div>
 
         </div>
-
+    </div>  
 </body>
+
 
 </html>
