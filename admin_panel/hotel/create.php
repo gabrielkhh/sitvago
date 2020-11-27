@@ -98,7 +98,7 @@ and open the template in the editor.
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">$</span>
                                                     </div>
-                                                    <input type="number" step=".01" id="<?= $rowRoomCat['category_name'] ?>" name="<?= $rowRoomCat['category_name'] ?>" class="form-control" aria-label="Amount">
+                                                    <input class="amount-class" type="number" step=".01" name="<?= $rowRoomCat['category_name'] ?>" class="form-control" aria-label="Amount">
                                                 </div>
                                             </div>
                                         <?php endforeach; ?>
@@ -131,11 +131,12 @@ and open the template in the editor.
         var buttonSave = document.getElementById("btnSave");
         var buttonCancel = document.getElementById("btnCancel");
 
-        function WebFormInfo(hotelName, hotelArea, hotelDescription) {
+        function WebFormInfo(hotelName, hotelArea, hotelDescription, amounts) {
             this.option = "createHotel";
             this.name = hotelName;
             this.geoLocation = hotelArea;
             this.description = hotelDescription;
+            this.amounts = amounts;
         }
 
         window.$hotelImageInputElement = $('#fileInput');
@@ -175,17 +176,7 @@ and open the template in the editor.
             allowedFileTypes: ['image'],
             allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif', 'tiff'],
             uploadExtraData: function() { // callback example
-                // var out = {
-                //     "id": insertedHotelId,
-                //     "hotelName": insertedHotelName
-                // };
                 var obj = {};
-                //var obj = {"id": insertedHotelId, "hotelName": insertedHotelName};
-                // $('.forFileUploads').find('input').each(function(i) {
-                //     // var id = $(this).attr('id'),
-                //     var val = $(this).val();
-                //     obj[i] = val;
-                // });
 
                 $('.kv-init:visible').each(function(i) {
                     var val = $(this).val();
@@ -216,8 +207,17 @@ and open the template in the editor.
             var collectedArea = $("#selectArea").val();
             var collectedHotelDescription = encodeURI(CKEDITOR.instances.hotelDescription.getData());
 
+            var collectedAmt = {};
 
-            var webFormData = new WebFormInfo(collectedHotelName, collectedArea, collectedHotelDescription);
+            $('.amount-class').each(function(i) {
+                var nameType = $(this).attr('name');
+                var val = $(this).val();
+                collectedAmt[nameType] = val;
+            });
+            console.log(collectedAmt);
+
+
+            var webFormData = new WebFormInfo(collectedHotelName, collectedArea, collectedHotelDescription, JSON.stringify(collectedAmt));
             var webFormDataInString = JSON.stringify(webFormData);
             console.log(webFormDataInString);
 

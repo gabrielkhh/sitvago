@@ -36,7 +36,7 @@ class Hotel extends DB
         return $rowHotel;
     }
 
-    public function addHotel($hotelName, $hotelDescription, $rating, $userID, $hotelGeoLocation)
+    public function addHotel($hotelName, $hotelDescription, $rating, $userID, $hotelGeoLocation, $amounts)
     {
         $response = [];
         $success = true;
@@ -65,6 +65,12 @@ class Hotel extends DB
                 $response['error'] = "";
                 $response['insertedID'] = $newHotelID;
                 $response['insertedName'] = $hotelName;
+                foreach ($amounts as $key => $val) {
+                    $sql = "INSERT INTO HotelRoomCategory (hotel_id, room_category_id, availability, price_per_night, created_at, created_by, updated_at, updated_by)
+                    VALUES (" . $newHotelID . ", (SELECT rc.id FROM RoomCategory rc WHERE rc.category_name='" . $key . "'), 1, " . $val . ", now(), " . $userID . ", now(), " . $userID .")";
+                    mysqli_query($this->conn, $sql)
+                        or die(mysqli_error($this->conn));
+                }
             }
             $stmt->close();
         }

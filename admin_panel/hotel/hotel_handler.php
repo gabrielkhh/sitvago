@@ -13,10 +13,11 @@ if ($dataFromClient['option'] === 'createHotel')
     $hotelName = $dataFromClient['name'];
     $hotelGeoLocation = $dataFromClient['geoLocation'];
     $hotelDescription = $dataFromClient['description'];
+    $amounts = json_decode($dataFromClient['amounts'], true);
     $rating = 5.00;
     $userID = 1;
  
-    $result = $hotel->addHotel($hotelName, $hotelDescription, $rating, $userID, $hotelGeoLocation);
+    $result = $hotel->addHotel($hotelName, $hotelDescription, $rating, $userID, $hotelGeoLocation, $amounts);
     echo json_encode($result);
 }
 else if ($dataFromClient['option'] === 'updateHotel')
