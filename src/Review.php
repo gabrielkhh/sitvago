@@ -73,27 +73,27 @@ class Review extends DB
     {
         $response = [];
         $success = true;
-        $preparedSQL = "UPDATE Review SET name=?, description=?, rating=?,
+        $preparedSQL = "UPDATE Review SET title=?, rating=?, content=?,
                  geo_id=(SELECT GeoLocation.id FROM GeoLocation WHERE GeoLocation.name=?), updated_at=now(), 
-                 updated_by=? WHERE Hotel.id=?;";
+                  WHERE Review.hotel_id=?";
 
         if ($this->conn->connect_error) {
             $errorMsg = "Connection failed: " . $this->conn->connect_error;
             $success = false;
             $response['success'] = $success;
-            $response['message'] = "Failed to update";
+            $response['message'] = "Failed to connect";
             $response['error'] = $errorMsg;
         } else {
             $stmt = $this->conn->prepare($preparedSQL);
-            $stmt->bind_param("ssdsii", $hotelName, $hotelDescription, $rating, $hotelGeoLocation, $userID, $hotelID);
+            $stmt->bind_param("iisds", $reviewID, $userID, $hotelID, $title, $rating, $content);
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
                 $response['success'] = $success;
-                $response['message'] = "Hotel Hellll";
+                $response['message'] = "Failed to execute";
                 $response['error'] = $errorMsg;
             } else {
                 $response['success'] = $success;
-                $response['message'] = $hotelName . " has been successfully updated!!";
+                $response['message'] = "Review has been successfully updated!!";
                 $response['error'] = "";
             }
             $stmt->close();
