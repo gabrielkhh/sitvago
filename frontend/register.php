@@ -133,27 +133,27 @@
                         <br>Already have an account? <a href="loginpage.php">Sign in</a></p>
                     <div class="form-group">
                         <label for="fname">First Name:</label>
-                        <input type="text" class="form-control" name="fname" placeholder="First Name" id="fname" maxlength="50">
+                        <input type="text" class="form-control" name="fname" placeholder="eg: John" id="fname" maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="lname">Last Name:</label>
-                        <input type="text" class="form-control" name="lname" placeholder="Last Name" required id="lname"  maxlength="50">
+                        <input type="text" class="form-control" name="lname" placeholder="eg: Tan" required id="lname"  maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" name="email" placeholder="Email" required id="email"  maxlength="50">
+                        <input type="email" class="form-control" name="email" placeholder="eg: johntan@gmail.com" required id="email"  maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="email">Phone number:</label>
-                        <input type="number" class="form-control" name="phone_number" placeholder="Phone Number" required id="phone_number" maxlength="8">
+                        <input type="tel" class="form-control" name="phone_number" placeholder="eg: 93173710" required id="phone_number" maxlength="8">
                     </div>
                     <div class="form-group">
                         <label for="country">Country:</label>
-                        <input type="text" class="form-control" name="country" placeholder="Country" required id="country" maxlength="50">
+                        <input type="text" class="form-control" name="country" placeholder="eg: Singapore" required id="country" maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="billing_address">Billing Address:</label>
-                        <input type="text" class="form-control" name="billing_address" placeholder="Billing Address" required id="billing_address" maxlength="200">
+                        <input type="text" class="form-control" name="billing_address" placeholder="eg: Bukit Timah Hill 67" required id="billing_address" maxlength="200">
                     </div>
                 </div>
 
