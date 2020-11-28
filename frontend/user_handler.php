@@ -18,6 +18,8 @@ session_start();
 $redirect = "";
 // $password = "";
 $errors = array();
+$errorsDetails = array();
+$errorsPW = array();
 
 //Helper function that checks input for malicious or unwanted content.
 function sanitize_input($data)
@@ -107,7 +109,7 @@ if (isset($_POST['reg_user'])) {
         $saveUser = new User();
         $saveUserResult = $saveUser->registerUser($first_name, $last_name, $username, $email, $phone_number, $country, $password, $billing_address);
         $_SESSION['username'] = $username;
-        $_SESSION['success'] = "You are now logged in";
+        
         # Instantiate the client.
         $mg = Mailgun::create($_SERVER['mailgun_api_key']);
         // Now, compose and send your message.
@@ -118,9 +120,19 @@ if (isset($_POST['reg_user'])) {
             'subject' => 'Thank you for signing up with us!',
             'html'    => 'We hope you will have a great time!'
         ]);
-        header('location: home.php');
+        $Message = "Registration successful! Please login from the home page.";
+			
+        header("location: home.php?Message=" .urlencode($Message));
     } else {
-        echo "ploblem";
+        
+		$_SESSION['errMsgreg'] = $errors;
+		header('location: register.php');
+		//if (count($errors)>0){
+			//foreach ($errors as $error):
+				//$_SESSION['errMsgreg'] = $error;
+			//endforeach;
+		//}
+		
     }
 }
 
@@ -147,7 +159,7 @@ if (isset($_POST['login_user'])) {
             $UserData = $retrieveUserData->getUserDataForSession($username);
 
             $_SESSION['username'] = $UserData['username'];
-            $_SESSION['user_id'] = $UserData['id'];
+            $_SESSION['userID'] = $UserData['id'];
             $_SESSION['role_id'] = $UserData['role_id'];
             $_SESSION['first_name'] = $UserData['first_name'];
             $_SESSION['last_name'] = $UserData['last_name'];
@@ -166,15 +178,15 @@ if (isset($_POST['login_user'])) {
             header('location:' . $redirect);
         } else {
             array_push($errors, "Wrong username/password combination");
+			$_SESSION['errMsg'] = "Invalid username or password";
+			header('location: loginpage.php');
         }
     }
 }
 
 
-
 //UPDATE USER
 if (isset($_POST['update_user'])) {
-
     $userObj = new User();
 
     // receive all input values from the form
@@ -185,22 +197,21 @@ if (isset($_POST['update_user'])) {
     $phone_number = $_POST['phone_number'];
     $country = $_POST['country'];
     $billing_address = $_POST['billing_address'];
-
     // form validation: ensure that the form is correctly filled ...
-    // by adding (array_push()) corresponding error unto $errors array
+    // by adding (array_push()) corresponding error unto $errorsDetails array
     if (empty($first_name)) {
-        array_push($errors, "First name is required");
+        array_push($errorsDetails, "First name is required");
     } else {
         //$fname = filter_var($_POST["fname"], FILTER_SANITIZE_STRING);
         $fname = preg_replace('/[^A-Za-z0-9\-]/', '', $_POST["fname"]);
     }
     if (empty($last_name)) {
-        array_push($errors, "Last name is required");
+        array_push($errorsDetails, "Last name is required");
     } else {
         $lname = preg_replace('/[^A-Za-z0-9\-]/', '', $_POST["lname"]);
     }
     if (empty($email)) {
-        array_push($errors, "Email is required");
+        array_push($errorsDetails, "Email is required");
     } else {
         $email = sanitize_input($_POST["email"]);
         // Additional check to make sure e-mail address is well-formed.
@@ -210,48 +221,42 @@ if (isset($_POST['update_user'])) {
         }
     }
     if (empty($phone_number)) {
-        array_push($errors, "Phone number is required");
+        array_push($errorsDetails, "Phone number is required");
     }
     if (empty($country)) {
-        array_push($errors, "Country is required");
+        array_push($errorsDetails, "Country is required");
     }
     if (empty($billing_address)) {
-        array_push($errors, "Billing address is required");
+        array_push($errorsDetails, "Billing address is required");
     }
 
 
     // first check the database to make sure 
-    // a user does not already exist with the same username and/or email
-    // Check if the user made any request to change the username.
-    if ($_SESSION['username'] != $username) {
-        //User is trying to change username, check DB if it is taken.
-        $checkUsername = new User();
-        $user = $checkUsername->checkUserNameExists($username);
-        if ($user) {
-            if ($user['username'] === $username) {
-                array_push($errors, "Username already exists");
-            }
-        }
-    }
-
+    // a user does not already exist with the same email
+    
+   
     if ($_SESSION['email'] != $email) {
         $checkEmail = new User();
         $userRes = $checkEmail->checkEmailExists($email);
         if ($userRes) {
-            if ($user['email'] === $email) {
-                array_push($errors, "email already exists");
+            if ($userRes['email'] === $email) {
+                array_push($errorsDetails, "email already exists");
             }
         }
     }
 
     // Finally, update user if there are no errors in the form
-    if (count($errors) == 0) {
+    if (count($errorsDetails) == 0) {
 
         $updateUserResult = $userObj->updateUser($first_name, $last_name, $email, $phone_number, $country, $billing_address, $username);
         $_SESSION['username'] = $username;
-        $_SESSION['success'] = "You are now logged out???";
-        header("location: home.php?logout='1'");
-    }
+        $Message = "Account details updated successfully! Please login again.";
+			
+        header("location: home.php?Message=" .urlencode($Message));
+    }else{
+		header("location: user_profile.php");
+		$_SESSION['errorsDetails'] = $errorsDetails;
+	}
 }
 
 
@@ -264,32 +269,38 @@ if (isset($_POST['update_password'])) {
     $password3 = $_POST['confirmed_password'];
 
     if (empty($username)) {
-        array_push($errors, "Username is required");
+        array_push($errorsPW, "Username is required");
     }
     if (empty($password)) {
-        array_push($errors, "Password is required");
+        array_push($errorsPW, "Password is required");
     }
     if (empty($password2)) {
-        array_push($errors, "New Password is required");
+        array_push($errorsPW, "New Password is required");
     }
     if (empty($password3)) {
-        array_push($errors, "Confirmed Password is required");
+        array_push($errorsPW, "Confirmed Password is required");
     }
     if ($password2 != $password3) {
-        array_push($errors, "Passwords do not match");
+        array_push($errorsPW, "Passwords do not match");
     }
 
-    if (count($errors) == 0) {
+    if (count($errorsPW) == 0) {
         $password = md5($password);
         $checkPasswordResult = $userObj->loginUser($username, $password);
 
         if (count($checkPasswordResult) > 0) {
             $password_new = md5($password2);
             $updatePasswordQuery = $userObj->updateUserPassword($password_new, $username);
-
-            header("location: home.php?logout='1'");
+			$Message = "Password changed successfully! Please login again.";
+			
+            header("location: home.php?Message=" .urlencode($Message));
+			
         } else {
-            array_push($errors, "Invalid Password");
+            array_push($errorsPW, "Invalid Password");
+		
         }
-    }
+    }else{
+		header("location: user_profile.php");
+		$_SESSION['errorsPW'] = $errorsPW;
+	}
 }
