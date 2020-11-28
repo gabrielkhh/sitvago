@@ -2,11 +2,11 @@
     session_start();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
     <head>
 
-        <title>Singapore Tourism Attraction </title>
+        <title>Singapore Tourism Attraction Registration Page </title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -40,88 +40,88 @@
         <!-- Custom styles for this template -->
         <link href="css/cover.css" rel="stylesheet">
         <link href='css/register.css' rel="stylesheet">
+
+
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                background-color: #f1f1f1;
+            }
+
+            #regForm {
+                background-color: #ffffff;
+                margin: 100px auto;
+                font-family: Raleway;
+                padding: 40px;
+                width: 70%;
+                min-width: 300px;
+            }
+
+            h1 {
+                text-align: center;  
+            }
+
+            input {
+                padding: 10px;
+                width: 100%;
+                font-size: 17px;
+                font-family: Raleway;
+                border: 1px solid #aaaaaa;
+            }
+
+            /* Mark input boxes that gets an error on validation: */
+            input.invalid {
+                background-color: #ffdddd;
+            }
+
+            /* Hide all steps by default: */
+            .tab {
+                display: none;
+            }
+
+            button {
+                background-color: #4CAF50;
+                color: #ffffff;
+                border: none;
+                padding: 10px 20px;
+                font-size: 17px;
+                font-family: Raleway;
+                cursor: pointer;
+            }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+            #prevBtn {
+                background-color: #bbbbbb;
+            }
+
+            /* Make circles that indicate the steps of the form: */
+            .step {
+                height: 15px;
+                width: 15px;
+                margin: 0 2px;
+                background-color: #bbbbbb;
+                border: none;  
+                border-radius: 50%;
+                display: inline-block;
+                opacity: 0.5;
+            }
+
+            .step.active {
+                opacity: 1;
+            }
+
+            /* Mark the steps that are finished and valid: */
+            .step.finish {
+                background-color: #4CAF50;
+            }
+        </style>
     </head>
-
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #f1f1f1;
-        }
-
-        #regForm {
-            background-color: #ffffff;
-            margin: 100px auto;
-            font-family: Raleway;
-            padding: 40px;
-            width: 70%;
-            min-width: 300px;
-        }
-
-        h1 {
-            text-align: center;  
-        }
-
-        input {
-            padding: 10px;
-            width: 100%;
-            font-size: 17px;
-            font-family: Raleway;
-            border: 1px solid #aaaaaa;
-        }
-
-        /* Mark input boxes that gets an error on validation: */
-        input.invalid {
-            background-color: #ffdddd;
-        }
-
-        /* Hide all steps by default: */
-        .tab {
-            display: none;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 17px;
-            font-family: Raleway;
-            cursor: pointer;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
-
-        #prevBtn {
-            background-color: #bbbbbb;
-        }
-
-        /* Make circles that indicate the steps of the form: */
-        .step {
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbbbbb;
-            border: none;  
-            border-radius: 50%;
-            display: inline-block;
-            opacity: 0.5;
-        }
-
-        .step.active {
-            opacity: 1;
-        }
-
-        /* Mark the steps that are finished and valid: */
-        .step.finish {
-            background-color: #4CAF50;
-        }
-    </style>
     <body>
         <div class="signup-form">
             <form action="user_handler.php" method="post">
@@ -129,45 +129,46 @@
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
                     <h2>Register</h2>
-                    <p class="hint-text">Create your account to book hotels.</p>
+                    <p class="hint-text">Create your account to book hotels. 
+                        <br>Already have an account? <a href="loginpage.php">Sign in</a></p>
                     <div class="form-group">
                         <label for="fname">First Name:</label>
-                        <input type="text" class="form-control" name="fname" placeholder="First Name" id="fname" required maxlength="50">
+                        <input type="text" class="form-control" name="fname" placeholder="First Name" id="fname" maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="lname">Last Name:</label>
-                        <input type="text" class="form-control" name="lname" placeholder="Last Name" required="required" id="lname" required maxlength="50">
+                        <input type="text" class="form-control" name="lname" placeholder="Last Name" required id="lname"  maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" name="email" placeholder="Email" required="required" id="email" required maxlength="50">
+                        <input type="email" class="form-control" name="email" placeholder="Email" required id="email"  maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="email">Phone number:</label>
-                        <input type="number" class="form-control" name="phone_number" placeholder="Phone Number" required="required" id="phone_number" required maxlength="8">
+                        <input type="number" class="form-control" name="phone_number" placeholder="Phone Number" required id="phone_number" maxlength="8">
                     </div>
                     <div class="form-group">
                         <label for="country">Country:</label>
-                        <input type="text" class="form-control" name="country" placeholder="Country" required="required" id="country" required maxlength="50">
+                        <input type="text" class="form-control" name="country" placeholder="Country" required id="country" maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="billing_address">Billing Address:</label>
-                        <input type="text" class="form-control" name="billing_address" placeholder="Billing Address" required="required" id="billing_address" required maxlength="200">
+                        <input type="text" class="form-control" name="billing_address" placeholder="Billing Address" required id="billing_address" maxlength="200">
                     </div>
                 </div>
-               
+
                 <div class="tab">Login Information
                     <div class="form-group">
                         <label for="username">Username:</label>
-                        <input type="text" class="form-control" name="username" placeholder="Username" required="required" id="username" required maxlength="50">
+                        <input type="text" class="form-control" name="username" placeholder="Username" required id="username" maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="pwd">Password:</label>
-                        <input type="password" class="form-control" name="pwd" placeholder="Password" required="required" id="pwd" required maxlength="50">
+                        <input type="password" class="form-control" name="pwd" placeholder="Password" required id="pwd" maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="pwd_confirm">Confirm Password:</label>
-                        <input type="password" class="form-control" name="pwd_confirm" placeholder="Confirm Password" required="required" id="pwd_confirm" required maxlength="50">
+                        <input type="password" class="form-control" name="pwd_confirm" placeholder="Confirm Password" required id="pwd_confirm" maxlength="50">
                     </div> 
                 </div>
 
@@ -188,7 +189,6 @@
                     <span class="step"></span>
                 </div>
             </form>
-            <div class="text-center">Already have an account? <a href="loginpage.php">Sign in</a></div>
         </div>
         <script>
             var currentTab = 0; // Current tab is set to be the first tab (0)

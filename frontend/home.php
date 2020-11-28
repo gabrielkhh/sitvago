@@ -24,7 +24,7 @@ and open the template in the editor.
 -->
 
 
-<html>
+<html lang="en">
     <head>
 
         <title>Sitvago's Home </title>
@@ -39,6 +39,9 @@ and open the template in the editor.
         <!-- Font and Icons CSS -->
         <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Custom styles for this template -->
+        <link href="css/album.css" rel="stylesheet">
 
 
         <!--jQuery-->
@@ -55,10 +58,6 @@ and open the template in the editor.
                 crossorigin="anonymous">
         </script>
 
-
-
-
-
         <style>
             .bd-placeholder-img {
                 font-size: 1.125rem;
@@ -68,7 +67,6 @@ and open the template in the editor.
                 -ms-user-select: none;
                 user-select: none;
             }
-
             @media (min-width: 768px) {
                 .bd-placeholder-img-lg {
                     font-size: 3.5rem;
@@ -81,32 +79,24 @@ and open the template in the editor.
                 background-size: cover;
                 -o-background-size: cover;
             }
-
             body {
                 zoom: 90%;
             }
-
-
-
-
+            .bd-placeholder-img{
+                width:100%;
+                height:0;
+            }
         </style>
-        <!-- Custom styles for this template -->
-
-        <link href="css/album.css" rel="stylesheet">
     </head>
     <body>
         <?php
         if (isset($_SESSION['username'])) {
             include "navbar_User.php";
-
         } else if (!isset($_SESSION['username'])) {
             include "navbar_nonUser.php";
         }
         ?>
-
-
-        <main role="main">
-
+        <main>
             <div class="jumbotron">
                 <div class="container text-center text-white">
                     <h1 class="display-2" >Welcome to SITVAGO</h1>
@@ -143,22 +133,17 @@ and open the template in the editor.
                             </form>
                         </div>
                     </section>
-
                 </div>
             </div>
-
-
-
             <div class="album py-5 bg-light">
                 <div class="container">
-
                     <div class="row"> 
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="0" preserveAspectRatio="xMidYMid slice" 
-                                     <title>The Barracks Hotel Sentosa</title><img src="images/hotel/barrackshotel.jpg" class='img-fluid'></svg>
+                                <svg class="bd-placeholder-img card-img-top"  preserveAspectRatio="xMidYMid slice">
+                                <title>Barracks Hotel Sentosa</title><img src="images/hotel/barrackshotel.jpg" class='img-fluid' alt="Barrack Hotel"/>
                                 <div class="card-body">
-                                    <h5 class="card-title">The Barracks Hotel Sentosa</h5>
+                                    <h5 class="card-title">Barracks Hotel Sentosa</h5>
                                     <p class="card-text">Availability: 5</p>
                                     <p class="card-text">Ratings: 3/5</p>
                                     <div class="d-flex justify-content-between align-items-center">     
@@ -171,8 +156,8 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="0" preserveAspectRatio="xMidYMid slice" 
-                                     <title>Capella Singapore</title><img src="images/hotel/capella.jpg" class='img-fluid' ></svg>
+                                <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice" >
+                                <title>Capella Singapore</title><img src="images/hotel/capella.jpg" class='img-fluid' alt="Capella Singapore"/>
                                 <div class="card-body">
                                     <h5 class="card-title">Capella Singapore</h5>
                                     <p class="card-text">Availability: 2</p>
@@ -187,8 +172,8 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="0" preserveAspectRatio="xMidYMid slice" 
-                                     <title>Mandarin Oriental</title><img src="images/hotel/mandarinoriental.jpg" class='img-fluid'></svg>
+                                <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice" >
+                                <title>Mandarin Oriental</title><img src="images/hotel/mandarinoriental.jpg" class='img-fluid' alt="Mandarin Oriental"/>
                                 <div class="card-body">
                                     <h5 class="card-title">Mandarin Oriental</h5>
                                     <p class="card-text">Availability: 4</p>
@@ -203,8 +188,8 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="0" preserveAspectRatio="xMidYMid slice" 
-                                     <title>Hotel Goodwood Park</title><img src="images/hotel/goodwoodpark.jpg" class='img-fluid'></svg>
+                                <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice" >
+                                <title>Hotel Goodwood Park</title><img src="images/hotel/goodwoodpark.jpg" class='img-fluid' alt="Hotel Goodwood Park"/>
                                 <div class="card-body">
                                     <h5 class="card-title">Hotel Goodwood Park</h5>
                                     <p class="card-text">Hotel Goodwood Park</p>
@@ -218,8 +203,8 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="0" preserveAspectRatio="xMidYMid slice" 
-                                     <title>Hilton Singapore</title><img src="images/hotel/Hilton.jpg" class='img-fluid'></svg>
+                                <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice" >
+                                <title>Hilton Singapore</title><img src="images/hotel/Hilton.jpg" class='img-fluid' alt="Hilton Singapore"/>
                                 <div class="card-body">
                                     <h5 class="card-title">Hilton Singapore</h5>
                                     <p class="card-text">Hilton Singapore</p>
@@ -233,8 +218,8 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="0" preserveAspectRatio="xMidYMid slice" 
-                                     <title>M Social Singapore</title><img src="images/hotel/msocial.jpg" class='img-fluid'></svg>
+                                <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice" >
+                                <title>M Social Singapore</title><img src="images/hotel/msocial.jpg" class='img-fluid' alt='M Social'/>
                                 <div class="card-body">
                                     <h5 class="card-title">M Social Singapore</h5>
                                     <p class="card-text">M Social Singapore</p>
@@ -248,8 +233,8 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="0" preserveAspectRatio="xMidYMid slice" 
-                                     <title>Carlton Hotel Singapore</title><img src="images/hotel/carlton.jpg" class='img-fluid'></svg>
+                                <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice" >
+                                <title>Carlton Hotel Singapore</title><img src="images/hotel/carlton.jpg" class='img-fluid' alt='Carlton Hotel'/>
                                 <div class="card-body">
                                     <h5 class="card-title">Carlton Hotel Singapore</h5>
                                     <p class="card-text">Carlton Hotel Singapore</p>
@@ -263,8 +248,8 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="0" preserveAspectRatio="xMidYMid slice" 
-                                     <title>Village Hotel Bugis</title><img src="images/hotel/villagehotelbugis.jpg" class='img-fluid'></svg>
+                                <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice" >
+                                <title>Village Hotel Bugis</title><img src="images/hotel/villagehotelbugis.jpg" class='img-fluid' alt='Village Hotel'/>
                                 <div class="card-body">
                                     <h5 class="card-title">Village Hotel Bugis</h5>
                                     <p class="card-text">Village Hotel Bugis</p>
@@ -278,8 +263,8 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="0" preserveAspectRatio="xMidYMid slice" 
-                                     <title>Shangri-La Hotel</title><img src="images/hotel/Shangrila.jpg" class='img-fluid'></svg>
+                                <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice" >
+                                <title>Shangri-La Hotel</title><img src="images/hotel/Shangrila.jpg" class='img-fluid' alt='Shangri-La Hotel'/>
                                 <div class="card-body">
                                     <h5 class="card-title">Shangri-La Hotel</h5>
                                     <p class="card-text">Shangri-La Hotel</p>
@@ -291,12 +276,12 @@ and open the template in the editor.
                                 </div>
                             </div>
                         </div>
-
-                        </main>
-
-                        <footer class="container">
-                            <p>&copy; Sitvago 2020</p>
-                        </footer>
-                        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-                        <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-                        </html>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+    <footer class="container">
+        <p>&copy; Sitvago 2020</p>
+    </footer>
+</html>

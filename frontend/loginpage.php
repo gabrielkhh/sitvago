@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <!--
@@ -9,10 +9,10 @@ and open the template in the editor.
 -->
 
 
-<html>
+<html lang="en">
     <head>
 
-        <title>Singapore Tourism Attraction </title>
+        <title>Singapore Tourism Attraction Login Page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -56,6 +56,11 @@ and open the template in the editor.
                     font-size: 3.5rem;
                 }
             }
+
+            .mb-4{
+                width:300px;
+                height:110px;
+            }
         </style>
         <!-- Custom styles for this template -->
         <link href="css/cover.css" rel="stylesheet">
@@ -66,15 +71,14 @@ and open the template in the editor.
             <header class="masthead mb-auto">
                 <div class="inner">
                     <nav class="nav nav-masthead justify-content-center">
-                        <a class="nav-link active" href="#">About Us</a>
+                        <a class="nav-link active" href="aboutus.php">About Us</a>
                     </nav>
                 </div>
             </header>
 
             <div class="form-signin">
                 <form action="user_handler.php" method="post">
-                    <img class="mb-4" src="images/logo_nobackground.png" alt="mainpagelogo" width="300" height="110">
-
+                    <img class="mb-4" src="images/logo_nobackground.png" alt="mainpagelogo">
                     <p> Login to access our site or <a href="register.php" class="font-weight-bolder" >Register</a> with us </p>
 
                     <!-- Remember to add 'required' field later, currently remove for demo purpose -->
@@ -82,13 +86,9 @@ and open the template in the editor.
                     <input type="text" id="inputUsername" class="form-control" placeholder="Username"  name="username" autofocus>
                     <label for="inputPassword" class="sr-only">Password</label>
                     <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password">
-
-                
                     <button type="submit" id="submitBtn" name="login_user" class="btn btn-lg btn-primary btn-block">Login</button>
                 </form>
             </div>
-
-
             <footer class="mastfoot mt-auto">
                 <div class="inner">
                     <p>Team Project - SITVAGO</p>
