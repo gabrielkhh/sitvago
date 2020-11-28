@@ -69,11 +69,11 @@ class Review extends DB
         return $response;
     }
 
-    public function updateReview($hotelID, $hotelName, $hotelDescription, $hotelGeoLocation, $rating, $userID)
+    public function updateReview($userID, $hotelID, $title, $rating, $content)
     {
         $response = [];
         $success = true;
-        $preparedSQL = "UPDATE Hotel SET name=?, description=?, rating=?, geo_id=(SELECT GeoLocation.id FROM GeoLocation WHERE GeoLocation.name=?), updated_at=now(), updated_by=? WHERE Hotel.id=?;";
+        $preparedSQL = "UPDATE Review SET name=?, description=?, rating=?, geo_id=(SELECT GeoLocation.id FROM GeoLocation WHERE GeoLocation.name=?), updated_at=now(), updated_by=? WHERE Hotel.id=?;";
 
         if ($this->conn->connect_error) {
             $errorMsg = "Connection failed: " . $this->conn->connect_error;
