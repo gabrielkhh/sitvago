@@ -64,7 +64,18 @@ body{
     text-align:center;
 }
 
-
+.card {
+    margin: 0 auto; 
+    float: none; 
+    width:400px;
+}
+#card-h2{
+    margin: 0 auto; 
+    float: none; 
+    margin-bottom: 10px; 
+    text-align:center;
+    margin-top:50px;
+}
 
 /* Popup container */
 .popup {

@@ -143,8 +143,8 @@ $userBillingAddress = $_SESSION['billing_address'];
                 </div>
             </div>
             <div class="row">
-                <label for="notice" class="notice"><i class="fa fa-exclamation-circle"></i> Notice</label>
-                <p><span class="notice">Do take not that we are only reserving the room for you! Availability is up to the hotel. Have a nice day :)</span></p>
+                <!--<label for="notice" class="notice"><i class="fa fa-exclamation-circle"></i> Notice</label>-->
+                <!--<p><span class="notice">Do take not that we are only reserving the room for you! Availability is up to the hotel. Have a nice day :)</span></p>-->
 
             </div>
 
