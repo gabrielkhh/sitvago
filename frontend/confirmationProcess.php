@@ -101,7 +101,18 @@ if ($userStripeCustID['stripe_customer_id'] == NULL) {
     $updatedBookingInfo = $newBookingObj->updateBookingWithStripeTxID($newBookingID, $txID);
 }
 
+$resultantData = array(
+    "stripeTxID" => $txID,
+    "duration" => $bookingDurationInDays,
+    "price" => number_format((float)$price, 2, '.', ''),
+    "email" => $email,
+    "fname" => $first_name,
+    "lname" => $last_name,
+    "roomtype" => $roomCategoryName,
+    "hotelname" => $hotelName
+);
+
 //Redirect to Success
-print_r($charge);
+$_SESSION['INFO'] = $resultantData;
 header("Location:bookingConfirmation.php");
 ?>
