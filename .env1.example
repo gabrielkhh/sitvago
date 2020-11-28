@@ -11,3 +11,6 @@ cloudinary_secret_key="secretkeygoeshere"
 
 # STRIPE API
 stripe_secret_key="abcdefghijklmnopqrstuvwxyzyoushallnothavemykey"
+
+# MAILGUN API
+mailgun_api_key="mailgunapikey"

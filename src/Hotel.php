@@ -36,7 +36,7 @@ class Hotel extends DB
         return $rowHotel;
     }
 
-    public function addHotel($hotelName, $hotelDescription, $rating, $userID, $hotelGeoLocation)
+    public function addHotel($hotelName, $hotelDescription, $rating, $userID, $hotelGeoLocation, $amounts)
     {
         $response = [];
         $success = true;
@@ -65,6 +65,12 @@ class Hotel extends DB
                 $response['error'] = "";
                 $response['insertedID'] = $newHotelID;
                 $response['insertedName'] = $hotelName;
+                foreach ($amounts as $key => $val) {
+                    $sql = "INSERT INTO HotelRoomCategory (hotel_id, room_category_id, availability, price_per_night, created_at, created_by, updated_at, updated_by)
+                    VALUES (" . $newHotelID . ", (SELECT rc.id FROM RoomCategory rc WHERE rc.category_name='" . $key . "'), 1, " . $val . ", now(), " . $userID . ", now(), " . $userID .")";
+                    mysqli_query($this->conn, $sql)
+                        or die(mysqli_error($this->conn));
+                }
             }
             $stmt->close();
         }
@@ -135,11 +141,11 @@ class Hotel extends DB
         return $response;
     }
 
-    public function addHotelImage($hotelID, $url, $width, $height, $extension, $isThumbnail)
+    public function addHotelImage($hotelID, $url, $secureUrl, $width, $height, $extension, $isThumbnail, $originalSrc)
     {
         $response = [];
         $success = true;
-        $preparedSQL = "INSERT INTO HotelImage (url, hotel_id, is_thumbnail, image_extension, width, height) SELECT ?, Hotel.id,
+        $preparedSQL = "INSERT INTO HotelImage (url, secure_url, original_src, hotel_id, is_thumbnail, image_extension, width, height) SELECT ?, ?, ?, Hotel.id,
         ?, ?, ?, ? FROM Hotel WHERE Hotel.id=?";
 
 
@@ -151,7 +157,7 @@ class Hotel extends DB
             $response['error'] = $errorMsg;
         } else {
             $stmt = $this->conn->prepare($preparedSQL);
-            $stmt->bind_param("sisiii", $url, $isThumbnail, $extension, $width, $height, $hotelID);
+            $stmt->bind_param("sssisiii", $url, $secureUrl, $originalSrc, $isThumbnail, $extension, $width, $height, $hotelID);
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
                 $response['success'] = $success;

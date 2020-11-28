@@ -5,6 +5,10 @@ use sitvago\Hotel;
 
 $hotelObj = new Hotel();
 $roomCategoriesResults = $hotelObj->getRoomCategories();
+//$hotelSelected = $hotelObj->getSingleHotel();
+//$roomPrice = $hotelObj->getRoomCategoryRate($hotelSelected,$roomCategoriesResults);
+//$roomDescription = $hotelObj->getRoomDescription();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -118,12 +122,12 @@ $roomCategoriesResults = $hotelObj->getRoomCategories();
                     </div>
                 </div>
                 <div class="col-lg-4 sidebar ftco-animate pl-md-5">
-                    <div class="sidebar-box ftco-animate">
-                        <h3 class="hotel_selected">Barrack Hotel Rooms</h3>
-                        <form action="confirmation.php" method="POST" autocomplete="off">
+                    <!--div class="sidebar-box ftco-animate">-->
+                        <h3 class="hotel_selected">Barrack Hotel Rooms</h3>                       
+                        <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form" >
                             <div class="form-group">
-                                <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
-                            </div>
+                                <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>                                 
+                            </div>                       
                             <div class="form-group">
                                 <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>
                             </div>
@@ -136,15 +140,17 @@ $roomCategoriesResults = $hotelObj->getRoomCategories();
                                 </select>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-primary" type="submit" name="submit" id="submit">Book Now!</button></a>
+                                <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
+                                   <span id="error"></span>
                             </div>
                         </form>
                         <p>
                             <h3 id="price">For only $99.99 per night!</h3>
                         </p>
-                        <p>Some description about the hotel. This hotel is in Singapore, expensive but confirm worth it for $99.99 per night!</p>
-                    </div>
+                        <p>Dynamic DESCRIPTION!</p>
+                    <!--</div>-->
                 </div>
+ 
             </div>
         </div>
     </section>

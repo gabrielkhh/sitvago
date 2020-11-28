@@ -1,4 +1,6 @@
-<?php include('user.php') ?>
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -122,8 +124,8 @@
     </head>
     <body>
         <div class="signup-form">
-            <form action="register.php" method="post">
-                <?php include('errors.php'); ?>
+            <form action="user_handler.php" method="post">
+                <!-- <?php include('errors.php'); ?> -->
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
                     <h2>Register</h2>

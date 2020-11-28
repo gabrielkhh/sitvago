@@ -30,7 +30,6 @@ function sanitize_input($data)
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
-
     // prepare and bind for register
 
     // receive all input values from the form
@@ -86,8 +85,8 @@ if (isset($_POST['reg_user'])) {
         array_push($errors, "Passwords do not match");
     }
 
-    // first check the database to make sure 
-    // a user does not already exist with the same username and/or email
+    // // first check the database to make sure 
+    // // a user does not already exist with the same username and/or email
     $checkUserNameAndEmail = new User();
     $user = $checkUserNameAndEmail->userNameEmail($username, $email);
 
@@ -110,7 +109,7 @@ if (isset($_POST['reg_user'])) {
         $_SESSION['username'] = $username;
         $_SESSION['success'] = "You are now logged in";
         # Instantiate the client.
-        $mg = Mailgun::create('40e8726dbad000cafb5eed0698218294-360a0b2c-a5e58e14');
+        $mg = Mailgun::create($_SERVER['mailgun_api_key']);
         // Now, compose and send your message.
         // $mg->messages()->send($domain, $params);
         $mg->messages()->send('mg.sitvago.com', [
@@ -120,6 +119,8 @@ if (isset($_POST['reg_user'])) {
             'html'    => 'We hope you will have a great time!'
         ]);
         header('location: home.php');
+    } else {
+        echo "ploblem";
     }
 }
 
@@ -221,20 +222,34 @@ if (isset($_POST['update_user'])) {
 
     // first check the database to make sure 
     // a user does not already exist with the same username and/or email
-    $checkUserResult = $userObj->userNameEmail($username, $email);
-
-    if ($checkUserResult) { // if user exists
-        if ($checkUserResult['email'] === $email) {
-            array_push($errors, "email already exists");
+    // Check if the user made any request to change the username.
+    if ($_SESSION['username'] != $username) {
+        //User is trying to change username, check DB if it is taken.
+        $checkUsername = new User();
+        $user = $checkUsername->checkUserNameExists($username);
+        if ($user) {
+            if ($user['username'] === $username) {
+                array_push($errors, "Username already exists");
+            }
         }
     }
 
-    // Finally, register user if there are no errors in the form
+    if ($_SESSION['email'] != $email) {
+        $checkEmail = new User();
+        $userRes = $checkEmail->checkEmailExists($email);
+        if ($userRes) {
+            if ($user['email'] === $email) {
+                array_push($errors, "email already exists");
+            }
+        }
+    }
+
+    // Finally, update user if there are no errors in the form
     if (count($errors) == 0) {
 
         $updateUserResult = $userObj->updateUser($first_name, $last_name, $email, $phone_number, $country, $billing_address, $username);
         $_SESSION['username'] = $username;
-        $_SESSION['success'] = "You are now logged in";
+        $_SESSION['success'] = "You are now logged out???";
         header("location: home.php?logout='1'");
     }
 }

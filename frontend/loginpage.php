@@ -1,4 +1,6 @@
-<?php include('user.php') ?>
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -54,7 +56,7 @@ and open the template in the editor.
                     font-size: 3.5rem;
                 }
             }
-            
+
             .mb-4{
                 width:300px;
                 height:110px;
@@ -75,9 +77,8 @@ and open the template in the editor.
             </header>
 
             <div class="form-signin">
-                <form action="loginpage.php" method="post">
+                <form action="user_handler.php" method="post">
                     <img class="mb-4" src="images/logo_nobackground.png" alt="mainpagelogo">
-
                     <p> Login to access our site or <a href="register.php" class="font-weight-bolder" >Register</a> with us </p>
 
                     <!-- Remember to add 'required' field later, currently remove for demo purpose -->
@@ -85,8 +86,6 @@ and open the template in the editor.
                     <input type="text" id="inputUsername" class="form-control" placeholder="Username"  name="username" autofocus>
                     <label for="inputPassword" class="sr-only">Password</label>
                     <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password">
-
-                
                     <button type="submit" id="submitBtn" name="login_user" class="btn btn-lg btn-primary btn-block">Login</button>
                 </form>
             </div>

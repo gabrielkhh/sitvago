@@ -1,5 +1,7 @@
 <?php
 require '../../vendor/autoload.php';
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST');
 
 use sitvago\Hotel;
 
@@ -27,9 +29,11 @@ if (empty($_FILES['fileInput'])) {
     for ($i = 0; $i < $totalFiles; $i++) {
         $imgIsThumbnail = 0;
         $pathOfImage = "sitvago/hotels/" . $hotelName . "/". $hotelID . "/" . $_FILES['fileInput']['name'][$i];
+        $originalSrc = $_POST[$i];
 
         $files['imgCloudinaryData'] = \Cloudinary\Uploader::upload($_FILES['fileInput']['tmp_name'][$i], array("public_id" => $pathOfImage));
         $secure_url = $files['imgCloudinaryData']['secure_url'];
+        $url = $files['imgCloudinaryData']['url'];
         $width = $files['imgCloudinaryData']['width'];
         $height = $files['imgCloudinaryData']['height'];
         $imgExtension = $files['imgCloudinaryData']['format'];
@@ -41,7 +45,7 @@ if (empty($_FILES['fileInput'])) {
 
         //Save the information into HotelImages Table
         $hotel = new Hotel();
-        $results = $hotel->addHotelImage($hotelID, $secure_url, $width, $height, $imgExtension, $imgIsThumbnail);
+        $results = $hotel->addHotelImage($hotelID, $url, $secure_url, $width, $height, $imgExtension, $imgIsThumbnail, $originalSrc);
     }
 }
 echo "{}";
