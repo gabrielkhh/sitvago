@@ -83,7 +83,7 @@ $userBillingAddress = $_SESSION['billing_address'];
     <div class="row">
         <div class="col-75">
             <div class="container confirm-box">
-                <form action="confirmationProcess.php" method="post" id="booking_form">
+                <form action="bookingConfirmation.php" method="post" id="booking_form">
                     <link rel="stylesheet" href="css/confirmation.css">
                     <h1 class="book_confirm">Booking Confirmation</h1>
                     <div class="row">

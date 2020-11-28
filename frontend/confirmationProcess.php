@@ -103,3 +103,5 @@ if ($userStripeCustID['stripe_customer_id'] == NULL) {
 
 //Redirect to Success
 print_r($charge);
+header("Location:bookingConfirmation.php");
+?>

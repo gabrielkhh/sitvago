@@ -7,6 +7,7 @@ $hotelObj = new Hotel();
 $roomCategoriesResults = $hotelObj->getRoomCategories();
 //$hotelSelected = $hotelObj->getSingleHotel();
 //$roomPrice = $hotelObj->getRoomCategoryRate($hotelSelected,$roomCategoriesResults);
+//$roomDescription = $hotelObj->getRoomDescription();
 
 ?>
 <!DOCTYPE html>
@@ -125,7 +126,7 @@ $roomCategoriesResults = $hotelObj->getRoomCategories();
                         <h3 class="hotel_selected">Barrack Hotel Rooms</h3>                       
                         <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form" >
                             <div class="form-group">
-                                <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required><span class="popuptext" id="error"></span>                                   
+                                <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>                                 
                             </div>                       
                             <div class="form-group">
                                 <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>
@@ -140,6 +141,7 @@ $roomCategoriesResults = $hotelObj->getRoomCategories();
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
+                                   <span id="error"></span>
                             </div>
                         </form>
                         <p>
