@@ -23,6 +23,24 @@ class Hotel extends DB
         return $results;
     }
 
+    public function retrieveHotelsForHomePage()
+    {
+        $results = [];
+        $sql = "SELECT Hotel.id, Hotel.name, Hotel.description, Hotel.rating, GeoLocation.name AS area_name, HotelImage.secure_url, HotelImage.original_src
+        FROM Hotel LEFT JOIN GeoLocation ON Hotel.geo_id = GeoLocation.id LEFT JOIN HotelImage ON HotelImage.hotel_id = Hotel.id 
+        AND HotelImage.is_thumbnail = 1";
+
+        $resultsSQL = mysqli_query($this->conn, $sql);
+
+        if (mysqli_num_rows($resultsSQL) > 0) {
+            while ($row = mysqli_fetch_assoc($resultsSQL)) {
+                $results[] = $row;
+            }
+        }
+
+        return $results;
+    }
+
     public function getSingleHotel($hotelID)
     {
         $results = [];
