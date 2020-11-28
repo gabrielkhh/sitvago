@@ -177,6 +177,7 @@ and open the template in the editor.
             ajaxSettings: {
                 // dataType: 'jsonp',
                 type: 'post',
+                contentType: false,
                 crossDomain: true
             },
             uploadExtraData: function() { // callback example
@@ -204,6 +205,12 @@ and open the template in the editor.
                 }).then(function() {
                     window.location = "index.php";
                 });
+            });
+        window.$hotelImageInputElement.on('filebatchuploaderror',
+            function(event, data, msg) {
+                console.log("lmfao");
+                console.log(data);
+                console.log(msg);
             });
 
         var saveHotel = function(e) {

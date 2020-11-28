@@ -1,6 +1,6 @@
-<?php include('user.php') ?>
 <!DOCTYPE html>
 <?php
+session_start();
 if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginpage.php');
@@ -206,12 +206,12 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                 <div id="Account" class="tabcontent">
 
                     <div class="signup-form" id="edit_profile">
-                        <form action="user_profile.php" method="post" onSubmit="if (confirm('Confirm changes??')) {
+                        <form action="user_handler.php" method="post" onSubmit="if (confirm('Confirm changes??')) {
                                 } else {
                                     return false;
                                 }
                                 ;">
-                                  <?php include('errors.php'); ?>
+                                  <!-- <?php include('errors.php'); ?> -->
                             <div class="form-group">
                                 <h2>Account Details</h2>
                                 <label for="fname">Username:</label>
@@ -251,7 +251,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                     </div>
 
                     <div class="form-signin" id="change_password">
-                        <form action="loginpage.php" method="post">
+                        <form action="user_handler.php" method="post">
 
                             <!-- Remember to add 'required' field later, currently remove for demo purpose -->
                             <h2>Change Password</h2>

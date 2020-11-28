@@ -151,12 +151,12 @@ USE `sitvago_db`;
 INSERT INTO Role (name, created_at) VALUES("Administrator", now());
 INSERT INTO Role (name, created_at) VALUES("User", now());
 
-INSERT INTO User (first_name, last_name, username, email, phone_number, country, password, billing_address, card_number, role_id, is_confirmed, created_at, updated_at) VALUES("Towkay", NULL, "admin", "admin@sitvago.com", NULL, NULL, NULL, NULL, NULL, (SELECT id from Role WHERE name="administrator"), 1, now(), now());
+INSERT INTO User (first_name, last_name, username, email, phone_number, country, password, billing_address, card_number, role_id, is_confirmed, created_at, updated_at) VALUES("Super Administrator", NULL, "admin", "admin@sitvago.com", NULL, NULL, NULL, NULL, NULL, (SELECT id from Role WHERE name="administrator"), 1, now(), now());
 
-INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("Orchard", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
-INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("Marina Bay", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
-INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("Sentosa", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
-INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("Bugis", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("North", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("South", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("East", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) VALUES("West", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
 
 INSERT INTO RoomCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Deluxe Double Room", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
 INSERT INTO RoomCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Premium Queen Room", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));

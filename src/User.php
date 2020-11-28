@@ -2,6 +2,8 @@
 
 namespace sitvago;
 
+error_reporting(E_ALL); ini_set('display_errors', 1);
+
 class User extends DB
 {
     public function registerUser($first_name, $last_name, $username, $email, $phone_number, $country, $password, $billing_address)
@@ -34,18 +36,35 @@ class User extends DB
 
     public function loginUser($username, $password)
     {
-        $query = "SELECT * FROM user WHERE username=? AND password=?";
+        $query = "SELECT * FROM User WHERE username=? AND password=?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
         $result = $stmt->get_result();
-
         return $result;
     }
 
     public function userNameEmail($username, $email)
     {
-        $user_check_query = "SELECT * FROM user WHERE username='$username' OR email='$email' LIMIT 1";
+        $user_check_query = "SELECT * FROM User WHERE username='$username' OR email='$email' LIMIT 1";
+        $result = mysqli_query($this->conn, $user_check_query);
+        $user = mysqli_fetch_assoc($result);
+
+        return $user;
+    }
+
+    public function checkUserNameExists($username)
+    {
+        $user_check_query = "SELECT User.username FROM User WHERE username='$username'";
+        $result = mysqli_query($this->conn, $user_check_query);
+        $user = mysqli_fetch_assoc($result);
+
+        return $user;
+    }
+
+    public function checkEmailExists($email)
+    {
+        $user_check_query = "SELECT User.email FROM User WHERE email='$email'";
         $result = mysqli_query($this->conn, $user_check_query);
         $user = mysqli_fetch_assoc($result);
 
@@ -64,7 +83,7 @@ class User extends DB
 
     public function updateUser($first_name, $last_name, $email, $phone_number, $country, $billing_address, $username)
     {
-        $sqlQuery = "UPDATE user SET first_name=?, last_name=?, email=?, phone_number=?, country=?, billing_address=?, updated_at=now() WHERE username=?";
+        $sqlQuery = "UPDATE User SET first_name=?, last_name=?, email=?, phone_number=?, country=?, billing_address=?, updated_at=now() WHERE username=?";
         $stmt = $this->conn->prepare($sqlQuery);
         //$stmt = $db->prepare("UPDATE user SET first_name=?, last_name=?, email=?, phone_number=?, country=?, billing_address=?, updated_at=now() WHERE username=?");
 
@@ -77,7 +96,7 @@ class User extends DB
 
     public function updateUserPassword($password_new, $username)
     {
-        $sqlStatement = "UPDATE user SET password=? where username=?";
+        $sqlStatement = "UPDATE User SET password=? where username=?";
         $stmt = $this->conn->prepare($sqlStatement);
         $stmt->bind_param("ss", $password_new, $username);
         $stmt->execute();
