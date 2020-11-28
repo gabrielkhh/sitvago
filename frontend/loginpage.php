@@ -83,10 +83,14 @@ and open the template in the editor.
 
                     <!-- Remember to add 'required' field later, currently remove for demo purpose -->
                     <label for="inputUsername" class="sr-only">Username</label>
-                    <input type="text" id="inputUsername" class="form-control" placeholder="Username"  name="username" autofocus>
+                    <input type="text" id="inputUsername" class="form-control" placeholder="Username"  name="username" required autofocus>
                     <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password">
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
                     <button type="submit" id="submitBtn" name="login_user" class="btn btn-lg btn-primary btn-block">Login</button>
+					<div id="errMsg">
+						<?php if(!empty($_SESSION['errMsg'])) { echo $_SESSION['errMsg']; } ?>
+					</div>
+						<?php unset($_SESSION['errMsg']); ?>
                 </form>
             </div>
             <footer class="mastfoot mt-auto">

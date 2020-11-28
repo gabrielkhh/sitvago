@@ -1,6 +1,11 @@
+
+<?php include('user_handler.php') ?>
 <?php
-    session_start();
+if (isset($_SESSION['errMsgreg'])) {
+    $errors = ($_SESSION['errMsgreg']);
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -125,7 +130,16 @@
     <body>
         <div class="signup-form">
             <form action="user_handler.php" method="post">
-                <!-- <?php include('errors.php'); ?> -->
+			
+				<?php foreach ($errors as $error): ?>
+				
+					<p><?php echo $error ?></p>
+					
+				<?php endforeach ?>
+			
+			
+			
+				
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
                     <h2>Register</h2>

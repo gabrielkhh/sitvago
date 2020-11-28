@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <?php
+require '../vendor/autoload.php';
+use sitvago\Booking;
+
 session_start();
 if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginpage.php');
 } else {
+	$userID = ($_SESSION['userID']);
     $username = ($_SESSION['username']);
     $first_name = ($_SESSION['first_name']);
     $last_name = ($_SESSION['last_name']);
@@ -12,6 +16,20 @@ if (!isset($_SESSION['username'])) {
     $phone_number = ($_SESSION['phone_number']);
     $country = ($_SESSION['country']);
     $billing_address = ($_SESSION['billing_address']);
+}
+
+//display error details for update user profile
+if (isset($_SESSION['errorsDetails'])) {
+    $errorsDetails = ($_SESSION['errorsDetails']);
+}else{
+	$errorsDetails = "";
+}
+
+//display error details for change password
+if (isset($_SESSION['errorsPW'])) {
+    $errorsPW = ($_SESSION['errorsPW']);
+}else{
+	$errorsPW = "";
 }
 
 if (isset($_GET['logout'])) {
@@ -27,6 +45,9 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
     session_destroy();   // destroy session data  
 }
 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+
+$bookings = new Booking();
+$results = $bookings->getBookings($userID);
 ?>
 <html>
     <head>
@@ -78,7 +99,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                 }
             }
             .jumbotron{
-                background: url(../images/home_cover.jpg) no-repeat center center fixed;
+                background: url(images/home_cover.jpg) no-repeat center center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 background-size: cover;
@@ -163,6 +184,10 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
             button:hover {
                 opacity: 0.8;
             }
+			
+			.card{
+				padding: 40px;
+			}
 
 
 
@@ -211,7 +236,13 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                                     return false;
                                 }
                                 ;">
-                                  <!-- <?php include('errors.php'); ?> -->
+							<?php if (is_array($errorsDetails)): ?>
+								<?php foreach ($errorsDetails as $error): ?>
+				
+								<p><?php echo $error ?></p>
+					
+								<?php endforeach ?>
+							<?php  endif ?>
                             <div class="form-group">
                                 <h2>Account Details</h2>
                                 <label for="fname">Username:</label>
@@ -252,11 +283,21 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 
                     <div class="form-signin" id="change_password">
                         <form action="user_handler.php" method="post">
+						
+						<?php if (is_array($errorsPW)): ?>
+								<?php foreach ($errorsPW as $error): ?>
+				
+								<p><?php echo $error ?></p>
+					
+								<?php endforeach ?>
+							<?php  endif ?>
+							
+							
 
                             <!-- Remember to add 'required' field later, currently remove for demo purpose -->
                             <h2>Change Password</h2>
                             <label for="inputUsername" class="sr-only">Username</label>
-                            <input type="text" id="inputUsername" class="form-control" placeholder="Username"  name="username" autofocus>
+                            <input type="text" class="form-control" name="username" id="username" value = "<?php echo $username ?>" readonly>
 
                             <label for="inputPassword" class="sr-only">Current Password</label>
                             <input type="password" id="inputPassword" class="form-control" placeholder="Current Password" name="password">
@@ -274,11 +315,22 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                 </div>
 
                 <div id="Bookings" class="tabcontent">
-                    <h3>Bookings</h3>
-                    <p>Bookings is the capital of France.</p> 
-                </div>
+					<?php foreach ($results as $row) : ?>
+						<div class="card">
+						
+						  <h5 class="card-header">Hotel Name: <?= $row['name'] ?></h5>
+						  <div class="card-body">
+							<p class="card-text">Transaction ID: <?= $row['id'] ?></p>
+							<p class="card-title">Room Type: <?= $row['room_type'] ?></p>
+							<p class="card-text">Amount Paid: <?= $row['price'] ?></p>
+							<p class="card-text">Check-in Date: <?= $row['check_in'] ?></p>
+							<p class="card-text">Check-out Date: <?= $row['check_out'] ?></p>
+							<p class="card-text">Booking Date: <?= $row['created_at'] ?></p>
+						  </div>
+						</div>
+					<?php endforeach; ?>
 
-            </div>
+				</div>
         </main>
 
         <footer class="container">
