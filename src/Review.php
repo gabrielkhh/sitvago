@@ -74,8 +74,7 @@ class Review extends DB
         $response = [];
         $success = true;
         $preparedSQL = "UPDATE Review SET title=?, rating=?, content=?,
-                 geo_id=(SELECT GeoLocation.id FROM GeoLocation WHERE GeoLocation.name=?), updated_at=now(), 
-                  WHERE Review.hotel_id=?";
+                 updated_at=now(), WHERE Review.hotel_id=?";
 
         if ($this->conn->connect_error) {
             $errorMsg = "Connection failed: " . $this->conn->connect_error;
