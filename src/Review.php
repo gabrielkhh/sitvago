@@ -33,7 +33,7 @@ class Review extends DB
         $resultReview = mysqli_query($this->conn, $SQL);
         $rowReview = mysqli_fetch_assoc($resultReview);
 
-        return $rowHotel;
+        return $rowReview;
     }
 
     public function addReview($userID, $hotelID, $title, $rating, $content)
@@ -102,11 +102,11 @@ class Review extends DB
         return $response;
     }
 
-    public function deleteReview($hotelID, $hotelName)
+    public function deleteReview($reviewID)
     {
         $results = [];
         $success = true;
-        $preparedSQL = "DELETE FROM Hotel WHERE id=?";
+        $preparedSQL = "DELETE FROM Review WHERE id=?";
 
 
         if ($this->conn->connect_error) {
@@ -117,7 +117,7 @@ class Review extends DB
             $response['error'] = $errorMsg;
         } else {
             $stmt = $this->conn->prepare($preparedSQL);
-            $stmt->bind_param("i", $hotelID);
+            $stmt->bind_param("i", $reviewID);
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
                 $response['success'] = $success;
@@ -125,7 +125,7 @@ class Review extends DB
                 $response['error'] = $errorMsg;
             } else {
                 $response['success'] = $success;
-                $response['message'] = $hotelName . " has been successfully deleted from the database.";
+                $response['message'] =  "Review has been successfully deleted from the database.";
                 $response['error'] = "";
             }
             $stmt->close();
