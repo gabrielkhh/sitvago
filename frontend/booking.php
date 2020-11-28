@@ -3,12 +3,17 @@ require '../vendor/autoload.php';
 
 use sitvago\Hotel;
 
-$hotelObj = new Hotel();
-$roomCategoriesResults = $hotelObj->getRoomCategories();
-//$hotelSelected = $hotelObj->getSingleHotel();
-//$roomPrice = $hotelObj->getRoomCategoryRate($hotelSelected,$roomCategoriesResults);
-//$roomDescription = $hotelObj->getRoomDescription();
+$id = $_GET['key'];
 
+$hotelObj = new Hotel();
+$sss = new Hotel();
+$roomCategoriesResults = $hotelObj->getRoomCategories();
+$hotelSelected = $hotelObj->getHotelInfoForBooking($id);
+$hotelImagesSelected = $hotelObj->getHotelImagesForBooking($id);
+$hotelPrices = $hotelObj->getHotelPricesForBooking($id);
+// $roomPrice = $hotelObj->getRoomCategoryRate($hotelSelected,$roomCategoriesResults);
+//$roomDescription = $hotelObj->getRoomDescription();
+$counterImage = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,15 +71,14 @@ $roomCategoriesResults = $hotelObj->getRoomCategories();
                     <div class="row">
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="images/rooms/Barrackhotel.jpg" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/rooms/Barrackhotel2.jpg" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/rooms/Barrackhotel3.jpg" class="d-block w-100" alt="...">
-                                </div>
+                                <?php foreach ($hotelImagesSelected as $rowImage) : ?>
+                                    <div class="carousel-item <?php if ($counterImage == 0) {
+                                                                    echo ' active';
+                                                                    $counterImage++;
+                                                                } ?>">
+                                        <img src="<?= $rowImage['secure_url'] ?>" class="d-block w-100" alt="...">
+                                    </div>
+                                <?php endforeach; ?>
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -123,34 +127,36 @@ $roomCategoriesResults = $hotelObj->getRoomCategories();
                 </div>
                 <div class="col-lg-4 sidebar ftco-animate pl-md-5">
                     <!--div class="sidebar-box ftco-animate">-->
-                        <h3 class="hotel_selected">Barrack Hotel Rooms</h3>                       
-                        <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form" >
-                            <div class="form-group">
-                                <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>                                 
-                            </div>                       
-                            <div class="form-group">
-                                <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control" id="TypeOfRooms" name="TypeOfRooms" required>
-                                    <option value="" selected disabled>Choose A Room Type</option>
-                                    <?php foreach ($roomCategoriesResults as $row) : ?>
-                                        <option value="<?= $row['category_name'] ?>"><?= $row['category_name'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
-                                   <span id="error"></span>
-                            </div>
-                        </form>
-                        <p>
-                            <h3 id="price">For only $99.99 per night!</h3>
-                        </p>
-                        <p>Dynamic DESCRIPTION!</p>
+                    <h3 class="hotel_selected"><?= $hotelSelected['name'] ?></h3>
+                    <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="TypeOfRooms" name="TypeOfRooms" required>
+                                <option value="disabled" selected disabled>Choose A Room Type</option>
+                                <?php foreach ($roomCategoriesResults as $row) : ?>
+                                    <option id="<?= $row['id'] ?>" value="<?= $row['category_name'] ?>"><?= $row['category_name'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden>
+                            <input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden>
+                            <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
+                            <span id="error"></span>
+                        </div>
+                    </form>
+                    <p>
+                        <h3 id="price"></h3>
+                    </p>
+                    <div id="descriptionArea"></div>
                     <!--</div>-->
                 </div>
- 
+
             </div>
         </div>
     </section>
@@ -173,7 +179,22 @@ $roomCategoriesResults = $hotelObj->getRoomCategories();
     <script src="js/aos.js"></script>
     <script src="js/scrollax.min.js"></script>
     <script src="js/main.js"></script>
-
 </body>
 
 </html>
+<script>
+    var hotelDescriptionText = decodeURI("<?= $hotelSelected['description'] ?>");
+    document.getElementById("descriptionArea").innerHTML = hotelDescriptionText;
+
+    var pricesData = new Object();
+    <?php foreach ($hotelPrices as $prices) : ?>
+        <?php $amtIn2DP = number_format((float)$prices['price_per_night'], 2, '.', ''); ?>
+        pricesData["<?= $prices['room_category_id'] ?>"] = "<?= $amtIn2DP ?>";
+    <?php endforeach; ?>
+
+    $('select').on('change', function() {
+        var id = $(this).children(":selected").attr("id");
+        document.getElementById("price").innerHTML = "SGD$" + pricesData[id] + " per night";
+        document.getElementById("amountPN").value = pricesData[id];
+    });
+</script>

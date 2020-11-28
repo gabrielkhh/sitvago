@@ -54,6 +54,55 @@ class Hotel extends DB
         return $rowHotel;
     }
 
+    public function getHotelInfoForBooking($hotelID)
+    {
+        $results = [];
+        $success = true;
+        $SQL = "SELECT Hotel.id, Hotel.name, Hotel.description, Hotel.rating, Hotel.geo_id, GeoLocation.name AS geo_name 
+        FROM Hotel LEFT JOIN GeoLocation ON Hotel.geo_id = GeoLocation.id WHERE Hotel.id=" . $hotelID . ";";
+
+        $resultHotel = mysqli_query($this->conn, $SQL);
+        $rowHotel = mysqli_fetch_assoc($resultHotel);
+
+        return $rowHotel;
+    }
+
+    public function getHotelImagesForBooking($hotelID)
+    {
+        $results = [];
+        $success = true;
+        $SQL = "SELECT HotelImage.secure_url, HotelImage.original_src, HotelImage.width, HotelImage.height, HotelImage.is_thumbnail 
+        FROM Hotel LEFT JOIN HotelImage ON HotelImage.hotel_id = Hotel.id WHERE Hotel.id=" . $hotelID . ";";
+
+        $resultsSQL = mysqli_query($this->conn, $SQL);
+
+        if (mysqli_num_rows($resultsSQL) > 0) {
+            while ($row = mysqli_fetch_assoc($resultsSQL)) {
+                $results[] = $row;
+            }
+        }
+
+        return $results;
+    }
+
+    public function getHotelPricesForBooking($hotelID)
+    {
+        $results = [];
+        $success = true;
+        $SQL = "SELECT HotelRoomCategory.price_per_night, HotelRoomCategory.room_category_id 
+        FROM Hotel LEFT JOIN HotelRoomCategory ON HotelRoomCategory.hotel_id = Hotel.id WHERE Hotel.id=" . $hotelID . ";";
+
+        $resultsSQL = mysqli_query($this->conn, $SQL);
+
+        if (mysqli_num_rows($resultsSQL) > 0) {
+            while ($row = mysqli_fetch_assoc($resultsSQL)) {
+                $results[] = $row;
+            }
+        }
+
+        return $results;
+    }
+
     public function addHotel($hotelName, $hotelDescription, $rating, $userID, $hotelGeoLocation, $amounts)
     {
         $response = [];
@@ -85,7 +134,7 @@ class Hotel extends DB
                 $response['insertedName'] = $hotelName;
                 foreach ($amounts as $key => $val) {
                     $sql = "INSERT INTO HotelRoomCategory (hotel_id, room_category_id, availability, price_per_night, created_at, created_by, updated_at, updated_by)
-                    VALUES (" . $newHotelID . ", (SELECT rc.id FROM RoomCategory rc WHERE rc.category_name='" . $key . "'), 1, " . $val . ", now(), " . $userID . ", now(), " . $userID .")";
+                    VALUES (" . $newHotelID . ", (SELECT rc.id FROM RoomCategory rc WHERE rc.category_name='" . $key . "'), 1, " . $val . ", now(), " . $userID . ", now(), " . $userID . ")";
                     mysqli_query($this->conn, $sql)
                         or die(mysqli_error($this->conn));
                 }
