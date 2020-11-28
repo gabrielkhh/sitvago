@@ -13,6 +13,11 @@ body {
   font-size: 17px;
   padding: 8px;
   margin:40px;
+  background-image:url("../images/loginpage.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
 }
 
 * {
@@ -48,12 +53,13 @@ body {
   padding: 0 16px;
 }
 
-.container {
+.confirm-box {
   background-color: #F8F8FF;
   padding: 5px 20px 15px 20px;
   border: 1px solid lightgrey;
   border-radius: 3px;
 }
+
 
 input[type=text] {
   width: 100%;
@@ -87,7 +93,7 @@ label {
 }
 
 .btn:hover {
-  background-color: #45a049;
+  background-color: #F08080;
 }
 
 a {
@@ -118,14 +124,6 @@ span.price {
   }
 }
 
-
-
-
-
-/**
- * The CSS shown here will not be introduced in the Quickstart guide, but shows
- * how you can use CSS to style your Element's container.
- */
  .StripeElement {
     box-sizing: border-box;
   
@@ -152,4 +150,13 @@ span.price {
   
   .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
+  }
+  
+  .price{
+      text-align:center;
+  }
+  
+  .notice{
+      color:white;
+      
   }

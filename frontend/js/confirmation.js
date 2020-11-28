@@ -22,10 +22,13 @@ function enableForm() {
     for (var i=0; i<all_inputs.length; i++)
     {
         document.getElementById(all_inputs[i].id).disabled = false;
+        /*
         if (all_inputs[i].id ==="hotel-name")
         {
             document.getElementById(all_inputs[i].id).disabled = true;
         }
+          
+        */
     }
 }
 
