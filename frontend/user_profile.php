@@ -318,9 +318,10 @@ $results = $bookings->getBookings($userID);
 					<?php foreach ($results as $row) : ?>
 						<div class="card">
 						
-						  <h5 class="card-header">Hotel Name: <?= $row['name'] ?></h5>
+						  <h5 class="card-header">Hotel Name: <?= $row['hotel_name'] ?></h5>
 						  <div class="card-body">
-							<p class="card-text">Transaction ID: <?= $row['id'] ?></p>
+							<p class="card-text">Transaction ID: <?= $row['stripe_payment_id'] ?></p>
+							<p class="card-text">Booking ID: <?= $row['id'] ?></p>
 							<p class="card-title">Room Type: <?= $row['room_type'] ?></p>
 							<p class="card-text">Amount Paid: <?= $row['price'] ?></p>
 							<p class="card-text">Check-in Date: <?= $row['check_in'] ?></p>
