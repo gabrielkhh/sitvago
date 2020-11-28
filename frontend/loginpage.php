@@ -72,6 +72,7 @@ and open the template in the editor.
                 <div class="inner">
                     <nav class="nav nav-masthead justify-content-center">
                         <a class="nav-link active" href="aboutus.php">About Us</a>
+						<a class="nav-link active" href="home.php">Home</a>
                     </nav>
                 </div>
             </header>
