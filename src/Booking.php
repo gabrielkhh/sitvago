@@ -41,7 +41,7 @@ class Booking extends DB
     }
     //user make a new booking
     public function addBooking($userID, $hotelName, $roomCategoryName, $price, $check_in, $check_out)
-    {
+    {  
         $response = [];
         $success = true;
         $preparedSQL = "INSERT INTO Booking (hotel_id, user_id, room_category_id, price, check_in, check_out, created_at)

@@ -1,4 +1,6 @@
-<?php include('user.php') ?>
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -70,7 +72,7 @@ and open the template in the editor.
             </header>
 
             <div class="form-signin">
-                <form action="loginpage.php" method="post">
+                <form action="user_handler.php" method="post">
                     <img class="mb-4" src="images/logo_nobackground.png" alt="mainpagelogo" width="300" height="110">
 
                     <p> Login to access our site or <a href="register.php" class="font-weight-bolder" >Register</a> with us </p>
