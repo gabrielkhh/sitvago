@@ -32,3 +32,7 @@ footer {
 footer p {
   margin-bottom: .25rem;
 }
+
+.card-body{
+    height:13rem;
+}
