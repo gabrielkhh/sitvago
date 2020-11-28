@@ -126,14 +126,16 @@ and open the template in the editor.
     } else {
         console.error(counterGeo.error);
     }
+    
     let counterBooking = new CountUp('bookingCounter', 0, bookingNumbers);
-    if (!counter.error) {
+    if (!counterBooking.error) {
         counterBooking.start();
     } else {
         console.error(counterBooking.error);
     }
+    
     let counterReview = new CountUp('reviewCounter', 0, reviewNumbers);
-    if (!counter.error) {
+    if (!counterReview.error) {
         counterReview.start();
     } else {
         console.error(counterReview.error);

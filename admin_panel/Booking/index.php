@@ -4,7 +4,7 @@ require '../../vendor/autoload.php';
 use sitvago\Booking;
 
 $booking = new Booking();
-$results = $booking->getBooking();
+$results = $booking->getBookings();
 ?>
 <!DOCTYPE html>
 <!--
