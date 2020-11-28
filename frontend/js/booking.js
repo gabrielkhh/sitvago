@@ -43,10 +43,9 @@ $(document).ready(function()
 
 
  //Remove error message after 3sec cotinously
-var myError = setInterval(removeErrorMsg,3000);
+var myError = setInterval(removeErrorMsg,6000);
 function removeErrorMsg(){    
     //Always checking for error message
-    console.log(messages.length);
     if(messages.length >0){
         messages =[];
         removeElement('error');
@@ -73,7 +72,6 @@ function removeErrorMsg(){
             
             //If error messages found prevent submission.
             if (messages.length >0){
-                console.log(messages.length);
                 addElement("book_btn",'span','error',messages[0]);
                 e.preventDefault(); 
                 //errorElement.innerText =messages.join(', ');            
@@ -113,10 +111,10 @@ function calenderHandler1(){
                     //errorElement.innerText =messages.join(', ')
                     instance.clear();
                     addElement("book_btn",'span','error',messages[0]);
-                  
+
                 }
             }
-            
+
         }
         /*
         disable:[
@@ -175,12 +173,10 @@ function addElement(parentId, elementTag, elementId, html) {
     newElement.setAttribute('id', elementId);
     newElement.innerText = html;
     p.insertAdjacentElement('afterend',newElement);
-    //p.appendChild(newElement);
-    //document.body.appendChild(p);
 }
 
+// Removes an element of child from the document
 function removeElement(elementId) {
-    // Removes an element from the document
     var element = document.getElementById(elementId);
     element.parentNode.removeChild(element);
 }
