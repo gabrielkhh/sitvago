@@ -90,31 +90,36 @@ $counterImage = 0;
                             </a>
                         </div>
                         <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
-                            <h2 class="mb-4"></h2>
                             <div class="container icon-containers">
                                 <div class="row icon-row">
-                                    <div class="col-sm-2 col-icon">
-                                        <i class='fas fa-glass-martini-alt'></i>
+                                    <div class="col-sm col-icon">
+                                        <p></p>
+                                        <i class='fas fa-glass-martini-alt my-icon'></i>
                                         <p>Drinking<br>Lounge.</p>
                                     </div>
-                                    <div class="col-sm-2 col-icon">
-                                        <i class='fas fa-bath'> </i>
+                                    <div class="col-sm col-icon">
+                                        <p></p>
+                                        <i class='fas fa-bath my-icon'> </i>
                                         <p>Relaxing<br>Bathtub.</p>
                                     </div>
-                                    <div class="col-sm-2 col-icon">
-                                        <i class="fas fa-smoking"></i>
+                                    <div class="col-sm col-icon">
+                                        <p></p>
+                                        <i class="fas fa-smoking my-icon"></i>
                                         <p>Smoking<br>Room.</p>
                                     </div>
-                                    <div class="col-sm-2 col-icon">
-                                        <i class='fas fa-utensils'></i>
+                                    <div class="col-sm col-icon">
+                                        <p></p>
+                                        <i class='fas fa-utensils my-icon'></i>
                                         <p>Breakfast<br>Buffet.</p>
                                     </div>
-                                    <div class="col-sm-2 col-icon">
-                                        <i class='fas fa-wifi'></i>
+                                    <div class="col-sm col-icon">
+                                        <p></p>
+                                        <i class='fas fa-wifi my-icon'></i>
                                         <p>Free<br>Wi-Fi.</p>
                                     </div>
-                                    <div class="col-sm-2 col-icon">
-                                        <i class="fas fa-dumbbell"></i>
+                                    <div class="col-sm col-icon">
+                                        <p></p>
+                                        <i class="fas fa-dumbbell my-icon"></i>
                                         <p>Free<br>Gym.</p>
                                     </div>
                                 </div>
@@ -153,8 +158,11 @@ $counterImage = 0;
                     <p>
                         <h3 id="price"></h3>
                     </p>
-                    <div id="descriptionArea"></div>
-                    <!--</div>-->
+                    <div id="descriptionArea">TEST</div>
+                    <hr/>
+                    <div id="review">
+                        THROW THE CONTENT HERE WILL EDIT LATER HERE FOR REVIEW
+                    </div>
                 </div>
 
             </div>
@@ -165,7 +173,7 @@ $counterImage = 0;
             <p class="font-italic text-muted mb-0">&copy; Sitvago's 2020 Copyright</p>
         </div>
     </footer>
-
+    
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -179,6 +187,7 @@ $counterImage = 0;
     <script src="js/aos.js"></script>
     <script src="js/scrollax.min.js"></script>
     <script src="js/main.js"></script>
+
 </body>
 
 </html>
