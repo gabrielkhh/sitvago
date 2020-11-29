@@ -285,5 +285,23 @@ class Hotel extends DB
         return $results;
     }
 
+    public function getExistingHotelRoomCategories($hotelID)
+    {
+        $results = [];
+        $sql = "SELECT HotelRoomCategory.price_per_night, RoomCategory.category_name, HotelRoomCategory.created_at, HotelRoomCategory.updated_at 
+        FROM HotelRoomCategory LEFT JOIN RoomCategory ON HotelRoomCategory.room_category_id = RoomCategory.id 
+        WHERE HotelRoomCategory.hotel_id = " . $hotelID . ";";
+
+        $resultsSQL = mysqli_query($this->conn, $sql);
+
+        if (mysqli_num_rows($resultsSQL) > 0) {
+            while ($row = mysqli_fetch_assoc($resultsSQL)) {
+                $results[] = $row;
+            }
+        }
+
+        return $results;
+    }
+
     //INSERT INTO HotelRoomCategory (hotel_id, room_category_id, availability, price_per_night, created_at) VALUES (2, 1, 1, 210.00, now());
 }

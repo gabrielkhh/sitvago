@@ -10,6 +10,7 @@ $hotel = new Hotel();
 $geo = new GeoLocation();
 $resultsGeo = $geo->getGeoLocations();
 $rowHotel = $hotel->getSingleHotel($id);
+$resultsRoomCat = $hotel->getExistingHotelRoomCategories($id);
 ?>
 <!DOCTYPE html>
 <!--
@@ -96,6 +97,25 @@ and open the template in the editor.
                                             ?>
                                             CKEDITOR.instances['hotelDescription'].setData(decodedDataDescription);
                                         </script>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="hotelImages">Hotel Photos</label>
+                                        <div class="forFileUploads">
+                                            <input id="fileInput" name="fileInput[]" type="file" class="file input-group-lg" multiple />
+                                        </div>
+                                    </div>
+                                    <div class="form-group price-room-category">
+                                        <?php foreach ($resultsRoomCat as $rowRoomCat) : ?>
+                                            <div class="row col-md-4">
+                                                <label for="hotelImages">Set price per night for <?= $rowRoomCat['category_name'] ?></label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">$</span>
+                                                    </div>
+                                                    <input class="amount-class" type="number" step=".01" name="<?= $rowRoomCat['category_name'] ?>" value="<?= $rowRoomCat['price_per_night'] ?>" class="form-control" aria-label="Amount">
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
                                 </form>
                                 <div class="float-right">
