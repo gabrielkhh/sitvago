@@ -26,6 +26,7 @@ and open the template in the editor.
         <script src="https://kit.fontawesome.com/ebd40a1317.js" crossorigin="anonymous"></script>
         <script defer src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/dayjs.min.js" integrity="sha512-C2m821NxMpJ4Df47O4P/17VPqt0yiK10UmGl59/e5ynRRYiCSBvy0KHJjhp2XIjUJreuR+y3SIhVyiVilhCmcQ==" crossorigin="anonymous"></script>
         <script defer src="/js/main.js"></script>
     </head>
 
@@ -54,11 +55,11 @@ and open the template in the editor.
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th scope="col">Booking ID</th>
-                                                <th scope="col">User</th>
+                                                <th scope="col">Username</th>
+                                                <th scope="col">Customer Email</th>
                                                 <th scope="col">Hotel name</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Transaction IDt</th>
-                                                <th scope="col">Created At</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col">Created</th>
                                                 <th>&nbsp;</th>
                                             </tr>
                                         </thead>
@@ -69,12 +70,12 @@ and open the template in the editor.
                                             </script>
                                             <tr>
                                                 <td><?= $row['id'] ?></td>
-                                                <td><?= $row['user_id'] ?></td>
-                                                <td><?= $row['hotel_id'] ?></td>
+                                                <td><?= $row['username'] ?></td>
+                                                <td><?= $row['email'] ?></td>
+                                                <td><?= $row['hotel_name'] ?></td>
                                                 <td><?= $row['price'] ?></td>
-                                                <td><?= $row['stripe_payment_id'] ?></td>
-                                                <td><?= $row['created_at'] ?></td>
-                                                <td><a role="button" class="btn btn-primary updateBtn" href="update.php?key=<?= $row['id'] ?>" value="<?= $row['id'] ?>">Update</a></td>
+                                                <td id="createdDate<?= $row['id'] ?>"><script>document.getElementById('createdDate<?= $row['id'] ?>').innerHTML = createdAt;</script></td>
+                                                <td><a role="button" class="btn btn-primary updateBtn" href="update.php?key=<?= $row['id'] ?>" value="<?= $row['id'] ?>">View</a></td>
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>

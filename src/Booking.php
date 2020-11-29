@@ -8,10 +8,10 @@ class Booking extends DB
     public function getBookingsAdmin()
     {
         $results = [];
-        $sql = "SELECT Booking.id, Booking.stripe_payment_id, Hotel.name AS hotel_name, RoomCategory.category_name AS room_type, 
+        $sql = "SELECT Booking.id, User.username, User.email, Booking.stripe_payment_id, Hotel.name AS hotel_name, RoomCategory.category_name AS room_type, 
             Booking.price, Booking.check_in, Booking.check_out, Booking.created_at FROM Booking 
             LEFT JOIN Hotel ON Booking.hotel_id = Hotel.id LEFT JOIN RoomCategory
-            ON Booking.room_category_id = RoomCategory.id";
+            ON Booking.room_category_id = RoomCategory.id LEFT JOIN User ON Booking.user_id = User.id";
 
         $resultsSQL = mysqli_query($this->conn, $sql);
 
