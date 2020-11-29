@@ -72,7 +72,7 @@ class Hotel extends DB
     {
         $results = [];
         $success = true;
-        $SQL = "SELECT HotelImage.secure_url, HotelImage.original_src, HotelImage.width, HotelImage.height, HotelImage.is_thumbnail 
+        $SQL = "SELECT HotelImage.id, HotelImage.secure_url, HotelImage.original_src, HotelImage.width, HotelImage.height, HotelImage.is_thumbnail 
         FROM Hotel LEFT JOIN HotelImage ON HotelImage.hotel_id = Hotel.id WHERE Hotel.id=" . $hotelID . ";";
 
         $resultsSQL = mysqli_query($this->conn, $SQL);
@@ -208,6 +208,38 @@ class Hotel extends DB
             } else {
                 $response['success'] = $success;
                 $response['message'] = $hotelName . " has been successfully deleted from the database.";
+                $response['error'] = "";
+            }
+            $stmt->close();
+        }
+        $this->conn->close();
+        return $response;
+    }
+
+    public function deleteHotelImage($imageID)
+    {
+        $results = [];
+        $success = true;
+        $preparedSQL = "DELETE FROM HotelImage WHERE id=?";
+
+
+        if ($this->conn->connect_error) {
+            $errorMsg = "Connection failed: " . $this->conn->connect_error;
+            $success = false;
+            $response['success'] = $success;
+            $response['message'] = "Connection Error";
+            $response['error'] = $errorMsg;
+        } else {
+            $stmt = $this->conn->prepare($preparedSQL);
+            $stmt->bind_param("i", $imageID);
+            if (!$stmt->execute()) {
+                $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
+                $response['success'] = $success;
+                $response['message'] = "";
+                $response['error'] = $errorMsg;
+            } else {
+                $response['success'] = $success;
+                $response['message'] = "Image has been removed from the database";
                 $response['error'] = "";
             }
             $stmt->close();

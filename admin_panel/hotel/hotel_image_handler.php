@@ -21,8 +21,7 @@ $results = [];
 $files = array();
 
 if (empty($_FILES['fileInput'])) {
-    //Sibei jialat, got no image coming from the frontend.
-    echo "sibei jialat";
+    //User did not add any files to upload
 } else {
     $totalFiles = count($_FILES['fileInput']['name']); // multiple files
 

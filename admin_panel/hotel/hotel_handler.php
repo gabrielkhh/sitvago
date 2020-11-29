@@ -45,6 +45,15 @@ else if ($dataFromClient['option'] === 'deleteHotel')
     $result = $hotel->deleteHotel($hotelID, $hotelName);
     echo json_encode($result);
 }
+else if ($dataFromClient['option'] === 'deleteHotelImage')
+{
+    $hotel = new Hotel();
+ 
+    $imageID = $dataFromClient['id'];
+ 
+    $result = $hotel->deleteHotelImage($imageID);
+    echo json_encode($result);
+}
 
  
  

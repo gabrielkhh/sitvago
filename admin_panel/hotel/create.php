@@ -143,7 +143,7 @@ and open the template in the editor.
 
         var footerTemplate = '<div class="file-thumbnail-footer" style ="height:94px">\n' +
             '  <input class="kv-input kv-new form-control input-sm form-control-sm text-center {TAG_CSS_NEW}" value="{caption}" placeholder="Enter caption..." readonly>\n' +
-            '  <input class="kv-input kv-init form-control input-sm form-control-sm text-center {TAG_CSS_INIT}" value="{TAG_VALUE}" placeholder="Enter Original Source URL">\n' +
+            '  <input class="kv-input kv-init form-control input-sm form-control-sm text-center {TAG_CSS_INIT}" value="{TAG_VALUE}" placeholder="Enter Citation Source URL">\n' +
             '   <div class="small" style="margin:15px 0 2px 0">{size}</div> {progress}\n{indicator}\n{actions}\n' +
             '</div>';
 
