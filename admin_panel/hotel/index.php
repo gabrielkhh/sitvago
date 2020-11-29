@@ -54,6 +54,7 @@ and open the template in the editor.
                                 <table class="table table-striped table-dark">
                                     <thead class="thead-dark">
                                         <tr>
+                                            <th>&nbsp;</th>
                                             <th scope="col">Hotel Name</th>
                                             <th scope="col">Area</th>
                                             <th scope="col">Created By</th>
@@ -64,6 +65,7 @@ and open the template in the editor.
                                     <tbody id="hotelTableBody" class="">
                                         <?php foreach ($results as $row) : ?>
                                             <tr>
+                                                <td><img src="<?= $row['secure_url'] ?>" alt="Hotel Image" width="180" height="100"></td>
                                                 <td><?= $row['name'] ?></td>
                                                 <td><?= $row['area_name'] ?></td>
                                                 <td><?= $row['created_by'] ?></td>
