@@ -38,7 +38,7 @@ if (empty($_FILES['fileInput'])) {
         $height = $files['imgCloudinaryData']['height'];
         $imgExtension = $files['imgCloudinaryData']['format'];
 
-        if ($i == 0)
+        if ($i === 0)
         {
             $imgIsThumbnail = 1;
         }

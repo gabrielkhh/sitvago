@@ -7,9 +7,10 @@ class Hotel extends DB
     public function getHotels()
     {
         $results = [];
-        $sql = "SELECT Hotel.id, Hotel.name, Hotel.description, Hotel.rating, Hotel.created_at, 
+        $sql = "SELECT Hotel.id, Hotel.name, Hotel.description, Hotel.rating, HotelImage.secure_url, Hotel.created_at, 
         c.first_name AS created_by, Hotel.updated_at, u.first_name AS updated_by, GeoLocation.name AS area_name 
-        FROM Hotel LEFT JOIN GeoLocation ON Hotel.geo_id = GeoLocation.id LEFT JOIN User c ON Hotel.created_by = c.id 
+        FROM Hotel LEFT JOIN GeoLocation ON Hotel.geo_id = GeoLocation.id LEFT JOIN HotelImage ON HotelImage.hotel_id = Hotel.id 
+        AND HotelImage.is_thumbnail = 1 LEFT JOIN User c ON Hotel.created_by = c.id 
         LEFT JOIN User u ON Hotel.updated_by = u.id;";
 
         $resultsSQL = mysqli_query($this->conn, $sql);
