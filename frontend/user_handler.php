@@ -14,7 +14,7 @@ session_start();
 // $country = "";
 // $billing_address = "";
 // $phone_number = "";
-// $role_id = "";
+// $role_name = "";
 $redirect = "";
 // $password = "";
 $errors = array();
@@ -111,7 +111,7 @@ if (isset($_POST['reg_user'])) {
         $_SESSION['username'] = $username;
         
         # Instantiate the client.
-        $mg = Mailgun::create($_SERVER['mailgun_api_key']);
+        /*$mg = Mailgun::create($_SERVER['mailgun_api_key']);
         // Now, compose and send your message.
         // $mg->messages()->send($domain, $params);
         $mg->messages()->send('mg.sitvago.com', [
@@ -119,7 +119,7 @@ if (isset($_POST['reg_user'])) {
             'to'      => 'freezingheat97@gmail.com',
             'subject' => 'Thank you for signing up with us!',
             'html'    => 'We hope you will have a great time!'
-        ]);
+        ]);*/
         $Message = "Registration successful! Please login from the home page.";
 			
         header("location: home.php?Message=" .urlencode($Message));
@@ -127,11 +127,7 @@ if (isset($_POST['reg_user'])) {
         
 		$_SESSION['errMsgreg'] = $errors;
 		header('location: register.php');
-		//if (count($errors)>0){
-			//foreach ($errors as $error):
-				//$_SESSION['errMsgreg'] = $error;
-			//endforeach;
-		//}
+
 		
     }
 }
@@ -160,7 +156,7 @@ if (isset($_POST['login_user'])) {
 
             $_SESSION['username'] = $UserData['username'];
             $_SESSION['userID'] = $UserData['id'];
-            $_SESSION['role_id'] = $UserData['role_id'];
+            $_SESSION['role_name'] = $UserData['role_name'];
             $_SESSION['first_name'] = $UserData['first_name'];
             $_SESSION['last_name'] = $UserData['last_name'];
             $_SESSION['email'] = $UserData['email'];
@@ -168,10 +164,9 @@ if (isset($_POST['login_user'])) {
             $_SESSION['country'] = $UserData['country'];
             $_SESSION['billing_address'] = $UserData['billing_address'];
 
-            $_SESSION['success'] = "You are now logged in";
-            if ($UserData['role_id'] == 1) {
-                $redirect = 'home.php';
-            } else if ($UserData['role_id'] == 2) {
+            if ($UserData['role_name'] == "Administrator") {
+                $redirect = 'https://admin.sitvago.com';
+            } else if ($UserData['role_name'] == "User") {
 
                 $redirect = 'home.php';
             }
