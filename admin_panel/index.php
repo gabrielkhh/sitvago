@@ -82,7 +82,7 @@ and open the template in the editor.
                         <div class="card-header text-center">Total number of reviews</div>
                         <div class="card-body text-center">
                             <h1 id="reviewCounter" class="card-title text-center">Number</h5>
-                                <a href="Review/index.php" class="btn btn-primary">View Reviews</a>
+                                <a href="review/index.php" class="btn btn-primary">View Reviews</a>
                         </div>
                     </div>
                 </div>
