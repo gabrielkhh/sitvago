@@ -45,9 +45,9 @@ and open the template in the editor.
                         <div class="col-md-10">
                             <h3>Manage Reviews</h3>
                         </div>
-                        <div class="col-md-2">
+                        <!--<div class="col-md-2">
                             <a role="button" class="float-right btn btn-info" href="create.php">Add Geo-Location</a>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -55,11 +55,11 @@ and open the template in the editor.
                                 <table class="table table-striped table-dark">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th scope="col">Region Name</th>
-                                            <th scope="col">Created At</th>
-                                            <th scope="col">Created By</th>
+                                            <th scope="col">User</th>
+                                            <th scope="col">Review Title</th>                                            
+                                            <th scope="col">Hotel</th>
+                                            <th scope="col">Created At</th>                                           
                                             <th scope="col">Updated At</th>
-                                            <th scope="col">Updated By</th>
                                             <th>&nbsp;</th>
                                         </tr>
                                     </thead>
