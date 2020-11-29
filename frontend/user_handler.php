@@ -174,9 +174,10 @@ if (isset($_POST['login_user'])) {
             $_SESSION['country'] = $UserData['country'];
             $_SESSION['billing_address'] = $UserData['billing_address'];
 
-            if ($UserData['role_name'] == "Administrator") {
+            if ($UserData['role_name'] === "Administrator") {
                 $redirect = 'https://admin.sitvago.com';
-            } else if ($UserData['role_name'] == "User") {
+				
+            } else if ($UserData['role_name'] === "User") {
 
                 $redirect = 'home.php';
             }
@@ -272,6 +273,10 @@ if (isset($_POST['update_password'])) {
     $password = $_POST['password'];
     $password2 = $_POST['new_password'];
     $password3 = $_POST['confirmed_password'];
+	$uppercase = preg_match('@[A-Z]@', $password2);
+	$lowercase = preg_match('@[a-z]@', $password2);
+	$number    = preg_match('@[0-9]@', $password2);
+	$space = preg_match("/\\s/", $password2);
 
     if (empty($username)) {
         array_push($errorsPW, "Username is required");
@@ -281,7 +286,9 @@ if (isset($_POST['update_password'])) {
     }
     if (empty($password2)) {
         array_push($errorsPW, "New Password is required");
-    }
+    }else if(!$uppercase || !$lowercase || !$number || strlen($password_1) < 8 || $space) {
+		 array_push($errorsPW, "Your password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and should not contain whitespaces.");
+	}
     if (empty($password3)) {
         array_push($errorsPW, "Confirmed Password is required");
     }
