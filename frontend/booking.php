@@ -2,6 +2,7 @@
 require '../vendor/autoload.php';
 
 use sitvago\Hotel;
+use sitvago\Review;
 
 $id = $_GET['key'];
 
