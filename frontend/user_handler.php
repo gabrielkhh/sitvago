@@ -21,6 +21,9 @@ $errors = array();
 $errorsDetails = array();
 $errorsPW = array();
 
+
+
+
 //Helper function that checks input for malicious or unwanted content.
 function sanitize_input($data)
 {
@@ -44,6 +47,11 @@ if (isset($_POST['reg_user'])) {
     $billing_address = $_POST['billing_address'];
     $password_1 = $_POST['pwd'];
     $password_2 = $_POST['pwd_confirm'];
+	
+	$uppercase = preg_match('@[A-Z]@', $password_1);
+	$lowercase = preg_match('@[a-z]@', $password_1);
+	$number    = preg_match('@[0-9]@', $password_1);
+	$space = preg_match("/\\s/", $password_1);
 
     // form validation: ensure that the form is correctly filled ...
     // by adding (array_push()) corresponding error unto $errors array
@@ -82,7 +90,9 @@ if (isset($_POST['reg_user'])) {
     }
     if (empty($password_1)) {
         array_push($errors, "Password is required");
-    }
+    }else if(!$uppercase || !$lowercase || !$number || strlen($password_1) < 8 || $space) {
+		 array_push($errors, "Your password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and should not contain whitespaces.");
+	}
     if ($password_1 != $password_2) {
         array_push($errors, "Passwords do not match");
     }
