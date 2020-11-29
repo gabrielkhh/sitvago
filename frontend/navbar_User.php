@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
     <nav>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="home.php">
             <img src="images/logo_nobackground.png" width="100" height="35" class="d-inline-block align-top" alt=""> 
         </a>
     </nav>
