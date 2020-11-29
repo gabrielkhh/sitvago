@@ -29,10 +29,16 @@ class Review extends DB
         $success = true;
         $SQL = "SELECT Review.id, Review.title, User.username, Review.rating, Review.content,
             Review.created_at FROM Review LEFT JOIN User ON Review.user_id = User.id  
-            WHERE Review.hotel_id=?";
+            WHERE Review.hotel_id=" . $hotelID;
 
         $resultReview = mysqli_query($this->conn, $SQL);
-        $rowReview = mysqli_fetch_assoc($resultReview);
+        
+        if (mysqli_num_rows($resultReview) > 0) {
+            while ($row = mysqli_fetch_assoc($resultReview)) {
+                $results[] = $row;
+            }
+        }
+        
 
         return $rowReview;
     }

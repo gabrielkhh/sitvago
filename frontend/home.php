@@ -24,7 +24,7 @@ if (isset($_GET['Message'])) {
 
 
 	
-
+ 
 //Ending a php session after 30 minutes of inactivity
 $minutesBeforeSessionExpire = 30;
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
