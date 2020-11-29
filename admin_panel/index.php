@@ -91,48 +91,48 @@ and open the template in the editor.
     <!-- <?php
             include "../../footer.inc.php";
             ?> -->
+    <script>
+        var hotelNumbers = <?= $results[0]['HotelCount']; ?>;
+        var userNumbers = <?= $results[1]['UserCount']; ?>;
+        var geoNumbers = <?= $results[2]['GeoCount']; ?>;
+        var bookingNumbers = <?= $results[3]['BookingCount']; ?>;
+        var reviewNumbers = <?= $results[4]['ReviewCount']; ?>;
+
+        let counterHotel = new CountUp('hotelCounter', 0, hotelNumbers);
+        if (!counterHotel.error) {
+            counterHotel.start();
+        } else {
+            console.error(counterHotel.error);
+        }
+
+        let counterUser = new CountUp('userCounter', 0, userNumbers);
+        if (!counterUser.error) {
+            counterUser.start();
+        } else {
+            console.error(counterUser.error);
+        }
+
+        let counterGeo = new CountUp('geoCounter', 0, geoNumbers);
+        if (!counterGeo.error) {
+            counterGeo.start();
+        } else {
+            console.error(counterGeo.error);
+        }
+
+        let counterBooking = new CountUp('bookingCounter', 0, bookingNumbers);
+        if (!counterBooking.error) {
+            counterBooking.start();
+        } else {
+            console.error(counterBooking.error);
+        }
+
+        let counterReview = new CountUp('reviewCounter', 0, reviewNumbers);
+        if (!counterReview.error) {
+            counterReview.start();
+        } else {
+            console.error(counterReview.error);
+        }
+    </script>
 </body>
 
 </html>
-<script>
-    var hotelNumbers = <?= $results[0]['HotelCount']; ?>;
-    var userNumbers = <?= $results[1]['UserCount']; ?>;
-    var geoNumbers = <?= $results[2]['GeoCount']; ?>;
-    var bookingNumbers = <?= $results[3]['BookingCount']; ?>;
-    var reviewNumbers = <?= $results[4]['ReviewCount']; ?>;
-
-    let counterHotel = new CountUp('hotelCounter', 0, hotelNumbers);
-    if (!counterHotel.error) {
-        counterHotel.start();
-    } else {
-        console.error(counterHotel.error);
-    }
-
-    let counterUser = new CountUp('userCounter', 0, userNumbers);
-    if (!counterUser.error) {
-        counterUser.start();
-    } else {
-        console.error(counterUser.error);
-    }
-
-    let counterGeo = new CountUp('geoCounter', 0, geoNumbers);
-    if (!counterGeo.error) {
-        counterGeo.start();
-    } else {
-        console.error(counterGeo.error);
-    }
-
-    let counterBooking = new CountUp('bookingCounter', 0, bookingNumbers);
-    if (!counterBooking.error) {
-        counterBooking.start();
-    } else {
-        console.error(counterBooking.error);
-    }
-
-    let counterReview = new CountUp('reviewCounter', 0, reviewNumbers);
-    if (!counterReview.error) {
-        counterReview.start();
-    } else {
-        console.error(counterReview.error);
-    }
-</script>
