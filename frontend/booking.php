@@ -17,7 +17,7 @@ $hotelPrices = $hotelObj->getHotelPricesForBooking($id);
 $counterImage = 0;
 
 $review = new Review();
-$results=$review->getSingleHotelReview();
+$results = $review->getSingleHotelReview($id);
 
 ?>
 <!DOCTYPE html>
