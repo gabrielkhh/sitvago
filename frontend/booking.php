@@ -130,6 +130,7 @@ $counterImage = 0;
                             <div class="row">
                                 <div class="panel panel-default widget">
                                     <div class="panel-heading">
+                                        <hr/>
                                         <h3 class="panel-title">Recent Reviews</h3>
                                         <span class="label label-info">No of reviews if want</span>
                                     </div>
@@ -140,7 +141,7 @@ $counterImage = 0;
                                                 <div class="col-xs-10 col-md-11">
                                                     <div>
                                                         <div class="mic-info">
-                                                            By: <a href="#">Jing Xuan</a> on 2 Aug 2013
+                                                            By: Jing Xuan on 2 Aug 2013
                                                         </div>
                                                     </div>
                                                     <div class="comment-text">
@@ -186,12 +187,9 @@ $counterImage = 0;
                     <p>
                         <h3 id="price"></h3>
                     </p>
-                    <div id="descriptionArea">TEST</div>
-                    <hr/>
+                    <div id="descriptionArea"></div>
+                   
                     
-                    <div id="review">
-                        THROW THE CONTENT HERE WILL EDIT LATER HERE FOR REVIEW
-                    </div>
                 </div>
 
             </div>

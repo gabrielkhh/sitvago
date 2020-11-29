@@ -9,6 +9,7 @@
  const checkOutDate = document.querySelector('#checkout');
  const errorElement = document.getElementById('error');
  const bookBtn = document.getElementById("book_btn");
+ const roomType = document.getElementById("TypeOfRooms");
 
  //Make the function available after the document is loaded
 $(document).ready(function()
@@ -23,27 +24,10 @@ $(document).ready(function()
  var minCoutDate = new Date();
  minCoutDate.setDate(minCoutDate.getDate() +1);
  let messages =[];
- //var errorFound = false; 
  
- /*
- //Remove error message after 3sec
- function removeErrorMsg(){
-    console.log(messages.length);
-    var thisTimeout = setTimeout(function(){
-        if(messages.length >0){
-            messages =[];
-            errorElement.remove();
-            //removeElement('error'); //Need to remove and append back element for new error messages
-            console.log(messages.length);
-           }
-    },3000)//After 3 seconds clear error message
-}
-*/
 
-
-
- //Remove error message after 3sec cotinously
-var myError = setInterval(removeErrorMsg,5000);
+ //Remove error message if found
+var myError = setInterval(removeErrorMsg,4000);
 function removeErrorMsg(){    
     //Always checking for error message
     if(messages.length >0){
@@ -51,7 +35,7 @@ function removeErrorMsg(){
         removeElement('error');
     }
 }
-
+    
 
 //Validation for submit button
  function registerEventHandlers()
@@ -63,17 +47,18 @@ function removeErrorMsg(){
         bookBtn.addEventListener("click",(e) =>{
            var checkInValue = checkInDate.value;
            var checkOutValue = checkOutDate.value;
-           //Check if date are filled
-           if (checkInValue.length === 0 || checkOutValue.length === 0)
+           var roomTypeValue = roomType.value;
+           //Check if date are filled, roomTypeValue.length is cause it's disabled means it's empty value
+           if (checkInValue.length === 0 || checkOutValue.length === 0 || roomTypeValue.length === 8)
            {
                messages.push("Please fill in all fields");
            }
-
-           //If error messages found prevent submission.
+           
+           //If error messages found prevent submission. 
            if (messages.length >0){
                e.target.disabled = true;
                e.preventDefault();
-               addElement("book_btn",'span','error',messages[0]); 
+               addElement("book_btn",'span','error',messages[0]);             
                setTimeout(()=> {
                    e.target.disabled = false;
                },5000)
@@ -124,7 +109,20 @@ function calenderHandler1(){
                 }
             }
 
+        },
+        /*
+        //If error message is generated when closed produce error message
+        onClose: function(selectedDates,dateStr,instance){
+              //If error messages found prevent submission. 
+               if (messages.length >0){
+                   bookBtn.target.disabled = true;
+                   bookBtn.preventDefault();
+                   setTimeout(()=> {
+                   bookBtn.target.disabled = false;
+               },5000)
+           }
         }
+        */
         /*
         disable:[
         function(date) {
