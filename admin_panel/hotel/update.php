@@ -237,8 +237,6 @@ and open the template in the editor.
         })
         window.$hotelImageInputElement.on('filebatchuploadsuccess',
             function(event, data, previewId, index) {
-                console.log(data);
-
                 swal({
                     title: "Updated Hotel Information",
                     text: data.message,
