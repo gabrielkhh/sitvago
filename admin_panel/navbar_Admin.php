@@ -31,8 +31,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="home.php?logout='1'">Logout</a>
             </li>
-
         </ul>
-
     </div>
 </nav>
