@@ -1,8 +1,4 @@
-﻿<!DOCTYPE html>
-
-
-
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+﻿<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
     <nav>
         <a class="navbar-brand" href="home.php">
