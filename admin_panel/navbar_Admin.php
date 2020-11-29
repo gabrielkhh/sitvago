@@ -2,7 +2,7 @@
 
     <nav>
         <a class="navbar-brand" href="home.php">
-            <img src="images/logo_nobackground.png" width="100" height="35" class="d-inline-block align-top" alt=""> 
+            <img src="https://res.cloudinary.com/gabrielkok/image/upload/v1606662031/sitvago/Logo/logo_nobackground.png" width="100" height="35" class="d-inline-block align-top" alt="">
         </a>
     </nav>
 
@@ -12,18 +12,18 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="home.php">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+                <a class="nav-link" href="https://admin.sitvago.com/geolocation/index.php">Geo Locations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="faq.php">FAQ</a>
+                <a class="nav-link" href="https://admin.sitvago.com/Booking/index.php">Bookings</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Add Hotels</a>
+                <a class="nav-link" href="https://admin.sitvago.com/hotel/index.php">Hotels</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="user_profile.php">Admin Profile</a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="home.php?logout='1'">Logout</a>
             </li>

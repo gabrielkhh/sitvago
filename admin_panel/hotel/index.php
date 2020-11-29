@@ -31,9 +31,9 @@ and open the template in the editor.
 </head>
 
 <body>
-    <!-- <?php
-            include "../../nav.inc.php";
-            ?> -->
+    <?php
+    include "../navbar_Admin.php";
+    ?>
     <main class="container main-content">
         <h1>Viewing All Hotels</h1>
 
@@ -85,8 +85,8 @@ and open the template in the editor.
 
     </main>
     <!-- <?php
-        include "../../footer.inc.php";
-    ?> -->
+            include "../../footer.inc.php";
+            ?> -->
 </body>
 
 

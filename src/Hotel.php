@@ -189,6 +189,8 @@ class Hotel extends DB
         $results = [];
         $success = true;
         $preparedSQL = "DELETE FROM Hotel WHERE id=?";
+        $preparedSQLForHotelImage = "DELETE FROM HotelImage WHERE hotel_id=" . $hotelID;
+        $preparedSQLForHotelRoomCategory = "DELETE FROM HotelRoomCategory WHERE hotel_id=" . $hotelID;
 
 
         if ($this->conn->connect_error) {
@@ -198,6 +200,10 @@ class Hotel extends DB
             $response['message'] = "Connection Error";
             $response['error'] = $errorMsg;
         } else {
+            mysqli_query($this->conn, $preparedSQLForHotelImage)
+                or die(mysqli_error($this->conn));
+            mysqli_query($this->conn, $preparedSQLForHotelRoomCategory)
+                or die(mysqli_error($this->conn));
             $stmt = $this->conn->prepare($preparedSQL);
             $stmt->bind_param("i", $hotelID);
             if (!$stmt->execute()) {

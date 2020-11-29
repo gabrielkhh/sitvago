@@ -46,9 +46,9 @@ and open the template in the editor.
 </head>
 
 <body>
-    <!-- <?php
-            include "../../nav.inc.php";
-            ?> -->
+    <?php
+    include "../navbar_Admin.php";
+    ?>
     <main class="container main-content mt-2">
         <?php echo "<h1>Update details for " . $rowHotel['name'] . "</h1>"; ?>
 

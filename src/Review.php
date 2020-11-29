@@ -21,7 +21,8 @@ class Review extends DB
 
         return $results;
     }
-
+    
+    //get review for a single hotel
     public function getSingleHotelReview($hotelID)
     {
         $results = [];

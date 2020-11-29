@@ -27,7 +27,7 @@ and open the template in the editor.
     <script defer src="/js/main.js"></script>
 </head>
 
-<body>
+<body style="padding-top: 70px;">
     <?php
     include "../navbar.php";
     ?>
@@ -69,6 +69,7 @@ and open the template in the editor.
             include "../../footer.inc.php";
             ?> -->
 </body>
+
 </html>
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {

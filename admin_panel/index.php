@@ -102,9 +102,6 @@ and open the template in the editor.
             </div>
         </div>
     </main>
-    <!-- <?php
-            include "../../footer.inc.php";
-            ?> -->
     <script>
         var hotelNumbers = <?= $results[0]['HotelCount']; ?>;
         var userNumbers = <?= $results[1]['UserCount']; ?>;

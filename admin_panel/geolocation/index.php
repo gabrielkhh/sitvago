@@ -31,10 +31,10 @@ and open the template in the editor.
     <script defer src="/js/main.js"></script>
 </head>
 
-<body>
-    <!-- <?php
-            include "../../nav.inc.php";
-            ?> -->
+<body style="padding-top: 70px;">
+    <?php
+    include "../navbar_Admin.php";
+    ?>
     <main class="container main-content">
         <h1>Viewing All Geo-Locations</h1>
 
@@ -71,9 +71,17 @@ and open the template in the editor.
                                             </script>
                                             <tr>
                                                 <td><?= $row['name'] ?></td>
-                                                <td id="created<?= $row['id'] ?>"><script>document.getElementById('created<?= $row['id'] ?>').innerHTML = createdAt;</script></td>
+                                                <td id="created<?= $row['id'] ?>">
+                                                    <script>
+                                                        document.getElementById('created<?= $row['id'] ?>').innerHTML = createdAt;
+                                                    </script>
+                                                </td>
                                                 <td><?= $row['created_by'] ?></td>
-                                                <td id="updated<?= $row['id'] ?>"><script>document.getElementById('updated<?= $row['id'] ?>').innerHTML = updatedAt;</script></td>
+                                                <td id="updated<?= $row['id'] ?>">
+                                                    <script>
+                                                        document.getElementById('updated<?= $row['id'] ?>').innerHTML = updatedAt;
+                                                    </script>
+                                                </td>
                                                 <td><?= $row['updated_by'] ?></td>
                                                 <td><a role="button" class="btn btn-primary updateBtn" href="update.php?key=<?= $row['id'] ?>" value="<?= $row['id'] ?>">Update</a></td>
                                             </tr>
@@ -90,8 +98,8 @@ and open the template in the editor.
 
     </main>
     <!-- <?php
-        include "../../footer.inc.php";
-    ?> -->
+            include "../../footer.inc.php";
+            ?> -->
 </body>
 
 
