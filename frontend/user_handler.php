@@ -175,7 +175,9 @@ if (isset($_POST['login_user'])) {
             $_SESSION['billing_address'] = $UserData['billing_address'];
 
             if ($UserData['role_name'] === "Administrator") {
-                $redirect = 'https://admin.sitvago.com';
+				$_SESSION['role_name'] = "Administrator";
+                //$redirect = 'https://admin.sitvago.com';
+				$redirect = 'home.php';
 				
             } else if ($UserData['role_name'] === "User") {
 
