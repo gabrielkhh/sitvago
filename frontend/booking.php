@@ -124,10 +124,38 @@ $counterImage = 0;
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- <div class="d-md-flex mt-5 mb-5"><ul class="list"> <li><span>Max:</span></li></ul></div> -->
-
                         </div>
+                        <!--Review Section Starts Here -->
+                        <div class="container review-container">
+                            <div class="row">
+                                <div class="panel panel-default widget">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Recent Reviews</h3>
+                                        <span class="label label-info">No of reviews if want</span>
+                                    </div>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-10 col-md-11">
+                                                    <div>
+                                                        <div class="mic-info">
+                                                            By: <a href="#">Jing Xuan</a> on 2 Aug 2013
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-text">
+                                                        Awesome hehehe
+                                                    </div>
+                                                    <hr/>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <!--Review Section End Here -->
                     </div>
                 </div>
                 <div class="col-lg-4 sidebar ftco-animate pl-md-5">
@@ -160,6 +188,7 @@ $counterImage = 0;
                     </p>
                     <div id="descriptionArea">TEST</div>
                     <hr/>
+                    
                     <div id="review">
                         THROW THE CONTENT HERE WILL EDIT LATER HERE FOR REVIEW
                     </div>
