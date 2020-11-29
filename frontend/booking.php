@@ -15,6 +15,10 @@ $hotelPrices = $hotelObj->getHotelPricesForBooking($id);
 // $roomPrice = $hotelObj->getRoomCategoryRate($hotelSelected,$roomCategoriesResults);
 //$roomDescription = $hotelObj->getRoomDescription();
 $counterImage = 0;
+
+$review = new Review();
+$results=$review->getSingleHotelReview();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -132,12 +136,13 @@ $counterImage = 0;
                                 <div class="panel panel-default widget">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Recent Reviews</h3>
-                                        <span class="label label-info">No of reviews if want</span>
+                                        <input type="text" id="review" name="review" placeholder="Eg.This place is awesome">
                                     </div>
                                 <div class="panel-body">
                                     <ul class="list-group">
                                         <li class="list-group-item">
-                                            <div class="row">
+                                            <?php foreach ($results as $row) : ?>
+                                            <div class="row">                                                
                                                 <div class="col-xs-10 col-md-11">
                                                     <div>
                                                         <div class="mic-info">
@@ -147,7 +152,8 @@ $counterImage = 0;
                                                     <div class="comment-text">
                                                         Awesome hehehe
                                                     </div>
-                                                    <hr/>
+                                                    <?php endforeach; ?>
+                                                    <br/>
                                                 </div>
                                             </div>
                                         </li>
@@ -190,9 +196,9 @@ $counterImage = 0;
                     <div id="descriptionArea">TEST</div>
                     <hr/>
                     
-                    <div id="review">
-                        THROW THE CONTENT HERE WILL EDIT LATER HERE FOR REVIEW
-                    </div>
+                    <!--<div id="review">
+                        
+                    </div>-->
                 </div>
 
             </div>
