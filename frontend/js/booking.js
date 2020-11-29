@@ -53,7 +53,6 @@ function removeErrorMsg(){
 }
 
 
-
 //Validation for submit button
  function registerEventHandlers()
 {
@@ -72,8 +71,12 @@ function removeErrorMsg(){
 
            //If error messages found prevent submission.
            if (messages.length >0){
+               e.target.disabled = true;
                e.preventDefault();
                addElement("book_btn",'span','error',messages[0]); 
+               setTimeout(()=> {
+                   e.target.disabled = false;
+               },5000)
            }
        });
     }
@@ -136,23 +139,6 @@ function calenderHandler1(){
 function calenderHandler2(){
     flatpickr(checkOutDate,{
         dateFormat: "d-m-Y",
-        /*
-        //Validation using onChange Event
-        onChange: function(selectedDates, dateStr, instance) {
-            var checkOutValue = checkOutDate.value;
-            var checkInValue = checkInDate.value;
-            var checkOutFormatted = checkOutValue.split("-").reverse().join("-");
-            var checkInFormatted = checkInValue.split("-").reverse().join("-");
-            //Only check if checkInValue is not null and greater then checkout
-            if (checkInValue.length !==0){
-                if (checkInFormatted > checkOutFormatted)
-                {
-                    instance.clear();
-                }
-            }
-            
-        },
-         */
         //Set min date always greater then check in date
         onOpen: function(selectedDates, dateStr, instance) {
             var checkInValue = checkInDate.value;
