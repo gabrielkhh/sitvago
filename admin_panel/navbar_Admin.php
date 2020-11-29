@@ -1,11 +1,7 @@
-﻿<!DOCTYPE html>
-
-
-
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+﻿<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
     <nav>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="home.php">
             <img src="images/logo_nobackground.png" width="100" height="35" class="d-inline-block align-top" alt=""> 
         </a>
     </nav>
@@ -31,8 +27,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="home.php?logout='1'">Logout</a>
             </li>
-
         </ul>
-
     </div>
 </nav>

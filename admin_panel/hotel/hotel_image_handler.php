@@ -21,8 +21,7 @@ $results = [];
 $files = array();
 
 if (empty($_FILES['fileInput'])) {
-    //Sibei jialat, got no image coming from the frontend.
-    echo "sibei jialat";
+    //User did not add any files to upload
 } else {
     $totalFiles = count($_FILES['fileInput']['name']); // multiple files
 
@@ -38,7 +37,7 @@ if (empty($_FILES['fileInput'])) {
         $height = $files['imgCloudinaryData']['height'];
         $imgExtension = $files['imgCloudinaryData']['format'];
 
-        if ($i == 0)
+        if ($i === 0)
         {
             $imgIsThumbnail = 1;
         }

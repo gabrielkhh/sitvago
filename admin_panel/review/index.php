@@ -45,9 +45,6 @@ and open the template in the editor.
                         <div class="col-md-10">
                             <h3>Manage Reviews</h3>
                         </div>
-                        <div class="col-md-2">
-                            <a role="button" class="float-right btn btn-info" href="create.php">Add Geo-Location</a>
-                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -55,26 +52,23 @@ and open the template in the editor.
                                 <table class="table table-striped table-dark">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th scope="col">Region Name</th>
-                                            <th scope="col">Created At</th>
-                                            <th scope="col">Created By</th>
-                                            <th scope="col">Updated At</th>
-                                            <th scope="col">Updated By</th>
+                                            <th scope="col">User</th>
+                                            <th scope="col">Review Title</th>                                            
+                                            <th scope="col">Hotel</th>
+                                            <th scope="col">Created At</th>                                           
                                             <th>&nbsp;</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="regionTableBody" class="">
+                                    <tbody id="reviewTableBody" class="">
                                         <?php foreach ($results as $row) : ?>
                                             <script>
                                                 var createdAt = dayjs('<?= $row['created_at'] ?>').format('D MMM YYYY h:mm A');
-                                                var updatedAt = dayjs('<?= $row['updated_at'] ?>').format('D MMM YYYY h:mm A');
                                             </script>
                                             <tr>
-                                                <td><?= $row['name'] ?></td>
-                                                <td id="created<?= $row['id'] ?>"><script>document.getElementById('created<?= $row['id'] ?>').innerHTML = createdAt;</script></td>
-                                                <td><?= $row['created_by'] ?></td>
-                                                <td id="updated<?= $row['id'] ?>"><script>document.getElementById('updated<?= $row['id'] ?>').innerHTML = updatedAt;</script></td>
-                                                <td><?= $row['updated_by'] ?></td>
+                                                <td><?= $row['user_id'] ?></td>
+                                                <td><?= $row['title'] ?></td>
+                                                <td><?= $row['hotel_id'] ?></td>
+                                                <td><?= $row['created_at'] ?></td>
                                                 <td><a role="button" class="btn btn-primary updateBtn" href="update.php?key=<?= $row['id'] ?>" value="<?= $row['id'] ?>">Update</a></td>
                                             </tr>
                                         <?php endforeach; ?>

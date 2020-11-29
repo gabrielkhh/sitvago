@@ -28,10 +28,11 @@ else if ($dataFromClient['option'] === 'updateHotel')
     $hotelName = $dataFromClient['name'];
     $hotelGeoLocation = $dataFromClient['geoLocation'];
     $hotelDescription = $dataFromClient['description'];
+    $amounts = json_decode($dataFromClient['amounts'], true);
     $rating = 5.00;
     $userID = 1;
  
-    $result = $hotel->updateHotel($hotelID, $hotelName, $hotelDescription, $hotelGeoLocation, $rating, $userID);
+    $result = $hotel->updateHotel($hotelID, $hotelName, $hotelDescription, $hotelGeoLocation, $rating, $userID, $amounts);
     echo json_encode($result);
 }
 else if ($dataFromClient['option'] === 'deleteHotel')
@@ -42,6 +43,15 @@ else if ($dataFromClient['option'] === 'deleteHotel')
     $hotelName = $dataFromClient['name'];
  
     $result = $hotel->deleteHotel($hotelID, $hotelName);
+    echo json_encode($result);
+}
+else if ($dataFromClient['option'] === 'deleteHotelImage')
+{
+    $hotel = new Hotel();
+ 
+    $imageID = $dataFromClient['id'];
+ 
+    $result = $hotel->deleteHotelImage($imageID);
     echo json_encode($result);
 }
 

@@ -7,9 +7,10 @@ class Hotel extends DB
     public function getHotels()
     {
         $results = [];
-        $sql = "SELECT Hotel.id, Hotel.name, Hotel.description, Hotel.rating, Hotel.created_at, 
+        $sql = "SELECT Hotel.id, Hotel.name, Hotel.description, Hotel.rating, HotelImage.secure_url, Hotel.created_at, 
         c.first_name AS created_by, Hotel.updated_at, u.first_name AS updated_by, GeoLocation.name AS area_name 
-        FROM Hotel LEFT JOIN GeoLocation ON Hotel.geo_id = GeoLocation.id LEFT JOIN User c ON Hotel.created_by = c.id 
+        FROM Hotel LEFT JOIN GeoLocation ON Hotel.geo_id = GeoLocation.id LEFT JOIN HotelImage ON HotelImage.hotel_id = Hotel.id 
+        AND HotelImage.is_thumbnail = 1 LEFT JOIN User c ON Hotel.created_by = c.id 
         LEFT JOIN User u ON Hotel.updated_by = u.id;";
 
         $resultsSQL = mysqli_query($this->conn, $sql);
@@ -71,7 +72,7 @@ class Hotel extends DB
     {
         $results = [];
         $success = true;
-        $SQL = "SELECT HotelImage.secure_url, HotelImage.original_src, HotelImage.width, HotelImage.height, HotelImage.is_thumbnail 
+        $SQL = "SELECT HotelImage.id, HotelImage.secure_url, HotelImage.original_src, HotelImage.width, HotelImage.height, HotelImage.is_thumbnail 
         FROM Hotel LEFT JOIN HotelImage ON HotelImage.hotel_id = Hotel.id WHERE Hotel.id=" . $hotelID . ";";
 
         $resultsSQL = mysqli_query($this->conn, $SQL);
@@ -145,7 +146,7 @@ class Hotel extends DB
         return $response;
     }
 
-    public function updateHotel($hotelID, $hotelName, $hotelDescription, $hotelGeoLocation, $rating, $userID)
+    public function updateHotel($hotelID, $hotelName, $hotelDescription, $hotelGeoLocation, $rating, $userID, $amounts)
     {
         $response = [];
         $success = true;
@@ -169,6 +170,13 @@ class Hotel extends DB
                 $response['success'] = $success;
                 $response['message'] = $hotelName . " has been successfully updated!!";
                 $response['error'] = "";
+                foreach ($amounts as $key => $val) {
+                    $sql = "UPDATE HotelRoomCategory SET availability=1, price_per_night=" . $val . ", updated_at=now(),
+                    updated_by=" . $userID . " WHERE HotelRoomCategory.room_category_id = (SELECT rc.id FROM RoomCategory rc WHERE rc.category_name='" . $key . "')
+                    AND HotelRoomCategory.hotel_id = " . $hotelID;
+                    mysqli_query($this->conn, $sql)
+                        or die(mysqli_error($this->conn));
+                }
             }
             $stmt->close();
         }
@@ -200,6 +208,38 @@ class Hotel extends DB
             } else {
                 $response['success'] = $success;
                 $response['message'] = $hotelName . " has been successfully deleted from the database.";
+                $response['error'] = "";
+            }
+            $stmt->close();
+        }
+        $this->conn->close();
+        return $response;
+    }
+
+    public function deleteHotelImage($imageID)
+    {
+        $results = [];
+        $success = true;
+        $preparedSQL = "DELETE FROM HotelImage WHERE id=?";
+
+
+        if ($this->conn->connect_error) {
+            $errorMsg = "Connection failed: " . $this->conn->connect_error;
+            $success = false;
+            $response['success'] = $success;
+            $response['message'] = "Connection Error";
+            $response['error'] = $errorMsg;
+        } else {
+            $stmt = $this->conn->prepare($preparedSQL);
+            $stmt->bind_param("i", $imageID);
+            if (!$stmt->execute()) {
+                $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
+                $response['success'] = $success;
+                $response['message'] = "";
+                $response['error'] = $errorMsg;
+            } else {
+                $response['success'] = $success;
+                $response['message'] = "Image has been removed from the database";
                 $response['error'] = "";
             }
             $stmt->close();
@@ -273,6 +313,24 @@ class Hotel extends DB
     {
         $results = [];
         $sql = "SELECT RoomCategory.id, RoomCategory.category_name FROM RoomCategory;";
+
+        $resultsSQL = mysqli_query($this->conn, $sql);
+
+        if (mysqli_num_rows($resultsSQL) > 0) {
+            while ($row = mysqli_fetch_assoc($resultsSQL)) {
+                $results[] = $row;
+            }
+        }
+
+        return $results;
+    }
+
+    public function getExistingHotelRoomCategories($hotelID)
+    {
+        $results = [];
+        $sql = "SELECT HotelRoomCategory.price_per_night, RoomCategory.category_name, HotelRoomCategory.created_at, HotelRoomCategory.updated_at 
+        FROM HotelRoomCategory LEFT JOIN RoomCategory ON HotelRoomCategory.room_category_id = RoomCategory.id 
+        WHERE HotelRoomCategory.hotel_id = " . $hotelID . ";";
 
         $resultsSQL = mysqli_query($this->conn, $sql);
 
