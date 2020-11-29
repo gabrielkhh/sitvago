@@ -43,7 +43,7 @@ and open the template in the editor.
                     <div class="card text-white bg-dark mb-3">
                         <div class="card-header text-center">Hotels Present to Date</div>
                         <div class="card-body text-center">
-                            <h1 id="hotelCounter" class="card-title text-center">Number</h5>
+                            <h1 id="hotelCounter" class="card-title text-center">Number</h1>
                                 <a href="hotel/index.php" class="btn btn-primary">View Hotels</a>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ and open the template in the editor.
                     <div class="card text-white bg-dark mb-3">
                         <div class="card-header text-center">Registered Users to Date</div>
                         <div class="card-body text-center">
-                            <h1 id="userCounter" class="card-title text-center">Number</h5>
+                            <h1 id="userCounter" class="card-title text-center">Number</h1>
                                 <a href="#" class="btn btn-primary">View Users</a>
                         </div>
                     </div>
@@ -61,7 +61,7 @@ and open the template in the editor.
                     <div class="card text-white bg-dark mb-3">
                         <div class="card-header text-center">Active Geo-Locations to Date</div>
                         <div class="card-body text-center">
-                            <h1 id="geoCounter" class="card-title text-center">Number</h5>
+                            <h1 id="geoCounter" class="card-title text-center">Number</h1>
                                 <a href="geolocation/index.php" class="btn btn-primary">View Geo-Locations</a>
                         </div>
                     </div>
@@ -70,7 +70,7 @@ and open the template in the editor.
                     <div class="card text-white bg-dark mb-3">
                         <div class="card-header text-center">Total number of bookings</div>
                         <div class="card-body text-center">
-                            <h1 id="bookingCounter" class="card-title text-center">Number</h5>
+                            <h1 id="bookingCounter" class="card-title text-center">Number</h1>
                                 <a href="Booking/index.php" class="btn btn-primary">View Bookings</a>
                         </div>
                     </div>
@@ -81,7 +81,7 @@ and open the template in the editor.
                     <div class="card text-white bg-dark mb-3">
                         <div class="card-header text-center">Total number of reviews</div>
                         <div class="card-body text-center">
-                            <h1 id="reviewCounter" class="card-title text-center">Number</h5>
+                            <h1 id="reviewCounter" class="card-title text-center">Number</h1>
                                 <a href="review/index.php" class="btn btn-primary">View Reviews</a>
                         </div>
                     </div>
