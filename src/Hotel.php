@@ -145,7 +145,7 @@ class Hotel extends DB
         return $response;
     }
 
-    public function updateHotel($hotelID, $hotelName, $hotelDescription, $hotelGeoLocation, $rating, $userID)
+    public function updateHotel($hotelID, $hotelName, $hotelDescription, $hotelGeoLocation, $rating, $userID, $amounts)
     {
         $response = [];
         $success = true;
@@ -169,6 +169,13 @@ class Hotel extends DB
                 $response['success'] = $success;
                 $response['message'] = $hotelName . " has been successfully updated!!";
                 $response['error'] = "";
+                foreach ($amounts as $key => $val) {
+                    $sql = "UPDATE HotelRoomCategory SET availability=1, price_per_night=" . $val . ", updated_at=now(),
+                    updated_by=" . $userID . " WHERE HotelRoomCategory.room_category_id = (SELECT rc.id FROM RoomCategory rc WHERE rc.category_name='" . $key . "')
+                    AND HotelRoomCategory.hotel_id = " . $hotelID;
+                    mysqli_query($this->conn, $sql)
+                        or die(mysqli_error($this->conn));
+                }
             }
             $stmt->close();
         }

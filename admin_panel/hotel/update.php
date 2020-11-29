@@ -147,12 +147,13 @@ and open the template in the editor.
         var buttonDelete = document.getElementById("btnDelete");
         var buttonCancel = document.getElementById("btnCancel");
 
-        function WebFormInfo(inOption, hotelID, hotelName, hotelGeoLocation, hotelDescription) {
+        function WebFormInfo(inOption, hotelID, hotelName, hotelGeoLocation, hotelDescription, amounts) {
             this.option = inOption;
             this.id = hotelID;
             this.name = hotelName;
             this.geoLocation = hotelGeoLocation;
             this.description = hotelDescription;
+            this.amounts = amounts;
         }
 
         var saveHotel = function(e) {
@@ -161,7 +162,16 @@ and open the template in the editor.
             var collectedHotelDescription = encodeURI(CKEDITOR.instances.hotelDescription.getData());
             var id = $(this).attr("value");
 
-            var webFormData = new WebFormInfo("updateHotel", id, collectedHotelName, collectedGeoLocation, collectedHotelDescription);
+            var collectedAmt = {};
+
+            $('.amount-class').each(function(i) {
+                var nameType = $(this).attr('name');
+                var val = $(this).val();
+                collectedAmt[nameType] = val;
+            });
+            console.log(collectedAmt);
+
+            var webFormData = new WebFormInfo("updateHotel", id, collectedHotelName, collectedGeoLocation, collectedHotelDescription, JSON.stringify(collectedAmt));
             var webFormDataInString = JSON.stringify(webFormData);
             console.log(webFormDataInString);
 

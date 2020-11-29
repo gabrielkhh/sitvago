@@ -196,7 +196,7 @@ and open the template in the editor.
         })
         window.$hotelImageInputElement.on('filebatchuploadsuccess',
             function(event, data, previewId, index) {
-
+                console.log(data);
 
                 swal({
                     title: "Saved Hotel",
@@ -206,12 +206,12 @@ and open the template in the editor.
                     window.location = "index.php";
                 });
             });
-        window.$hotelImageInputElement.on('filebatchuploaderror',
-            function(event, data, msg) {
-                console.log("lmfao");
-                console.log(data);
-                console.log(msg);
-            });
+        // window.$hotelImageInputElement.on('filebatchuploaderror',
+        //     function(event, data, msg) {
+        //         console.log("lmfao");
+        //         console.log(data);
+        //         console.log(msg);
+        //     });
 
         var saveHotel = function(e) {
             var collectedHotelName = $("#inputHotelName").val();
