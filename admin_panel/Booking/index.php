@@ -57,10 +57,8 @@ and open the template in the editor.
                                                 <th scope="col">User</th>
                                                 <th scope="col">Hotel name</th>
                                                 <th scope="col">Price</th>
+                                                <th scope="col">Transaction IDt</th>
                                                 <th scope="col">Created At</th>
-                                                <th scope="col">Created By</th>
-                                                <th scope="col">Updated At</th>
-                                                <th scope="col">Updated By</th>
                                                 <th>&nbsp;</th>
                                             </tr>
                                         </thead>
@@ -68,15 +66,14 @@ and open the template in the editor.
                                             <?php foreach ($results as $row) : ?>
                                             <script>
                                                 var createdAt = dayjs('<?= $row['created_at'] ?>').format('D MMM YYYY h:mm A');
-                                                var updatedAt = dayjs('<?= $row['updated_at'] ?>').format('D MMM YYYY h:mm A');
                                             </script>
                                             <tr>
-                                                <td><?= $row['Booking.id'] ?></td>
-                                                <td><?= $row['user.id'] ?></td>
-                                                <td><?= $row['Hotel.id'] ?></td>
+                                                <td><?= $row['id'] ?></td>
+                                                <td><?= $row['user_id'] ?></td>
+                                                <td><?= $row['hotel_id'] ?></td>
                                                 <td><?= $row['price'] ?></td>
-                                                <td><?= $row['created_by'] ?></td>
-                                                <td><?= $row['updated_by'] ?></td>
+                                                <td><?= $row['stripe_payment_id'] ?></td>
+                                                <td><?= $row['created_at'] ?></td>
                                                 <td><a role="button" class="btn btn-primary updateBtn" href="update.php?key=<?= $row['id'] ?>" value="<?= $row['id'] ?>">Update</a></td>
                                             </tr>
                                         <?php endforeach; ?>
