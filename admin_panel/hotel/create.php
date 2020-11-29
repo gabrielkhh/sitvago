@@ -4,10 +4,22 @@ require '../../vendor/autoload.php';
 use sitvago\GeoLocation;
 use sitvago\Hotel;
 
+session_start();
+
 $geo = new GeoLocation();
 $roomCat = new Hotel();
 $results = $geo->getGeoLocations();
 $resultsRoomCat = $roomCat->getRoomCategories();
+
+if (!isset($_SESSION['username'])) {
+	$Message = "Please log in as Admin to view this page";
+    header("location: ../frontend/loginpage.php?Message=" .urlencode($Message));
+}
+else if($_SESSION['role_name']!= "Administrator"){
+	$Message = "You do not have permission to view this page";
+    header("location: ../frontend/home.php?Message=" .urlencode($Message));
+}
+
 ?>
 <!DOCTYPE html>
 <!--

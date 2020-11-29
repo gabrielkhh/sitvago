@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<?php include('user_handler.php') ?>
 <?php
 require '../vendor/autoload.php';
 use sitvago\Hotel;
 
-
+session_start();
 
 if (isset($_GET['logout'])) {
 	

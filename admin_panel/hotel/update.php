@@ -6,12 +6,23 @@ require '../../vendor/autoload.php';
 use sitvago\Hotel;
 use sitvago\GeoLocation;
 
+session_start();
+
 $hotel = new Hotel();
 $geo = new GeoLocation();
 $resultsGeo = $geo->getGeoLocations();
 $rowHotel = $hotel->getSingleHotel($id);
 $resultsRoomCat = $hotel->getExistingHotelRoomCategories($id);
 $hotelImages = $hotel->getHotelImagesForBooking($id);
+
+if (!isset($_SESSION['username'])) {
+	$Message = "Please log in as Admin to view this page";
+    header("location: ../frontend/loginpage.php?Message=" .urlencode($Message));
+}
+else if($_SESSION['role_name']!= "Administrator"){
+	$Message = "You do not have permission to view this page";
+    header("location: ../frontend/home.php?Message=" .urlencode($Message));
+}
 ?>
 <!DOCTYPE html>
 <!--
