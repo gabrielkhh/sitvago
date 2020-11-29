@@ -65,8 +65,8 @@ and open the template in the editor.
                                                 var createdAt = dayjs('<?= $row['created_at'] ?>').format('D MMM YYYY h:mm A');
                                             </script>
                                             <tr>
-                                                <td><?= $row['id'] ?></td>
                                                 <td><?= $row['user_id'] ?></td>
+                                                <td><?= $row['title'] ?></td>
                                                 <td><?= $row['hotel_id'] ?></td>
                                                 <td><?= $row['created_at'] ?></td>
                                                 <td><a role="button" class="btn btn-primary updateBtn" href="update.php?key=<?= $row['id'] ?>" value="<?= $row['id'] ?>">Update</a></td>
