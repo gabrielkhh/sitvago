@@ -70,7 +70,7 @@ and open the template in the editor.
                     <div class="card text-white bg-dark mb-3">
                         <div class="card-header text-center">Total number of bookings</div>
                         <div class="card-body text-center">
-                            <h1 id="BookingCounter" class="card-title text-center">Number</h5>
+                            <h1 id="bookingCounter" class="card-title text-center">Number</h5>
                                 <a href="Booking/index.php" class="btn btn-primary">View Bookings</a>
                         </div>
                     </div>
@@ -81,7 +81,7 @@ and open the template in the editor.
                     <div class="card text-white bg-dark mb-3">
                         <div class="card-header text-center">Total number of reviews</div>
                         <div class="card-body text-center">
-                            <h1 id="BookingCounter" class="card-title text-center">Number</h5>
+                            <h1 id="reviewCounter" class="card-title text-center">Number</h5>
                                 <a href="Review/index.php" class="btn btn-primary">View Reviews</a>
                         </div>
                     </div>
@@ -103,7 +103,7 @@ and open the template in the editor.
     var userNumbers = <?= $results[1]['UserCount']; ?>;
     var geoNumbers = <?= $results[2]['GeoCount']; ?>;
     var bookingNumbers = <?= $results[3]['BookingCount']; ?>;
-    var ReviewNumbers = <?= $results[4]['ReviewCount']; ?>;
+    var reviewNumbers = <?= $results[4]['ReviewCount']; ?>;
 </script>
 <script>
     let counterHotel = new CountUp('hotelCounter', 0, hotelNumbers);
