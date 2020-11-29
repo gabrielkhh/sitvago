@@ -34,10 +34,10 @@ and open the template in the editor.
     <script defer src="/js/main.js"></script>
 </head>
 
-<body>
-    <!-- <?php
-            include "../../nav.inc.php";
-            ?> -->
+<body style="padding-top: 70px;">
+    <?php
+    include "../navbar_Admin.php";
+    ?>
     <main class="container main-content mt-2">
         <?php echo "<h1>Update details for " . $resultGeo['name'] . "</h1>"; ?>
 
@@ -75,9 +75,6 @@ and open the template in the editor.
         </div>
 
     </main>
-    <!-- <?php
-            include "../../footer.inc.php";
-            ?> -->
 </body>
 
 </html>

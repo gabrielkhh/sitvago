@@ -41,9 +41,9 @@ and open the template in the editor.
     <script defer src="/js/main.js"></script>
 </head>
 
-<body>
+<body style="padding-top: 70px;">
     <?php
-    include "../navbar.php";
+    include "../navbar_Admin.php";
     ?>
     <main class="container main-content mt-2">
         <h1>Add a New Hotel</h1>
@@ -116,9 +116,6 @@ and open the template in the editor.
         </div><!-- end of div element with class="row"-->
 
     </main>
-    <!-- <?php
-            include "../../footer.inc.php";
-            ?> -->
 </body>
 
 </html>
