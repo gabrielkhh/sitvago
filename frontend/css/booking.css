@@ -54,16 +54,25 @@ body{
 }
 
 .col-icon{
-    font-size:20px;
+    font-size:18px;
     color:black;
     font-weight:bold;
     border-style:dotted;
     border-width:2px;
-    border-color:#FF1493;
-    border-radius:25px;
+    border-color:#191970;
+    border-radius:20px;
     text-align:center;
+    vertical-align: middle;
+    margin:2px;
 }
 
+
+.my-icon{
+    color:black;
+    vertical-align: middle;
+}
+
+/* card is for booking confirmation page */
 .card {
     margin: 0 auto; 
     float: none; 
@@ -125,3 +134,13 @@ body{
 
 
 
+.widget .panel-body { padding:0px; }
+.widget .list-group { margin-bottom: 0; }
+.widget .panel-title { display:inline }
+.widget .label-info { float: right; }
+.widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+.widget .mic-info { color: #666666;font-size: 15px; }
+.widget .action { margin-top:5px; }
+.widget .comment-text { font-size: 12px; }
+.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }

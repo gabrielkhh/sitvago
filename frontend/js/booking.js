@@ -43,7 +43,7 @@ $(document).ready(function()
 
 
  //Remove error message after 3sec cotinously
-var myError = setInterval(removeErrorMsg,6000);
+var myError = setInterval(removeErrorMsg,5000);
 function removeErrorMsg(){    
     //Always checking for error message
     if(messages.length >0){
@@ -53,30 +53,32 @@ function removeErrorMsg(){
 }
 
 
-
 //Validation for submit button
  function registerEventHandlers()
 {
     //var bookBtn = document.getElementById("book_btn");
     if (bookBtn !==null)
     {
-         //Prevent default submission still trying to get it work
-         bookBtn.addEventListener("click",(e) =>{
-            var checkInValue = checkInDate.value;
-            var checkOutValue = checkOutDate.value;
-            //Check if date are filled
-            if (checkInValue.length === 0 || checkOutValue.length === 0)
-            {
-                messages.push("Please fill in all fields");
-            }
-            
-            //If error messages found prevent submission.
-            if (messages.length >0){
-                addElement("book_btn",'span','error',messages[0]);
-                e.preventDefault(); 
-                //errorElement.innerText =messages.join(', ');            
-            }
-        });
+        //Prevent default submission still trying to get it work
+        bookBtn.addEventListener("click",(e) =>{
+           var checkInValue = checkInDate.value;
+           var checkOutValue = checkOutDate.value;
+           //Check if date are filled
+           if (checkInValue.length === 0 || checkOutValue.length === 0)
+           {
+               messages.push("Please fill in all fields");
+           }
+
+           //If error messages found prevent submission.
+           if (messages.length >0){
+               e.target.disabled = true;
+               e.preventDefault();
+               addElement("book_btn",'span','error',messages[0]); 
+               setTimeout(()=> {
+                   e.target.disabled = false;
+               },5000)
+           }
+       });
     }
     else
     {
@@ -105,13 +107,20 @@ function calenderHandler1(){
             var checkInFormatted = checkInValue.split("-").reverse().join("-");
             //Only check if checkIn value is greater than checkout
             if (checkOutValue.length !==0){
+                //If dates are greater then checkout
                 if (checkInFormatted > checkOutFormatted)
                 {
                     messages.push("Invalid Date!");
-                    //errorElement.innerText =messages.join(', ')
                     instance.clear();
                     addElement("book_btn",'span','error',messages[0]);
 
+                }
+                 //If dates are same
+                if (checkOutFormatted === checkInFormatted){
+                     messages.push("Invalid Date!");
+                    instance.clear();
+                    addElement("book_btn",'span','error',messages[0]);
+                    
                 }
             }
 
@@ -129,25 +138,7 @@ function calenderHandler1(){
 
 function calenderHandler2(){
     flatpickr(checkOutDate,{
-        //minDate: minCoutDate,
         dateFormat: "d-m-Y",
-        /*
-        //Validation using onChange Event
-        onChange: function(selectedDates, dateStr, instance) {
-            var checkOutValue = checkOutDate.value;
-            var checkInValue = checkInDate.value;
-            var checkOutFormatted = checkOutValue.split("-").reverse().join("-");
-            var checkInFormatted = checkInValue.split("-").reverse().join("-");
-            //Only check if checkInValue is not null and greater then checkout
-            if (checkInValue.length !==0){
-                if (checkInFormatted > checkOutFormatted)
-                {
-                    instance.clear();
-                }
-            }
-            
-        },
-         */
         //Set min date always greater then check in date
         onOpen: function(selectedDates, dateStr, instance) {
             var checkInValue = checkInDate.value;
@@ -181,8 +172,5 @@ function removeElement(elementId) {
     element.parentNode.removeChild(element);
 }
 
-//Do not allow user to enter into the input field for validation by disabling keypress
-//checkInDate.onkeypress = () => false;
-//checkOutDate.onkeypress = () => false;
 
 
