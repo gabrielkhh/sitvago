@@ -5,16 +5,15 @@ use sitvago\Overview;
 
 // $some_name = session_name("sitvago_session");
 // session_set_cookie_params(0, '/', '.sitvago.com');
+
+$overview = new Overview();
+$results = $overview->getCount();
+ 
 if (isset($_COOKIE['session_id']))
     session_id($_COOKIE['session_id']);
 session_start();
 if (!isset($_COOKIE['session_id']))
     setcookie('session_id', session_id(), 0, '/', '.sitvago.com');
-
-$overview = new Overview();
-$results = $overview->getCount();
- 
-
 
 if (!isset($_SESSION['username'])) {
 	$Message = "Please log in as Admin to view this page";
