@@ -181,8 +181,8 @@ if (isset($_POST['login_user'])) {
 
             if ($UserData['role_name'] === "Administrator") {
                 $_SESSION['role_name'] = "Administrator";
-                //$redirect = 'https://admin.sitvago.com';
-                $redirect = 'home.php';
+                $redirect = 'https://admin.sitvago.com';
+                // $redirect = 'home.php';
             } else if ($UserData['role_name'] === "User") {
 
                 $redirect = 'home.php';

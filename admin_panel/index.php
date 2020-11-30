@@ -12,30 +12,19 @@ session_start();
 // if (!isset($_COOKIE['session_id']))
 //     setcookie('session_id', session_id(), 0, '/', '.sitvago.com');
 
-echo $_SESSION['username'];
-if (!isset($_SESSION['username']))
-{
-    echo "Not set";
-}
-else
-{
-    echo $_SESSION['username'];
-    echo "SESSION IS SET";
-}
-
 $overview = new Overview();
 $results = $overview->getCount();
  
 
 
-// if (!isset($_SESSION['username'])) {
-// 	$Message = "Please log in as Admin to view this page";
-//     header("location: https://sitvago.com/loginpage.php?Message=" .urlencode($Message));
-// }
-// else if($_SESSION['role_name']!= "Administrator"){
-// 	$Message = "You do not have permission to view this page";
-//     header("location: https://sitvago.com/home.php?Message=" .urlencode($Message));
-// }
+if (!isset($_SESSION['username'])) {
+	$Message = "Please log in as Admin to view this page";
+    header("location: https://sitvago.com/loginpage.php?Message=" .urlencode($Message));
+}
+else if($_SESSION['role_name']!= "Administrator"){
+	$Message = "You do not have permission to view this page";
+    header("location: https://sitvago.com/home.php?Message=" .urlencode($Message));
+}
 
 ?>
 <!DOCTYPE html>
