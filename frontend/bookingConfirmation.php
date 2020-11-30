@@ -54,12 +54,18 @@ unset($_SESSION['INFO']);
                 <h4 class="card-title">Payment Details</h4>
                 <p class="card-text">
                     Congratulations! Your booking with <?= $data['hotelname'] ?> for <?= $data['duration'] ?> days is confirmed!<br>
+                    </hr>
                     <strong>Transaction ID:</strong> <?= $data['stripeTxID'] ?><br>
+                    </hr>
                     <strong>First Name:</strong> <?= $data['fname'] ?><br>
+                    </hr>
                     <strong>Last Name:</strong> <?= $data['lname'] ?><br>
+                    </hr>
                     <strong>Email Address:</strong> <?= $data['email'] ?><br>
+                    </hr>
                     <strong>Room Type:</strong> <?= $data['roomtype'] ?><br>
-                    <strong>Amount paid:</strong> SGD$<?= $data['price'] ?><br>
+                    </hr>                    
+                    <strong>Amount paid:</strong> SGD$<?= $data['price'] ?><br>                    
                 </p>
                 <a href="#" class="btn btn-primary">Email Invoice</a>
             </div>
