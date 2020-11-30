@@ -7,6 +7,7 @@ use sitvago\Overview;
 $overview = new Overview();
 $results = $overview->getCount();
 
+echo $_SESSION['username'];
 echo $_SERVER["DOCUMENT_ROOT"];
 
 // if (!isset($_SESSION['username'])) {
