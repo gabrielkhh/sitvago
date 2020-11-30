@@ -7,6 +7,8 @@ $some_name = session_name("sitvago_session");
 session_set_cookie_params(0, '/', '.sitvago.com');
 session_start();
 
+echo $_SESSION['username'];
+
 $overview = new Overview();
 $results = $overview->getCount();
  
