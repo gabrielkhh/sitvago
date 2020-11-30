@@ -40,7 +40,7 @@ class Review extends DB
         }
         
 
-        return $rowReview;
+        return $results;
     }
 
     public function addReview($userID, $hotelID, $title, $rating, $content)
