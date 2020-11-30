@@ -113,12 +113,11 @@ $resultantData = array(
     "hotelname" => $hotelName
 );
 
-$html  = file_get_contents('../frontend/email_template/bookingEmail.php'); // this will retrieve the html document
-
-
-
 //Redirect to Success
 $_SESSION['INFO'] = $resultantData;
+$_SESSION['EMAILINFO'] = $resultantData;
+
+$html  = file_get_contents('../frontend/email_template/bookingEmail.php'); // this will retrieve the html document
 
 # Instantiate the client.
 $mg = Mailgun::create($_SERVER['mailgun_api_key']);

@@ -1,6 +1,7 @@
 <?php
 session_start();
-$data = $_SESSION['INFO'];
+$data = $_SESSION['EMAILINFO'];
+unset($_SESSION['EMAILINFO']);
 ?>
 <!DOCTYPE html>
 <html>
