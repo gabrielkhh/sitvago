@@ -1,3 +1,7 @@
+<?php
+session_start();
+$data = $_SESSION['INFO'];
+?>
 <!DOCTYPE html>
 <html>
 
@@ -131,7 +135,9 @@
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                            <p style="margin: 0;">We hope you enjoy your stay at Hotel Name! If you have any questions, feel free to check out our FAQ section by clicking the button below.</p>
+                            <p style="margin: 0;"><strong>Transaction ID:</strong> <?= $data['stripeTxID'] ?><br></p>
+                            <p style="margin: 0;"><strong>Amount paid:</strong> SGD$<?= $data['price'] ?><br></p>
+                            <p style="margin: 0;"> Dear <?= $data['fname'] ?>, We hope you enjoy your stay at <?= $data['hotelname'] ?>! If you have any questions, feel free to check out our FAQ section by clicking the button below.</p>
                         </td>
                     </tr>
                     <tr>
@@ -159,12 +165,12 @@
                             <p style="margin: 0;"><a href="#" target="_blank" style="color: #FFA73B;">https://sitvago.com/faq.php</a></p>
                         </td>
                     </tr>
-                    
+
                     <tr>
                         <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 40px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                             <p style="margin: 0;">Cheers,<br>The Sitvago Team</p>
                         </td>
-                    </tr>	
+                    </tr>
                 </table>
             </td>
         </tr>

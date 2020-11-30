@@ -113,7 +113,12 @@ $resultantData = array(
     "hotelname" => $hotelName
 );
 
-$html  = file_get_contents('../frontend/email_template/bookingEmail.html'); // this will retrieve the html document
+$html  = file_get_contents('../frontend/email_template/bookingEmail.php'); // this will retrieve the html document
+
+
+
+//Redirect to Success
+$_SESSION['INFO'] = $resultantData;
 
 # Instantiate the client.
 $mg = Mailgun::create($_SERVER['mailgun_api_key']);
@@ -121,11 +126,9 @@ $mg = Mailgun::create($_SERVER['mailgun_api_key']);
 // $mg->messages()->send($domain, $params);
 $mg->messages()->send('mg.sitvago.com', [
     'from'    => 'Sitvago noreply@sitvago.com',
-    'to'      => 'freezingheat97@gmail.com',
+    'to'      => $email,
     'subject' => 'Your Booking Has Been Confirmed',
     'html'    => $html
 ]);
 
-//Redirect to Success
-$_SESSION['INFO'] = $resultantData;
 header("Location:bookingConfirmation.php");
