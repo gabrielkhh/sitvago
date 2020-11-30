@@ -5,7 +5,6 @@ use sitvago\Overview;
 
 // $some_name = session_name("sitvago_session");
 // session_set_cookie_params(0, '/', '.sitvago.com');
-session_start();
 if (isset($_COOKIE['session_id']))
     session_id($_COOKIE['session_id']);
 session_start();
