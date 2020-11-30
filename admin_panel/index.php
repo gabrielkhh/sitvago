@@ -1,14 +1,13 @@
-
-
 <?php
+session_start();
 require '../vendor/autoload.php';
 
 use sitvago\Overview;
 
-session_start();
-
 $overview = new Overview();
 $results = $overview->getCount();
+
+echo $_SERVER["DOCUMENT_ROOT"];
 
 if (!isset($_SESSION['username'])) {
 	$Message = "Please log in as Admin to view this page";
