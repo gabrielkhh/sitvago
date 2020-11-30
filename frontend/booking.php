@@ -12,8 +12,6 @@ $roomCategoriesResults = $hotelObj->getRoomCategories();
 $hotelSelected = $hotelObj->getHotelInfoForBooking($id);
 $hotelImagesSelected = $hotelObj->getHotelImagesForBooking($id);
 $hotelPrices = $hotelObj->getHotelPricesForBooking($id);
-// $roomPrice = $hotelObj->getRoomCategoryRate($hotelSelected,$roomCategoriesResults);
-//$roomDescription = $hotelObj->getRoomDescription();
 $counterImage = 0;
 
 $review = new Review();
