@@ -13,6 +13,9 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+                <a class="nav-link" href="https://sitvago.com">Sitvago Home Page</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="https://admin.sitvago.com/geolocation/index.php">Geo Locations</a>
             </li>
             <li class="nav-item">
@@ -25,7 +28,7 @@
                 <a class="nav-link" href="user_profile.php">Admin Profile</a>
             </li> -->
             <li class="nav-item">
-                <a class="nav-link" href="home.php?logout='1'">Logout</a>
+                <a class="nav-link" href="https://sitvago.com/loginpage.php?logout='1'">Logout</a>
             </li>
         </ul>
     </div>

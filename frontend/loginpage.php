@@ -6,6 +6,11 @@ if (isset($_GET['Message'])) {
     print '<script type="text/javascript">alert("' . $_GET['Message'] . '");</script>';
 }
 
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy();
+}
+
 
 ?>
 <!DOCTYPE html>
