@@ -2,7 +2,6 @@
 require '../vendor/autoload.php';
 
 use sitvago\User;
-use Mailgun\Mailgun;
 
 // $some_name = session_name("sitvago_session");
 // session_set_cookie_params(0, '/', '.sitvago.com');
@@ -127,16 +126,6 @@ if (isset($_POST['reg_user'])) {
         $saveUserResult = $saveUser->registerUser($first_name, $last_name, $username, $email, $phone_number, $country, $password, $billing_address);
         $_SESSION['username'] = $username;
 
-        # Instantiate the client.
-        /*$mg = Mailgun::create($_SERVER['mailgun_api_key']);
-        // Now, compose and send your message.
-        // $mg->messages()->send($domain, $params);
-        $mg->messages()->send('mg.sitvago.com', [
-            'from'    => 'Sitvago noreply@sitvago.com',
-            'to'      => 'freezingheat97@gmail.com',
-            'subject' => 'Thank you for signing up with us!',
-            'html'    => 'We hope you will have a great time!'
-        ]);*/
         session_unset();
         session_destroy();
         $Message = "Registration successful! Please login from the home page.";
