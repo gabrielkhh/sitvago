@@ -115,9 +115,14 @@ $resultantData = array(
 
 //Redirect to Success
 $_SESSION['INFO'] = $resultantData;
-$_SESSION['EMAILINFO'] = $resultantData;
 
-$html  = file_get_contents('../frontend/email_template/bookingEmail.php'); // this will retrieve the html document
+$html  = file_get_contents('https://sitvago.com/email_template/bookingEmail.php'); // this will retrieve the html document
+
+$html = str_replace("HOTELNAME", "$hotelName", $html);
+$html = str_replace("FNAME", "$first_name", $html);
+$html = str_replace("TXID", "$txID", $html);
+$html = str_replace("PRICE", number_format((float)$price, 2, '.', ''), $html);
+
 
 # Instantiate the client.
 $mg = Mailgun::create($_SERVER['mailgun_api_key']);

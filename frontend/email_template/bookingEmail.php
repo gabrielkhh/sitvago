@@ -1,8 +1,3 @@
-<?php
-session_start();
-$data = $_SESSION['EMAILINFO'];
-unset($_SESSION['EMAILINFO']);
-?>
 <!DOCTYPE html>
 <html>
 
@@ -108,7 +103,7 @@ unset($_SESSION['EMAILINFO']);
 
 <body style="background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;">
     <!-- HIDDEN PREHEADER TEXT -->
-    <div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: 'Lato', Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;"> We're thrilled to have you here! Get ready to dive into your new account. </div>
+    <div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: 'Lato', Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;"> Thank you for choosing Sitvago!</div>
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <!-- LOGO -->
         <tr>
@@ -136,9 +131,9 @@ unset($_SESSION['EMAILINFO']);
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                            <p style="margin: 0;"><strong>Transaction ID:</strong> <?= $data['stripeTxID'] ?><br></p>
-                            <p style="margin: 0;"><strong>Amount paid:</strong> SGD$<?= $data['price'] ?><br></p>
-                            <p style="margin: 0;"> Dear <?= $data['fname'] ?>, We hope you enjoy your stay at <?= $data['hotelname'] ?>! If you have any questions, feel free to check out our FAQ section by clicking the button below.</p>
+                            <p style="margin: 0;"><strong>Transaction ID:</strong> TXID<br></p>
+                            <p style="margin: 0;"><strong>Amount paid:</strong> SGD$PRICE<br></p>
+                            <p style="margin: 0;"> Dear FNAME, We hope you enjoy your stay at HOTELNAME! If you have any questions, feel free to check out our FAQ section by clicking the button below.</p>
                         </td>
                     </tr>
                     <tr>
