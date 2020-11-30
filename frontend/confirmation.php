@@ -43,7 +43,7 @@ $userBillingAddress = $_SESSION['billing_address'];
     <!-- Own Script -->
     <script src="https://js.stripe.com/v3/"></script>
     <script defer src="js/confirmation.js"></script>
-    <script defer src="js/booking.js"></script>
+    <!--<script defer src="js/booking.js"></script>-->
 
 
 
@@ -63,9 +63,6 @@ $userBillingAddress = $_SESSION['billing_address'];
     $days =  $origin ->diff($target)->format('%a');
     
     //Price of rooms
-    $deluxe = 150;
-    $suite = 200;
-    $bookingFee = 10;
     $rate = $_POST['amountPN'];
     $price_before_round = $rate * $days;
     $price = "SGD$" . number_format((float)$price_before_round, 2, '.', '');
@@ -74,11 +71,15 @@ $userBillingAddress = $_SESSION['billing_address'];
     //Cal price based on type of room
     if ($roomType == "Deluxe"){
         $roomFee = $deluxe;
-        $price = ($roomFee * $days) + $bookingFee;
+        $price = ($roomFee * $days);
     }
     if ($roomType == "Executive Suite"){
         $roomFee = $suite;
-        $price = ($roomFee * $days) + $bookingFee;
+        $price = ($roomFee * $days);
+    }
+     if ($roomType == "Twin Room"){
+        $roomFee = $twin;
+        $price = ($roomFee * $days);
     }
 
     ?>
@@ -139,9 +140,6 @@ $userBillingAddress = $_SESSION['billing_address'];
                             <div id="card-errors" role="alert"></div>
                         </div>
                     </div>
-                   <!-- <label>-->
-                       <!-- <input type="checkbox" name="accDetails" id="details_check_box"> Confirm Details-->
-                    <!-- </label>-->
                     <input type="submit" value="Confirm Booking" class="btn" name="confirm_book_btn" id="confirm_book_btn">
                 </form>
             </div>
@@ -150,8 +148,8 @@ $userBillingAddress = $_SESSION['billing_address'];
             <div class="row">
                 <div class="container confirm-box">
                     <h1 class="price_confirm">Total Price</h1>
-                    <p>Room Fee: <span class="price"><?=$roomFee?></span></p>
-                    <p>Booking Fee: <span class="price"><?=$bookingFee?></span></p>
+                    <p>Room Fee: <span class="price"><?=$rate?></span></p>
+                    <!--<p>Booking Fee: <span class="price"></span></p>-->
                     <p>Total Days: <span class="price"><?=$days?></span></p>
                     <p>Total: <span class="price"><?=$price?></span></p>
                 </div>

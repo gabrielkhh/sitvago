@@ -69,6 +69,7 @@ print_r($results);
         <link rel="stylesheet" href="css/booking.css">
         <section class="ftco-section">
             <div class="container">
+                <!--First Row Starts Here -->
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="row">
@@ -130,43 +131,9 @@ print_r($results);
                                     </div>
                                 </div>
                             </div>
-                            <!--Review Section Starts Here -->
-                            <div class="container review-container">
-                                <div class="row">
-                                    <div class="panel panel-default widget">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">Recent Reviews</h3>
-                                            <input type="text" id="review" name="review" placeholder="Eg.This place is awesome">
-                                        </div>
-                                        <div class="panel-body">
-                                            <ul class="list-group">
-                                                <li class="list-group-item">
-                                                    <?php foreach ($results as $row) : ?>
-                                                        <div class="row">                                                
-                                                            <div class="col-xs-10 col-md-11">
-                                                                    <div class="mic-info">
-                                                                        By: <?= $row['username'] ?> on <?= $row['created_at'] ?>
-                                                                    </div>
-                                                                
-                                                                <div class="comment-text">
-                                                                    <?= $row['title'] ?>
-                                                                    <br>
-                                                                    <?= $row['content'] ?>
-                                                                </div>                                                             
-                                                            </div>
-                                                        </div>
-                                                        <?php endforeach; ?>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Review Section End Here -->
                         </div>
                     </div>
                     <div class="col-lg-4 sidebar ftco-animate pl-md-5">
-                        <!--div class="sidebar-box ftco-animate">-->
                         <h3 class="hotel_selected"><?= $hotelSelected['name'] ?></h3>
                         <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">
                             <div class="form-group">
@@ -193,15 +160,45 @@ print_r($results);
                         <p>
                         <h3 id="price"></h3>
                         </p>
-                        <div id="descriptionArea">TEST</div>
+                        <div id="descriptionArea"></div>
                         <hr/>
-
-                        <!--<div id="review">
-                            
-                        </div>-->
                     </div>
-
                 </div>
+                <!--First Row End Here -->
+                
+                <!--Review Section Starts Here -->
+                <div class="container review-container">
+                    <div class="row">
+                        <div class="panel panel-default widget">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Recent Reviews</h3>
+                                <input type="text" id="review" name="review" placeholder="Eg.This place is awesome">
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <?php foreach ($results as $row) : ?>
+                                            <div class="row">                                                
+                                                <div class="col-xs-10 col-md-11">
+                                                        <div class="mic-info">
+                                                            By: <?= $row['username'] ?> on <?= $row['created_at'] ?>
+                                                        </div>
+
+                                                    <div class="comment-text">
+                                                        <?= $row['title'] ?>
+                                                        <br>
+                                                        <?= $row['content'] ?>
+                                                    </div>                                                             
+                                                </div>
+                                            </div>
+                                            <?php endforeach; ?>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Review Section End Here -->
             </div>
         </section>
         <footer class="bg-light pb-5">
