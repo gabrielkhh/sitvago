@@ -395,8 +395,6 @@ $results = $bookings->getBookings($userID);
                 document.getElementById("billing_address").readOnly = true;
                 document.getElementById("change_password").style.display = "none";
                 document.getElementById("prevBtn").style.display = "none";
-
-
             }
             // Get the element with id="defaultOpen" and click on it
             document.getElementById("defaultOpen").click();

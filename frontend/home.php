@@ -153,6 +153,7 @@ and open the template in the editor.
                                                 <a class="btn btn-light" role="button" href="booking.php?key=<?= $row['id'] ?>">View</a>
                                             </div>
                                         </div>
+                                        <span class="badge badge-info mt-3"><?= $row['area_name'] ?></span>
                                     </div>
                             </div>
                         </div>

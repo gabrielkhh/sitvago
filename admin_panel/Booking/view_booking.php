@@ -6,18 +6,17 @@ require '../../vendor/autoload.php';
 use sitvago\Hotel;
 use sitvago\Booking;
 
-$hotel = new Hotel();
 $booking = new Booking();
-$rowHotel = $hotel->getSingleHotel($id);
 $rowBooking = $booking->getSingleBooking($id);
 
+session_start();
+
 if (!isset($_SESSION['username'])) {
-	$Message = "Please log in as Admin to view this page";
-    header("location: ../frontend/loginpage.php?Message=" .urlencode($Message));
-}
-else if($_SESSION['role_name']!= "Administrator"){
-	$Message = "You do not have permission to view this page";
-    header("location: ../frontend/home.php?Message=" .urlencode($Message));
+    $Message = "Please log in as Admin to view this page";
+    header("location: ../frontend/loginpage.php?Message=" . urlencode($Message));
+} else if ($_SESSION['role_name'] != "Administrator") {
+    $Message = "You do not have permission to view this page";
+    header("location: ../frontend/home.php?Message=" . urlencode($Message));
 }
 
 ?>
@@ -31,7 +30,7 @@ and open the template in the editor.
 
 <head>
     <meta charset="UTF-8">
-    <title>Hotel Sitvago CMS - Create Hotel</title>
+    <title>Hotel Sitvago CMS - View Booking</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--CSS Sources-->
@@ -47,11 +46,11 @@ and open the template in the editor.
     <script defer src="/js/main.js"></script>
 </head>
 
-<body>
-    <!-- <?php
-            include "../../nav.inc.php";
-            ?> -->
-    <main class="container main-content mt-2">
+<body style="padding-top: 70px;">
+    <?php
+    include "../navbar_Admin.php";
+    ?>
+    <main class="container main-content ">
         <?php echo "<h1>Update details for " . $rowHotel['name'] . "</h1>"; ?>
 
         <div class="row">

@@ -87,7 +87,7 @@ and open the template in the editor.
                                                 <td><?= $row['hotel_name'] ?></td>
                                                 <td><?= $row['price'] ?></td>
                                                 <td id="createdDate<?= $row['id'] ?>"><script>document.getElementById('createdDate<?= $row['id'] ?>').innerHTML = createdAt;</script></td>
-                                                <td><a role="button" class="btn btn-primary updateBtn" href="update.php?key=<?= $row['id'] ?>" value="<?= $row['id'] ?>">View</a></td>
+                                                <td><a role="button" class="btn btn-primary updateBtn" href="view_booking.php?key=<?= $row['id'] ?>" value="<?= $row['id'] ?>">View</a></td>
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>

@@ -48,8 +48,8 @@ class Booking extends DB
     {
         $results = [];
         $success = true;
-        $SQL = "SELECT Booking.id, Hotel.name AS hotel_name, RoomCategory.name AS room_type, 
-            Booking.price, Booking.check_in, Booking.check_out, FROM Booking 
+        $SQL = "SELECT Booking.id, Booking.stripe_payment_id, Hotel.name AS hotel_name, RoomCategory.category_name AS room_type, 
+            Booking.price, Booking.check_in, Booking.check_out FROM Booking 
             LEFT JOIN Hotel ON Booking.hotel_id = Hotel.id LEFT JOIN RoomCategory
             ON Booking.room_category_id = RoomCategory.id WHERE Booking.id=" . $bookingID . ";";
 
