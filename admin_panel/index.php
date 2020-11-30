@@ -9,14 +9,14 @@ $results = $overview->getCount();
 
 echo $_SERVER["DOCUMENT_ROOT"];
 
-if (!isset($_SESSION['username'])) {
-	$Message = "Please log in as Admin to view this page";
-    header("location: https://sitvago.com/loginpage.php?Message=" .urlencode($Message));
-}
-else if($_SESSION['role_name']!= "Administrator"){
-	$Message = "You do not have permission to view this page";
-    header("location: https://sitvago.com/home.php?Message=" .urlencode($Message));
-}
+// if (!isset($_SESSION['username'])) {
+// 	$Message = "Please log in as Admin to view this page";
+//     header("location: https://sitvago.com/loginpage.php?Message=" .urlencode($Message));
+// }
+// else if($_SESSION['role_name']!= "Administrator"){
+// 	$Message = "You do not have permission to view this page";
+//     header("location: https://sitvago.com/home.php?Message=" .urlencode($Message));
+// }
 
 ?>
 <!DOCTYPE html>
