@@ -56,7 +56,7 @@ and open the template in the editor.
     include "navbar_Admin.php";
     ?>
     <main class="container main-content">
-        <h1>Welcome Back, Admin!</h1>
+        <h1>Welcome Back, <?= $_SESSION['username'] ?>!</h1>
 
         <div class="row mt-4">
             <div class="col-md-3">
