@@ -126,17 +126,6 @@ and open the template in the editor.
                                         <div class="col-lg-3 col-md-3 col-sm-12 p-0 ">
                                             <input type="text" class="form-control search-slt" placeholder="Preferred Location">
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-12 p-0 ">
-                                            <select class="form-control search-slt" id="exampleFormControlSelect1">
-                                                <option>Sort By</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                            </select>
-                                        </div>
                                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                             <button type="button" class="btn btn-danger wrn-btn">Search</button>
                                         </div>
