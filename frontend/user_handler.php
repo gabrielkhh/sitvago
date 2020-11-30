@@ -137,6 +137,7 @@ if (isset($_POST['reg_user'])) {
             'subject' => 'Thank you for signing up with us!',
             'html'    => 'We hope you will have a great time!'
         ]);*/
+        session_destroy();
         $Message = "Registration successful! Please login from the home page.";
 
         header("location: home.php?Message=" . urlencode($Message));
@@ -261,6 +262,7 @@ if (isset($_POST['update_user'])) {
 
         $updateUserResult = $userObj->updateUser($first_name, $last_name, $email, $phone_number, $country, $billing_address, $username);
         $_SESSION['username'] = $username;
+        session_destroy();
         $Message = "Account details updated successfully! Please login again.";
 
         header("location: home.php?Message=" . urlencode($Message));
@@ -308,6 +310,7 @@ if (isset($_POST['update_password'])) {
         if (count($checkPasswordResult) > 0) {
             $password_new = md5($password2);
             $updatePasswordQuery = $userObj->updateUserPassword($password_new, $username);
+            session_destroy();
             $Message = "Password changed successfully! Please login again.";
 
             header("location: home.php?Message=" . urlencode($Message));
