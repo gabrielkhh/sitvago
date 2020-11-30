@@ -136,6 +136,7 @@ if (isset($_SESSION['errMsgreg'])) {
 					<p><?php echo $error ?></p>
 					
 				<?php endforeach ?>
+				<?php unset($_SESSION['errMsgreg']); ?>
 			
 			
 			

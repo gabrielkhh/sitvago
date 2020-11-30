@@ -6,6 +6,7 @@ use sitvago\Booking;
 use Dotenv\Dotenv;
 use sitvago\Hotel;
 use sitvago\User;
+use Mailgun\Mailgun;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->load();
@@ -114,5 +115,24 @@ $resultantData = array(
 
 //Redirect to Success
 $_SESSION['INFO'] = $resultantData;
+
+$html  = file_get_contents('https://sitvago.com/email_template/bookingEmail.php'); // this will retrieve the html document
+
+$html = str_replace("HOTELNAME", "$hotelName", $html);
+$html = str_replace("FNAME", "$first_name", $html);
+$html = str_replace("TXID", "$txID", $html);
+$html = str_replace("PRICE", number_format((float)$price, 2, '.', ''), $html);
+
+
+# Instantiate the client.
+$mg = Mailgun::create($_SERVER['mailgun_api_key']);
+// Now, compose and send your message.
+// $mg->messages()->send($domain, $params);
+$mg->messages()->send('mg.sitvago.com', [
+    'from'    => 'Sitvago noreply@sitvago.com',
+    'to'      => $email,
+    'subject' => 'Your Booking Has Been Confirmed',
+    'html'    => $html
+]);
+
 header("Location:bookingConfirmation.php");
-?>

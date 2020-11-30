@@ -1,5 +1,17 @@
 <?php
 session_start();
+
+if (isset($_GET['Message'])) {
+	// unset($_SESSION['username']);
+    print '<script type="text/javascript">alert("' . $_GET['Message'] . '");</script>';
+}
+
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy();
+}
+
+
 ?>
 <!DOCTYPE html>
 <!--

@@ -2,9 +2,15 @@
 require '../vendor/autoload.php';
 
 use sitvago\User;
-use Mailgun\Mailgun;
 
+// $some_name = session_name("sitvago_session");
+// session_set_cookie_params(0, '/', '.sitvago.com');
+// session_start();
+if (isset($_COOKIE['session_id']))
+    session_id($_COOKIE['session_id']);
 session_start();
+if (!isset($_COOKIE['session_id']))
+    setcookie('session_id', session_id(), 0, '/', '.sitvago.com');
 
 // // initializing variables
 // $first_name = "";
@@ -14,12 +20,15 @@ session_start();
 // $country = "";
 // $billing_address = "";
 // $phone_number = "";
-// $role_id = "";
+// $role_name = "";
 $redirect = "";
 // $password = "";
 $errors = array();
 $errorsDetails = array();
 $errorsPW = array();
+
+
+
 
 //Helper function that checks input for malicious or unwanted content.
 function sanitize_input($data)
@@ -44,6 +53,11 @@ if (isset($_POST['reg_user'])) {
     $billing_address = $_POST['billing_address'];
     $password_1 = $_POST['pwd'];
     $password_2 = $_POST['pwd_confirm'];
+
+    $uppercase = preg_match('@[A-Z]@', $password_1);
+    $lowercase = preg_match('@[a-z]@', $password_1);
+    $number    = preg_match('@[0-9]@', $password_1);
+    $space = preg_match("/\\s/", $password_1);
 
     // form validation: ensure that the form is correctly filled ...
     // by adding (array_push()) corresponding error unto $errors array
@@ -82,6 +96,8 @@ if (isset($_POST['reg_user'])) {
     }
     if (empty($password_1)) {
         array_push($errors, "Password is required");
+    } else if (!$uppercase || !$lowercase || !$number || strlen($password_1) < 8 || $space) {
+        array_push($errors, "Your password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and should not contain whitespaces.");
     }
     if ($password_1 != $password_2) {
         array_push($errors, "Passwords do not match");
@@ -109,30 +125,16 @@ if (isset($_POST['reg_user'])) {
         $saveUser = new User();
         $saveUserResult = $saveUser->registerUser($first_name, $last_name, $username, $email, $phone_number, $country, $password, $billing_address);
         $_SESSION['username'] = $username;
-        
-        # Instantiate the client.
-        $mg = Mailgun::create($_SERVER['mailgun_api_key']);
-        // Now, compose and send your message.
-        // $mg->messages()->send($domain, $params);
-        $mg->messages()->send('mg.sitvago.com', [
-            'from'    => 'Sitvago noreply@sitvago.com',
-            'to'      => 'freezingheat97@gmail.com',
-            'subject' => 'Thank you for signing up with us!',
-            'html'    => 'We hope you will have a great time!'
-        ]);
+
+        session_unset();
+        session_destroy();
         $Message = "Registration successful! Please login from the home page.";
-			
-        header("location: home.php?Message=" .urlencode($Message));
+
+        header("location: home.php?Message=" . urlencode($Message));
     } else {
-        
-		$_SESSION['errMsgreg'] = $errors;
-		header('location: register.php');
-		//if (count($errors)>0){
-			//foreach ($errors as $error):
-				//$_SESSION['errMsgreg'] = $error;
-			//endforeach;
-		//}
-		
+
+        $_SESSION['errMsgreg'] = $errors;
+        header('location: register.php');
     }
 }
 
@@ -160,7 +162,7 @@ if (isset($_POST['login_user'])) {
 
             $_SESSION['username'] = $UserData['username'];
             $_SESSION['userID'] = $UserData['id'];
-            $_SESSION['role_id'] = $UserData['role_id'];
+            $_SESSION['role_name'] = $UserData['role_name'];
             $_SESSION['first_name'] = $UserData['first_name'];
             $_SESSION['last_name'] = $UserData['last_name'];
             $_SESSION['email'] = $UserData['email'];
@@ -168,18 +170,18 @@ if (isset($_POST['login_user'])) {
             $_SESSION['country'] = $UserData['country'];
             $_SESSION['billing_address'] = $UserData['billing_address'];
 
-            $_SESSION['success'] = "You are now logged in";
-            if ($UserData['role_id'] == 1) {
-                $redirect = 'home.php';
-            } else if ($UserData['role_id'] == 2) {
+            if ($UserData['role_name'] === "Administrator") {
+                $redirect = 'https://admin.sitvago.com';
+                // $redirect = 'home.php';
+            } else if ($UserData['role_name'] === "User") {
 
                 $redirect = 'home.php';
             }
             header('location:' . $redirect);
         } else {
             array_push($errors, "Wrong username/password combination");
-			$_SESSION['errMsg'] = "Invalid username or password";
-			header('location: loginpage.php');
+            $_SESSION['errMsg'] = "Invalid username or password";
+            header('location: loginpage.php');
         }
     }
 }
@@ -233,8 +235,8 @@ if (isset($_POST['update_user'])) {
 
     // first check the database to make sure 
     // a user does not already exist with the same email
-    
-   
+
+
     if ($_SESSION['email'] != $email) {
         $checkEmail = new User();
         $userRes = $checkEmail->checkEmailExists($email);
@@ -250,13 +252,14 @@ if (isset($_POST['update_user'])) {
 
         $updateUserResult = $userObj->updateUser($first_name, $last_name, $email, $phone_number, $country, $billing_address, $username);
         $_SESSION['username'] = $username;
+        session_destroy();
         $Message = "Account details updated successfully! Please login again.";
-			
-        header("location: home.php?Message=" .urlencode($Message));
-    }else{
-		header("location: user_profile.php");
-		$_SESSION['errorsDetails'] = $errorsDetails;
-	}
+
+        header("location: home.php?Message=" . urlencode($Message));
+    } else {
+        header("location: user_profile.php");
+        $_SESSION['errorsDetails'] = $errorsDetails;
+    }
 }
 
 
@@ -267,6 +270,10 @@ if (isset($_POST['update_password'])) {
     $password = $_POST['password'];
     $password2 = $_POST['new_password'];
     $password3 = $_POST['confirmed_password'];
+    $uppercase = preg_match('@[A-Z]@', $password2);
+    $lowercase = preg_match('@[a-z]@', $password2);
+    $number    = preg_match('@[0-9]@', $password2);
+    $space = preg_match("/\\s/", $password2);
 
     if (empty($username)) {
         array_push($errorsPW, "Username is required");
@@ -276,6 +283,8 @@ if (isset($_POST['update_password'])) {
     }
     if (empty($password2)) {
         array_push($errorsPW, "New Password is required");
+    } else if (!$uppercase || !$lowercase || !$number || strlen($password_1) < 8 || $space) {
+        array_push($errorsPW, "Your password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and should not contain whitespaces.");
     }
     if (empty($password3)) {
         array_push($errorsPW, "Confirmed Password is required");
@@ -291,16 +300,16 @@ if (isset($_POST['update_password'])) {
         if (count($checkPasswordResult) > 0) {
             $password_new = md5($password2);
             $updatePasswordQuery = $userObj->updateUserPassword($password_new, $username);
-			$Message = "Password changed successfully! Please login again.";
-			
-            header("location: home.php?Message=" .urlencode($Message));
-			
+            session_unset();
+            session_destroy();
+            $Message = "Password changed successfully! Please login again.";
+
+            header("location: home.php?Message=" . urlencode($Message));
         } else {
             array_push($errorsPW, "Invalid Password");
-		
         }
-    }else{
-		header("location: user_profile.php");
-		$_SESSION['errorsPW'] = $errorsPW;
-	}
+    } else {
+        header("location: user_profile.php");
+        $_SESSION['errorsPW'] = $errorsPW;
+    }
 }

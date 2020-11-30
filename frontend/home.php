@@ -1,31 +1,26 @@
 <!DOCTYPE html>
 
-<?php include('user_handler.php') ?>
 <?php
 require '../vendor/autoload.php';
 use sitvago\Hotel;
 
-
+session_start();
 
 if (isset($_GET['logout'])) {
 	
     session_destroy();
-    unset($_SESSION['username']);
-	echo '<script>alert("Welcome to Geeks for Geeks")</script>'; 
     header("location: home.php");
-	
-
 }
 
 if (isset($_GET['Message'])) {
-	unset($_SESSION['username']);
+	// unset($_SESSION['username']);
     print '<script type="text/javascript">alert("' . $_GET['Message'] . '");</script>';
 }
 
 
 
 	
-
+ 
 //Ending a php session after 30 minutes of inactivity
 $minutesBeforeSessionExpire = 30;
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {

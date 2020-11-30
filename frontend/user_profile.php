@@ -5,8 +5,8 @@ use sitvago\Booking;
 
 session_start();
 if (!isset($_SESSION['username'])) {
-    $_SESSION['msg'] = "You must log in first";
-    header('location: loginpage.php');
+	$Message = "Please login to view your profile.";
+    header("location: loginpage.php?Message=" .urlencode($Message));
 } else {
 	$userID = ($_SESSION['userID']);
     $username = ($_SESSION['username']);

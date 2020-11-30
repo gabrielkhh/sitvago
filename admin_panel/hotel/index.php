@@ -3,8 +3,19 @@ require '../../vendor/autoload.php';
 
 use sitvago\Hotel;
 
+session_start();
+
 $hotel = new Hotel();
 $results = $hotel->getHotels();
+
+if (!isset($_SESSION['username'])) {
+	$Message = "Please log in as Admin to view this page";
+    header("location: ../frontend/loginpage.php?Message=" .urlencode($Message));
+}
+else if($_SESSION['role_name']!= "Administrator"){
+	$Message = "You do not have permission to view this page";
+    header("location: ../frontend/home.php?Message=" .urlencode($Message));
+}
 ?>
 <!DOCTYPE html>
 <!--
@@ -31,9 +42,9 @@ and open the template in the editor.
 </head>
 
 <body>
-    <!-- <?php
-            include "../../nav.inc.php";
-            ?> -->
+    <?php
+    include "../navbar_Admin.php";
+    ?>
     <main class="container main-content">
         <h1>Viewing All Hotels</h1>
 
@@ -85,8 +96,8 @@ and open the template in the editor.
 
     </main>
     <!-- <?php
-        include "../../footer.inc.php";
-    ?> -->
+            include "../../footer.inc.php";
+            ?> -->
 </body>
 
 

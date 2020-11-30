@@ -5,8 +5,19 @@ require '../../vendor/autoload.php';
 
 use sitvago\GeoLocation;
 
+session_start();
+
 $geo = new GeoLocation();
 $resultGeo = $geo->getSingleGeoLocation($id);
+
+if (!isset($_SESSION['username'])) {
+	$Message = "Please log in as Admin to view this page";
+    header("location: ../frontend/loginpage.php?Message=" .urlencode($Message));
+}
+else if($_SESSION['role_name']!= "Administrator"){
+	$Message = "You do not have permission to view this page";
+    header("location: ../frontend/home.php?Message=" .urlencode($Message));
+}
 ?>
 <!DOCTYPE html>
 <!--
@@ -34,10 +45,10 @@ and open the template in the editor.
     <script defer src="/js/main.js"></script>
 </head>
 
-<body>
-    <!-- <?php
-            include "../../nav.inc.php";
-            ?> -->
+<body style="padding-top: 70px;">
+    <?php
+    include "../navbar_Admin.php";
+    ?>
     <main class="container main-content mt-2">
         <?php echo "<h1>Update details for " . $resultGeo['name'] . "</h1>"; ?>
 
@@ -75,9 +86,6 @@ and open the template in the editor.
         </div>
 
     </main>
-    <!-- <?php
-            include "../../footer.inc.php";
-            ?> -->
 </body>
 
 </html>

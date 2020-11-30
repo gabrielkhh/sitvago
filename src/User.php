@@ -9,7 +9,7 @@ class User extends DB
     public function registerUser($first_name, $last_name, $username, $email, $phone_number, $country, $password, $billing_address)
     {
 
-        $stmt = $this->conn->prepare("INSERT INTO User (first_name, last_name, username, email, phone_number, country, password, billing_address, role_id, is_confirmed, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 1, now(), now())");
+        $stmt = $this->conn->prepare("INSERT INTO User (first_name, last_name, username, email, phone_number, country, password, billing_address, role_id, is_confirmed, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 2, 1, now(), now())");
         $stmt->bind_param("ssssssss", $first_name, $last_name, $username, $email, $phone_number, $country, $password, $billing_address);
 
         $stmt->execute();
@@ -73,7 +73,7 @@ class User extends DB
 
     public function getUserDataForSession($username)
     {
-        $sqlQuery = "SELECT User.id, User.username, User.role_id, User.first_name, User.last_name, User.email, User.phone_number, User.country, User.billing_address FROM User WHERE User.username='" . $username . "';";
+        $sqlQuery = "SELECT User.id, User.username, Role.name AS role_name, User.first_name, User.last_name, User.email, User.phone_number, User.country, User.billing_address FROM User LEFT JOIN Role ON User.role_id = Role.id WHERE User.username='" . $username . "';";
 
         $resultUser = mysqli_query($this->conn, $sqlQuery);
         $rowUser = mysqli_fetch_assoc($resultUser);

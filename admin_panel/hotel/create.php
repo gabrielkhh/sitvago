@@ -4,10 +4,22 @@ require '../../vendor/autoload.php';
 use sitvago\GeoLocation;
 use sitvago\Hotel;
 
+session_start();
+
 $geo = new GeoLocation();
 $roomCat = new Hotel();
 $results = $geo->getGeoLocations();
 $resultsRoomCat = $roomCat->getRoomCategories();
+
+if (!isset($_SESSION['username'])) {
+	$Message = "Please log in as Admin to view this page";
+    header("location: ../frontend/loginpage.php?Message=" .urlencode($Message));
+}
+else if($_SESSION['role_name']!= "Administrator"){
+	$Message = "You do not have permission to view this page";
+    header("location: ../frontend/home.php?Message=" .urlencode($Message));
+}
+
 ?>
 <!DOCTYPE html>
 <!--
@@ -41,9 +53,9 @@ and open the template in the editor.
     <script defer src="/js/main.js"></script>
 </head>
 
-<body>
+<body style="padding-top: 70px;">
     <?php
-    include "../navbar.php";
+    include "../navbar_Admin.php";
     ?>
     <main class="container main-content mt-2">
         <h1>Add a New Hotel</h1>
@@ -116,9 +128,6 @@ and open the template in the editor.
         </div><!-- end of div element with class="row"-->
 
     </main>
-    <!-- <?php
-            include "../../footer.inc.php";
-            ?> -->
 </body>
 
 </html>
