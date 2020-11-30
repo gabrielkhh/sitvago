@@ -110,10 +110,10 @@ function calenderHandler1(){
             }
 
         },
-        /*
+        
         //If error message is generated when closed produce error message
         onClose: function(selectedDates,dateStr,instance){
-              //If error messages found prevent submission. 
+              //If error messages found disable submit button. 
                if (messages.length >0){
                    bookBtn.target.disabled = true;
                    bookBtn.preventDefault();
@@ -122,7 +122,6 @@ function calenderHandler1(){
                },5000)
            }
         }
-        */
         /*
         disable:[
         function(date) {
@@ -130,7 +129,7 @@ function calenderHandler1(){
             return !(date.getDate() % 8);
         }
         ]
-         */
+        */
     });
 }
 

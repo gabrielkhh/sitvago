@@ -11,8 +11,6 @@ $roomCategoriesResults = $hotelObj->getRoomCategories();
 $hotelSelected = $hotelObj->getHotelInfoForBooking($id);
 $hotelImagesSelected = $hotelObj->getHotelImagesForBooking($id);
 $hotelPrices = $hotelObj->getHotelPricesForBooking($id);
-// $roomPrice = $hotelObj->getRoomCategoryRate($hotelSelected,$roomCategoriesResults);
-//$roomDescription = $hotelObj->getRoomDescription();
 $counterImage = 0;
 ?>
 <!DOCTYPE html>
@@ -124,8 +122,41 @@ $counterImage = 0;
                                     </div>
                                 </div>
                             </div>
+                        </div>                     
+                    </div>
+                </div>
+                <div class="col-lg-4 sidebar ftco-animate pl-md-5">
+                    <h3 class="hotel_selected"><?= $hotelSelected['name'] ?></h3>
+                    <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
                         </div>
-                        <!--Review Section Starts Here -->
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="TypeOfRooms" name="TypeOfRooms" required>
+                                <option value="disabled" selected disabled>Choose A Room Type</option>
+                                <?php foreach ($roomCategoriesResults as $row) : ?>
+                                    <option id="<?= $row['id'] ?>" value="<?= $row['category_name'] ?>"><?= $row['category_name'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden>
+                            <input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden>
+                            <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
+                            <span id="error"></span>
+                        </div>
+                    </form>
+                    <p>
+                        <h3 id="price"></h3>
+                    </p>
+                    <div id="descriptionArea"></div>                                 
+                </div>
+
+            </div>           
+                <!--Review Section Starts Here -->
                         <div class="container review-container">
                             <div class="row">
                                 <div class="panel panel-default widget">
@@ -156,43 +187,7 @@ $counterImage = 0;
                             </div>
                         </div>
                     </div>
-                   <!--Review Section End Here -->
-                    </div>
-                </div>
-                <div class="col-lg-4 sidebar ftco-animate pl-md-5">
-                    <!--div class="sidebar-box ftco-animate">-->
-                    <h3 class="hotel_selected"><?= $hotelSelected['name'] ?></h3>
-                    <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">
-                        <div class="form-group">
-                            <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" id="TypeOfRooms" name="TypeOfRooms" required>
-                                <option value="disabled" selected disabled>Choose A Room Type</option>
-                                <?php foreach ($roomCategoriesResults as $row) : ?>
-                                    <option id="<?= $row['id'] ?>" value="<?= $row['category_name'] ?>"><?= $row['category_name'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden>
-                            <input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden>
-                            <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
-                            <span id="error"></span>
-                        </div>
-                    </form>
-                    <p>
-                        <h3 id="price"></h3>
-                    </p>
-                    <div id="descriptionArea"></div>
-                   
-                    
-                </div>
-
-            </div>
+            <!--Review Section End Here -->              
         </div>
     </section>
     <footer class="bg-light pb-5">
