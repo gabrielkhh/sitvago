@@ -4,6 +4,8 @@ require '../vendor/autoload.php';
 use sitvago\User;
 use Mailgun\Mailgun;
 
+$some_name = session_name("sitvago_session");
+session_set_cookie_params(0, '/', '.sitvago.com');
 session_start();
 
 // // initializing variables
