@@ -13,6 +13,15 @@ if (!isset($_COOKIE['session_id']))
     setcookie('session_id', session_id(), 0, '/', '.sitvago.com');
 
 echo $_SESSION['username'];
+if (!isset($_SESSION['username']))
+{
+    echo "Not set";
+}
+else
+{
+    echo $_SESSION['username'];
+    echo "SESSION IS SET";
+}
 
 $overview = new Overview();
 $results = $overview->getCount();
