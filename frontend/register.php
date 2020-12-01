@@ -3,6 +3,8 @@
 <?php
 if (isset($_SESSION['errMsgreg'])) {
     $errors = ($_SESSION['errMsgreg']);
+} else {
+    $errors = "";
 }
 ?>
 
@@ -130,14 +132,15 @@ if (isset($_SESSION['errMsgreg'])) {
     <body>
         <div class="signup-form">
             <form action="user_handler.php" method="post">
-			
+			<?php if (is_array($errors)): ?>
+				<?php echo "<h2>Warning(s)</h2>"; ?>
 				<?php foreach ($errors as $error): ?>
 				
-					<p><?php echo $error ?></p>
+					<p><strong><?php echo $error ?></strong></p>
 					
 				<?php endforeach ?>
 				<?php unset($_SESSION['errMsgreg']); ?>
-			
+			<?php endif ?>
 			
 			
 				
