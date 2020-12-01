@@ -112,6 +112,99 @@ $results = $bookings->getBookings($userID);
                 zoom: 90%;
                 font-family: Arial;
             }
+			/* Style the tab */
+			.tab {
+				overflow: hidden;
+				border: 2px solid #ccc;
+				background-image:url(http://www.zingerbugimages.com/backgrounds/white_marble_background_seamless.jpg);
+
+				
+			}
+
+			/* Style the buttons inside the tab */
+			.tab button {
+				background-color: inherit;
+				color: black;
+				float: left;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				padding: 14px 16px;
+				transition: 0.3s;
+				font-size: 17px;
+				font-family: Raleway;
+				font-weight: bold;
+
+			}
+
+			/* Change background color of buttons on hover */
+			.tab button:hover {
+				background-color: #ddd;
+			}
+
+			/* Create an active/current tablink class */
+			.tab button.active {
+				filter: brightness(75%);
+			}
+			/* Style the tab content */
+			.tabcontent {
+				display: none;
+				padding: 10px 0px;
+				border: 1px solid #ccc;
+				border-top: none;
+				background-color: #ffffff;
+				
+			}
+
+			.tab_container{
+				padding: 100px;
+				max-width: 900px;
+				margin: auto;
+			}
+
+			#regForm {
+				background-color: #ffffff;
+				margin: 100px auto;
+				font-family: Raleway;
+				padding: 40px;
+				width: 100%;
+				min-width: 300px;
+			}
+			@media screen and (max-width: 900px) {
+			  .signup-form, card{
+				width: 100%;
+				margin-top: 0;
+			  }
+			}
+
+
+
+			input {
+				padding: 100px;
+				width: 100%;
+				font-size: 17px;
+				font-family: Raleway;
+				border: 1px solid #aaaaaa;
+			}
+
+			button {
+				background-image:url(http://www.zingerbugimages.com/backgrounds/white_marble_background_seamless.jpg);
+				color: black;
+				border: none;
+				padding: 10px 20px;
+				font-size: 17px;
+				font-family: Raleway;
+				cursor: pointer;
+				font-weight: bold;
+			}
+
+			button:hover {
+				opacity: 0.8;
+			}
+
+			.card{
+				padding: 40px;
+			}
 
 
         </style>
@@ -155,9 +248,10 @@ $results = $bookings->getBookings($userID);
                                 }
                                 ;">
                                   <?php if (is_array($errorsDetails)): ?>
+									<?php echo "<h2>Warning(s)</h2>"; ?>
                                       <?php foreach ($errorsDetails as $error): ?>
 
-                                    <p><?php echo $error ?></p>
+                                    <p><strong><?php echo $error ?></strong></p>
 
 
                                 <?php endforeach ?>
