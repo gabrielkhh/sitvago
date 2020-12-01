@@ -128,11 +128,9 @@
                 </div>
             </div>
         </main>
-            <footer class="bg-light pb-5">
-        <div class="container text-center">
-            <p class="font-italic text-muted mb-0">&copy; Sitvago's 2020 Copyright</p>
-        </div>
-    </footer>
+            <?php
+			include "footer.php";
+			?>
     </body>
 
 </html>

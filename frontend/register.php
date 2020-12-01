@@ -205,6 +205,9 @@ if (isset($_SESSION['errMsgreg'])) {
                 </div>
             </form>
         </div>
+		<?php
+			include "footer.php";
+		?>
         <script>
             var currentTab = 0; // Current tab is set to be the first tab (0)
             showTab(currentTab); // Display the current tab

@@ -163,6 +163,9 @@ $userBillingAddress = $_SESSION['billing_address'];
 
         </div>
     </div>  
+		<?php
+			include "footer.php";
+		?>
 </body>
 
 

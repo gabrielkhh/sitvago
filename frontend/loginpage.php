@@ -106,11 +106,9 @@ and open the template in the editor.
 						<?php unset($_SESSION['errMsg']); ?>
                 </form>
             </div>
-            <footer class="mastfoot mt-auto">
-                <div class="inner">
-                    <p>Team Project - SITVAGO</p>
-                </div>
-            </footer>
+        <?php
+			include "footer.php";
+		?>
         </div>
     </body>
 </html>
