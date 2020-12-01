@@ -85,6 +85,10 @@ $results = $bookings->getBookings($userID);
 
 
         <style>
+			* {
+                box-sizing: border-box;
+            }
+			
             .bd-placeholder-img {
                 font-size: 1.125rem;
                 text-anchor: middle;
@@ -161,6 +165,12 @@ $results = $bookings->getBookings($userID);
                 width: 70%;
                 min-width: 300px;
             }
+			@media screen and (max-width: 600px) {
+			  .signup-form, card{
+				width: 100%;
+				margin-top: 0;
+			  }
+			}
 
 
 
