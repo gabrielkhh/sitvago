@@ -162,9 +162,10 @@ and open the template in the editor.
             </div>
         </div>
     </main>
-</body>
-<footer class="container">
+    <footer class="container">
     <p>&copy; Sitvago 2020</p>
 </footer>
+</body>
+
 
 </html>
