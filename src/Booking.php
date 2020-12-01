@@ -49,7 +49,7 @@ class Booking extends DB
         $results = [];
         $success = true;
         $SQL = "SELECT Booking.id, Booking.stripe_payment_id, Hotel.name AS hotel_name, RoomCategory.category_name AS room_type, 
-            Booking.price, Booking.check_in, Booking.check_out FROM Booking 
+            Booking.price, Booking.check_in, Booking.check_out, Booking.created_at FROM Booking 
             LEFT JOIN Hotel ON Booking.hotel_id = Hotel.id LEFT JOIN RoomCategory
             ON Booking.room_category_id = RoomCategory.id WHERE Booking.id=" . $bookingID . ";";
 
@@ -58,9 +58,26 @@ class Booking extends DB
 
         return $rowBooking;
     }
+
+    public function getSingleBookingAdmin($bookingID)
+    {
+        $results = [];
+        $success = true;
+        $SQL = "SELECT Booking.id, Booking.stripe_payment_id, User.first_name, User.last_name, User.username, User.email, User.stripe_customer_id,
+            User.password, User.phone_number, User.billing_address, Hotel.name AS hotel_name, RoomCategory.category_name AS room_type, 
+            Booking.price, Booking.check_in, Booking.check_out, Booking.created_at FROM Booking 
+            LEFT JOIN Hotel ON Booking.hotel_id = Hotel.id LEFT JOIN RoomCategory
+            ON Booking.room_category_id = RoomCategory.id LEFT JOIN User ON Booking.user_id = User.id WHERE Booking.id=" . $bookingID . ";";
+
+        $resultBooking = mysqli_query($this->conn, $SQL);
+        $rowBooking = mysqli_fetch_assoc($resultBooking);
+
+        return $rowBooking;
+    }
+
     //user make a new booking
     public function addBooking($userID, $hotelName, $roomCategoryName, $price, $check_in, $check_out)
-    {  
+    {
         $response = [];
         $success = true;
         $preparedSQL = "INSERT INTO Booking (hotel_id, user_id, room_category_id, price, check_in, check_out, created_at)
@@ -188,5 +205,3 @@ class Booking extends DB
         return $response;
     }
 }
-
-

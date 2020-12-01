@@ -17,19 +17,8 @@ else if($_SESSION['role_name']!= "Administrator"){
 
 use sitvago\GeoLocation;
 
-session_start();
-
 $geolocation = new GeoLocation();
 $results = $geolocation->getGeoLocations();
-
-if (!isset($_SESSION['username'])) {
-	$Message = "Please log in as Admin to view this page";
-    header("location: ../frontend/loginpage.php?Message=" .urlencode($Message));
-}
-else if($_SESSION['role_name']!= "Administrator"){
-	$Message = "You do not have permission to view this page";
-    header("location: ../frontend/home.php?Message=" .urlencode($Message));
-}
 ?>
 <!DOCTYPE html>
 <!--
@@ -41,7 +30,7 @@ and open the template in the editor.
 
 <head>
     <meta charset="UTF-8">
-    <title>Hotel Sitvago CMS</title>
+    <title>Hotel Sitvago CMS - View Geo-Locations</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--CSS Sources-->
@@ -84,7 +73,7 @@ and open the template in the editor.
                                             <th scope="col">Created At</th>
                                             <th scope="col">Created By</th>
                                             <th scope="col">Updated At</th>
-                                            <th scope="col">Updated By</th>
+                                            <th scope="col">Last Updated By</th>
                                             <th>&nbsp;</th>
                                         </tr>
                                     </thead>

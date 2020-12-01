@@ -10,10 +10,9 @@ if (!isset($_COOKIE['session_id']))
     setcookie('session_id', session_id(), 0, '/', '.sitvago.com');
 
 if (!isset($_SESSION['username'])) {
-	$Message = "Please log in as Admin to view this page";
-    header("location: https://sitvago.com/loginpage.php?Message=" .urlencode($Message));
-}
-else if($_SESSION['role_name']!= "Administrator"){
+    $Message = "Please log in as Admin to view this page";
+    header("location: https://sitvago.com/loginpage.php?Message=" . urlencode($Message));
+} else if ($_SESSION['role_name'] != "Administrator") {
     header("location: https://sitvago.com/forbidden.php");
 }
 
@@ -21,17 +20,7 @@ use sitvago\Hotel;
 use sitvago\Booking;
 
 $booking = new Booking();
-$rowBooking = $booking->getSingleBooking($id);
-
-session_start();
-
-if (!isset($_SESSION['username'])) {
-    $Message = "Please log in as Admin to view this page";
-    header("location: ../frontend/loginpage.php?Message=" . urlencode($Message));
-} else if ($_SESSION['role_name'] != "Administrator") {
-    $Message = "You do not have permission to view this page";
-    header("location: ../frontend/home.php?Message=" . urlencode($Message));
-}
+$rowBooking = $booking->getSingleBookingAdmin($id);
 
 ?>
 <!DOCTYPE html>
@@ -57,6 +46,7 @@ and open the template in the editor.
     <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
     <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/dayjs.min.js" integrity="sha512-C2m821NxMpJ4Df47O4P/17VPqt0yiK10UmGl59/e5ynRRYiCSBvy0KHJjhp2XIjUJreuR+y3SIhVyiVilhCmcQ==" crossorigin="anonymous"></script>
     <script defer src="/js/main.js"></script>
 </head>
 
@@ -65,7 +55,7 @@ and open the template in the editor.
     include "../navbar_Admin.php";
     ?>
     <main class="container main-content ">
-        <?php echo "<h1>Update details for " . $rowHotel['name'] . "</h1>"; ?>
+        <?php echo "<h1>Booking Details</h1>"; ?>
 
         <div class="row">
             <div class="col-md-12">
@@ -76,51 +66,21 @@ and open the template in the editor.
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="inputHotelName">Hotel Name</label>
-                                                <?php
-                                                echo "<input class='form-control' id='inputHotelName' placeholder='Hotel Name' value='" . $rowHotel['name'] . "'>";
-                                                ?>
-                                            </div>
+                                <div class="card mb-5">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Booking ID : <?= $rowBooking['id']; ?></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Created : <?= $rowBooking['created_at'] ?></h6>
+                                        <div class="card-body">
+                                            <h3>Customer Details</h2>
+                                            <p>First Name : <?= $rowBooking['first_name'] ?></p>
+                                            <p>Last Name : <?= $rowBooking['last_name'] ?></p>
+                                            <p>Email Address : <?= $rowBooking['email'] ?></p>
+                                            <p>Username : <?= $rowBooking['phone_number'] ?></p>
+                                            <p>Last Name : <?= $rowBooking['last_name'] ?></p>
                                         </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="selectArea">Region</label>
-                                                <select class="form-control" id="selectArea">
-                                                    <option value="" disabled>Choose a region</option>
-                                                    <?php
-                                                    foreach ($resultsGeo as $row) {
-                                                        if ($row['id'] === $rowHotel['geo_id']) {
-                                                            echo "<option value='" . $row['name'] . "' selected>";
-                                                            echo $row['name'];
-                                                            echo "</option>";
-                                                        } else {
-                                                            echo "<option value='" . $row['name'] . "'>";
-                                                            echo $row['name'];
-                                                            echo "</option>";
-                                                        }
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="hotelDescription">Hotel Description</label>
-                                        <textarea class="form-control" id="hotelDescription"></textarea>
-                                        <script>
-                                            CKEDITOR.replace('hotelDescription');
-                                            <?php
-                                            echo "var encodedDataDescription = '" . $rowHotel['description'] . "';";
-                                            echo "var decodedDataDescription = decodeURI(encodedDataDescription);";
-                                            ?>
-                                            CKEDITOR.instances['hotelDescription'].setData(decodedDataDescription);
-                                        </script>
-                                    </div>
-                                </form>
+                                </div>
                                 <div class="float-right">
                                     <?php echo "<button id='btnDelete' class='btn btn-danger' value='" . $id . "'>Delete</button>"; ?>
                                     <button id="btnCancel" class="btn btn-warning">Cancel</button>
@@ -128,10 +88,10 @@ and open the template in the editor.
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- end of div element with class="panel-body" -->
-                </div><!-- end of div element with class="panel" -->
-            </div> <!-- end of div element with  class="col-md-offset-2  col-md-8"-->
-        </div><!-- end of div element with class="row"-->
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
     <?php
