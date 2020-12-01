@@ -68,6 +68,9 @@ unset($_SESSION['INFO']);
                 </p>
             </div>
         </div>
+		<?php
+			include "footer.php";
+		?>
 </body>
 
 </head>
