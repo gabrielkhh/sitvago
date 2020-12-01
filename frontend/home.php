@@ -2,25 +2,26 @@
 
 <?php
 require '../vendor/autoload.php';
+
 use sitvago\Hotel;
 
 session_start();
 
 if (isset($_GET['logout'])) {
-	
+
     session_destroy();
     header("location: home.php");
 }
 
 if (isset($_GET['Message'])) {
-	// unset($_SESSION['username']);
+    // unset($_SESSION['username']);
     print '<script type="text/javascript">alert("' . $_GET['Message'] . '");</script>';
 }
 
 
 
-	
- 
+
+
 //Ending a php session after 30 minutes of inactivity
 $minutesBeforeSessionExpire = 30;
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
@@ -147,13 +148,13 @@ and open the template in the editor.
                                     <title><?= $row['name'] ?></title><img src="<?= $row['secure_url'] ?>" class='img-fluid' alt="Barrack Hotel" />
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $row['name'] ?></h5>
+                                        <span class="badge badge-dark"><?= $row['area_name'] ?></span>
                                         <p><?= $row['original_src'] ?></p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <a class="btn btn-light" role="button" href="booking.php?key=<?= $row['id'] ?>">View</a>
                                             </div>
                                         </div>
-                                        <span class="badge badge-info mt-3"><?= $row['area_name'] ?></span>
                                     </div>
                             </div>
                         </div>
@@ -162,9 +163,9 @@ and open the template in the editor.
             </div>
         </div>
     </main>
-    <footer class="container">
-    <p>&copy; Sitvago 2020</p>
-</footer>
+    <?php
+    include "footer.php";
+    ?>
 </body>
 
 

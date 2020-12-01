@@ -21,7 +21,7 @@ if (!isset($_SESSION['username'])) {
 }
 else if($_SESSION['role_name']!= "Administrator"){
 	$Message = "You do not have permission to view this page";
-    header("location: https://sitvago.com/home.php?Message=" .urlencode($Message));
+    header("location: https://sitvago.com/");
 }
 
 ?>
@@ -107,6 +107,9 @@ and open the template in the editor.
             </div>
         </div>
     </main>
+    <?php
+    include "footer.php";
+    ?>
     <script>
         var hotelNumbers = <?= $results[0]['HotelCount']; ?>;
         var userNumbers = <?= $results[1]['UserCount']; ?>;

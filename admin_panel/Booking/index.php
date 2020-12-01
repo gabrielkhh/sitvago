@@ -42,10 +42,10 @@ and open the template in the editor.
         <script defer src="/js/main.js"></script>
     </head>
 
-    <body>
-        <!-- <?php
-        include "../../nav.inc.php";
-        ?> -->
+    <body style="padding-top: 70px;">
+    <?php
+    include "../navbar_Admin.php";
+    ?>
         <main class="container main-content">
             <h1>Viewing All Booking</h1>
 
