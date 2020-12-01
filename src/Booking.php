@@ -142,7 +142,7 @@ class Booking extends DB
     }
 
     //user delete booking if he/she dont want
-    public function deleteBooking($bookingID, $hotelID)
+    public function deleteBooking($bookingID)
     {
         $results = [];
         $success = true;
@@ -161,11 +161,11 @@ class Booking extends DB
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
                 $response['success'] = $success;
-                $response['message'] = "Hotel Hellll";
+                $response['message'] = "There was an error when trying to cancel the booking.";
                 $response['error'] = $errorMsg;
             } else {
                 $response['success'] = $success;
-                $response['message'] = $bookingID . " has been successfully deleted from the database.";
+                $response['message'] = "Booking has been successfully deleted from the database.";
                 $response['error'] = "";
             }
             $stmt->close();
