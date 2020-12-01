@@ -1,6 +1,20 @@
 <?php
 require '../../vendor/autoload.php';
 
+if (isset($_COOKIE['session_id']))
+    session_id($_COOKIE['session_id']);
+session_start();
+if (!isset($_COOKIE['session_id']))
+    setcookie('session_id', session_id(), 0, '/', '.sitvago.com');
+
+if (!isset($_SESSION['username'])) {
+	$Message = "Please log in as Admin to view this page";
+    header("location: https://sitvago.com/loginpage.php?Message=" .urlencode($Message));
+}
+else if($_SESSION['role_name']!= "Administrator"){
+    header("location: https://sitvago.com/forbidden.php");
+}
+
 use sitvago\GeoLocation;
 use sitvago\Hotel;
 

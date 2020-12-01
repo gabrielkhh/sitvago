@@ -20,7 +20,7 @@ if (!isset($_SESSION['username'])) {
     header("location: https://sitvago.com/loginpage.php?Message=" .urlencode($Message));
 }
 else if($_SESSION['role_name']!= "Administrator"){
-    header("location: https://sitvago.com/");
+    header("location: https://sitvago.com/forbidden.php");
 }
 
 ?>

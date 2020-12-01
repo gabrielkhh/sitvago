@@ -148,14 +148,13 @@ and open the template in the editor.
                                     <title><?= $row['name'] ?></title>
                                     <img src="<?= $row['secure_url'] ?>" class='img-fluid' alt="Barrack Hotel">
                                     <div class="card-body">
-                                        <h5 class="card-title"><?= $row['name'] ?></h5>
-                                        <span class="badge badge-dark"><?= $row['area_name'] ?></span>
-                                        <p><?= $row['original_src'] ?></p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <a class="btn btn-light" role="button" href="booking.php?key=<?= $row['id'] ?>">View</a>
+                                        <h4 class="card-title"><?= $row['name'] ?></h5>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <a class="btn btn-light" role="button" href="booking.php?key=<?= $row['id'] ?>">View More</a>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <span class="badge badge-dark mt-3"><?= $row['area_name'] ?></span>
                                     </div>
                             </div>
                         </div>
