@@ -86,6 +86,9 @@ and open the template in the editor.
         </div>
 
     </main>
+    <?php
+    include "../footer.php";
+    ?>
 </body>
 
 </html>

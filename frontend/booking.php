@@ -18,7 +18,11 @@ $counterImage = 0;
 
 $review = new Review();
 $results = $review->getSingleHotelReview($id);
-print_r($results);
+
+if (count($hotelSelected) === 0)
+{
+    header('location: notfound.php');
+}
 ?>
 
 <html lang="en">

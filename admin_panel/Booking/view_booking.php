@@ -120,9 +120,9 @@ and open the template in the editor.
         </div><!-- end of div element with class="row"-->
 
     </main>
-    <!-- <?php
-            include "../../footer.inc.php";
-            ?> -->
+    <?php
+    include "../footer.php";
+    ?>
 </body>
 
 </html>
