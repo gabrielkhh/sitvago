@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 require '../vendor/autoload.php';
 
@@ -96,33 +97,33 @@ $userBillingAddress = $_SESSION['billing_address'];
                     <div class="row">
                         <div class="col-50">
                             <label for="name"><i class="fa fa-user"></i> First Name</label>
-                            <input class="confirm_input" type="text" id="fnameDisabled" name="fnameDisabled" placeholder="Auto-Fill" value="<?= $userFName ?>"disabled>
-                            <input class="confirm_input" type="text" id="fname" name="fname" placeholder="Auto-Fill" value="<?= $userFName ?>"hidden>
+                            <input class="confirm_input" type="text" id="fnameDisabled" name="fnameDisabled" placeholder="Auto-Fill" value="<?= $userFName ?>" disabled>
+                            <input class="confirm_input" type="text" id="fname" name="fname" placeholder="Auto-Fill" value="<?= $userFName ?>" hidden>
                             <label for="check-in-confirm"><i class="fa fa-calendar-check-o"></i> Check In Date</label>
-                            <input class="confirm_input" type="text" id="ci_dateDisabled" name="ci_dateDisabled" value="<?= $_POST['checkin'] ?>"disabled>
-                            <input class="confirm_input" type="text" id="ci_date" name="ci_date" value="<?= $_POST['checkin'] ?>"hidden>
+                            <input class="confirm_input" type="text" id="ci_dateDisabled" name="ci_dateDisabled" value="<?= $_POST['checkin'] ?>" disabled>
+                            <input class="confirm_input" type="text" id="ci_date" name="ci_date" value="<?= $_POST['checkin'] ?>" hidden>
                             <label for="hotel-name"><i class="fa fa-building"></i> Hotel Name</label>
                             <input class="confirm_input" type="text" id="hotelnameDisabled" name="hotelnameDisabled" value="<?= $_POST['hotelName'] ?>" disabled>
                             <input class="confirm_input" type="text" id="hotel-name" name="hotel-name" value="<?= $_POST['hotelName'] ?>" hidden>
                             <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                            <input class="confirm_input" type="text" id="emailDisabled" name="emailDisabled" placeholder="Auto-Fill" required name="email" value="<?= $userEmail ?>"disabled>
-                            <input class="confirm_input" type="text" id="email" name="email" placeholder="Auto-Fill" required name="email" value="<?= $userEmail ?>"hidden>
+                            <input class="confirm_input" type="text" id="emailDisabled" name="emailDisabled" placeholder="Auto-Fill" required name="email" value="<?= $userEmail ?>" disabled>
+                            <input class="confirm_input" type="text" id="email" name="email" placeholder="Auto-Fill" required name="email" value="<?= $userEmail ?>" hidden>
                                 
                             
                         </div>
                         <div class="col-50">
                             <label for="city"><i class="fa fa-user"></i> Last Name</label>
-                            <input class="confirm_input" type="text" id="lnameDisabled" name="lnameDisabled" placeholder="Auto-Fill" value="<?= $userLName ?>"disabled> 
-                            <input class="confirm_input" type="text" id="lname" name="lname" placeholder="Auto-Fill" value="<?= $userLName ?>"hidden>                                        
+                            <input class="confirm_input" type="text" id="lnameDisabled" name="lnameDisabled" placeholder="Auto-Fill" value="<?= $userLName ?>" disabled> 
+                            <input class="confirm_input" type="text" id="lname" name="lname" placeholder="Auto-Fill" value="<?= $userLName ?>" hidden>                                        
                             <label for="check-out-confirm"><i class="fa fa-calendar-check-o"></i> Check Out Date</label>
-                            <input class="confirm_input" type="text" id="codateDisabled" name="codateDisabled" value="<?= $_POST['checkout'] ?>"disabled>
-                            <input class="confirm_input" type="text" id="co_date" name="co_date" value="<?= $_POST['checkout'] ?>"hidden>
+                            <input class="confirm_input" type="text" id="codateDisabled" name="codateDisabled" value="<?= $_POST['checkout'] ?>" disabled>
+                            <input class="confirm_input" type="text" id="co_date" name="co_date" value="<?= $_POST['checkout'] ?>" hidden>
                             <label for="room-type"><i class="fa fa-bed"></i> Room Type</label>
-                            <input class="confirm_input" type="text" id="roomtypeDisabled" name="roomtypeDisabled" value="<?= $_POST['TypeOfRooms'] ?>"disabled>
-                            <input class="confirm_input" type="text" id="room-type" name="room-type" value="<?= $_POST['TypeOfRooms'] ?>"hidden>                                       
+                            <input class="confirm_input" type="text" id="roomtypeDisabled" name="roomtypeDisabled" value="<?= $_POST['TypeOfRooms'] ?>" disabled>
+                            <input class="confirm_input" type="text" id="room-type" name="room-type" value="<?= $_POST['TypeOfRooms'] ?>" hidden>                                       
                             <label for="adr"><i class="fa fa-address-card-o"></i> Billing Address</label>
-                            <input class="confirm_input" type="text" id="adrDisabled" name="addressDisabled" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>"disabled>
-                            <input class="confirm_input" type="text" id="adr" name="address" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>"hidden>
+                            <input class="confirm_input" type="text" id="adrDisabled" name="addressDisabled" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>" disabled>
+                            <input class="confirm_input" type="text" id="adr" name="address" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>" hidden>
                             
                         </div>
                         <div class="col-50">
