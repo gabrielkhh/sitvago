@@ -283,7 +283,7 @@ if (isset($_POST['update_password'])) {
     }
     if (empty($password2)) {
         array_push($errorsPW, "New Password is required");
-    } else if (!$uppercase || !$lowercase || !$number || strlen($password_1) < 8 || $space) {
+    } else if (!$uppercase || !$lowercase || !$number || strlen($password2) < 8 || $space) {
         array_push($errorsPW, "Your password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and should not contain whitespaces.");
     }
     if (empty($password3)) {

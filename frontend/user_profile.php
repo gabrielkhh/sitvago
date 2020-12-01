@@ -50,7 +50,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 $bookings = new Booking();
 $results = $bookings->getBookings($userID);
 ?>
-<html>
+<html lang="en">
     <head>
 
         <title>Singapore Tourism Attraction </title>
@@ -85,9 +85,6 @@ $results = $bookings->getBookings($userID);
 
 
         <style>
-			* {
-                box-sizing: border-box;
-            }
 			
             .bd-placeholder-img {
                 font-size: 1.125rem;
@@ -165,12 +162,12 @@ $results = $bookings->getBookings($userID);
                 width: 70%;
                 min-width: 300px;
             }
-			@media screen and (max-width: 600px) {
-			  .signup-form, card{
-				width: 100%;
-				margin-top: 0;
-			  }
-			}
+		@media screen and (max-width: 600px) {
+		  .signup-form, card{
+			width: 100%;
+			margin-top: 0;
+		  }
+		}
 
 
 
@@ -226,7 +223,7 @@ $results = $bookings->getBookings($userID);
 
             <div class="jumbotron">
                 <div class="container text-center text-white">
-                    <h1 class="display-2" >Your Profile</h1>
+                    <h1 class="display-2" ><?php echo $first_name ?>'s Profile</h1>
                     <p>View your account and bookings here!</p>
                 </div>
             </div>
@@ -256,7 +253,7 @@ $results = $bookings->getBookings($userID);
                             <?php endif ?>
                             <div class="form-group">
                                 <h2>Account Details</h2>
-                                <label for="fname">Username:</label>
+                                <label for="username">Username:</label>
                                 <input type="text" class="form-control" name="username" id="username" value = "<?php echo $username ?>" readonly>
                             </div>
                             <div class="form-group">
@@ -307,20 +304,20 @@ $results = $bookings->getBookings($userID);
 
                             <!-- Remember to add 'required' field later, currently remove for demo purpose -->
                             <h2>Change Password</h2>
-                            <label for="inputUsername" class="sr-only">Username</label>
-                            <input type="text" class="form-control" name="username" id="username" value = "<?php echo $username ?>" readonly>
+                            <label for="username" class="sr-only">Username</label>
+                            <input type="text" class="form-control" name="username" id="username2" value = "<?php echo $username ?>" readonly>
 
-                            <label for="inputPassword" class="sr-only">Current Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Current Password" name="password">
+                            <label for="inputPassword1" class="sr-only">Current Password</label>
+                            <input type="password" id="inputPassword1" class="form-control" placeholder="Current Password" name="password">
 
-                            <label for="inputNewPassword" class="sr-only">New Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="New Password" name="new_password">
+                            <label for="inputNewPassword2" class="sr-only">New Password</label>
+                            <input type="password" id="inputPassword2" class="form-control" placeholder="New Password" name="new_password">
 
                             <label for="inputConfirmedPassword" class="sr-only">Confirmed Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Confirmed Password" name="confirmed_password">
+                            <input type="password" id="inputConfirmedPassword3" class="form-control" placeholder="Confirmed Password" name="confirmed_password">
 
-                            <button type="button" id="prevBtn" onclick="prevFunction()">Cancel</button>
-                            <button type="submit" id="submitBtn" name="update_password">Submit</button>
+                            <button type="button" id="prevBtn2" onclick="prevFunction()">Cancel</button>
+                            <button type="submit" id="submitBtn2" name="update_password">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -352,14 +349,17 @@ $results = $bookings->getBookings($userID);
         </footer>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+		<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
         <script>
                                 function openCity(evt, cityName) {
                                     var i, tabcontent, tablinks;
                                     tabcontent = document.getElementsByClassName("tabcontent");
                                     document.getElementById("prevBtn").style.display = "none";
+									document.getElementById("prevBtn2").style.display = "none";
                                     document.getElementById("change_password").style.display = "none";
                                     document.getElementById("submitBtn").style.display = "none";
+									document.getElementById("submitBtn2").style.display = "none";
                                     for (i = 0; i < tabcontent.length; i++) {
                                         tabcontent[i].style.display = "none";
                                     }
@@ -378,8 +378,10 @@ $results = $bookings->getBookings($userID);
                                     document.getElementById("country").readOnly = false;
                                     document.getElementById("billing_address").readOnly = false;
                                     document.getElementById("submitBtn").style.display = "inline";
+									document.getElementById("submitBtn2").style.display = "none";
                                     document.getElementById("editBtn").style.display = "none";
                                     document.getElementById("prevBtn").style.display = "inline"
+									document.getElementById("prevBtn2").style.display = "none";
                                     document.getElementById("passwordBtn").style.display = "none";
 
                                 }
@@ -389,12 +391,13 @@ $results = $bookings->getBookings($userID);
 
                                     document.getElementById("edit_profile").style.display = "none";
                                     document.getElementById("change_password").style.display = "block";
-
-                                    document.getElementById("prevBtn").style.display = "inline"
+									document.getElementById("prevBtn").style.display = "none";
+                                    document.getElementById("prevBtn2").style.display = "inline"
 
                                 }
                                 function prevFunction() {
                                     document.getElementById("submitBtn").style.display = "none";
+									document.getElementById("submitBtn2").style.display = "none";
                                     document.getElementById("editBtn").style.display = "inline";
                                     document.getElementById("passwordBtn").style.display = "inline";
                                     document.getElementById("edit_profile").style.display = "block";
@@ -406,6 +409,7 @@ $results = $bookings->getBookings($userID);
                                     document.getElementById("billing_address").readOnly = true;
                                     document.getElementById("change_password").style.display = "none";
                                     document.getElementById("prevBtn").style.display = "none";
+									document.getElementById("prevBtn2").style.display = "none";
                                 }
                                 // Get the element with id="defaultOpen" and click on it
                                 document.getElementById("defaultOpen").click();
