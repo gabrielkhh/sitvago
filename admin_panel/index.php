@@ -20,7 +20,6 @@ if (!isset($_SESSION['username'])) {
     header("location: https://sitvago.com/loginpage.php?Message=" .urlencode($Message));
 }
 else if($_SESSION['role_name']!= "Administrator"){
-	$Message = "You do not have permission to view this page";
     header("location: https://sitvago.com/");
 }
 
