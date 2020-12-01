@@ -17,8 +17,6 @@ else if($_SESSION['role_name']!= "Administrator"){
 
 use sitvago\Booking;
 
-session_start();
-
 $booking = new Booking();
 $results = $booking->getBookingsAdmin();
 
@@ -41,7 +39,7 @@ and open the template in the editor.
 
 <head>
     <meta charset="UTF-8">
-    <title>Hotel Sitvago CMS</title>
+    <title>Hotel Sitvago CMS - View Bookings</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--CSS Sources-->

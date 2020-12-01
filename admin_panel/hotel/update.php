@@ -37,7 +37,7 @@ and open the template in the editor.
 
 <head>
     <meta charset="UTF-8">
-    <title>Hotel Sitvago CMS - Create Hotel</title>
+    <title>Hotel Sitvago CMS - Update Hotel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--CSS Sources-->
