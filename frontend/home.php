@@ -145,7 +145,8 @@ and open the template in the editor.
                         <div class="col-md-4 hotel-card">
                             <div class="card mb-4 shadow-sm">
                                 <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice">
-                                    <title><?= $row['name'] ?></title><img src="<?= $row['secure_url'] ?>" class='img-fluid' alt="Barrack Hotel" />
+                                    <title><?= $row['name'] ?></title>
+                                    <img src="<?= $row['secure_url'] ?>" class='img-fluid' alt="Barrack Hotel">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $row['name'] ?></h5>
                                         <span class="badge badge-dark"><?= $row['area_name'] ?></span>
