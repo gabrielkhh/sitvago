@@ -153,6 +153,7 @@ and open the template in the editor.
                                                 <a class="btn btn-light" role="button" href="booking.php?key=<?= $row['id'] ?>">View</a>
                                             </div>
                                         </div>
+                                        <span class="badge badge-info mt-3"><?= $row['area_name'] ?></span>
                                     </div>
                             </div>
                         </div>
@@ -161,9 +162,10 @@ and open the template in the editor.
             </div>
         </div>
     </main>
-</body>
-<footer class="container">
+    <footer class="container">
     <p>&copy; Sitvago 2020</p>
 </footer>
+</body>
+
 
 </html>

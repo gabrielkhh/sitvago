@@ -161,7 +161,7 @@ if (isset($_POST['login_user'])) {
             $UserData = $retrieveUserData->getUserDataForSession($username);
 
             $_SESSION['username'] = $UserData['username'];
-            $_SESSION['userID'] = $UserData['id'];
+            $_SESSION['user_id'] = $UserData['id'];
             $_SESSION['role_name'] = $UserData['role_name'];
             $_SESSION['first_name'] = $UserData['first_name'];
             $_SESSION['last_name'] = $UserData['last_name'];

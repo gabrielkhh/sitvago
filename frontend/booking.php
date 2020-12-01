@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <?php
 require '../vendor/autoload.php';
 
@@ -18,7 +20,7 @@ $review = new Review();
 $results = $review->getSingleHotelReview($id);
 print_r($results);
 ?>
-<!DOCTYPE html>
+
 <html lang="en">
 
     <head>

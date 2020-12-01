@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <?php
 require '../vendor/autoload.php';
+
 use sitvago\Booking;
 
 session_start();
 if (!isset($_SESSION['username'])) {
-	$Message = "Please login to view your profile.";
-    header("location: loginpage.php?Message=" .urlencode($Message));
+    $Message = "Please login to view your profile.";
+    header("location: loginpage.php?Message=" . urlencode($Message));
 } else {
-	$userID = ($_SESSION['userID']);
+    $userID = ($_SESSION['userID']);
     $username = ($_SESSION['username']);
     $first_name = ($_SESSION['first_name']);
     $last_name = ($_SESSION['last_name']);
@@ -21,15 +22,15 @@ if (!isset($_SESSION['username'])) {
 //display error details for update user profile
 if (isset($_SESSION['errorsDetails'])) {
     $errorsDetails = ($_SESSION['errorsDetails']);
-}else{
-	$errorsDetails = "";
+} else {
+    $errorsDetails = "";
 }
 
 //display error details for change password
 if (isset($_SESSION['errorsPW'])) {
     $errorsPW = ($_SESSION['errorsPW']);
-}else{
-	$errorsPW = "";
+} else {
+    $errorsPW = "";
 }
 
 if (isset($_GET['logout'])) {
@@ -184,10 +185,10 @@ $results = $bookings->getBookings($userID);
             button:hover {
                 opacity: 0.8;
             }
-			
-			.card{
-				padding: 40px;
-			}
+
+            .card{
+                padding: 40px;
+            }
 
 
 
@@ -221,7 +222,7 @@ $results = $bookings->getBookings($userID);
             </div>
 
             <div class="tab_container"> 
-               
+
 
                 <div class="tab">
                     <button class="tablinks" id="defaultOpen" onclick="openCity(event, 'Account')">Account Settings</button>
@@ -236,13 +237,13 @@ $results = $bookings->getBookings($userID);
                                     return false;
                                 }
                                 ;">
-							<?php if (is_array($errorsDetails)): ?>
-								<?php foreach ($errorsDetails as $error): ?>
-				
-								<p><?php echo $error ?></p>
-					
-								<?php endforeach ?>
-							<?php  endif ?>
+                                  <?php if (is_array($errorsDetails)): ?>
+                                      <?php foreach ($errorsDetails as $error): ?>
+
+                                    <p><?php echo $error ?></p>
+
+                                <?php endforeach ?>
+                            <?php endif ?>
                             <div class="form-group">
                                 <h2>Account Details</h2>
                                 <label for="fname">Username:</label>
@@ -283,16 +284,16 @@ $results = $bookings->getBookings($userID);
 
                     <div class="form-signin" id="change_password">
                         <form action="user_handler.php" method="post">
-						
-						<?php if (is_array($errorsPW)): ?>
-								<?php foreach ($errorsPW as $error): ?>
-				
-								<p><?php echo $error ?></p>
-					
-								<?php endforeach ?>
-							<?php  endif ?>
-							
-							
+
+                            <?php if (is_array($errorsPW)): ?>
+                                <?php foreach ($errorsPW as $error): ?>
+
+                                    <p><?php echo $error ?></p>
+
+                                <?php endforeach ?>
+                            <?php endif ?>
+
+
 
                             <!-- Remember to add 'required' field later, currently remove for demo purpose -->
                             <h2>Change Password</h2>
@@ -315,23 +316,23 @@ $results = $bookings->getBookings($userID);
                 </div>
 
                 <div id="Bookings" class="tabcontent">
-					<?php foreach ($results as $row) : ?>
-						<div class="card">
-						
-						  <h5 class="card-header">Hotel Name: <?= $row['hotel_name'] ?></h5>
-						  <div class="card-body">
-							<p class="card-text">Transaction ID: <?= $row['stripe_payment_id'] ?></p>
-							<p class="card-text">Booking ID: <?= $row['id'] ?></p>
-							<p class="card-title">Room Type: <?= $row['room_type'] ?></p>
-							<p class="card-text">Amount Paid: <?= $row['price'] ?></p>
-							<p class="card-text">Check-in Date: <?= $row['check_in'] ?></p>
-							<p class="card-text">Check-out Date: <?= $row['check_out'] ?></p>
-							<p class="card-text">Booking Date: <?= $row['created_at'] ?></p>
-						  </div>
-						</div>
-					<?php endforeach; ?>
+                    <?php foreach ($results as $row) : ?>
+                        <div class="card">
 
-				</div>
+                            <h5 class="card-header">Hotel Name: <?= $row['hotel_name'] ?></h5>
+                            <div class="card-body">
+                                <p class="card-text">Transaction ID: <?= $row['stripe_payment_id'] ?></p>
+                                <p class="card-text">Booking ID: <?= $row['id'] ?></p>
+                                <p class="card-title">Room Type: <?= $row['room_type'] ?></p>
+                                <p class="card-text">Amount Paid: <?= $row['price'] ?></p>
+                                <p class="card-text">Check-in Date: <?= $row['check_in'] ?></p>
+                                <p class="card-text">Check-out Date: <?= $row['check_out'] ?></p>
+                                <p class="card-text">Booking Date: <?= $row['created_at'] ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
         </main>
 
         <footer class="container">
@@ -343,65 +344,63 @@ $results = $bookings->getBookings($userID);
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-            function openCity(evt, cityName) {
-                var i, tabcontent, tablinks;
-                tabcontent = document.getElementsByClassName("tabcontent");
-                document.getElementById("prevBtn").style.display = "none";
-                document.getElementById("change_password").style.display = "none";
-                document.getElementById("submitBtn").style.display = "none";
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                }
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-                document.getElementById(cityName).style.display = "block";
-                evt.currentTarget.className += " active";
-            }
-            function editFunction() {
-                document.getElementById("fname").readOnly = false;
-                document.getElementById("lname").readOnly = false;
-                document.getElementById("email").readOnly = false;
-                document.getElementById("phone_number").readOnly = false;
-                document.getElementById("country").readOnly = false;
-                document.getElementById("billing_address").readOnly = false;
-                document.getElementById("submitBtn").style.display = "inline";
-                document.getElementById("editBtn").style.display = "none";
-                document.getElementById("prevBtn").style.display = "inline"
-                document.getElementById("passwordBtn").style.display = "none";
+                                function openCity(evt, cityName) {
+                                    var i, tabcontent, tablinks;
+                                    tabcontent = document.getElementsByClassName("tabcontent");
+                                    document.getElementById("prevBtn").style.display = "none";
+                                    document.getElementById("change_password").style.display = "none";
+                                    document.getElementById("submitBtn").style.display = "none";
+                                    for (i = 0; i < tabcontent.length; i++) {
+                                        tabcontent[i].style.display = "none";
+                                    }
+                                    tablinks = document.getElementsByClassName("tablinks");
+                                    for (i = 0; i < tablinks.length; i++) {
+                                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                                    }
+                                    document.getElementById(cityName).style.display = "block";
+                                    evt.currentTarget.className += " active";
+                                }
+                                function editFunction() {
+                                    document.getElementById("fname").readOnly = false;
+                                    document.getElementById("lname").readOnly = false;
+                                    document.getElementById("email").readOnly = false;
+                                    document.getElementById("phone_number").readOnly = false;
+                                    document.getElementById("country").readOnly = false;
+                                    document.getElementById("billing_address").readOnly = false;
+                                    document.getElementById("submitBtn").style.display = "inline";
+                                    document.getElementById("editBtn").style.display = "none";
+                                    document.getElementById("prevBtn").style.display = "inline"
+                                    document.getElementById("passwordBtn").style.display = "none";
 
-            }
-            function passwordFunction() {
-                document.getElementById("editBtn").style.display = "none";
-                document.getElementById("passwordBtn").style.display = "none";
+                                }
+                                function passwordFunction() {
+                                    document.getElementById("editBtn").style.display = "none";
+                                    document.getElementById("passwordBtn").style.display = "none";
 
-                document.getElementById("edit_profile").style.display = "none";
-                document.getElementById("change_password").style.display = "block";
+                                    document.getElementById("edit_profile").style.display = "none";
+                                    document.getElementById("change_password").style.display = "block";
 
-                document.getElementById("prevBtn").style.display = "inline"
+                                    document.getElementById("prevBtn").style.display = "inline"
 
-            }
-            function prevFunction() {
-                document.getElementById("submitBtn").style.display = "none";
-                document.getElementById("editBtn").style.display = "inline";
-                document.getElementById("passwordBtn").style.display = "inline";
-                document.getElementById("edit_profile").style.display = "block";
-                document.getElementById("fname").readOnly = true;
-                document.getElementById("lname").readOnly = true;
-                document.getElementById("email").readOnly = true;
-                document.getElementById("phone_number").readOnly = true;
-                document.getElementById("country").readOnly = true;
-                document.getElementById("billing_address").readOnly = true;
-                document.getElementById("change_password").style.display = "none";
-                document.getElementById("prevBtn").style.display = "none";
+                                }
+                                function prevFunction() {
+                                    document.getElementById("submitBtn").style.display = "none";
+                                    document.getElementById("editBtn").style.display = "inline";
+                                    document.getElementById("passwordBtn").style.display = "inline";
+                                    document.getElementById("edit_profile").style.display = "block";
+                                    document.getElementById("fname").readOnly = true;
+                                    document.getElementById("lname").readOnly = true;
+                                    document.getElementById("email").readOnly = true;
+                                    document.getElementById("phone_number").readOnly = true;
+                                    document.getElementById("country").readOnly = true;
+                                    document.getElementById("billing_address").readOnly = true;
+                                    document.getElementById("change_password").style.display = "none";
+                                    document.getElementById("prevBtn").style.display = "none";
+                                }
+                                // Get the element with id="defaultOpen" and click on it
+                                document.getElementById("defaultOpen").click();
 
 
-            }
-            // Get the element with id="defaultOpen" and click on it
-            document.getElementById("defaultOpen").click();
-                                
-                                
 
 
         </script>

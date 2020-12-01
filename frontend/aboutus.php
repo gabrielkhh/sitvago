@@ -128,10 +128,11 @@
                 </div>
             </div>
         </main>
-    </body>
-    <footer class="bg-light pb-5">
+            <footer class="bg-light pb-5">
         <div class="container text-center">
             <p class="font-italic text-muted mb-0">&copy; Sitvago's 2020 Copyright</p>
         </div>
     </footer>
+    </body>
+
 </html>
