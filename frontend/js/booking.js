@@ -26,17 +26,20 @@ $(document).ready(function()
  let messages =[];
  
 
- //Remove error message if found
-var myError = setInterval(removeErrorMsg,4000);
+//Checking for error message
 function removeErrorMsg(){    
-    //Always checking for error message
     if(messages.length >0){
         messages =[];
         removeElement('error');
     }
 }
-    
 
+//Clear the interval
+function destroyTimer(errorTimer){
+    clearInterval(errorTimer);
+}
+    
+    
 //Validation for submit button
  function registerEventHandlers()
 {
@@ -51,17 +54,20 @@ function removeErrorMsg(){
            //Check if date are filled, roomTypeValue.length is cause it's disabled means it's empty value
            if (checkInValue.length === 0 || checkOutValue.length === 0 || roomTypeValue.length === 8)
            {
-               messages.push("Please fill in all fields");
+               messages.push(" Please fill in all fields");
            }
            
            //If error messages found prevent submission. 
            if (messages.length >0){
                e.target.disabled = true;
+               //Remove error message if found, interval should also start after error is found and stop when there's no error
+               var myError = setInterval(removeErrorMsg,4000);
                e.preventDefault();
                addElement("book_btn",'span','error',messages[0]);             
                setTimeout(()=> {
                    e.target.disabled = false;
-               },5000)
+                   destroyTimer(myError);
+               },4000)
            }
        });
     }
@@ -92,37 +98,30 @@ function calenderHandler1(){
             var checkInFormatted = checkInValue.split("-").reverse().join("-");
             //Only check if checkIn value is greater than checkout
             if (checkOutValue.length !==0){
-                //If dates are greater then checkout
-                if (checkInFormatted > checkOutFormatted)
+                /*  If error message is generated when calender is closed produce error message
+                /   If dates are greater then checkout  */
+                if (checkInFormatted > checkOutFormatted || checkOutFormatted === checkInFormatted)
                 {
-                    messages.push("Invalid Date!");
+                    messages.push(" Invalid Date!");
                     instance.clear();
                     addElement("book_btn",'span','error',messages[0]);
+                    //If error messages found disable submit button. 
+                    if (messages.length >0){
+                            console.log(bookBtn);
+                            bookBtn.disabled = true;
+                            //Remove error message if found, interval should also start after error is found and stop when there's no error
+                            var myError = setInterval(removeErrorMsg,4000);
+                            setTimeout(()=> {
+                            bookBtn.disabled = false;
+                            destroyTimer(myError);
+                        },4000)
+                    }
 
-                }
-                 //If dates are same
-                if (checkOutFormatted === checkInFormatted){
-                     messages.push("Invalid Date!");
-                    instance.clear();
-                    addElement("book_btn",'span','error',messages[0]);
-                    
                 }
             }
 
-        },
-        
-        //If error message is generated when closed produce error message
-        onClose: function(selectedDates,dateStr,instance){
-              //If error messages found disable submit button. 
-               if (messages.length >0){
-                   bookBtn.target.disabled = true;
-                   bookBtn.preventDefault();
-                   setTimeout(()=> {
-                   bookBtn.target.disabled = false;
-               },5000)
-           }
-        }
-        /*
+        }      
+        /* For future implementation
         disable:[
         function(date) {
             //Test
@@ -142,10 +141,10 @@ function calenderHandler2(){
             if(checkInValue.length ===0){
                 instance.set('minDate', minCoutDate);
             }
+            //Setting date to next date based on check in date
             var checkInFormatted = checkInValue.split("-").reverse().join("-");
             var newMinDate = new Date(checkInFormatted);
             newMinDate.setDate(newMinDate.getDate() + 1);
-            console.log(newMinDate);
             if(checkInFormatted.length !==0)
             {
                  instance.set('minDate',newMinDate);

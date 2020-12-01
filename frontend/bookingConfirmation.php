@@ -41,7 +41,6 @@ unset($_SESSION['INFO']);
     ?>
 
 
-
 <body>
     <link rel="stylesheet" href="css/booking.css">
     <div class="container my-card">
@@ -65,16 +64,14 @@ unset($_SESSION['INFO']);
                     </hr>
                     <strong>Room Type:</strong> <?= $data['roomtype'] ?><br>
                     </hr>                    
-                    <strong>Amount paid:</strong> SGD$<?= $data['price'] ?><br>                    
+                    <strong>Amount paid:</strong> SGD$<?= $data['price'] ?><br>
+                    </hr>  
+                    Your booking details has been send to your email:<br><?= $data['email'] ?>
                 </p>
-                <a href="#" class="btn btn-primary">Email Invoice</a>
             </div>
         </div>
-
-
-
-
 </body>
+
 </head>
 
-</html>
+</html>   
