@@ -116,7 +116,7 @@ $results = $bookings->getBookings($userID);
 			.tab {
 				overflow: hidden;
 				border: 2px solid #ccc;
-				background-image:url(http://www.zingerbugimages.com/backgrounds/white_marble_background_seamless.jpg);
+				background-image:url(images/white_marble_background.jpg);
 
 				
 			}
@@ -188,7 +188,7 @@ $results = $bookings->getBookings($userID);
 			}
 
 			button {
-				background-image:url(http://www.zingerbugimages.com/backgrounds/white_marble_background_seamless.jpg);
+				background-image:url(images/white_marble_background.jpg);
 				color: black;
 				border: none;
 				padding: 10px 20px;
@@ -345,7 +345,9 @@ $results = $bookings->getBookings($userID);
                                 <p class="card-text">Booking Date: <?= $row['created_at'] ?></p>
                             </div>
                         </div>
+					
                     <?php endforeach; ?>
+				
                 </div>
             </div>
         </main>
