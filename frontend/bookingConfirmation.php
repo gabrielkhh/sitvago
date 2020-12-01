@@ -39,16 +39,14 @@ unset($_SESSION['INFO']);
         $pass = true;
         ?>
 
-    </head>
-
-    <body>
-        <link rel="stylesheet" href="css/booking.css">
-        <div class="container my-card">
-            <h2 id="card-h2">Thank you for using Sitvago</h2>
-            <div class="card">
-                <img class="card-img-top" src="images/logo_nobackground.png" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <hr class="line">
+<body>
+    <link rel="stylesheet" href="css/booking.css">
+    <div class="container my-card">
+        <h2 id="card-h2">Thank you for using Sitvago</h2>
+        <div class="card">
+            <img class="card-img-top" src="images/logo_nobackground.png" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <hr class="line">
                     </hr>
                     <h4 class="card-title">Payment Details</h4>
                     <p class="card-text">
@@ -63,14 +61,16 @@ unset($_SESSION['INFO']);
                     <strong>Email Address:</strong> <?= $data['email'] ?><br>
                     <hr>
                     <strong>Room Type:</strong> <?= $data['roomtype'] ?><br>
-                    <hr>                    
-                    <strong>Amount paid:</strong> SGD$<?= $data['price'] ?><br>                    
-                    </p>
-                    <a href="#" class="btn btn-primary">Email Invoice</a>
-                </div>
+                    </hr>                    
+                    <strong>Amount paid:</strong> SGD$<?= $data['price'] ?><br>
+                    </hr>  
+                    Your booking details has been send to your email:<br><?= $data['email'] ?>
+                </p>
             </div>
         </div>
-    </body>
+</body>
 
+</head>
 
-</html>
+</html>   
+

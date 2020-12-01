@@ -194,7 +194,7 @@ if (isset($_SESSION['errMsgreg'])) {
                     <div style="float:right;">
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                         <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-                        <button type="submit" id="submitBtn" name="reg_user" display="none">Register</button>
+                        <button type="submit" id="submitBtn" name="reg_user" >Register</button>
 
                     </div>
                 </div>
