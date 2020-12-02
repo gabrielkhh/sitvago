@@ -15,7 +15,7 @@ and open the template in the editor.
     margin-left:14px; 
     font-weight: bold;
 }
-
+#f8f9fa
 /*
 body{
     margin:40px;
@@ -83,7 +83,7 @@ body{
     float: none; 
     margin-bottom: 10px; 
     text-align:center;
-    margin-top:50px;
+    margin-top:60px;
 }
 
 /* The actual popup */
