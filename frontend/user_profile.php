@@ -112,97 +112,99 @@ $results = $bookings->getBookings($userID);
                 zoom: 90%;
                 font-family: Arial;
             }
-            /* Style the tab */
-            .tab {
-                overflow: hidden;
-                border: 1px solid #ccc;
-                background-color: #f1f1f1;
-            }
+			/* Style the tab */
+			.tab {
+				overflow: hidden;
+				border: 2px solid #ccc;
+				background-image:url(images/white_marble_background.jpg);
 
-            /* Style the buttons inside the tab */
-            .tab button {
-                background-color: inherit;
-                color: black;
-                float: left;
-                border: none;
-                outline: none;
-                cursor: pointer;
-                padding: 14px 16px;
-                transition: 0.3s;
-                font-size: 17px;
-            }
+				
+			}
 
-            /* Change background color of buttons on hover */
-            .tab button:hover {
-                background-color: #ddd;
-            }
+			/* Style the buttons inside the tab */
+			.tab button {
+				background-color: inherit;
+				color: black;
+				float: left;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				padding: 14px 16px;
+				transition: 0.3s;
+				font-size: 17px;
+				font-family: Raleway;
+				font-weight: bold;
 
-            /* Create an active/current tablink class */
-            .tab button.active {
-                background-color: #ccc;
-            }
+			}
 
-            /* Style the tab content */
-            .tabcontent {
-                display: none;
-                padding: 6px 12px;
-                border: 1px solid #ccc;
-                border-top: none;
-            }
+			/* Change background color of buttons on hover */
+			.tab button:hover {
+				background-color: #ddd;
+			}
 
-            .tab_container{
-                padding: 100px;
-            }
+			/* Create an active/current tablink class */
+			.tab button.active {
+				filter: brightness(75%);
+			}
+			/* Style the tab content */
+			.tabcontent {
+				display: none;
+				padding: 10px 0px;
+				border: 1px solid #ccc;
+				border-top: none;
+				background-color: #ffffff;
+				
+			}
 
-            #regForm {
-                background-color: #ffffff;
-                margin: 100px auto;
-                font-family: Raleway;
-                padding: 40px;
-                width: 70%;
-                min-width: 300px;
-            }
-		@media screen and (max-width: 600px) {
-		  .signup-form, card{
-			width: 100%;
-			margin-top: 0;
-		  }
-		}
+			.tab_container{
+				padding: 100px;
+				max-width: 900px;
+				margin: auto;
+			}
 
-
-
-            input {
-                padding: 100px;
-                width: 100%;
-                font-size: 17px;
-                font-family: Raleway;
-                border: 1px solid #aaaaaa;
-            }
-
-            button {
-                background-color: #4CAF50;
-                color: #ffffff;
-                border: none;
-                padding: 10px 20px;
-                font-size: 17px;
-                font-family: Raleway;
-                cursor: pointer;
-            }
-
-            button:hover {
-                opacity: 0.8;
-            }
-
-            .card{
-                padding: 40px;
-            }
+			#regForm {
+				background-color: #ffffff;
+				margin: 100px auto;
+				font-family: Raleway;
+				padding: 40px;
+				width: 100%;
+				min-width: 300px;
+			}
+			@media screen and (max-width: 900px) {
+			  .signup-form, card{
+				width: 100%;
+				margin-top: 0;
+			  }
+			}
 
 
 
+			input {
+				padding: 100px;
+				width: 100%;
+				font-size: 17px;
+				font-family: Raleway;
+				border: 1px solid #aaaaaa;
+			}
 
+			button {
+				background-image:url(images/white_marble_background.jpg);
+				color: black;
+				border: none;
+				padding: 10px 20px;
+				font-size: 17px;
+				font-family: Raleway;
+				cursor: pointer;
+				font-weight: bold;
+			}
 
+			button:hover {
+				opacity: 0.8;
+			}
 
-
+			.card{
+				padding: 40px;
+			}
 
 
         </style>
@@ -219,66 +221,70 @@ $results = $bookings->getBookings($userID);
         }
         ?>
 
-        <main role="main">
+        <main>
 
             <div class="jumbotron">
                 <div class="container text-center text-white">
                     <h1 class="display-2" ><?php echo $first_name ?>'s Profile</h1>
                     <p>View your account and bookings here!</p>
                 </div>
-            </div>
+			</div>
+            
 
             <div class="tab_container"> 
 
 
                 <div class="tab">
                     <button class="tablinks" id="defaultOpen" onclick="openCity(event, 'Account')">Account Settings</button>
-                    <button class="tablinks" onclick="openCity(event, 'Bookings')">Bookings</button>
+                    <button class="tablinks" id="bookingstab" onclick="openCity(event, 'Bookings')">Bookings</button>
                 </div>
 
                 <div id="Account" class="tabcontent">
 
                     <div class="signup-form" id="edit_profile">
-                        <form action="user_handler.php" method="post" onSubmit="if (confirm('Confirm changes??')) {
+                        <form action="user_handler.php" method="post" onSubmit="if (confirm('Confirm changes?')) {
                                 } else {
                                     return false;
                                 }
                                 ;">
                                   <?php if (is_array($errorsDetails)): ?>
+									<?php echo "<h2>Warning(s)</h2>"; ?>
                                       <?php foreach ($errorsDetails as $error): ?>
 
-                                    <p><?php echo $error ?></p>
+                                    <p><strong><?php echo $error ?></strong></p>
+
 
                                 <?php endforeach ?>
+								<?php unset($_SESSION['errorsDetails']); ?>
                             <?php endif ?>
                             <div class="form-group">
                                 <h2>Account Details</h2>
                                 <label for="username">Username:</label>
-                                <input type="text" class="form-control" name="username" id="username" value = "<?php echo $username ?>" readonly>
+                                <input type="text" class="form-control" name="username" id="username" value = "<?php echo $username ?>" maxlength="50" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="fname">First Name:</label>
-                                <input type="text" class="form-control" name="fname" id="fname" value = "<?php echo $first_name ?>" readonly>
+                                <input type="text" class="form-control" name="fname" id="fname" value = "<?php echo $first_name ?>" maxlength="50" required  readonly>
                             </div>
                             <div class="form-group">
                                 <label for="lname">Last Name:</label>
-                                <input type="text" class="form-control" name="lname" id="lname" value = "<?php echo $last_name ?>" readonly>
+                                <input type="text" class="form-control" name="lname" id="lname" value = "<?php echo $last_name ?>" maxlength="50" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" class="form-control" name="email" id="email" value = "<?php echo $email ?>" readonly>
+                                <input type="email" class="form-control" name="email" id="email" value = "<?php echo $email ?>" maxlength="50" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="phone_number">Phone number:</label>
-                                <input type="number" class="form-control" name="phone_number" id="phone_number" value = "<?php echo $phone_number ?>" readonly>
+                                <input type="tel" class="form-control" name="phone_number" id="phone_number" value = "<?php echo $phone_number ?>" maxlength="8" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="country">Country:</label>
-                                <input type="text" class="form-control" name="country" id="country" value = "<?php echo $country ?>" readonly>
+                                <input type="text" class="form-control" name="country" id="country" value = "<?php echo $country ?>" maxlength="50" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="billing_address">Billing Address:</label>
-                                <input type="text" class="form-control" name="billing_address" id="billing_address" value = "<?php echo $billing_address ?>" readonly>
+                                <input type="text" class="form-control" name="billing_address" id="billing_address" value = "<?php echo $billing_address ?>" required readonly>
                             </div>
                             <div style="overflow:auto;">
                                 <button type="button" id="editBtn" onclick="editFunction()">Edit Profile</button>
@@ -296,8 +302,10 @@ $results = $bookings->getBookings($userID);
                                 <?php foreach ($errorsPW as $error): ?>
 
                                     <p><?php echo $error ?></p>
+											
 
                                 <?php endforeach ?>
+								<?php unset($_SESSION['errorsPW']); ?>
                             <?php endif ?>
 
 
@@ -337,7 +345,9 @@ $results = $bookings->getBookings($userID);
                                 <p class="card-text">Booking Date: <?= $row['created_at'] ?></p>
                             </div>
                         </div>
+					
                     <?php endforeach; ?>
+				
                 </div>
             </div>
         </main>
@@ -345,6 +355,7 @@ $results = $bookings->getBookings($userID);
         <?php
 			include "footer.php";
 		?>
+
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
@@ -386,11 +397,13 @@ $results = $bookings->getBookings($userID);
                                 function passwordFunction() {
                                     document.getElementById("editBtn").style.display = "none";
                                     document.getElementById("passwordBtn").style.display = "none";
-
                                     document.getElementById("edit_profile").style.display = "none";
                                     document.getElementById("change_password").style.display = "block";
 									document.getElementById("prevBtn").style.display = "none";
                                     document.getElementById("prevBtn2").style.display = "inline"
+									document.getElementById("submitBtn2").style.display = "inline";
+									document.getElementById("bookingstab").disabled = true;
+									document.getElementById("defaultOpen").disabled = true;
 
                                 }
                                 function prevFunction() {
@@ -408,9 +421,13 @@ $results = $bookings->getBookings($userID);
                                     document.getElementById("change_password").style.display = "none";
                                     document.getElementById("prevBtn").style.display = "none";
 									document.getElementById("prevBtn2").style.display = "none";
+									document.getElementById("bookingstab").disabled = false;
+									document.getElementById("defaultOpen").disabled = false;
                                 }
                                 // Get the element with id="defaultOpen" and click on it
                                 document.getElementById("defaultOpen").click();
+
+
 
 
 

@@ -1,3 +1,7 @@
+p {
+text-align: center;
+}
+
 .form-control{
     height: 40px;
     box-shadow: none;
@@ -12,7 +16,7 @@
 .signup-form{
     width: 600px;
     margin: 0 auto;
-    padding: 30px 0;
+    padding: 3px 0;
 }
 .signup-form h2{
     color: #636363;
@@ -41,7 +45,7 @@
     text-align: center;
 }
 .signup-form form{
-    color: #999;
+    color: #000000;
     border-radius: 3px;
     margin-bottom: 15px;
     background: #ffffff;
@@ -110,3 +114,5 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+
