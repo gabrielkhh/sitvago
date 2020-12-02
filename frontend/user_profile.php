@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])) {
     $Message = "Please login to view your profile.";
     header("location: loginpage.php?Message=" . urlencode($Message));
 } else {
-    $userID = ($_SESSION['userID']);
+    $userID = ($_SESSION['user_id']);
     $username = ($_SESSION['username']);
     $first_name = ($_SESSION['first_name']);
     $last_name = ($_SESSION['last_name']);
@@ -49,6 +49,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 
 $bookings = new Booking();
 $results = $bookings->getBookings($userID);
+echo "LALLALALALALLAAL"
 ?>
 <html lang="en">
     <head>
