@@ -8,7 +8,7 @@ use sitvago\Hotel;
 session_start();
 
 if (isset($_GET['logout'])) {
-
+    session_unset();
     session_destroy();
     header("location: home.php");
 }
@@ -118,7 +118,6 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        session_start();
         if (isset($_SESSION['username'])) {
             include "navbar_User.php";
         } else if (!isset($_SESSION['username'])) {
