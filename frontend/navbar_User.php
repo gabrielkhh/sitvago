@@ -1,6 +1,10 @@
-<style>
+﻿<style>
     .nav-link{
         color: rgb(186,227,222) !important;
+    }
+
+    .nav-link-active{
+        color: rgb(140, 124, 250) !important;
     }
     
     .bg-dark{
