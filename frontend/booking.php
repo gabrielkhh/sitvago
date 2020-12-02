@@ -82,7 +82,7 @@ if (count($hotelSelected) === 0) {
     }
     ?>
     <link rel="stylesheet" href="css/booking.css">
-    <section class="ftco-section">
+    <section role="contentinfo" class="ftco-section">
         <div class="container">
             <!--First Row Starts Here -->
             <div class="row">
@@ -152,10 +152,12 @@ if (count($hotelSelected) === 0) {
                     <h3 class="hotel_selected"><?= $hotelSelected['name'] ?></h3>
                     <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">
                         <div class="form-group">
-                            <label for="checkin"><input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required></label>
+                            <label for="checkin"></label>
+                            <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
                         </div>
                         <div class="form-group">
-                            <label for="checkout"><input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required></label>
+                            <label for="checkout"></label>
+                            <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="TypeOfRooms" name="TypeOfRooms" required>
@@ -166,10 +168,12 @@ if (count($hotelSelected) === 0) {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="hotelName"><input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden></label>
-                            <label for="amountPN"><input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden></label>
+                           <label for="hotelName"></label>
+                           <input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden>
+                            <label for="amountPN"></label>
+                            <input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden>
                             <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
-                            <span id="error"></span>
+                            <!--<span id="error"></span>-->
                         </div>
                     </form>
                     <p>
