@@ -379,7 +379,7 @@
                             "hideMethod": "fadeOut"
                         }
 
-                        Command: toastr["success"]("We have successfully published your review!", "Woots!")
+                        Command: toastr["success"]("Your response has been submitted successfully", "Thank you for your review!")
                     });
                     $postReviewHandler.fail(function(jqXHR, textStatus, error) {
                         console.log(error);
