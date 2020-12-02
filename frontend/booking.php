@@ -351,7 +351,12 @@ if (count($hotelSelected) === 0) {
                     }
                     else
                     {
-
+                        var reviewAreaElement = document.getElementById('reviewsSection');
+                        reviewAreaElement.innerHTML += "<div class='reviewItem mt-3'><div class='col-md-12'><div class='row'>"
+                            + "<p class='float-left'>Posted by : &nbsp;&nbsp;&nbsp;" + userName + "</p>"
+                            + "<p id='reviewDate' class='ml-auto'>just now</p>"
+                            + "</div></div><div class='row'><div class='col-md-12'><h5>" + collectedTitle + "</h5>"
+                            + "</div><div class='col-md-12'><p>" + collectedContent + "</p></div></div></div><hr />";
                     }
                 });
                 $postReviewHandler.fail(function(jqXHR, textStatus, error) {
