@@ -188,72 +188,50 @@ if (count($hotelSelected) === 0) {
                         <div class="panel-heading">
                             <h3 class="panel-title">Recent Reviews</h3>
                         </div>
-                        <div class="panel-body">
-                            <ul class="list-group">
+                        <div id="reviewsSection" class="panel-body">
+                            <?php if (count($results) === 0) : ?>
                                 <script>
+                                    var noReviews = true;
+                                </script>
+                                <div id="emptyReview">
+                                    <h6 class="text-center mt-5 mb-5">Hmmm, looks like there's no reviews for this hotel yet..</h6>
+                                    <hr />
+                                </div>
+                            <?php else : ?>
+                                <script>
+                                    var noReviews = false;
                                     dayjs.extend(window.dayjs_plugin_relativeTime);
                                     const now = dayjs();
                                 </script>
-                                <?php if (count($results) === 0) : ?>
-                                    <h6 class="text-center mt-5">Hmmm, looks like there's no reviews for this hotel yet..</h6>
-                                <?php else : ?>
-                                    <?php foreach ($results as $row) : ?>
-                                        <li class="list-group-item">
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <p class="float-left">Posted by : &nbsp;&nbsp;&nbsp;<?= $row['username'] ?></p>
-                                                    <p id="reviewDate<?= $row['id'] ?>" class="ml-auto"></p>
-                                                </div>
-                                            </div>
+                                <?php foreach ($results as $row) : ?>
+                                    <div class=reviewItem mt-3">
+                                        <div class="col-md-12">
                                             <div class="row">
-                                                <div class="col-md-12">
-                                                    <h5><?= $row['title'] ?></h5>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <p><?= $row['content'] ?></p>
-                                                </div>
+                                                <p class="float-left">Posted by : &nbsp;&nbsp;&nbsp;<?= $row['username'] ?></p>
+                                                <p id="reviewDate<?= $row['id'] ?>" class="ml-auto"></p>
                                             </div>
-                                        </li>
-                                        <script>
-                                            if (now.diff('<?= $row['created_at'] ?>', 'day') < 7) {
-                                                var relativePostedTime = dayjs().to(dayjs('<?= $row['created_at'] ?>'));
-                                                document.getElementById('reviewDate<?= $row['id'] ?>').innerHTML = relativePostedTime;
-                                            } else {
-                                                var createdAt = dayjs('<?= $row['created_at'] ?>').format('D MMM YYYY');
-                                                document.getElementById('reviewDate<?= $row['id'] ?>').innerHTML = createdAt;
-                                            }
-                                        </script>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                                <!-- <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-xs-10 col-md-11">
-                                            <div class="mic-info">
-                                                By: LALAL on 8 dec
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h5><?= $row['title'] ?></h5>
                                             </div>
-                                            <div class="comment-text">
-                                                Very good
-                                                <br>
-                                                Not so good
+                                            <div class="col-md-12">
+                                                <p><?= $row['content'] ?></p>
                                             </div>
                                         </div>
                                     </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-xs-10 col-md-11">
-                                            <div class="mic-info">
-                                                By: LALAL on 8 dec
-                                            </div>
-                                            <div class="comment-text">
-                                                Very good
-                                                <br>
-                                                Not so good
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li> -->
-                            </ul>
+                                    <hr />
+                                    <script>
+                                        if (now.diff('<?= $row['created_at'] ?>', 'day') < 7) {
+                                            var relativePostedTime = dayjs().to(dayjs('<?= $row['created_at'] ?>'));
+                                            document.getElementById('reviewDate<?= $row['id'] ?>').innerHTML = relativePostedTime;
+                                        } else {
+                                            var createdAt = dayjs('<?= $row['created_at'] ?>').format('D MMM YYYY');
+                                            document.getElementById('reviewDate<?= $row['id'] ?>').innerHTML = createdAt;
+                                        }
+                                    </script>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                         <?php if (isset($_SESSION['username'])) : ?>
                             <div>
@@ -263,7 +241,7 @@ if (count($hotelSelected) === 0) {
                                         <input type="text" id="inputReviewTitle" style="min-width: 100%" placeholder="If you could describe your experience in one sentence, what would it be?"></input>
 
                                         <label for="inputReviewContent" class="mt-3">Your Review</label>
-                                        <textarea id="inputReviewContent" rows="3" style="min-width: 100%" placeholder="Need some help? Why not start by describing the service quality and the amenities!"></textarea>
+                                        <textarea id="inputReviewContent" rows="5" style="min-width: 100%" placeholder="Need some help? Why not start by describing the service quality and the amenities!"></textarea>
                                 </div>
                                 <button id="btnPost" class="btn btn-primary float-right">Post Review</button>
                             </div>
@@ -302,6 +280,7 @@ if (count($hotelSelected) === 0) {
 
     <script>
         var hotelID = <?= $id ?>;
+        var userName = "<?= $_SESSION['username'] ?>";
 
         var hotelDescriptionText = decodeURI("<?= $hotelSelected['description'] ?>");
         document.getElementById("descriptionArea").innerHTML = hotelDescriptionText;
@@ -359,6 +338,21 @@ if (count($hotelSelected) === 0) {
                 $postReviewHandler.done(function(data) {
                     // Append the review to the list of reviews
                     console.log(data.message);
+                    if (noReviews) {
+                        document.getElementById("emptyReview").style.display = "none";
+
+                        var reviewAreaElement = document.getElementById('reviewsSection');
+                        reviewAreaElement.innerHTML += "<div class='reviewItem mt-3'><div class='col-md-12'><div class='row'>"
+                            + "<p class='float-left'>Posted by : &nbsp;&nbsp;&nbsp;" + userName + "</p>"
+                            + "<p id='reviewDate' class='ml-auto'>just now</p>"
+                            + "</div></div><div class='row'><div class='col-md-12'><h5>" + collectedTitle + "</h5>"
+                            + "</div><div class='col-md-12'><p>" + collectedContent + "</p></div></div></div><hr />";
+                        
+                    }
+                    else
+                    {
+
+                    }
                 });
                 $postReviewHandler.fail(function(jqXHR, textStatus, error) {
                     console.log(error);
