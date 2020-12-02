@@ -209,6 +209,25 @@ $results = $bookings->getBookings($userID);
 				padding: 40px;
 				padding-bottom:10px;
 			}
+			
+			p {
+			text-align: center;
+			}
+
+			h3{
+				font-family: Raleway;
+			}
+
+			h4{
+				
+				font-size: 15px;
+				font-family: Arial, Helvetica, sans-serif;
+				text-align: left;
+			}
+
+			h1{
+				font-family: 'Cormorant SC', serif;
+			}
 
 
         </style>
