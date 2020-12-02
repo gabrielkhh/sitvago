@@ -151,12 +151,10 @@
                     <h1 class="hotel_selected"><?= $hotelSelected['name'] ?></h1>
                     <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">
                         <div class="form-group">
-                            <label for="checkin"></label>
                             <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
 
                         </div>
                         <div class="form-group">
-                            <label for="checkout"></label>
                             <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>
                         </div>
                         <div class="form-group">
@@ -168,9 +166,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                           <label for="hotelName"></label>
                            <input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden>
-                            <label for="amountPN"></label>
                             <input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden>
                             <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
                             <!--<span id="error"></span>-->
