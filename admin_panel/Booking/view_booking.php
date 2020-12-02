@@ -10,28 +10,16 @@ if (!isset($_COOKIE['session_id']))
     setcookie('session_id', session_id(), 0, '/', '.sitvago.com');
 
 if (!isset($_SESSION['username'])) {
-	$Message = "Please log in as Admin to view this page";
-    header("location: https://sitvago.com/loginpage.php?Message=" .urlencode($Message));
-}
-else if($_SESSION['role_name']!= "Administrator"){
+    $Message = "Please log in as Admin to view this page";
+    header("location: https://sitvago.com/loginpage.php?Message=" . urlencode($Message));
+} else if ($_SESSION['role_name'] != "Administrator") {
     header("location: https://sitvago.com/forbidden.php");
 }
 
-use sitvago\Hotel;
 use sitvago\Booking;
 
 $booking = new Booking();
-$rowBooking = $booking->getSingleBooking($id);
-
-session_start();
-
-if (!isset($_SESSION['username'])) {
-    $Message = "Please log in as Admin to view this page";
-    header("location: ../frontend/loginpage.php?Message=" . urlencode($Message));
-} else if ($_SESSION['role_name'] != "Administrator") {
-    $Message = "You do not have permission to view this page";
-    header("location: ../frontend/home.php?Message=" . urlencode($Message));
-}
+$rowBooking = $booking->getSingleBookingAdmin($id);
 
 ?>
 <!DOCTYPE html>
@@ -57,6 +45,7 @@ and open the template in the editor.
     <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
     <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/dayjs.min.js" integrity="sha512-C2m821NxMpJ4Df47O4P/17VPqt0yiK10UmGl59/e5ynRRYiCSBvy0KHJjhp2XIjUJreuR+y3SIhVyiVilhCmcQ==" crossorigin="anonymous"></script>
     <script defer src="/js/main.js"></script>
 </head>
 
@@ -65,8 +54,6 @@ and open the template in the editor.
     include "../navbar_Admin.php";
     ?>
     <main class="container main-content ">
-        <?php echo "<h1>Update details for " . $rowHotel['name'] . "</h1>"; ?>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -76,62 +63,43 @@ and open the template in the editor.
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="inputHotelName">Hotel Name</label>
-                                                <?php
-                                                echo "<input class='form-control' id='inputHotelName' placeholder='Hotel Name' value='" . $rowHotel['name'] . "'>";
-                                                ?>
+                                <div class="card mb-5">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Booking ID : <?= $rowBooking['id']; ?></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Created : <?= $rowBooking['created_at'] ?></h6>
+                                        <div class="row">
+                                            <div class="card-body">
+                                                <h3>Booking Information</h2>
+                                                    <p><strong>Stripe Transaction ID :</strong> <?= $rowBooking['stripe_payment_id'] ?></p>
+                                                    <p><strong>Hotel Name :</strong> <?= $rowBooking['hotel_name'] ?></p>
+                                                    <p><strong>Check-in Date :</strong> <?= $rowBooking['check_in'] ?></p>
+                                                    <p><strong>Check-out Date :</strong> <?= $rowBooking['check_out'] ?></p>
+                                                    <p><strong>Room Type :</strong> <?= $rowBooking['room_type'] ?></p>
+                                                    <p><strong>Amount paid :</strong> SGD$ <?= $rowBooking['price'] ?></p>
+                                            </div>
+                                            <div class="card-body">
+                                                <h3>Customer Information</h2>
+                                                    <p><strong>First Name :</strong> <?= $rowBooking['first_name'] ?></p>
+                                                    <p><strong>Last Name :</strong> <?= $rowBooking['last_name'] ?></p>
+                                                    <p><strong>Email Address :</strong> <?= $rowBooking['email'] ?></p>
+                                                    <p><strong>Username :</strong> <?= $rowBooking['username'] ?></p>
+                                                    <p><strong>Contact Number :</strong> <?= $rowBooking['phone_number'] ?></p>
+                                                    <p><strong>Stripe Customer Reference ID :</strong> <?= $rowBooking['stripe_customer_id'] ?></p>
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="selectArea">Region</label>
-                                                <select class="form-control" id="selectArea">
-                                                    <option value="" disabled>Choose a region</option>
-                                                    <?php
-                                                    foreach ($resultsGeo as $row) {
-                                                        if ($row['id'] === $rowHotel['geo_id']) {
-                                                            echo "<option value='" . $row['name'] . "' selected>";
-                                                            echo $row['name'];
-                                                            echo "</option>";
-                                                        } else {
-                                                            echo "<option value='" . $row['name'] . "'>";
-                                                            echo $row['name'];
-                                                            echo "</option>";
-                                                        }
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
+
                                     </div>
-                                    <div class="form-group">
-                                        <label for="hotelDescription">Hotel Description</label>
-                                        <textarea class="form-control" id="hotelDescription"></textarea>
-                                        <script>
-                                            CKEDITOR.replace('hotelDescription');
-                                            <?php
-                                            echo "var encodedDataDescription = '" . $rowHotel['description'] . "';";
-                                            echo "var decodedDataDescription = decodeURI(encodedDataDescription);";
-                                            ?>
-                                            CKEDITOR.instances['hotelDescription'].setData(decodedDataDescription);
-                                        </script>
-                                    </div>
-                                </form>
+                                </div>
                                 <div class="float-right">
-                                    <?php echo "<button id='btnDelete' class='btn btn-danger' value='" . $id . "'>Delete</button>"; ?>
-                                    <button id="btnCancel" class="btn btn-warning">Cancel</button>
-                                    <?php echo "<button id='btnSave' class='btn btn-primary' value='" . $id . "'>Save Changes</button>"; ?>
+                                    <a id='btnBack' class='btn btn-info' href="https://admin.sitvago.com/Booking/">Back to Bookings</a>
+                                    <?php echo "<button id='btnDelete' class='btn btn-danger' value='" . $id . "'>Cancel Booking</button>"; ?>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- end of div element with class="panel-body" -->
-                </div><!-- end of div element with class="panel" -->
-            </div> <!-- end of div element with  class="col-md-offset-2  col-md-8"-->
-        </div><!-- end of div element with class="row"-->
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
     <?php
@@ -141,78 +109,34 @@ and open the template in the editor.
 
 </html>
 <script type="text/javascript">
-    var hotelID = <?= $id; ?>;
-    var hotelName = "<?= $rowHotel['name']; ?>";
+    var bookingID = <?= $id; ?>;
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
-        var buttonSave = document.getElementById("btnSave");
         var buttonDelete = document.getElementById("btnDelete");
-        var buttonCancel = document.getElementById("btnCancel");
 
-        function WebFormInfo(inOption, hotelID, hotelName, hotelGeoLocation, hotelDescription) {
+        function WebFormInfo(inOption, bookingID) {
             this.option = inOption;
-            this.id = hotelID;
-            this.name = hotelName;
-            this.geoLocation = hotelGeoLocation;
-            this.description = hotelDescription;
+            this.id = bookingID;
         }
 
-        var saveHotel = function(e) {
-            var collectedHotelName = $("#inputHotelName").val();
-            var collectedGeoLocation = $("#selectArea").val();
-            var collectedHotelDescription = encodeURI(CKEDITOR.instances.hotelDescription.getData());
-            var id = $(this).attr("value");
-
-            var webFormData = new WebFormInfo("updateHotel", id, collectedHotelName, collectedGeoLocation, collectedHotelDescription);
+        var deleteBooking = function(e) {
+            var webFormData = new WebFormInfo("deleteBooking", bookingID);
             var webFormDataInString = JSON.stringify(webFormData);
             console.log(webFormDataInString);
 
-            // If statement for future validation checks.
-            if (true) {
-                $saveHotelHandler = jQuery.ajax({
-                    type: 'PUT',
-                    url: 'hotel_handler.php',
-                    dataType: 'json',
-                    contentType: 'application/json;',
-                    data: webFormDataInString
-                })
-
-                $saveHotelHandler.done(function(data) {
-                    swal({
-                        title: "Updated Hotel Information",
-                        text: data.message,
-                        icon: "success"
-                    }).then(function() {
-                        window.location = "index.php";
-                    });
-                });
-                $saveHotelHandler.fail(function(jqXHR, textStatus, error) {
-                    swal({
-                        title: "Something Went Wrong :(",
-                        text: textStatus,
-                        icon: "error"
-                    });
-                });
-            }
-        }
-
-        var deleteHotel = function(e) {
-            var webFormData = new WebFormInfo("deleteHotel", hotelID, hotelName, "", "");
-            var webFormDataInString = JSON.stringify(webFormData);
-
             swal({
                     title: "Are You Sure?",
-                    text: "You are about to remove " + hotelName + " from existence.",
+                    text: "You are about to cancel a booking.",
                     icon: "warning",
-                    buttons: ["Nope", "Confirm Plus Chop"],
+                    buttons: ["Nope", "Yes"],
                     dangerMode: true,
                 })
                 .then((willDelete) => {
                     if (willDelete) {
                         $saveHotelHandler = jQuery.ajax({
                             type: 'DELETE',
-                            url: 'hotel_handler.php',
+                            url: 'booking_handler.php',
                             dataType: 'json',
                             contentType: 'application/json;',
                             data: webFormDataInString
@@ -226,7 +150,6 @@ and open the template in the editor.
                             }).then(function() {
                                 window.location = "index.php";
                             });
-                            console.log(data);
                         });
                         $saveHotelHandler.fail(function(jqXHR, textStatus, error) {
                             swal({
@@ -234,34 +157,10 @@ and open the template in the editor.
                                 text: "There seems to be a problem with deletion.",
                                 icon: "error"
                             });
-                            console.log(error);
-                            console.log(textStatus);
-                            console.log(jqXHR);
                         });
                     }
                 });
-        }
-
-        var cancelHotel = function(e) {
-            swal({
-                    title: "Are You Sure?",
-                    text: "You are about to discard any changes made and return back to the hotel lists page.",
-                    icon: "warning",
-                    buttons: ["Nope", "Confirm Plus Chop"],
-                    dangerMode: false,
-                })
-                .then((willCancel) => {
-                    if (willCancel) {
-                        window.location = "index.php";
-                    }
-                });
-        }
-
-        buttonSave.addEventListener('click', saveHotel, false);
-        buttonCancel.addEventListener('click', cancelHotel, false);
-        buttonDelete.addEventListener('click', deleteHotel, false);
+            }
+        buttonDelete.addEventListener('click', deleteBooking, false);
     });
-
-
-    // Your code to save "data", usually through Ajax.
 </script>

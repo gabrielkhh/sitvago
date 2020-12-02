@@ -137,7 +137,7 @@ and open the template in the editor.
                                     <title><?= $row['name'] ?></title>
                                     <img src="<?= $row['secure_url'] ?>" class='img-fluid' alt="Barrack Hotel">
                                     <div class="card-body">
-                                        <h4 class="card-title"><?= $row['name'] ?></h5>
+                                        <h4 class="card-title"><?= $row['name'] ?></h4>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="btn-group">
                                                     <a class="btn btn-light" role="button" href="booking.php?key=<?= $row['id'] ?>">View More</a>

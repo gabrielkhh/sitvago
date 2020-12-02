@@ -16,19 +16,9 @@ else if($_SESSION['role_name']!= "Administrator"){
 }
 
 use sitvago\Review;
-session_start();
 
 $review = new Review();
 $results = $review->getReviews();
-
-if (!isset($_SESSION['username'])) {
-	$Message = "Please log in as Admin to view this page";
-    header("location: ../frontend/loginpage.php?Message=" .urlencode($Message));
-}
-else if($_SESSION['role_name']!= "Administrator"){
-	$Message = "You do not have permission to view this page";
-    header("location: ../frontend/home.php?Message=" .urlencode($Message));
-}
 ?>
 <!DOCTYPE html>
 <!--
@@ -42,7 +32,7 @@ and open the template in the editor.
 
 <head>
     <meta charset="UTF-8">
-    <title>Hotel Sitvago CMS</title>
+    <title>Hotel Sitvago CMS - View Reviews</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--CSS Sources-->

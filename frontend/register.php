@@ -3,6 +3,8 @@
 <?php
 if (isset($_SESSION['errMsgreg'])) {
     $errors = ($_SESSION['errMsgreg']);
+} else {
+    $errors = "";
 }
 ?>
 
@@ -130,6 +132,7 @@ if (isset($_SESSION['errMsgreg'])) {
     <body>
         <div class="signup-form">
             <form action="user_handler.php" method="post">
+<<<<<<< HEAD
 
                 <?php foreach ($errors as $error): ?>
 
@@ -141,6 +144,20 @@ if (isset($_SESSION['errMsgreg'])) {
 
 
 
+=======
+			<?php if (is_array($errors)): ?>
+				<?php echo "<h2>Warning(s)</h2>"; ?>
+				<?php foreach ($errors as $error): ?>
+				
+					<p><strong><?php echo $error ?></strong></p>
+					
+				<?php endforeach ?>
+				<?php unset($_SESSION['errMsgreg']); ?>
+			<?php endif ?>
+			
+			
+				
+>>>>>>> main
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
                     <h2>Register</h2>
@@ -204,6 +221,7 @@ if (isset($_SESSION['errMsgreg'])) {
                     <span class="step"></span>
                 </div>
             </form>
+
         </div>
         <footer class="container">
             <div style="text-align:center;">
@@ -211,6 +229,7 @@ if (isset($_SESSION['errMsgreg'])) {
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Learn more about Sitvago and the team behind it.</a>
             </div>
         </footer>
+
         <script>
             var currentTab = 0; // Current tab is set to be the first tab (0)
             showTab(currentTab); // Display the current tab

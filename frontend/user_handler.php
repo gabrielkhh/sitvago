@@ -87,9 +87,14 @@ if (isset($_POST['reg_user'])) {
     }
     if (empty($phone_number)) {
         array_push($errors, "Phone number is required");
-    }
+    }else if (is_numeric($phone_number) !=1){
+		array_push($errors, "Invalid phone number");
+	}
+
     if (empty($country)) {
         array_push($errors, "Country is required");
+	}else{
+		$country = preg_replace('/[^A-Za-z0-9\-]/', '', $_POST["country"]);
     }
     if (empty($billing_address)) {
         array_push($errors, "Billing address is required");
@@ -224,9 +229,14 @@ if (isset($_POST['update_user'])) {
     }
     if (empty($phone_number)) {
         array_push($errorsDetails, "Phone number is required");
-    }
+    }else if (is_numeric($phone_number) !=1){
+		array_push($errorsDetails, "Invalid phone number");
+	}
+
     if (empty($country)) {
         array_push($errorsDetails, "Country is required");
+	}else{
+		$country = preg_replace('/[^A-Za-z0-9\-]/', '', $_POST["country"]);
     }
     if (empty($billing_address)) {
         array_push($errorsDetails, "Billing address is required");

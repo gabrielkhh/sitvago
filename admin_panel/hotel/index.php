@@ -30,7 +30,7 @@ and open the template in the editor.
 
 <head>
     <meta charset="UTF-8">
-    <title>Hotel Sitvago CMS</title>
+    <title>Hotel Sitvago CMS - View Hotels</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--CSS Sources-->
@@ -64,7 +64,7 @@ and open the template in the editor.
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 table-responsive">
                                 <table class="table table-striped table-dark">
                                     <thead class="thead-dark">
                                         <tr>
