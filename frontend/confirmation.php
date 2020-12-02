@@ -103,7 +103,18 @@ $userBillingAddress = $_SESSION['billing_address'];
                             <label for="email"><i class="fa fa-envelope"></i> Email</label>
                             <input class="confirm_input" type="text" id="emailDisabled" name="emailDisabled" placeholder="Auto-Fill" required name="email" value="<?= $userEmail ?>" disabled>
                             <input class="confirm_input" type="text" id="email" name="email" placeholder="Auto-Fill" required name="email" value="<?= $userEmail ?>" hidden>
-                                
+                            <label for="card-element">
+                                Credit Or Debit Card
+                                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                <i class="fa fa-cc-discover" style="color:orange;"></i>
+                            </label>
+                            <div id="card-element" class="form-control">
+                                <!-- A Stripe Element will be inserted here. -->
+                            </div>
+                            <!-- Used to display form errors. -->
+                            <div id="card-errors" role="alert"></div>    
                             
                         </div>
                         <div class="col-50">
@@ -119,26 +130,12 @@ $userBillingAddress = $_SESSION['billing_address'];
                             <label for="adr"><i class="fa fa-address-card-o"></i> Billing Address</label>
                             <input class="confirm_input" type="text" id="adrDisabled" name="addressDisabled" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>" disabled>
                             <input class="confirm_input" type="text" id="adr" name="address" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>" hidden>
+                            <label for="notice" class="notice"><i class="fa fa-exclamation-circle">Notice!</i></label>
+                            <p id="notice">Do check the price before confirming!</p>
                             
-                        </div>
-                        <div class="col-100">
-                            <label for="card-element">
-                                Credit Or Debit Card
-                                <i class="fa fa-cc-visa" style="color:navy;"></i>
-                                <i class="fa fa-cc-amex" style="color:blue;"></i>
-                                <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                                <i class="fa fa-cc-discover" style="color:orange;"></i>
-                            </label>
-                            <div id="card-element" class="form-control">
-                                <!-- A Stripe Element will be inserted here. -->
-                            </div>
-                            <!-- Used to display form errors. -->
-                            <div id="card-errors" role="alert"></div>
-                        </div>
+                        </div>                           
                     </div>
                     <input type="submit" value="Confirm Booking" class="btn" name="confirm_book_btn" id="confirm_book_btn">
-                        <label for="notice" class="notice"><i class="fa fa-exclamation-circle"></i> Notice</label>
-                        <span class="notice">Do check the price before confirming</span>
                 </form>
             </div>
         </div>
@@ -147,7 +144,6 @@ $userBillingAddress = $_SESSION['billing_address'];
                 <div class="container confirm-box">
                     <h1 class="price_confirm">Total Price</h1>
                     <p>Room Fee: <span class="price"><?=$rate?></span></p>
-                    <!--<p>Booking Fee: <span class="price"></span></p>-->
                     <p>Total Days: <span class="price"><?=$days?></span></p>
                     <p>Total: <span class="price"><?=$price?></span></p>
                 </div>

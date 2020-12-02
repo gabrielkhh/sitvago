@@ -101,12 +101,13 @@ $results = $bookings->getBookings($userID);
                     font-size: 3.5rem;
                 }
             }
-            .jumbotron{
-                background: url(images/home_cover.jpg) no-repeat center center fixed;
+            .jumbotron {
+                background: url(images/home_cover.png) no-repeat center center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
-                background-size: cover;
                 -o-background-size: cover;
+                background-size:100% 100%;
+                padding-bottom:150px;   
             }
 
             body {
