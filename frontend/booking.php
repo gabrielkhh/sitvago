@@ -1,29 +1,4 @@
 <!DOCTYPE html>
-
-<?php
-require '../vendor/autoload.php';
-
-use sitvago\Hotel;
-use sitvago\Review;
-
-$id = $_GET['key'];
-
-$hotelObj = new Hotel();
-$sss = new Hotel();
-$roomCategoriesResults = $hotelObj->getRoomCategories();
-$hotelSelected = $hotelObj->getHotelInfoForBooking($id);
-$hotelImagesSelected = $hotelObj->getHotelImagesForBooking($id);
-$hotelPrices = $hotelObj->getHotelPricesForBooking($id);
-$counterImage = 0;
-
-$review = new Review();
-$results = $review->getSingleHotelReview($id);
-
-if (count($hotelSelected) === 0) {
-    header('location: notfound.php');
-}
-?>
-
 <html lang="en">
 
 <head>
@@ -68,8 +43,32 @@ if (count($hotelSelected) === 0) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/plugin/relativeTime.min.js" integrity="sha512-ZpD5q39qjKdG3a3p8cttXCwl9C7InezFKiIVFaxmethhYdzvYTMxJuqqg3I0WmI5D7G4Qt0HiYfXjagboH8/jQ==" crossorigin="anonymous"></script>
 
 </head>
-
 <body>
+    <main>
+    <?php
+    require '../vendor/autoload.php';
+
+    use sitvago\Hotel;
+    use sitvago\Review;
+
+    $id = $_GET['key'];
+
+    $hotelObj = new Hotel();
+    $sss = new Hotel();
+    $roomCategoriesResults = $hotelObj->getRoomCategories();
+    $hotelSelected = $hotelObj->getHotelInfoForBooking($id);
+    $hotelImagesSelected = $hotelObj->getHotelImagesForBooking($id);
+    $hotelPrices = $hotelObj->getHotelPricesForBooking($id);
+    $counterImage = 0;
+
+    $review = new Review();
+    $results = $review->getSingleHotelReview($id);
+
+    if (count($hotelSelected) === 0) {
+        header('location: notfound.php');
+    }
+    ?>
+
     <?php
     session_start();
     if (isset($_SESSION['username'])) {
@@ -149,11 +148,12 @@ if (count($hotelSelected) === 0) {
                     </div>
                 </div>
                 <div class="col-lg-4 sidebar ftco-animate pl-md-5">
-                    <h3 class="hotel_selected"><?= $hotelSelected['name'] ?></h3>
+                    <h1 class="hotel_selected"><?= $hotelSelected['name'] ?></h1>
                     <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">
                         <div class="form-group">
                             <label for="checkin"></label>
                             <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
+
                         </div>
                         <div class="form-group">
                             <label for="checkout"></label>
@@ -371,6 +371,7 @@ if (count($hotelSelected) === 0) {
 
         buttonPost.addEventListener('click', postReview, false);
     </script>
+    </main>
 </body>
 
 </html>

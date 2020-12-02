@@ -1,19 +1,5 @@
 <!DOCTYPE html>
-<?php
-require '../vendor/autoload.php';
-
-session_start();
-
-if (!isset($_SESSION['username'])) {
-    header("location: loginpage.php");
-}
-
-$userFName = $_SESSION['first_name'];
-$userLName = $_SESSION['last_name'];
-$userEmail = $_SESSION['email'];
-$userBillingAddress = $_SESSION['billing_address'];
-?>
-<html lang="en">>
+<html lang="en">
 
 <head>
 
@@ -40,9 +26,25 @@ $userBillingAddress = $_SESSION['billing_address'];
     <!-- Script -->
     <script src="https://js.stripe.com/v3/"></script>
     <script defer src="js/confirmation.js"></script>
+    </head>
 
+<body>
+    <main>
+    <?php
+    require '../vendor/autoload.php';
 
+    session_start();
 
+    if (!isset($_SESSION['username'])) {
+        header("location: loginpage.php");
+    }
+
+    $userFName = $_SESSION['first_name'];
+    $userLName = $_SESSION['last_name'];
+    $userEmail = $_SESSION['email'];
+    $userBillingAddress = $_SESSION['billing_address'];
+    ?>
+        
     <?php
     if (isset($_SESSION['username'])) {
         include "navbar_User.php";
@@ -79,9 +81,7 @@ $userBillingAddress = $_SESSION['billing_address'];
     }
 
     ?>
-</head>
 
-<body>
 
     <div class="row">
         <div class="col-75">
@@ -90,7 +90,7 @@ $userBillingAddress = $_SESSION['billing_address'];
                     <link rel="stylesheet" href="css/confirmation.css">
                     <h1 class="book_confirm">Booking Confirmation</h1>
                     <div class="row">
-                        <div class="col-50">
+                        <div role="input" class="col-50">
                             <label for="name"><i class="fa fa-user"></i> First Name</label>
                             <label for="fnameDisabled"><input class="confirm_input" type="text" id="fnameDisabled" name="fnameDisabled" placeholder="Auto-Fill" value="<?= $userFName ?>" disabled></label>
                             <label for="fname"><input class="confirm_input" type="text" id="fname" name="fname" placeholder="Auto-Fill" value="<?= $userFName ?>" hidden></label>
@@ -130,7 +130,7 @@ $userBillingAddress = $_SESSION['billing_address'];
                             <label for="adr"><i class="fa fa-address-card-o"></i> Billing Address</label>
                             <label for="addressDisabled"><input class="confirm_input" type="text" id="adrDisabled" name="addressDisabled" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>" disabled></label>
                             <label for="address"><input class="confirm_input" type="text" id="adr" name="address" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>" hidden></label>
-                            <label for="notice"><i class="fa fa-exclamation-circle">Notice!</i></label>
+                            <label for="notice"><i class="fa fa-exclamation-circle"> Notice</i></label>
                             <p id="notice">Do check the price before confirming!</p>
                             
                         </div>                           
@@ -149,7 +149,8 @@ $userBillingAddress = $_SESSION['billing_address'];
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
+    </main>
 </body>
 
 
