@@ -120,6 +120,20 @@
                         </div>
                     </div>
 
+                    <div class="card ">
+                        <div class="card-header">
+                            <h4 class="card-header">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Where to get our beautiful pictures?</a>
+                            </h4>
+                        </div>
+                        <div id="collapseSix" class="panel-collapse collapse">
+                            <div class="card-body">
+                                We love to citate our images so that users can know where to get them. 
+                                <br>Sharing is Caring. Click <a href="citation.php">here</a> to view our citations.
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="faqHeader">Regarding Booking of our Hotels</div>
                     <div class="card ">
                         <div class="card-header">
@@ -129,8 +143,8 @@
                         </div>
                         <div id="collapseFour" class="panel-collapse collapse">
                             <div class="card-body">
-                                Unfortunately No. Due to prevailing rates set by our partners, we <strong>do not allow</strong> refunds through our website.
-                                <br>There won't be refund for your hotel bookings. Do choose wisely :) 
+                                Yes, to make a refund simply dial this hotline: 6235 3535 and our friendly customer service will assists you.  
+                                <br> Once Confirm, our admin will remove your booking and you will get your money back within 3 workings day.
                             </div>
                         </div>
                     </div>
@@ -157,10 +171,24 @@
             </div>
         </main>
         <?php
-			include "footer.php";
-		?>
+        include "footer.php";
+        ?>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <!-- This is for the Active NavBar to auto change -->
+        <script>
+            $(document).ready(function () {
+                $(".mr-auto .nav-item").bind("click", function (event) {
+                    event.preventDefault();
+                    var clickedItem = $(this);
+                    $(".mr-auto .nav-item").each(function () {
+                        $(this).removeClass("active");
+                    });
+                    clickedItem.addClass("active");
+                });
+            });
+        </script>
     </body>
 
 

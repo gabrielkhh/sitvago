@@ -43,10 +43,6 @@
                 background-size: cover;
                 -o-background-size: cover;
             }
-
-            body {
-                zoom: 90%;
-            }
             
             .img-thumbnail{
                height:150px;
