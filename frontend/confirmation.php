@@ -35,9 +35,11 @@
 
     session_start();
 
+    
     if (!isset($_SESSION['username'])) {
         header("location: loginpage.php");
     }
+    
 
     $userFName = $_SESSION['first_name'];
     $userLName = $_SESSION['last_name'];
@@ -90,7 +92,7 @@
                     <link rel="stylesheet" href="css/confirmation.css">
                     <h1 class="book_confirm">Booking Confirmation</h1>
                     <div class="row">
-                        <div role="input" class="col-50">
+                        <div class="col-50">
                             <label for="name"><i class="fa fa-user"></i> First Name</label>
                             <label for="fnameDisabled"><input class="confirm_input" type="text" id="fnameDisabled" name="fnameDisabled" placeholder="Auto-Fill" value="<?= $userFName ?>" disabled></label>
                             <label for="fname"><input class="confirm_input" type="text" id="fname" name="fname" placeholder="Auto-Fill" value="<?= $userFName ?>" hidden></label>
