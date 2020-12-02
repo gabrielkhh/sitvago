@@ -121,7 +121,7 @@ $userBillingAddress = $_SESSION['billing_address'];
                             <input class="confirm_input" type="text" id="adr" name="address" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>" hidden>
                             
                         </div>
-                        <div class="col-100">
+                        <div>
                             <label for="card-element">
                                 Credit Or Debit Card
                                 <i class="fa fa-cc-visa" style="color:navy;"></i>
@@ -137,8 +137,7 @@ $userBillingAddress = $_SESSION['billing_address'];
                         </div>
                     </div>
                     <input type="submit" value="Confirm Booking" class="btn" name="confirm_book_btn" id="confirm_book_btn">
-                        <label for="notice" class="notice"><i class="fa fa-exclamation-circle"></i> Notice</label>
-                        <span class="notice">Do check the price before confirming</span>
+                        <label for="notice" class="notice"><i class="fa fa-exclamation-circle"></i>Do check the price before confirming!</label>
                 </form>
             </div>
         </div>
@@ -147,7 +146,6 @@ $userBillingAddress = $_SESSION['billing_address'];
                 <div class="container confirm-box">
                     <h1 class="price_confirm">Total Price</h1>
                     <p>Room Fee: <span class="price"><?=$rate?></span></p>
-                    <!--<p>Booking Fee: <span class="price"></span></p>-->
                     <p>Total Days: <span class="price"><?=$days?></span></p>
                     <p>Total: <span class="price"><?=$price?></span></p>
                 </div>
