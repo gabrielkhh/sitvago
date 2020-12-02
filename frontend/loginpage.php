@@ -106,6 +106,7 @@ and open the template in the editor.
 						<?php unset($_SESSION['errMsg']); ?>
                 </form>
             </div>
+            
         <?php
 			include "footer.php";
 		?>

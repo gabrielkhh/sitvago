@@ -1,3 +1,13 @@
+<style>
+    .nav-link{
+        color: rgb(186,227,222) !important;
+    }
+    
+    .bg-dark{
+        background-color: #1f2022 !important;
+    }
+</style>
+
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
     <nav>
@@ -13,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="home.php">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="home.php">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="faq.php">FAQ</a>
@@ -27,8 +37,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="home.php?logout='1'">Logout</a>
             </li>
-
         </ul>
-
     </div>
 </nav>
