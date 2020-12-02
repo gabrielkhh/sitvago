@@ -66,8 +66,8 @@
     $rate = $_POST['amountPN'];
     $price_before_round = $rate * $days;
     $price = "SGD$" . number_format((float)$price_before_round, 2, '.', '');
-    $roomFee = 0;
 
+    /*
     //Cal price based on type of room
     if ($roomType == "Deluxe"){
         $roomFee = $deluxe;
@@ -81,7 +81,8 @@
         $roomFee = $twin;
         $price = ($roomFee * $days);
     }
-
+     */
+ 
     ?>
 
 
