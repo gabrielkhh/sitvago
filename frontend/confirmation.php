@@ -37,14 +37,9 @@ $userBillingAddress = $_SESSION['billing_address'];
     </script>
 
 
-    <!-- For Calender -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <!--<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>-->
-    <!--<script src='https://kit.fontawesome.com/a076d05399.js'></script>-->
-    <!-- Own Script -->
+    <!-- Script -->
     <script src="https://js.stripe.com/v3/"></script>
     <script defer src="js/confirmation.js"></script>
-    <!--<script defer src="js/booking.js"></script>-->
 
 
 
@@ -126,7 +121,7 @@ $userBillingAddress = $_SESSION['billing_address'];
                             <input class="confirm_input" type="text" id="adr" name="address" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>" hidden>
                             
                         </div>
-                        <div class="col-50">
+                        <div class="col-100">
                             <label for="card-element">
                                 Credit Or Debit Card
                                 <i class="fa fa-cc-visa" style="color:navy;"></i>
@@ -142,6 +137,8 @@ $userBillingAddress = $_SESSION['billing_address'];
                         </div>
                     </div>
                     <input type="submit" value="Confirm Booking" class="btn" name="confirm_book_btn" id="confirm_book_btn">
+                        <label for="notice" class="notice"><i class="fa fa-exclamation-circle"></i> Notice</label>
+                        <span class="notice">Do check the price before confirming</span>
                 </form>
             </div>
         </div>
@@ -155,17 +152,8 @@ $userBillingAddress = $_SESSION['billing_address'];
                     <p>Total: <span class="price"><?=$price?></span></p>
                 </div>
             </div>
-            <div class="row">
-                <!--<label for="notice" class="notice"><i class="fa fa-exclamation-circle"></i> Notice</label>-->
-                <!--<p><span class="notice">Do take not that we are only reserving the room for you! Availability is up to the hotel. Have a nice day :)</span></p>-->
-
-            </div>
-
         </div>
     </div>  
-		<?php
-			include "footer.php";
-		?>
 </body>
 
 
