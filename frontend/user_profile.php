@@ -49,7 +49,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 
 $bookings = new Booking();
 $results = $bookings->getBookings($userID);
-echo "LALLALALALALLAAL"
+
 ?>
 <html lang="en">
     <head>
@@ -112,6 +112,7 @@ echo "LALLALALALALLAAL"
             body {
                 zoom: 90%;
                 font-family: Arial;
+				background-color: #f8f9fa;
             }
 			/* Style the tab */
 			.tab {
@@ -153,7 +154,7 @@ echo "LALLALALALALLAAL"
 				padding: 10px 0px;
 				border: 1px solid #ccc;
 				border-top: none;
-				background-color: #ffffff;
+				background-color: white;
 				
 			}
 
@@ -161,6 +162,7 @@ echo "LALLALALALALLAAL"
 				padding: 100px;
 				max-width: 900px;
 				margin: auto;
+				background-color: #f8f9fa;
 			}
 
 			#regForm {
@@ -205,6 +207,26 @@ echo "LALLALALALALLAAL"
 
 			.card{
 				padding: 40px;
+				padding-bottom:10px;
+			}
+			
+			p {
+			text-align: center;
+			}
+
+			h3{
+				font-family: Raleway;
+			}
+
+			h4{
+				
+				font-size: 15px;
+				font-family: Arial, Helvetica, sans-serif;
+				text-align: left;
+			}
+
+			h1{
+				font-family: 'Cormorant SC', serif;
 			}
 
 
@@ -335,19 +357,21 @@ echo "LALLALALALALLAAL"
                     <?php foreach ($results as $row) : ?>
                         <div class="card">
 
-                            <h5 class="card-header">Hotel Name: <?= $row['hotel_name'] ?></h5>
+                            <h3 class="card-header">Hotel: <?= $row['hotel_name'] ?></h3>
                             <div class="card-body">
-                                <p class="card-text">Transaction ID: <?= $row['stripe_payment_id'] ?></p>
-                                <p class="card-text">Booking ID: <?= $row['id'] ?></p>
-                                <p class="card-title">Room Type: <?= $row['room_type'] ?></p>
-                                <p class="card-text">Amount Paid: <?= $row['price'] ?></p>
-                                <p class="card-text">Check-in Date: <?= $row['check_in'] ?></p>
-                                <p class="card-text">Check-out Date: <?= $row['check_out'] ?></p>
-                                <p class="card-text">Booking Date: <?= $row['created_at'] ?></p>
+                                <h4 class="card-text">Booking ID: <?= $row['id'] ?></h4>
+								<h4 class="card-text">Transaction ID: <?= $row['stripe_payment_id'] ?></h4>
+								<h4 class="card-text">Booking Date: <?= $row['created_at'] ?></h4>
+                                <h4 class="card-title">Room Type: <?= $row['room_type'] ?></h4>
+                                <h4 class="card-text">Amount Paid: <?= $row['price'] ?></h4>
+                                <h4 class="card-text">Check-in Date: <?= $row['check_in'] ?></h4>
+                                <h4 class="card-text">Check-out Date: <?= $row['check_out'] ?></h4>
+                                
                             </div>
                         </div>
 					
                     <?php endforeach; ?>
+
 				
                 </div>
             </div>

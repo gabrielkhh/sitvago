@@ -70,7 +70,18 @@ and open the template in the editor.
         <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
         </script>
 
+        <script defer src="js/nav.js"></script>
+
         <style>
+            .jumbotron {
+                background: url(images/home_cover.png) no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size:100% 100%;
+                padding-bottom:150px;   
+            }
+
             .bd-placeholder-img {
                 font-size: 1.125rem;
                 text-anchor: middle;
@@ -86,16 +97,6 @@ and open the template in the editor.
                 }
             }
 
-            .jumbotron {
-                background: url(images/home_cover.png) no-repeat center center fixed;
-                -webkit-background-size: cover;
-                -moz-background-size: cover;
-                -o-background-size: cover;
-                background-size:100% 100%;
-                padding-bottom:150px;   
-            }
-
-
             .bd-placeholder-img {
                 width: 100%;
                 height: 0;
@@ -104,61 +105,60 @@ and open the template in the editor.
             .display-2 {
                 font-family: 'Cormorant SC', serif;
             }
-            
+
             .btn btn-light button{
                 color:black;
             }
-
-
         </style>
-    </head>
 
-    <body>
+
         <?php
+        session_start();
         if (isset($_SESSION['username'])) {
             include "navbar_User.php";
         } else if (!isset($_SESSION['username'])) {
             include "navbar_nonUser.php";
         }
         ?>
-        <main>
-            <div class="jumbotron">
-                <div class="container text-center text-white">
-                    <h1 class="display-2">Welcome to SITVAGO</h1>
-                    <br>
-                    <br>
-                    <p>Book a Hotel with us! Your satisfaction matters to us </p>
-
-                </div>
+    <main>
+        <div class="jumbotron">
+            <div class="container text-center text-white">
+                <h1 class="display-2">Welcome to SITVAGO</h1>
+                <br>
+                <br>
+                <p>Book a Hotel with us! Your satisfaction matters to us </p>
             </div>
-            <div class="album py-5 bg-light">
-                <div class="container">
-                    <div class="row">
-                        <?php foreach ($results as $row) : ?>
-                            <div class="col-md-4 hotel-card">
-                                <div class="card mb-4 shadow-sm">
-                                    <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice">
-                                    <title><?= $row['name'] ?></title>
-                                    <img src="<?= $row['secure_url'] ?>" class='img-fluid' alt="Barrack Hotel">
-                                    <div class="card-body">
-                                        <h4 class="card-title"><?= $row['name'] ?></h4>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <a class="btn btn-light" role="button" href="booking.php?key=<?= $row['id'] ?>">View More</a>
-                                            </div>
-                                        </div>
-                                        <span class="badge badge-dark mt-3"><?= $row['area_name'] ?></span>
+        </div>
+    </div>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <?php foreach ($results as $row) : ?>
+                    <div class="col-md-4 hotel-card">
+                        <div class="card mb-4 shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice">
+                            <title><?= $row['name'] ?></title>
+                            <img src="<?= $row['secure_url'] ?>" class='img-fluid' alt="Barrack Hotel">
+                            <div class="card-body">
+                                <h4 class="card-title"><?= $row['name'] ?></h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-light" role="button" href="booking.php?key=<?= $row['id'] ?>">View More</a>
                                     </div>
                                 </div>
+                                <span class="badge badge-dark mt-3"><?= $row['area_name'] ?></span>
                             </div>
-                        <?php endforeach; ?>
+                        </div>
                     </div>
-                </div>
+                <?php endforeach; ?>
             </div>
-        </main>
-        <?php
-        include "footer.php";
-        ?>
+        </div>
+    </div>
+</main>
+<?php
+include "footer.php";
+?>
 
-    </body>
+</body>
+
 </html>
