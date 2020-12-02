@@ -152,10 +152,10 @@ if (count($hotelSelected) === 0) {
                     <h3 class="hotel_selected"><?= $hotelSelected['name'] ?></h3>
                     <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">
                         <div class="form-group">
-                            <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
+                            <label for="checkin"><input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required></label>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>
+                            <label for="checkout"><input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required></label>
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="TypeOfRooms" name="TypeOfRooms" required>
@@ -166,8 +166,8 @@ if (count($hotelSelected) === 0) {
                             </select>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden>
-                            <input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden>
+                            <label for="hotelName"><input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden></label>
+                            <label for="amountPN"><input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden></label>
                             <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
                             <span id="error"></span>
                         </div>
