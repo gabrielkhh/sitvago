@@ -63,7 +63,7 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <!--<div class="col-md-3">
                 <div class="card text-white bg-dark mb-3">
                     <div class="card-header text-center">Registered Users to Date</div>
                     <div class="card-body text-center">
@@ -71,7 +71,7 @@ and open the template in the editor.
                         <a href="#" class="btn btn-primary">View Users</a>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="col-md-3">
                 <div class="card text-white bg-dark mb-3">
                     <div class="card-header text-center">Active Geo-Locations to Date</div>
@@ -90,9 +90,7 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-3">
+             <div class="col-md-3">
                 <div class="card text-white bg-dark mb-3">
                     <div class="card-header text-center">Total number of reviews</div>
                     <div class="card-body text-center">
@@ -102,6 +100,9 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
+        
+           
+        
     </main>
     <?php
     include "footer.php";
