@@ -107,12 +107,12 @@ and open the template in the editor.
             }
 
             .btn btn-light{
-                color:black;
+                color:black !important;
             }
             
             .btn btn-light:hover{
-                color:black;
-                background-color: #afd8ff;
+                color:black !important;
+                background-color: #afd8ff !important;
             }
         </style>
     </head>
