@@ -13,7 +13,7 @@ $userLName = $_SESSION['last_name'];
 $userEmail = $_SESSION['email'];
 $userBillingAddress = $_SESSION['billing_address'];
 ?>
-<html>
+<html lang="en">>
 
 <head>
 
@@ -130,7 +130,7 @@ $userBillingAddress = $_SESSION['billing_address'];
                             <label for="adr"><i class="fa fa-address-card-o"></i> Billing Address</label>
                             <input class="confirm_input" type="text" id="adrDisabled" name="addressDisabled" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>" disabled>
                             <input class="confirm_input" type="text" id="adr" name="address" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>" hidden>
-                            <label for="notice" class="notice"><i class="fa fa-exclamation-circle">Notice!</i></label>
+                            <label for="notice"><i class="fa fa-exclamation-circle">Notice!</i></label>
                             <p id="notice">Do check the price before confirming!</p>
                             
                         </div>                           
