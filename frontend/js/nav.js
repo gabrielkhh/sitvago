@@ -7,10 +7,11 @@ function activateMenu()
     $(".navbar-nav a").each(function()
     {
         var target_URL = $(this).prop("href");
+        
         if (target_URL === current_page_URL)
         {
-            $('nav a').parents('li, ul').removeClass('navlink2');
-            $(this).parent('li').addClass('navlink2');
+            // $('nav-link a').parents('li, ul').removeClass('nav-link');
+            $(this).addClass('nav-link-active');
             return false;
         }
     });
