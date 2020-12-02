@@ -110,7 +110,7 @@ hr {
   border: 1px solid lightgrey;
 }
 
-span.price {
+.price {
   float: right;
   color: black;
 }
