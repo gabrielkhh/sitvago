@@ -132,32 +132,15 @@ if (isset($_SESSION['errMsgreg'])) {
     <body>
         <div class="signup-form">
             <form action="user_handler.php" method="post">
-<<<<<<< HEAD
 
-                <?php foreach ($errors as $error): ?>
+                <?php if (is_array($errors)): ?>
+                    <?php echo "<h2>Warning(s)</h2>"; ?>
+                    <?php foreach ($errors as $error): ?>
+                        <p><strong><?php echo $error ?></strong></p>
+                    <?php endforeach ?>
+                    <?php unset($_SESSION['errMsgreg']); ?>
+                <?php endif ?>
 
-                    <p><?php echo $error ?></p>
-
-                <?php endforeach ?>
-                <?php unset($_SESSION['errMsgreg']); ?>
-
-
-
-
-=======
-			<?php if (is_array($errors)): ?>
-				<?php echo "<h2>Warning(s)</h2>"; ?>
-				<?php foreach ($errors as $error): ?>
-				
-					<p><strong><?php echo $error ?></strong></p>
-					
-				<?php endforeach ?>
-				<?php unset($_SESSION['errMsgreg']); ?>
-			<?php endif ?>
-			
-			
-				
->>>>>>> main
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
                     <h2>Register</h2>
@@ -204,9 +187,6 @@ if (isset($_SESSION['errMsgreg'])) {
                     </div> 
                 </div>
 
-
-
-
                 <div style="overflow:auto;">
                     <div style="float:right;">
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
@@ -221,14 +201,16 @@ if (isset($_SESSION['errMsgreg'])) {
                     <span class="step"></span>
                 </div>
             </form>
-
+            <footer class="container">
+                <div style="text-align:center;">
+                    <p>&copy; Sitvago 2020</p>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Learn more about Sitvago and the team behind it.</a>
+                </div>
+                <br>
+                <br>
+            </footer>
         </div>
-        <footer class="container">
-            <div style="text-align:center;">
-                <p>&copy; Sitvago 2020</p>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Learn more about Sitvago and the team behind it.</a>
-            </div>
-        </footer>
+
 
         <script>
             var currentTab = 0; // Current tab is set to be the first tab (0)
