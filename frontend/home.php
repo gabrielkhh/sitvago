@@ -110,8 +110,8 @@ and open the template in the editor.
                 color:black;
             }
         </style>
-
-
+    </head>
+    <body>
         <?php
         session_start();
         if (isset($_SESSION['username'])) {
@@ -120,45 +120,43 @@ and open the template in the editor.
             include "navbar_nonUser.php";
         }
         ?>
-    <main>
-        <div class="jumbotron">
-            <div class="container text-center text-white">
-                <h1 class="display-2">Welcome to SITVAGO</h1>
-                <br>
-                <br>
-                <p>Book a Hotel with us! Your satisfaction matters to us </p>
+        <main>
+            <div class="jumbotron">
+                <div class="container text-center text-white">
+                    <h1 class="display-2">Welcome to SITVAGO</h1>
+                    <br>
+                    <br>
+                    <p>Book a Hotel with us! Your satisfaction matters to us </p>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <?php foreach ($results as $row) : ?>
-                    <div class="col-md-4 hotel-card">
-                        <div class="card mb-4 shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice">
-                            <title><?= $row['name'] ?></title>
-                            <img src="<?= $row['secure_url'] ?>" class='img-fluid' alt="Barrack Hotel">
-                            <div class="card-body">
-                                <h4 class="card-title"><?= $row['name'] ?></h4>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a class="btn btn-light" role="button" href="booking.php?key=<?= $row['id'] ?>">View More</a>
+
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row">
+                        <?php foreach ($results as $row) : ?>
+                            <div class="col-md-4 hotel-card">
+                                <div class="card mb-4 shadow-sm">
+                                    <svg class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice">
+                                    <title><?= $row['name'] ?></title>
+                                    <img src="<?= $row['secure_url'] ?>" class='img-fluid' alt="Barrack Hotel">
+                                    <div class="card-body">
+                                        <h4 class="card-title"><?= $row['name'] ?></h4>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <a class="btn btn-light" role="button" href="booking.php?key=<?= $row['id'] ?>">View More</a>
+                                            </div>
+                                        </div>
+                                        <span class="badge badge-dark mt-3"><?= $row['area_name'] ?></span>
                                     </div>
                                 </div>
-                                <span class="badge badge-dark mt-3"><?= $row['area_name'] ?></span>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
+                </div>
             </div>
-        </div>
-    </div>
-</main>
-<?php
-include "footer.php";
-?>
-
-</body>
-
+        </main>
+        <?php
+        include "footer.php";
+        ?>
+    </body>
 </html>

@@ -3,6 +3,10 @@
         color: rgb(186,227,222) !important;
     }
     
+    .nav-link2{
+        color: red !important;
+    }
+    
     .bg-dark{
         background-color: #1f2022 !important;
     }
