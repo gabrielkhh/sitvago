@@ -49,6 +49,9 @@
                 background-size: cover;
                 -o-background-size: cover;
             }
+            body{
+                background-color: #f8f9fa;
+            }
 
 
         </style>
