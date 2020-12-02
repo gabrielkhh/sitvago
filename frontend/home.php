@@ -106,8 +106,13 @@ and open the template in the editor.
                 font-family: 'Cormorant SC', serif;
             }
 
-            .btn btn-light button{
+            .btn btn-light{
                 color:black;
+            }
+            
+            .btn btn-light:hover{
+                color:black;
+                background-color: #afd8ff;
             }
         </style>
     </head>
