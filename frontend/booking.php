@@ -81,7 +81,7 @@
     }
     ?>
     <link rel="stylesheet" href="css/booking.css">
-    <section role="contentinfo" class="ftco-section">
+    <section class="ftco-section">
         <div class="container">
             <!--First Row Starts Here -->
             <div class="row">
@@ -173,7 +173,7 @@
                         </div>
                     </form>
                     <p>
-                        <h3 id="price"></h3>
+                        <h2 id="price"></h2>
                     </p>
                     <div id="descriptionArea"></div>
                     <hr />
