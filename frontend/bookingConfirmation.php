@@ -46,9 +46,7 @@ unset($_SESSION['INFO']);
         <div class="card">
             <img class="card-img-top" src="images/logo_nobackground.png" alt="Card image" style="width:100%">
             <div class="card-body">
-                <hr class="line">
-                    </hr>
-                    <h4 class="card-title">Payment Details</h4>
+                <hr class="line"></hr>                    
                     <p class="card-text">
                         Congratulations! Your booking with <?= $data['hotelname'] ?> for <?= $data['duration'] ?> days is confirmed!<br>
                     <hr>
@@ -61,9 +59,9 @@ unset($_SESSION['INFO']);
                     <strong>Email Address:</strong> <?= $data['email'] ?><br>
                     <hr>
                     <strong>Room Type:</strong> <?= $data['roomtype'] ?><br>
-                    </hr>                    
+                    <hr>                    
                     <strong>Amount paid:</strong> SGD$<?= $data['price'] ?><br>
-                    </hr>  
+                    <hr>  
                     Your booking details has been send to your email:<br><?= $data['email'] ?>
                 </p>
             </div>

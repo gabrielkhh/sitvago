@@ -3,8 +3,8 @@
         color: rgb(186,227,222) !important;
     }
     
-    .nav-link2{
-        color: red !important;
+    .nav-link-active{
+        color: rgb(140, 124, 250) !important;
     }
     
     .bg-dark{
@@ -27,7 +27,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link navlink2" href="home.php">Home</a>
+                <a class="nav-link" href="home.php">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="faq.php">FAQ</a>
