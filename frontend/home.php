@@ -90,10 +90,9 @@ and open the template in the editor.
                 background: url(images/home_cover.png) no-repeat center center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
-                background-size: cover;
                 -o-background-size: cover;
-                min-height: 300px;
-
+                background-size:100% 100%;
+                padding-bottom:150px;   
             }
 
 
@@ -104,6 +103,10 @@ and open the template in the editor.
 
             .display-2 {
                 font-family: 'Cormorant SC', serif;
+            }
+            
+            .btn btn-light button{
+                color:black;
             }
 
 
@@ -123,8 +126,9 @@ and open the template in the editor.
                 <div class="container text-center text-white">
                     <h1 class="display-2">Welcome to SITVAGO</h1>
                     <br>
+                    <br>
                     <p>Book a Hotel with us! Your satisfaction matters to us </p>
-                    
+
                 </div>
             </div>
             <div class="album py-5 bg-light">
@@ -138,12 +142,12 @@ and open the template in the editor.
                                     <img src="<?= $row['secure_url'] ?>" class='img-fluid' alt="Barrack Hotel">
                                     <div class="card-body">
                                         <h4 class="card-title"><?= $row['name'] ?></h4>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="btn-group">
-                                                    <a class="btn btn-light" role="button" href="booking.php?key=<?= $row['id'] ?>">View More</a>
-                                                </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <a class="btn btn-light" role="button" href="booking.php?key=<?= $row['id'] ?>">View More</a>
                                             </div>
-                                            <span class="badge badge-dark mt-3"><?= $row['area_name'] ?></span>
+                                        </div>
+                                        <span class="badge badge-dark mt-3"><?= $row['area_name'] ?></span>
                                     </div>
                                 </div>
                             </div>
