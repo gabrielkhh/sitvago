@@ -126,7 +126,7 @@ $results = $bookings->getBookings($userID);
 
 			/* Style the buttons inside the tab */
 			.tab button {
-				background-color: inherit;
+				background-color: rgb(140, 140, 140);
 				color: black;
 				float: left;
 				border: none;
@@ -147,7 +147,9 @@ $results = $bookings->getBookings($userID);
 
 			/* Create an active/current tablink class */
 			.tab button.active {
-				filter: brightness(75%);
+				background: rgba(51, 51, 51, 1);
+				color: white;
+				
 			}
 			/* Style the tab content */
 			.tabcontent {
@@ -192,8 +194,8 @@ $results = $bookings->getBookings($userID);
 			}
 
 			button {
-				background-image:url(images/white_marble_background.jpg);
-				color: black;
+				background: rgba(51, 51, 51, 1);
+				color: white;
 				border: none;
 				padding: 10px 20px;
 				font-size: 17px;
@@ -251,7 +253,6 @@ $results = $bookings->getBookings($userID);
             <div class="jumbotron">
                 <div class="container text-center text-white">
                     <h1 class="display-2" ><?php echo $first_name ?>'s Profile</h1>
-                    <p>View your account and bookings here!</p>
                 </div>
 			</div>
             
@@ -285,31 +286,31 @@ $results = $bookings->getBookings($userID);
                             <div class="form-group">
                                 <h2>Account Details</h2>
                                 <label for="username">Username:</label>
-                                <input type="text" class="form-control" name="username" id="username" value = "<?php echo $username ?>" maxlength="50" required readonly>
+                                <input type="text" style="color:#000000" class="form-control" name="username" id="username" value = "<?php echo $username ?>" maxlength="50" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="fname">First Name:</label>
-                                <input type="text" class="form-control" name="fname" id="fname" value = "<?php echo $first_name ?>" maxlength="50" required  readonly>
+                                <input type="text" style="color:#000000" class="form-control" name="fname" id="fname" value = "<?php echo $first_name ?>" maxlength="50" required  readonly>
                             </div>
                             <div class="form-group">
                                 <label for="lname">Last Name:</label>
-                                <input type="text" class="form-control" name="lname" id="lname" value = "<?php echo $last_name ?>" maxlength="50" required readonly>
+                                <input type="text" style="color:#000000" class="form-control" name="lname" id="lname" value = "<?php echo $last_name ?>" maxlength="50" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" class="form-control" name="email" id="email" value = "<?php echo $email ?>" maxlength="50" required readonly>
+                                <input type="email" style="color:#000000" class="form-control" name="email" id="email" value = "<?php echo $email ?>" maxlength="50" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="phone_number">Phone number:</label>
-                                <input type="tel" class="form-control" name="phone_number" id="phone_number" value = "<?php echo $phone_number ?>" maxlength="8" required readonly>
+                                <input type="tel" style="color:#000000" class="form-control" name="phone_number" id="phone_number" value = "<?php echo $phone_number ?>" maxlength="8" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="country">Country:</label>
-                                <input type="text" class="form-control" name="country" id="country" value = "<?php echo $country ?>" maxlength="50" required readonly>
+                                <input type="text" style="color:#000000" class="form-control" name="country" id="country" value = "<?php echo $country ?>" maxlength="50" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="billing_address">Billing Address:</label>
-                                <input type="text" class="form-control" name="billing_address" id="billing_address" value = "<?php echo $billing_address ?>" required readonly>
+                                <input type="text" style="color:#000000" class="form-control" name="billing_address" id="billing_address" value = "<?php echo $billing_address ?>" required readonly>
                             </div>
                             <div style="overflow:auto;">
                                 <button type="button" id="editBtn" onclick="editFunction()">Edit Profile</button>
