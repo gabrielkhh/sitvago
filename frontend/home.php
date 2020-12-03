@@ -105,15 +105,8 @@ and open the template in the editor.
         .display-2 {
             font-family: 'Cormorant SC', serif;
         }
-
-        .btn-light {
-            color: black !important;
-        }
-
-        .btn-light:hover {
-            color: black !important;
-            background-color: #afd8ff !important;
-        }
+        
+       
     </style>
 </head>
 

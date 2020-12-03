@@ -10,13 +10,18 @@
     .bg-dark{
         background-color: #1f2022 !important;
     }
+    
+    .navbar-brand img{
+        width:100px;
+        height: 35px;
+    }
 </style>
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
     <nav>
         <a class="navbar-brand" href="home.php">
-            <img src="images/logo_nobackground.png" width="100" height="35" class="d-inline-block align-top" alt=""> 
+            <img src="images/logo_nobackground.png" class="d-inline-block align-top" alt="logo for navbar"> 
         </a>
     </nav>
 

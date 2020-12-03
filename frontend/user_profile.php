@@ -237,6 +237,7 @@ $results = $bookings->getBookings($userID);
         <!-- Custom styles for this template -->
 
         <link href="css/album.css" rel="stylesheet">
+        <script defer src="js/nav.js"></script>
     </head>
     <body>
         <?php

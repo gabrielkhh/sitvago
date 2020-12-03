@@ -1,19 +1,5 @@
 <!DOCTYPE html>
-<?php
-require '../vendor/autoload.php';
-
-session_start();
-
-if (!isset($_SESSION['username'])) {
-    header("location: loginpage.php");
-}
-
-$userFName = $_SESSION['first_name'];
-$userLName = $_SESSION['last_name'];
-$userEmail = $_SESSION['email'];
-$userBillingAddress = $_SESSION['billing_address'];
-?>
-<html lang="en">>
+<html lang="en">
 
 <head>
 
@@ -40,9 +26,27 @@ $userBillingAddress = $_SESSION['billing_address'];
     <!-- Script -->
     <script src="https://js.stripe.com/v3/"></script>
     <script defer src="js/confirmation.js"></script>
+    </head>
 
+<body>
+    <main>
+    <?php
+    require '../vendor/autoload.php';
 
+    session_start();
 
+    
+    if (!isset($_SESSION['username'])) {
+        header("location: loginpage.php");
+    }
+    
+
+    $userFName = $_SESSION['first_name'];
+    $userLName = $_SESSION['last_name'];
+    $userEmail = $_SESSION['email'];
+    $userBillingAddress = $_SESSION['billing_address'];
+    ?>
+        
     <?php
     if (isset($_SESSION['username'])) {
         include "navbar_User.php";
@@ -62,8 +66,8 @@ $userBillingAddress = $_SESSION['billing_address'];
     $rate = $_POST['amountPN'];
     $price_before_round = $rate * $days;
     $price = "SGD$" . number_format((float)$price_before_round, 2, '.', '');
-    $roomFee = 0;
 
+    /*
     //Cal price based on type of room
     if ($roomType == "Deluxe"){
         $roomFee = $deluxe;
@@ -77,11 +81,10 @@ $userBillingAddress = $_SESSION['billing_address'];
         $roomFee = $twin;
         $price = ($roomFee * $days);
     }
-
+     */
+ 
     ?>
-</head>
 
-<body>
 
     <div class="row">
         <div class="col-75">
@@ -130,7 +133,7 @@ $userBillingAddress = $_SESSION['billing_address'];
                             <label for="adr"><i class="fa fa-address-card-o"></i> Billing Address</label>
                             <label for="addressDisabled"><input class="confirm_input" type="text" id="adrDisabled" name="addressDisabled" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>" disabled></label>
                             <label for="address"><input class="confirm_input" type="text" id="adr" name="address" placeholder="Auto-Fill" value="<?= $userBillingAddress ?>" hidden></label>
-                            <label for="notice"><i class="fa fa-exclamation-circle">Notice!</i></label>
+                            <label for="notice"><i class="fa fa-exclamation-circle"> Notice</i></label>
                             <p id="notice">Do check the price before confirming!</p>
                             
                         </div>                           
@@ -149,7 +152,8 @@ $userBillingAddress = $_SESSION['billing_address'];
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
+    </main>
 </body>
 
 
