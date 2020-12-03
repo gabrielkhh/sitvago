@@ -1,5 +1,8 @@
 p {
 	text-align: center;
+	color: black;
+	background:rgba(255,255,255, 1);
+	border-radius: 25px;
 }
 
 h3{
@@ -15,6 +18,9 @@ h4{
 
 h1{
 	font-family: 'Cormorant SC', serif;
+	color: black;
+	background:rgba(255,255,255, 1);
+	border-radius: 25px;
 }
 
 .form-control{
