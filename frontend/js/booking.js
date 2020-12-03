@@ -89,6 +89,7 @@ function disableDates(date){
 function calenderHandler1(){
     flatpickr(checkInDate,{
         minDate:"today",
+        maxDate: new Date().fp_incr(365), //1 year from now
         dateFormat: "d-m-Y",
         //Validation using onChange Event
         onChange: function(selectedDates, dateStr, instance) {
@@ -135,6 +136,7 @@ function calenderHandler1(){
 function calenderHandler2(){
     flatpickr(checkOutDate,{
         dateFormat: "d-m-Y",
+        maxDate:new Date().fp_incr(365),//1 year from now
         //Set min date always greater then check in date
         onOpen: function(selectedDates, dateStr, instance) {
             var checkInValue = checkInDate.value;
