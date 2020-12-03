@@ -58,7 +58,6 @@
         $id = $_GET['key'];
 
         $hotelObj = new Hotel();
-        $sss = new Hotel();
         $roomCategoriesResults = $hotelObj->getRoomCategories();
         $hotelSelected = $hotelObj->getHotelInfoForBooking($id);
         $hotelImagesSelected = $hotelObj->getHotelImagesForBooking($id);

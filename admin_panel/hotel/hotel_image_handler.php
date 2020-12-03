@@ -21,17 +21,8 @@ $results = [];
 $files = array();
 
 if (empty($_FILES['fileInput'])) {
-    //User did not add any files to upload
+    //User did not add any files to upload, so we will set a default placeholder image.
     $imgIsThumbnail = 1;
-    // $pathOfImage = "sitvago/hotels/" . $hotelName . "/" . $hotelID . "/" . $_FILES['fileInput']['name'][$i];
-    // $originalSrc = $_POST[$i];
-
-    // $files['imgCloudinaryData'] = \Cloudinary\Uploader::upload($_FILES['fileInput']['tmp_name'][$i], array("public_id" => $pathOfImage));
-    // $secure_url = $files['imgCloudinaryData']['secure_url'];
-    // $url = $files['imgCloudinaryData']['url'];
-    // $width = $files['imgCloudinaryData']['width'];
-    // $height = $files['imgCloudinaryData']['height'];
-    // $imgExtension = $files['imgCloudinaryData']['format'];
 
     //Save the information into HotelImages Table
     $url ="https://res.cloudinary.com/gabrielkok/image/upload/v1606964701/sitvago/Logo/placeholder_900x600.png";
@@ -42,8 +33,10 @@ if (empty($_FILES['fileInput'])) {
     $originalSrc = "Team Sitvago";
     $hotel = new Hotel();
     $results = $hotel->addHotelImage($hotelID, $url, $secure_url, $width, $height, $imgExtension, $imgIsThumbnail, $originalSrc);
+    
 } else {
-    $totalFiles = count($_FILES['fileInput']['name']); // multiple files
+    // There is one or more files to upload, count them and add them to the database.
+    $totalFiles = count($_FILES['fileInput']['name']);
 
     for ($i = 0; $i < $totalFiles; $i++) {
         $imgIsThumbnail = 0;
