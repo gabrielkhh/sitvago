@@ -120,7 +120,7 @@ class Booking extends DB
             $errorMsg = "Connection failed: " . $this->conn->connect_error;
             $success = false;
             $response['success'] = $success;
-            $response['message'] = "Hotel Hellll";
+            $response['message'] = "Connection Failed";
             $response['error'] = $errorMsg;
         } else {
             $stmt = $this->conn->prepare($preparedSQL);
@@ -128,7 +128,7 @@ class Booking extends DB
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
                 $response['success'] = $success;
-                $response['message'] = "Hotel Hellll";
+                $response['message'] = "Execute Failed";
                 $response['error'] = $errorMsg;
             } else {
                 $response['success'] = $success;

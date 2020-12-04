@@ -116,7 +116,7 @@ class Hotel extends DB
             $errorMsg = "Connection failed: " . $this->conn->connect_error;
             $success = false;
             $response['success'] = $success;
-            $response['message'] = "Hotel Hellll";
+            $response['message'] = "Connection Failed";
             $response['error'] = $errorMsg;
         } else {
             $stmt = $this->conn->prepare($preparedSQL);
@@ -124,7 +124,7 @@ class Hotel extends DB
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
                 $response['success'] = $success;
-                $response['message'] = "Hotel Hellll";
+                $response['message'] = "Execute Failed";
                 $response['error'] = $errorMsg;
             } else {
                 $newHotelID = mysqli_insert_id($this->conn);
@@ -156,7 +156,7 @@ class Hotel extends DB
             $errorMsg = "Connection failed: " . $this->conn->connect_error;
             $success = false;
             $response['success'] = $success;
-            $response['message'] = "Hotel Hellll";
+            $response['message'] = "Connection Failed";
             $response['error'] = $errorMsg;
         } else {
             $stmt = $this->conn->prepare($preparedSQL);
@@ -164,7 +164,7 @@ class Hotel extends DB
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
                 $response['success'] = $success;
-                $response['message'] = "Hotel Hellll";
+                $response['message'] = "Execute Failed";
                 $response['error'] = $errorMsg;
             } else {
                 $response['success'] = $success;
@@ -209,7 +209,7 @@ class Hotel extends DB
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
                 $response['success'] = $success;
-                $response['message'] = "Hotel Hellll";
+                $response['message'] = "Execute Failed";
                 $response['error'] = $errorMsg;
             } else {
                 $response['success'] = $success;
@@ -348,6 +348,4 @@ class Hotel extends DB
 
         return $results;
     }
-
-    //INSERT INTO HotelRoomCategory (hotel_id, room_category_id, availability, price_per_night, created_at) VALUES (2, 1, 1, 210.00, now());
 }
