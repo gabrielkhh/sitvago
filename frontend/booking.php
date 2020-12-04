@@ -151,7 +151,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 sidebar ftco-animate pl-md-5">
+                 <div class="col-lg-4 sidebar ftco-animate pl-md-5">
                     <h1 class="hotel_selected"><?= $hotelSelected['name'] ?></h1>
                     <label for="hotel_form">
                     <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">               
@@ -184,7 +184,8 @@
                     <div id="descriptionArea"></div>
                     <hr />
                 </div>
-                <!--First Row End Here -->
+            </div>
+            <!--First Row End Here -->               
 
                 <!--Review Section Starts Here -->
                 <div class="container review-container">
