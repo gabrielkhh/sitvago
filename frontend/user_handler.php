@@ -13,16 +13,7 @@ if (!isset($_COOKIE['session_id']))
     setcookie('session_id', session_id(), 0, '/', '.sitvago.com');
 
 // // initializing variables
-// $first_name = "";
-// $last_name = "";
-// $username = "";
-// $email = "";
-// $country = "";
-// $billing_address = "";
-// $phone_number = "";
-// $role_name = "";
 $redirect = "";
-// $password = "";
 $errors = array();
 $errorsDetails = array();
 $errorsPW = array();

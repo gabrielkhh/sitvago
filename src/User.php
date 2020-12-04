@@ -8,14 +8,37 @@ class User extends DB
 {
     public function registerUser($first_name, $last_name, $username, $email, $phone_number, $country, $password, $billing_address)
     {
+		$response = [];
+		$success = true;
+		$preparedSQL = "INSERT INTO User (first_name, last_name, username, email, phone_number, country, password, billing_address, role_id, is_confirmed, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 2, 1, now(), now())";
+        
 
-        $stmt = $this->conn->prepare("INSERT INTO User (first_name, last_name, username, email, phone_number, country, password, billing_address, role_id, is_confirmed, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 2, 1, now(), now())");
-        $stmt->bind_param("ssssssss", $first_name, $last_name, $username, $email, $phone_number, $country, $password, $billing_address);
+		if ($this->conn->connect_error) {
+            $errorMsg = "Connection failed: " . $this->conn->connect_error;
+            $success = false;
+            $response['success'] = $success;
+            $response['message'] = "Failed to connect to database";
+            $response['error'] = $errorMsg;
+        } else {
+            $stmt = $this->conn->prepare($preparedSQL);
+			$stmt->bind_param("ssssssss", $first_name, $last_name, $username, $email, $phone_number, $country, $password, $billing_address);
+			$stmt->execute();
+			if (!$stmt->execute()) {
+                $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
+                $response['success'] = $success;
+                $response['message'] = "Failed to add user to database";
+                $response['error'] = $errorMsg;
+            } else {
+                $response['success'] = $success;
+                $response['message'] = "";
+                $response['error'] = "";
+			}
+			$stmt->close();
 
-        $stmt->execute();
-
-        return "";
-    }
+		}
+		$this->conn->close();
+		return $response;
+	}
 
     public function getAllUsers()
     {
@@ -36,12 +59,36 @@ class User extends DB
 
     public function loginUser($username, $password)
     {
-        $query = "SELECT * FROM User WHERE username=? AND password=?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("ss", $username, $password);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result;
+		$response = [];
+		$success = true;		
+        $preparedSQL = "SELECT * FROM User WHERE username=? AND password=?";
+		
+		if ($this->conn->connect_error) {
+			$errorMsg = "Connection failed: " . $this->conn->connect_error;
+			$success = false;
+            $response['success'] = $success;
+            $response['message'] = "Failed to connect to database";
+            $response['error'] = $errorMsg;
+		} else{
+			$stmt = $this->conn->prepare($preparedSQL);
+			$stmt->bind_param("ss", $username, $password);
+			$stmt->execute();
+			if (!$stmt->execute()) {
+                $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
+                $response['success'] = $success;
+                $response['message'] = "Failed to connect to database";
+                $response['error'] = $errorMsg;
+				$response['result']= $stmt->get_result();
+            } else {
+                $response['success'] = $success;
+                $response['message'] = "";
+                $response['error'] = "";
+				$response['result']= $stmt->get_result();
+			}
+			$stmt->close();
+		}
+		$result = $stmt->get_result();
+		return $result;
     }
 
     public function userNameEmail($username, $email)
