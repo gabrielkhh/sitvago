@@ -45,7 +45,7 @@ unset($_SESSION['INFO']);
     <div class="container my-card">
         <h2 id="card-h2">Thank you for using Sitvago</h2>
         <div class="card">
-            <img class="card-img-top" src="images/logo_nobackground.png" alt="Card image"></img>
+            <img class="card-img-top" src="images/logo_nobackground.png" alt="Card image">
             <div class="card-body">
                 <hr class="line">                    
                     <p class="card-text">
@@ -67,9 +67,6 @@ unset($_SESSION['INFO']);
             </div>
         </div>
     </div>
-		<?php
-			include "footer.php";
-		?>
 </body>
 
 
