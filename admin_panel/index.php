@@ -58,7 +58,7 @@ and open the template in the editor.
         <h1>Welcome Back, <?= $_SESSION['username'] ?>!</h1>
 
         <div class="row mt-4">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card text-white bg-dark mb-3">
                     <div class="card-header text-center">Hotels Present to Date</div>
                     <div class="card-body text-center">
@@ -67,16 +67,16 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
-            <!--<div class="col-md-3">
+            <div class="col-md-3">
                 <div class="card text-white bg-dark mb-3">
-                    <div class="card-header text-center">Registered Users to Date</div>
+                    <div class="card-header text-center">Frequently Asked Questions</div>
                     <div class="card-body text-center">
-                        <h1 id="userCounter" class="card-title text-center">Number</h1>
-                        <a href="#" class="btn btn-primary">View Users</a>
+                        <h1 id="faqCounter" class="card-title text-center">Number</h1>
+                        <a href="faq/index.php" class="btn btn-primary">View FAQs</a>
                     </div>
                 </div>
-            </div>-->
-            <div class="col-md-4">
+            </div>
+            <div class="col-md-3">
                 <div class="card text-white bg-dark mb-3">
                     <div class="card-header text-center">Active Geo-Locations to Date</div>
                     <div class="card-body text-center">
@@ -85,7 +85,7 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card text-white bg-dark mb-3">
                     <div class="card-header text-center">Total number of bookings</div>
                     <div class="card-body text-center">
@@ -129,7 +129,7 @@ and open the template in the editor.
     ?>
     <script>
         var hotelNumbers = <?= $results[0]['HotelCount']; ?>;
-        var userNumbers = <?= $results[1]['UserCount']; ?>;
+        var faqNumbers = <?= $results[1]['FAQCount']; ?>;
         var geoNumbers = <?= $results[2]['GeoCount']; ?>;
         var bookingNumbers = <?= $results[3]['BookingCount']; ?>;
         var reviewNumbers = <?= $results[4]['ReviewCount']; ?>;
@@ -141,12 +141,12 @@ and open the template in the editor.
             console.error(counterHotel.error);
         }
 
-        // let counterUser = new CountUp('userCounter', 0, userNumbers);
-        // if (!counterUser.error) {
-        //     counterUser.start();
-        // } else {
-        //     console.error(counterUser.error);
-        // }
+        let counterFAQ = new CountUp('faqCounter', 0, faqNumbers);
+        if (!counterFAQ.error) {
+            counterFAQ.start();
+        } else {
+            console.error(counterFAQ.error);
+        }
 
         let counterGeo = new CountUp('geoCounter', 0, geoNumbers);
         if (!counterGeo.error) {
