@@ -1,6 +1,9 @@
 # Sitvago
 Hotel? Sitvago!!
 
+### PHP Libraries Used
+PHP Dot Env, Stripe, Cloudinary, Mailgun
+
 ### Project URLs
 [Public-facing Website (/frontend)](https://www.sitvago.com)
 
