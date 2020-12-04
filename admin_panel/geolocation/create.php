@@ -86,6 +86,8 @@ and open the template in the editor.
 
 </html>
 <script>
+    var userID = <?= $_SESSION['user_id'] ?>;
+
     document.addEventListener("DOMContentLoaded", function(event) {
         var buttonSave = document.getElementById("btnSave");
         var buttonCancel = document.getElementById("btnCancel");
@@ -99,11 +101,18 @@ and open the template in the editor.
         var saveRegion = function(e) {
             var collectedRegionName = $("#inputRegionName").val();
 
-            var webFormData = new WebFormInfo(collectedRegionName, 1);
+            var webFormData = new WebFormInfo(collectedRegionName, userID);
             var webFormDataInString = JSON.stringify(webFormData);
 
+            var isValid = false;
+
+            if ((collectedRegionName !== "" && collectedRegionName !== null)) {
+                //Inputs are not empty
+                isValid = true;
+            }
+
             // If statement for future validation checks.
-            if (true) {
+            if (isValid) {
                 $saveHotelHandler = jQuery.ajax({
                     type: 'POST',
                     url: 'geo_handler.php',
@@ -128,6 +137,14 @@ and open the template in the editor.
                         icon: "error"
                     });
                 });
+            }
+            else
+            {
+                swal({
+                        title: "Invalid Fields",
+                        text: "Please make sure that all fields are filled up.",
+                        icon: "error"
+                    });
             }
         }
 

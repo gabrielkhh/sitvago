@@ -10,10 +10,9 @@ if (!isset($_COOKIE['session_id']))
     setcookie('session_id', session_id(), 0, '/', '.sitvago.com');
 
 if (!isset($_SESSION['username'])) {
-	$Message = "Please log in as Admin to view this page";
-    header("location: https://sitvago.com/loginpage.php?Message=" .urlencode($Message));
-}
-else if($_SESSION['role_name']!= "Administrator"){
+    $Message = "Please log in as Admin to view this page";
+    header("location: https://sitvago.com/loginpage.php?Message=" . urlencode($Message));
+} else if ($_SESSION['role_name'] != "Administrator") {
     header("location: https://sitvago.com/forbidden.php");
 }
 
@@ -97,6 +96,7 @@ and open the template in the editor.
 </html>
 <script type="text/javascript">
     var geoID = <?= $id; ?>;
+    var userID = <?= $_SESSION['user_id'] ?>;
     var regionName = "<?= $resultGeo['name']; ?>";
 </script>
 <script>
@@ -114,15 +114,19 @@ and open the template in the editor.
 
         var saveHotel = function(e) {
             var collectedRegionName = $("#inputRegionName").val();
-            //var id = $(this).attr("value");
-            var UserID = 1;
 
-            var webFormData = new WebFormInfo("updateRegion", geoID, collectedRegionName, UserID);
+            var webFormData = new WebFormInfo("updateRegion", geoID, collectedRegionName, userID);
             var webFormDataInString = JSON.stringify(webFormData);
             console.log(webFormDataInString);
 
-            // If statement for future validation checks.
-            if (true) {
+            var isValid = false;
+
+            if ((collectedRegionName !== "" && collectedRegionName !== null)) {
+                //Inputs are not empty
+                isValid = true;
+            }
+
+            if (isValid) {
                 $saveHotelHandler = jQuery.ajax({
                     type: 'PUT',
                     url: 'geo_handler.php',
@@ -147,6 +151,14 @@ and open the template in the editor.
                         icon: "error"
                     });
                 });
+            }
+            else
+            {
+                swal({
+                        title: "Invalid Fields",
+                        text: "Please make sure that all fields are filled up.",
+                        icon: "error"
+                    });
             }
         }
 
@@ -180,6 +192,7 @@ and open the template in the editor.
                                 window.location = "index.php";
                             });
                         });
+
                         $saveHotelHandler.fail(function(jqXHR, textStatus, error) {
                             swal({
                                 title: "Something Went Wrong :(",

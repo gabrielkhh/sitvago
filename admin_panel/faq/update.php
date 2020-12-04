@@ -16,10 +16,9 @@ if (!isset($_COOKIE['session_id']))
     setcookie('session_id', session_id(), 0, '/', '.sitvago.com');
 
 if (!isset($_SESSION['username'])) {
-	$Message = "Please log in as Admin to view this page";
-    header("location: https://sitvago.com/loginpage.php?Message=" .urlencode($Message));
-}
-else if($_SESSION['role_name']!= "Administrator"){
+    $Message = "Please log in as Admin to view this page";
+    header("location: https://sitvago.com/loginpage.php?Message=" . urlencode($Message));
+} else if ($_SESSION['role_name'] != "Administrator") {
     header("location: https://sitvago.com/forbidden.php");
 }
 ?>
@@ -117,10 +116,10 @@ and open the template in the editor.
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- end of div element with class="panel-body" -->
-                </div><!-- end of div element with class="panel" -->
-            </div> <!-- end of div element with  class="col-md-offset-2  col-md-8"-->
-        </div><!-- end of div element with class="row"-->
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
     <?php
@@ -159,8 +158,7 @@ and open the template in the editor.
 
             var isValid = false;
 
-            if ((collectedQuestion !== "") && (collectedCategory !== "" && collectedCategory !== null) && (collectedAnswer !== ""))
-            {
+            if ((collectedQuestion !== "") && (collectedCategory !== "" && collectedCategory !== null) && (collectedAnswer !== "")) {
                 //Inputs are not empty
                 isValid = true;
             }
@@ -190,14 +188,12 @@ and open the template in the editor.
                         icon: "error"
                     });
                 });
-            }
-            else
-            {
+            } else {
                 swal({
-                        title: "Invalid Fields",
-                        text: "Please make sure that all fields are filled up.",
-                        icon: "error"
-                    });
+                    title: "Invalid Fields",
+                    text: "Please make sure that all fields are filled up.",
+                    icon: "error"
+                });
             }
         }
 
@@ -235,7 +231,6 @@ and open the template in the editor.
                             }).then(function() {
                                 window.location = "index.php";
                             });
-                            console.log(data);
                         });
                         $saveHotelHandler.fail(function(jqXHR, textStatus, error) {
                             swal({
@@ -243,9 +238,6 @@ and open the template in the editor.
                                 text: "There seems to be a problem with deletion.",
                                 icon: "error"
                             });
-                            console.log(error);
-                            console.log(textStatus);
-                            console.log(jqXHR);
                         });
                     }
                 });
@@ -270,7 +262,4 @@ and open the template in the editor.
         buttonCancel.addEventListener('click', cancelFAQ, false);
         buttonDelete.addEventListener('click', deleteFAQ, false);
     });
-
-
-    // Your code to save "data", usually through Ajax.
 </script>

@@ -10,10 +10,9 @@ if (!isset($_COOKIE['session_id']))
     setcookie('session_id', session_id(), 0, '/', '.sitvago.com');
 
 if (!isset($_SESSION['username'])) {
-	$Message = "Please log in as Admin to view this page";
-    header("location: https://sitvago.com/loginpage.php?Message=" .urlencode($Message));
-}
-else if($_SESSION['role_name']!= "Administrator"){
+    $Message = "Please log in as Admin to view this page";
+    header("location: https://sitvago.com/loginpage.php?Message=" . urlencode($Message));
+} else if ($_SESSION['role_name'] != "Administrator") {
     header("location: https://sitvago.com/forbidden.php");
 }
 
@@ -281,8 +280,15 @@ and open the template in the editor.
             var webFormDataInString = JSON.stringify(webFormData);
             console.log(webFormDataInString);
 
+            var isValid = false;
+
+            if ((collectedHotelName !== "") && (collectedArea !== "" && collectedArea !== null) && (collectedHotelDescription !== "")) {
+                //Inputs are not empty
+                isValid = true;
+            }
+
             // If statement for future validation checks.
-            if (true) {
+            if (isValid && amtIsValid) {
                 $saveHotelHandler = jQuery.ajax({
                     type: 'PUT',
                     url: 'hotel_handler.php',
@@ -303,6 +309,14 @@ and open the template in the editor.
                         icon: "error"
                     });
                 });
+            }
+            else
+            {
+                swal({
+                        title: "Invalid Fields",
+                        text: "Please make sure that all fields are filled up.",
+                        icon: "error"
+                    });
             }
         }
 
