@@ -269,9 +269,15 @@ and open the template in the editor.
 
             var collectedAmt = {};
 
+            var amtIsValid = true;
+
             $('.amount-class').each(function(i) {
                 var nameType = $(this).attr('name');
                 var val = $(this).val();
+                if (val === null || val === "")
+                {
+                    amtIsValid = false;
+                }
                 collectedAmt[nameType] = val;
             });
             console.log(collectedAmt);
