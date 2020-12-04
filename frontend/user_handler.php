@@ -152,7 +152,7 @@ if (isset($_POST['login_user'])) {
         $loginUser = new User();
         $result = $loginUser->loginUser($username, $password);
 
-        if ($result->num_rows > 0) {
+        if ($result['result']->num_rows > 0) {
             $retrieveUserData = new User();
             $UserData = $retrieveUserData->getUserDataForSession($username);
 

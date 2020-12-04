@@ -87,8 +87,8 @@ class User extends DB
 			}
 			$stmt->close();
 		}
-		$result = $stmt->get_result();
-		return $result;
+		// $result = $stmt->get_result();
+		return $response;
     }
 
     public function userNameEmail($username, $email)
