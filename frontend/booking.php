@@ -184,6 +184,7 @@
                     <div id="descriptionArea"></div>
                     <hr />
                 </div>
+                </div>
                 <!--First Row End Here -->
 
                 <!--Review Section Starts Here -->
