@@ -16,7 +16,7 @@
     }
 </style>
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" aria-label="label">
 
     <nav>
         <a class="navbar-brand" href="home.php">
