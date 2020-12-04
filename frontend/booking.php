@@ -150,37 +150,39 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 sidebar ftco-animate pl-md-5">
-                        <h1 class="hotel_selected"><?= $hotelSelected['name'] ?></h1>
-                        <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">
-                            <div class="form-group">
-                                <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
+                </div>
+                <div class="col-lg-4 sidebar ftco-animate pl-md-5">
+                    <h1 class="hotel_selected"><?= $hotelSelected['name'] ?></h1>
+                    <label for="hotel_form">
+                    <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">               
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
 
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control" id="TypeOfRooms" name="TypeOfRooms" required>
-                                    <option value="disabled" selected disabled>Choose A Room Type</option>
-                                    <?php foreach ($roomCategoriesResults as $row) : ?>
-                                        <option id="<?= $row['id'] ?>" value="<?= $row['category_name'] ?>"><?= $row['category_name'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden>
-                                <input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden>
-                                <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
-                                <!--<span id="error"></span>-->
-                            </div>
-                        </form>
-                        <p>
-                            <h2 id="price"></h2>
-                        </p>
-                        <div id="descriptionArea"></div>
-                        <hr />
-                    </div>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="TypeOfRooms" name="TypeOfRooms" required>
+                                <option value="disabled" selected disabled>Choose A Room Type</option>
+                                <?php foreach ($roomCategoriesResults as $row) : ?>
+                                    <option id="<?= $row['id'] ?>" value="<?= $row['category_name'] ?>"><?= $row['category_name'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                           <input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden>
+                            <input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden>
+                            <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
+                            <!--<span id="error"></span>-->
+                        </div>
+                    </form>
+                    </label>    
+                    <p>
+                        <h2 id="price"></h2>
+                    </p>
+                    <div id="descriptionArea"></div>
+                    <hr />
                 </div>
                 <!--First Row End Here -->
 

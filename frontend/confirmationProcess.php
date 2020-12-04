@@ -25,7 +25,7 @@ function sanitize_input($data)
     return $data;
 }
 
-/*
+
 $first_name = $_POST['fname'];
 $last_name = $_POST['lname'];
 $email = $_POST['email'];
@@ -35,9 +35,9 @@ $userID = $_SESSION['user_id'];
 $hotelName = $_POST['hotel-name'];
 $roomCategoryName = $_POST['room-type'];
 $token = $_POST['stripeToken'];
-*/
 
-//Sanitize_inputs
+/*
+//Sanitize_inputs might be causing problem for stripe 
 $first_name = preg_replace('/[^A-Za-z0-9\-]/', '', $_POST["fname"]);
 $last_name = preg_replace('/[^A-Za-z0-9\-]/', '', $_POST["lname"]);
 $email = sanitize_input($_POST["email"]);
@@ -47,6 +47,7 @@ $checkinDate = preg_replace("([^0-9-])", "", $_POST['ci_date']);
 $checkoutDate = preg_replace("([^0-9-])", "", $_POST['co_date']);
 $userID = $_SESSION['user_id'];
 $token = $_POST['stripeToken'];
+*/
 
 $checkinDateInUnix = strtotime($checkinDate);
 $checkoutDateInUnix = strtotime($checkoutDate);
