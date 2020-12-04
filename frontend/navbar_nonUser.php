@@ -1,23 +1,4 @@
-﻿<style>
-    .nav-link{
-        color: rgb(186,227,222) !important;
-    }
-    
-    .nav-link-active{
-        color: rgb(140, 124, 250) !important;
-    }
-    
-    .bg-dark{
-        background-color: #1f2022 !important;
-    }
-    
-    .navbar-brand img{
-        width:100px;
-        height: 35px;
-    }
-</style>
-
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+﻿<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
     <nav>
         <a class="navbar-brand" href="home.php">

@@ -26,6 +26,7 @@
     <!-- Script -->
     <script src="https://js.stripe.com/v3/"></script>
     <script defer src="js/confirmation.js"></script>
+    <link href="css/main.css" rel="stylesheet">
     </head>
 
 <body>

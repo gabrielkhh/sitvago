@@ -15,3 +15,12 @@ and open the template in the editor.
 .bg-dark{
     background-color: #1f2022 !important;
 }
+
+.nav-link-active{
+    color: rgb(140, 124, 250) !important;
+}
+
+.navbar-brand img{
+    width:100px;
+    height: 35px;
+}

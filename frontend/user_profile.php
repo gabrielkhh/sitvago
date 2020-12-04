@@ -83,6 +83,7 @@ $results = $bookings->getBookings($userID);
                 crossorigin="anonymous">
         </script>
         <link href='css/profile.css' rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
 
 
 

@@ -60,6 +60,7 @@ and open the template in the editor.
     <!-- Custom styles for this template -->
     <link href="css/album.css" rel="stylesheet">
     <link href="css/searchbar.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
 
 
     <!--jQuery-->

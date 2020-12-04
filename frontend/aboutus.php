@@ -22,6 +22,7 @@
     </script>
 
     <script defer src="js/nav.js"></script>
+    <link href="css/main.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {

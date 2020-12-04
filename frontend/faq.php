@@ -70,6 +70,7 @@ $resultsCats = $faqObj->getFAQCategoriesPublic();
     </style>
     <!-- Custom styles for this template -->
     <link href="css/faq.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
 
 </head>
 
