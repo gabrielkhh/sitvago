@@ -8,3 +8,10 @@ and open the template in the editor.
     Author     : fuminchong
 */
 
+.nav-link{
+    color: rgb(186,227,222) !important;
+}
+
+.bg-dark{
+    background-color: #1f2022 !important;
+}
