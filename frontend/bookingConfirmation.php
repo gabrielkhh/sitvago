@@ -28,6 +28,9 @@ unset($_SESSION['INFO']);
         <!-- Bootstrap -->
         <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
         </script>
+        
+    </head>
+
 
         <?php
         if (isset($_SESSION['username'])) {
@@ -48,7 +51,7 @@ unset($_SESSION['INFO']);
             <div class="card-body">
                 <hr class="line"></hr>                    
                     <p class="card-text">
-                        Congratulations! Your booking with <?= $data['hotelname'] ?> for <?= $data['duration'] ?> days is confirmed!<br>
+                        Congratulations! Your booking with <?= $data['hotelname'] ?> for <?= $data['duration'] ?> days is confirmed!</p><br>
                     <hr>
                     <strong>Transaction ID:</strong> <?= $data['stripeTxID'] ?><br>
                     <hr>
@@ -63,15 +66,14 @@ unset($_SESSION['INFO']);
                     <strong>Amount paid:</strong> SGD$<?= $data['price'] ?><br>
                     <hr>  
                     Your booking details has been send to your email:<br><?= $data['email'] ?>
-                </p>
             </div>
         </div>
+    </div>
 		<?php
 			include "footer.php";
 		?>
 </body>
 
-</head>
 
 </html>   
 
