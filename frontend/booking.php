@@ -81,6 +81,7 @@
     }
     ?>
     <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/main.css">
     <section class="ftco-section">
         <div class="container">
             <!--First Row first column Starts Here -->
@@ -163,7 +164,7 @@
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="TypeOfRooms" name="TypeOfRooms" required>
-                                <option value="disabled" selected disabled placeholder="Choose A Room Type">Choose A Room Type</option>
+                                <option value="disabled" selected disabled>Choose A Room Type</option>
                                 <?php foreach ($roomCategoriesResults as $row) : ?>
                                     <option id="<?= $row['id'] ?>" value="<?= $row['category_name'] ?>"><?= $row['category_name'] ?></option>
                                 <?php endforeach; ?>
@@ -178,7 +179,7 @@
                         </div>
                     </form>
                                         
-                    <p> id="price"></p>
+                    <p id="price"></p>
                    
                     <div id="descriptionArea"></div>
                     <hr />
