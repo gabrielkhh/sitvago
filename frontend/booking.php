@@ -164,7 +164,7 @@
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="TypeOfRooms" name="TypeOfRooms" required>
-                                <option value="disabled" selected disabled>Choose A Room Type</option>
+                                <option selected disabled>Choose A Room Type</option>
                                 <?php foreach ($roomCategoriesResults as $row) : ?>
                                     <option id="<?= $row['id'] ?>" value="<?= $row['category_name'] ?>"><?= $row['category_name'] ?></option>
                                 <?php endforeach; ?>
