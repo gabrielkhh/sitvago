@@ -24,7 +24,7 @@
         <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
         </script>
 
-
+        <script defer src="js/nav.js"></script>
 
         <style>
             .bd-placeholder-img {
@@ -42,6 +42,10 @@
                 }
             }
 
+            body{
+                background-color: #f8f9fa;
+            }
+
             .jumbotron {
                 background: url(../images/home_cover.jpg) no-repeat center center fixed;
                 -webkit-background-size: cover;
@@ -49,8 +53,6 @@
                 background-size: cover;
                 -o-background-size: cover;
             }
-
-
         </style>
         <!-- Custom styles for this template -->
         <link href="css/faq.css" rel="stylesheet">
@@ -84,7 +86,7 @@
                         <div id="collapseOne" class="panel-collapse collapse in">
                             <div class="card-body">
                                 First, account registration is needed. You can click on login, see top right in the navbar <strong>"Login"</strong>.
-                                <br>You can register for an account if you do not have one. It's that simple :) 
+                                <br>You can register for an account if you do not have one. It's that simple :)
                             </div>
                         </div>
                     </div>
@@ -128,7 +130,7 @@
                         </div>
                         <div id="collapseSix" class="panel-collapse collapse">
                             <div class="card-body">
-                                We love to citate our images so that users can know where to get them. 
+                                We love to citate our images so that users can know where to get them.
                                 <br>Sharing is Caring. Click <a href="citation.php">here</a> to view our citations.
                             </div>
                         </div>
@@ -143,7 +145,7 @@
                         </div>
                         <div id="collapseFour" class="panel-collapse collapse">
                             <div class="card-body">
-                                Yes, to make a refund simply dial this hotline: 6235 3535 and our friendly customer service will assists you.  
+                                Yes, to make a refund simply dial this hotline: 6235 3535 and our friendly customer service will assists you.
                                 <br> Once Confirm, our admin will remove your booking and you will get your money back within 3 workings day.
                             </div>
                         </div>
@@ -174,8 +176,11 @@
         include "footer.php";
         ?>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-        
+        <script>
+            window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+        </script>
+        <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
         <!-- This is for the Active NavBar to auto change -->
         <script>
             $(document).ready(function () {
@@ -193,5 +198,3 @@
 
 
 </html>
-
-

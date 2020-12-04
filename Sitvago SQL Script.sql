@@ -131,6 +131,51 @@ CREATE TABLE `sitvago_db`.`Review` (
   FOREIGN KEY (`created_by`) REFERENCES `User` (`id`),
   FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`)
 );
+
+CREATE TABLE `sitvago_db`.`FAQCategory` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `category_name` VARCHAR(255) NOT NULL,
+  `created_at` DATETIME NULL,
+  `created_by` INT NULL,
+  `updated_at` DATETIME NULL,
+  `updated_by` INT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `fk_user_created_idx` (`created_by` ASC),
+  INDEX `fk_user_updated_idx` (`updated_by` ASC),
+  CONSTRAINT `fk_user_created`
+    FOREIGN KEY (`created_by`)
+    REFERENCES `sitvago_db`.`User` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_updated`
+    FOREIGN KEY (`updated_by`)
+    REFERENCES `sitvago_db`.`User` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE NO ACTION);
+
+ALTER TABLE `sitvago_db`.`FAQ` 
+ADD COLUMN `category_id` INT NULL AFTER `updated_by`,
+ADD INDEX `faq_cat_id_idx` (`category_id` ASC);
+;
+ALTER TABLE `sitvago_db`.`FAQ` 
+ADD CONSTRAINT `faq_cat_id`
+  FOREIGN KEY (`category_id`)
+  REFERENCES `sitvago_db`.`FAQCategory` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `sitvago_db`.`FAQ` 
+CHANGE COLUMN `question` `question` VARCHAR(20000) NULL DEFAULT NULL ,
+CHANGE COLUMN `answer` `answer` MEDIUMTEXT NULL DEFAULT NULL ;
+
+ALTER TABLE `sitvago_db`.`HotelImage` 
+CHANGE COLUMN `url` `url` VARCHAR(5000) NULL DEFAULT NULL ,
+CHANGE COLUMN `secure_url` `secure_url` VARCHAR(5000) NULL DEFAULT NULL ,
+CHANGE COLUMN `original_src` `original_src` VARCHAR(5000) NULL DEFAULT NULL ,
+CHANGE COLUMN `alt_text` `alt_text` VARCHAR(1000) NULL DEFAULT NULL ;
+
+
 ALTER TABLE `sitvago_db`.`User`
 ADD FOREIGN KEY (`role_id`) REFERENCES `Role` (`id`);
 ALTER TABLE `sitvago_db`.`Hotel`
@@ -161,3 +206,6 @@ INSERT INTO GeoLocation (name, created_at, created_by, updated_at, updated_by) V
 INSERT INTO RoomCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Deluxe Double Room", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
 INSERT INTO RoomCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Premium Queen Room", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
 INSERT INTO RoomCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Twin Room", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+
+INSERT INTO FAQCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("General questions", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));
+INSERT INTO FAQCategory (category_name, created_at, created_by, updated_at, updated_by) VALUES("Regarding Booking of our Hotels", now(), (SELECT id FROM User WHERE email="admin@sitvago.com"), now(), (SELECT id FROM User WHERE email="admin@sitvago.com"));

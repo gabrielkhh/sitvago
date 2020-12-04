@@ -49,7 +49,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 
 $bookings = new Booking();
 $results = $bookings->getBookings($userID);
-echo "LALLALALALALLAAL"
+
 ?>
 <html lang="en">
     <head>
@@ -101,17 +101,19 @@ echo "LALLALALALALLAAL"
                     font-size: 3.5rem;
                 }
             }
-            .jumbotron{
-                background: url(images/home_cover.jpg) no-repeat center center fixed;
+            .jumbotron {
+                background: url(images/home_cover.png) no-repeat center center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
-                background-size: cover;
                 -o-background-size: cover;
+                background-size:100% 100%;
+                padding-bottom:150px;   
             }
 
             body {
                 zoom: 90%;
                 font-family: Arial;
+				background-color: #f8f9fa;
             }
 			/* Style the tab */
 			.tab {
@@ -124,7 +126,7 @@ echo "LALLALALALALLAAL"
 
 			/* Style the buttons inside the tab */
 			.tab button {
-				background-color: inherit;
+				background-color: rgb(140, 140, 140);
 				color: black;
 				float: left;
 				border: none;
@@ -145,7 +147,9 @@ echo "LALLALALALALLAAL"
 
 			/* Create an active/current tablink class */
 			.tab button.active {
-				filter: brightness(75%);
+				background: rgba(51, 51, 51, 1);
+				color: white;
+				
 			}
 			/* Style the tab content */
 			.tabcontent {
@@ -153,7 +157,7 @@ echo "LALLALALALALLAAL"
 				padding: 10px 0px;
 				border: 1px solid #ccc;
 				border-top: none;
-				background-color: #ffffff;
+				background-color: white;
 				
 			}
 
@@ -161,6 +165,7 @@ echo "LALLALALALALLAAL"
 				padding: 100px;
 				max-width: 900px;
 				margin: auto;
+				background-color: #f8f9fa;
 			}
 
 			#regForm {
@@ -189,8 +194,8 @@ echo "LALLALALALALLAAL"
 			}
 
 			button {
-				background-image:url(images/white_marble_background.jpg);
-				color: black;
+				background: rgba(51, 51, 51, 1);
+				color: white;
 				border: none;
 				padding: 10px 20px;
 				font-size: 17px;
@@ -205,6 +210,26 @@ echo "LALLALALALALLAAL"
 
 			.card{
 				padding: 40px;
+				padding-bottom:10px;
+			}
+			
+			p {
+			text-align: center;
+			}
+
+			h3{
+				font-family: Raleway;
+			}
+
+			h4{
+				
+				font-size: 15px;
+				font-family: Arial, Helvetica, sans-serif;
+				text-align: left;
+			}
+
+			h1{
+				font-family: 'Cormorant SC', serif;
 			}
 
 
@@ -212,6 +237,7 @@ echo "LALLALALALALLAAL"
         <!-- Custom styles for this template -->
 
         <link href="css/album.css" rel="stylesheet">
+        <script defer src="js/nav.js"></script>
     </head>
     <body>
         <?php
@@ -227,7 +253,6 @@ echo "LALLALALALALLAAL"
             <div class="jumbotron">
                 <div class="container text-center text-white">
                     <h1 class="display-2" ><?php echo $first_name ?>'s Profile</h1>
-                    <p>View your account and bookings here!</p>
                 </div>
 			</div>
             
@@ -261,31 +286,31 @@ echo "LALLALALALALLAAL"
                             <div class="form-group">
                                 <h2>Account Details</h2>
                                 <label for="username">Username:</label>
-                                <input type="text" class="form-control" name="username" id="username" value = "<?php echo $username ?>" maxlength="50" required readonly>
+                                <input type="text" style="color:#000000" class="form-control" name="username" id="username" value = "<?php echo $username ?>" maxlength="50" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="fname">First Name:</label>
-                                <input type="text" class="form-control" name="fname" id="fname" value = "<?php echo $first_name ?>" maxlength="50" required  readonly>
+                                <input type="text" style="color:#000000" class="form-control" name="fname" id="fname" value = "<?php echo $first_name ?>" maxlength="50" required  readonly>
                             </div>
                             <div class="form-group">
                                 <label for="lname">Last Name:</label>
-                                <input type="text" class="form-control" name="lname" id="lname" value = "<?php echo $last_name ?>" maxlength="50" required readonly>
+                                <input type="text" style="color:#000000" class="form-control" name="lname" id="lname" value = "<?php echo $last_name ?>" maxlength="50" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" class="form-control" name="email" id="email" value = "<?php echo $email ?>" maxlength="50" required readonly>
+                                <input type="email" style="color:#000000" class="form-control" name="email" id="email" value = "<?php echo $email ?>" maxlength="50" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="phone_number">Phone number:</label>
-                                <input type="tel" class="form-control" name="phone_number" id="phone_number" value = "<?php echo $phone_number ?>" maxlength="8" required readonly>
+                                <input type="tel" style="color:#000000" class="form-control" name="phone_number" id="phone_number" value = "<?php echo $phone_number ?>" maxlength="8" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="country">Country:</label>
-                                <input type="text" class="form-control" name="country" id="country" value = "<?php echo $country ?>" maxlength="50" required readonly>
+                                <input type="text" style="color:#000000" class="form-control" name="country" id="country" value = "<?php echo $country ?>" maxlength="50" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="billing_address">Billing Address:</label>
-                                <input type="text" class="form-control" name="billing_address" id="billing_address" value = "<?php echo $billing_address ?>" required readonly>
+                                <input type="text" style="color:#000000" class="form-control" name="billing_address" id="billing_address" value = "<?php echo $billing_address ?>" required readonly>
                             </div>
                             <div style="overflow:auto;">
                                 <button type="button" id="editBtn" onclick="editFunction()">Edit Profile</button>
@@ -335,19 +360,21 @@ echo "LALLALALALALLAAL"
                     <?php foreach ($results as $row) : ?>
                         <div class="card">
 
-                            <h5 class="card-header">Hotel Name: <?= $row['hotel_name'] ?></h5>
+                            <h3 class="card-header">Hotel: <?= $row['hotel_name'] ?></h3>
                             <div class="card-body">
-                                <p class="card-text">Transaction ID: <?= $row['stripe_payment_id'] ?></p>
-                                <p class="card-text">Booking ID: <?= $row['id'] ?></p>
-                                <p class="card-title">Room Type: <?= $row['room_type'] ?></p>
-                                <p class="card-text">Amount Paid: <?= $row['price'] ?></p>
-                                <p class="card-text">Check-in Date: <?= $row['check_in'] ?></p>
-                                <p class="card-text">Check-out Date: <?= $row['check_out'] ?></p>
-                                <p class="card-text">Booking Date: <?= $row['created_at'] ?></p>
+                                <h4 class="card-text">Booking ID: <?= $row['id'] ?></h4>
+								<h4 class="card-text">Transaction ID: <?= $row['stripe_payment_id'] ?></h4>
+								<h4 class="card-text">Booking Date: <?= $row['created_at'] ?></h4>
+                                <h4 class="card-title">Room Type: <?= $row['room_type'] ?></h4>
+                                <h4 class="card-text">Amount Paid: <?= $row['price'] ?></h4>
+                                <h4 class="card-text">Check-in Date: <?= $row['check_in'] ?></h4>
+                                <h4 class="card-text">Check-out Date: <?= $row['check_out'] ?></h4>
+                                
                             </div>
                         </div>
 					
                     <?php endforeach; ?>
+
 				
                 </div>
             </div>

@@ -1,5 +1,26 @@
 p {
-text-align: center;
+	text-align: center;
+	color: black;
+	background:rgba(255,255,255, 1);
+	border-radius: 25px;
+}
+
+h3{
+	font-family: Raleway;
+}
+
+h4{
+	
+	font-size: 15px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: left;
+}
+
+h1{
+	font-family: 'Cormorant SC', serif;
+	color: black;
+	background:rgba(255,255,255, 1);
+	border-radius: 25px;
 }
 
 .form-control{

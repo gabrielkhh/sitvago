@@ -1,19 +1,18 @@
+<!DOCTYPE html>
 <?php
 session_start();
 
 if (isset($_GET['Message'])) {
-	// unset($_SESSION['username']);
-    print '<script type="text/javascript">alert("' . $_GET['Message'] . '");</script>';
+    // unset($_SESSION['username']);
+    print '<script>alert("' . $_GET['Message'] . '");</script>';
 }
 
 if (isset($_GET['logout'])) {
     session_unset();
     session_destroy();
 }
-
-
 ?>
-<!DOCTYPE html>
+
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -84,7 +83,7 @@ and open the template in the editor.
                 <div class="inner">
                     <nav class="nav nav-masthead justify-content-center">
                         <a class="nav-link active" href="aboutus.php">About Us</a>
-						<a class="nav-link active" href="home.php">Home</a>
+                        <a class="nav-link active" href="home.php">Home</a>
                     </nav>
                 </div>
             </header>
@@ -96,20 +95,29 @@ and open the template in the editor.
 
                     <!-- Remember to add 'required' field later, currently remove for demo purpose -->
                     <label for="inputUsername" class="sr-only">Username</label>
-                    <input type="text" id="inputUsername" class="form-control" placeholder="Username"  name="username" required autofocus>
+                    <input type="text" id="inputUsername" class="form-control" placeholder="Username"  name="username" required autofocus >
+
                     <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
-                    <button type="submit" id="submitBtn" name="login_user" class="btn btn-lg btn-primary btn-block">Login</button>
-					<div id="errMsg">
-						<?php if(!empty($_SESSION['errMsg'])) { echo $_SESSION['errMsg']; } ?>
-					</div>
-						<?php unset($_SESSION['errMsg']); ?>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required >
+
+                    <button type="submit" id="submitBtn" name="login_user" class="btn btn-lg btn-primary btn-block">Login </button>
+                    <div id="errMsg">
+                        <?php
+                        if (!empty($_SESSION['errMsg'])) {
+                            echo $_SESSION['errMsg'];
+                        }
+
+                        unset($_SESSION['errMsg']);
+                        ?>
+                    </div>			
                 </form>
             </div>
-            
-        <?php
-			include "footer.php";
-		?>
+            <footer class="container">
+                <div style="text-align:center;">
+                    <p>&copy; Sitvago 2020</p>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Learn more about Sitvago and the team behind it.</a>
+                </div>
+            </footer>
         </div>
     </body>
 </html>
