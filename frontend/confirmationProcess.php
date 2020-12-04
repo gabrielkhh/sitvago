@@ -16,6 +16,16 @@ $stripe = new \Stripe\StripeClient($_SERVER['stripe_secret_key']);
 // Sanitize POST Array
 $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
 
+//Helper function that checks input for malicious or unwanted content.
+function sanitize_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+
 $first_name = $_POST['fname'];
 $last_name = $_POST['lname'];
 $email = $_POST['email'];
@@ -25,6 +35,19 @@ $userID = $_SESSION['user_id'];
 $hotelName = $_POST['hotel-name'];
 $roomCategoryName = $_POST['room-type'];
 $token = $_POST['stripeToken'];
+
+/*
+//Sanitize_inputs might be causing problem for stripe 
+$first_name = preg_replace('/[^A-Za-z0-9\-]/', '', $_POST["fname"]);
+$last_name = preg_replace('/[^A-Za-z0-9\-]/', '', $_POST["lname"]);
+$email = sanitize_input($_POST["email"]);
+$roomCategoryName = preg_replace('/[^A-Za-z0-9\-]/', '', $_POST["room-type"]);
+$hotelName= preg_replace('/[^A-Za-z0-9\-]/', '', $_POST["hotel-name"]); 
+$checkinDate = preg_replace("([^0-9-])", "", $_POST['ci_date']);
+$checkoutDate = preg_replace("([^0-9-])", "", $_POST['co_date']);
+$userID = $_SESSION['user_id'];
+$token = $_POST['stripeToken'];
+*/
 
 $checkinDateInUnix = strtotime($checkinDate);
 $checkoutDateInUnix = strtotime($checkoutDate);
@@ -136,3 +159,4 @@ $mg->messages()->send('mg.sitvago.com', [
 ]);
 
 header("Location:bookingConfirmation.php");
+

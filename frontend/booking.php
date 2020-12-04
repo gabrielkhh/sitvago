@@ -1,29 +1,4 @@
 <!DOCTYPE html>
-
-<?php
-require '../vendor/autoload.php';
-
-use sitvago\Hotel;
-use sitvago\Review;
-
-$id = $_GET['key'];
-
-$hotelObj = new Hotel();
-$sss = new Hotel();
-$roomCategoriesResults = $hotelObj->getRoomCategories();
-$hotelSelected = $hotelObj->getHotelInfoForBooking($id);
-$hotelImagesSelected = $hotelObj->getHotelImagesForBooking($id);
-$hotelPrices = $hotelObj->getHotelPricesForBooking($id);
-$counterImage = 0;
-
-$review = new Review();
-$results = $review->getSingleHotelReview($id);
-
-if (count($hotelSelected) === 0) {
-    header('location: notfound.php');
-}
-?>
-
 <html lang="en">
 
 <head>
@@ -68,8 +43,32 @@ if (count($hotelSelected) === 0) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/plugin/relativeTime.min.js" integrity="sha512-ZpD5q39qjKdG3a3p8cttXCwl9C7InezFKiIVFaxmethhYdzvYTMxJuqqg3I0WmI5D7G4Qt0HiYfXjagboH8/jQ==" crossorigin="anonymous"></script>
 
 </head>
-
 <body>
+    <main>
+    <?php
+    require '../vendor/autoload.php';
+
+    use sitvago\Hotel;
+    use sitvago\Review;
+
+    $id = $_GET['key'];
+
+    $hotelObj = new Hotel();
+    $sss = new Hotel();
+    $roomCategoriesResults = $hotelObj->getRoomCategories();
+    $hotelSelected = $hotelObj->getHotelInfoForBooking($id);
+    $hotelImagesSelected = $hotelObj->getHotelImagesForBooking($id);
+    $hotelPrices = $hotelObj->getHotelPricesForBooking($id);
+    $counterImage = 0;
+
+    $review = new Review();
+    $results = $review->getSingleHotelReview($id);
+
+    if (count($hotelSelected) === 0) {
+        header('location: notfound.php');
+    }
+    ?>
+
     <?php
     session_start();
     if (isset($_SESSION['username'])) {
@@ -84,7 +83,7 @@ if (count($hotelSelected) === 0) {
     <link rel="stylesheet" href="css/booking.css">
     <section class="ftco-section">
         <div class="container">
-            <!--First Row Starts Here -->
+            <!--First Row first column Starts Here -->
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
@@ -148,14 +147,19 @@ if (count($hotelSelected) === 0) {
                         </div>
                     </div>
                 </div>
+                <!--First Column Ends Here -->
+                
+                 <!--Second Column First Row Starts Here -->
                 <div class="col-lg-4 sidebar ftco-animate pl-md-5">
-                    <h3 class="hotel_selected"><?= $hotelSelected['name'] ?></h3>
-                    <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">
+                    <h1 class="hotel_selected"><?= $hotelSelected['name'] ?></h1>
+                    <label for="hotel_form">
+                    <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">               
                         <div class="form-group">
-                            <label for="checkin"><input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required></label>
+                            <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
+
                         </div>
                         <div class="form-group">
-                            <label for="checkout"><input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required></label>
+                            <input class="form-control" type="text" id="checkout" name="checkout" placeholder="Check-Out-Date" required>
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="TypeOfRooms" name="TypeOfRooms" required>
@@ -166,20 +170,21 @@ if (count($hotelSelected) === 0) {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="hotelName"><input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden></label>
-                            <label for="amountPN"><input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden></label>
+                           <input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden>
+                            <input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden>
                             <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
-                            <span id="error"></span>
+                            <!--<span id="error"></span>-->
                         </div>
                     </form>
+                    </label>    
                     <p>
-                        <h3 id="price"></h3>
+                        <h2 id="price"></h2>
                     </p>
                     <div id="descriptionArea"></div>
                     <hr />
                 </div>
             </div>
-            <!--First Row End Here -->
+            <!--Second Column First Row End Here -->
 
             <!--Review Section Starts Here -->
             <div class="container review-container">
@@ -367,6 +372,7 @@ if (count($hotelSelected) === 0) {
 
         buttonPost.addEventListener('click', postReview, false);
     </script>
+    </main>
 </body>
 
 </html>
