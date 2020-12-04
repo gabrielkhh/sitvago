@@ -242,7 +242,7 @@
                         <?php if (isset($_SESSION['username'])) : ?>
                             <div>
                                 <div class="mt-5">
-                                    <h3>Share your experience</h1>
+                                    <h3>Share your experience</h3>
                                         <label for="inputReviewTitle">Title your Review</label>
                                         <input type="text" id="inputReviewTitle" style="min-width: 100%" placeholder="If you could describe your experience in one sentence, what would it be?"></input>
 
