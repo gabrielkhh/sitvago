@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <?php
 session_start();
 
 if (isset($_GET['Message'])) {
     // unset($_SESSION['username']);
-    print '<script type="text/javascript">alert("' . $_GET['Message'] . '");</script>';
+    print '<script>alert("' . $_GET['Message'] . '");</script>';
 }
 
 if (isset($_GET['logout'])) {
@@ -11,7 +12,7 @@ if (isset($_GET['logout'])) {
     session_destroy();
 }
 ?>
-<!DOCTYPE html>
+
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
