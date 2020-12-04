@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <?php
 session_start();
 
@@ -20,7 +21,7 @@ and open the template in the editor.
 -->
 
 
-<html lang="en">
+
     <head>
 
         <title>Singapore Tourism Attraction Login Page</title>

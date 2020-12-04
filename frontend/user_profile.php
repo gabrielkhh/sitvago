@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <?php
 require '../vendor/autoload.php';
 
@@ -51,7 +52,7 @@ $bookings = new Booking();
 $results = $bookings->getBookings($userID);
 
 ?>
-<html lang="en">
+
     <head>
 
         <title>Singapore Tourism Attraction </title>
