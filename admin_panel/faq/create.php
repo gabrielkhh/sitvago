@@ -135,9 +135,15 @@ and open the template in the editor.
             var webFormDataInString = JSON.stringify(webFormData);
             console.log(webFormDataInString);
 
-            // CKEDITOR.instances['hotelDescription'].dataProcessor.toHtml("<p>Something just like this</p>");
+            var isValid = false;
 
-            if (true) {
+            if ((collectedQuestion !== "") && (collectedCategory !== "" && collectedCategory !== null) && (collectedAnswer !== ""))
+            {
+                //Inputs are not empty
+                isValid = true;
+            }
+
+            if (isValid) {
                 $saveFAQHandler = jQuery.ajax({
                     type: 'POST',
                     url: 'faq_handler.php',
@@ -159,10 +165,18 @@ and open the template in the editor.
                 $saveFAQHandler.fail(function(jqXHR, textStatus, error) {
                     swal({
                         title: "Something Went Wrong :(",
-                        text: "Test",
+                        text: "There was an error saving the FAQ into the Database.",
                         icon: "error"
                     });
                 });
+            }
+            else
+            {
+                swal({
+                        title: "Invalid Fields",
+                        text: "Please make sure that all fields are filled up.",
+                        icon: "error"
+                    });
             }
         }
 

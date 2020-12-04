@@ -157,8 +157,15 @@ and open the template in the editor.
             var webFormDataInString = JSON.stringify(webFormData);
             console.log(webFormDataInString);
 
-            // If statement for future validation checks.
-            if (true) {
+            var isValid = false;
+
+            if ((collectedQuestion !== "") && (collectedCategory !== "" && collectedCategory !== null) && (collectedAnswer !== ""))
+            {
+                //Inputs are not empty
+                isValid = true;
+            }
+
+            if (isValid) {
                 $saveFAQHandler = jQuery.ajax({
                     type: 'PUT',
                     url: 'faq_handler.php',
@@ -183,6 +190,14 @@ and open the template in the editor.
                         icon: "error"
                     });
                 });
+            }
+            else
+            {
+                swal({
+                        title: "Invalid Fields",
+                        text: "Please make sure that all fields are filled up.",
+                        icon: "error"
+                    });
             }
         }
 

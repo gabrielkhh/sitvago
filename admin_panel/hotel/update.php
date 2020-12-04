@@ -244,6 +244,7 @@ and open the template in the editor.
                 });
                 obj["id"] = hotelID;
                 obj["hotelName"] = hotelName;
+                obj["option"] = "updateHotel";
                 console.log(obj);
                 return obj;
                 // return out;
