@@ -1,13 +1,10 @@
 <!DOCTYPE html>
+<html lang="en">
 <?php
 session_start();
-
-
 $data = $_SESSION['INFO'];
 unset($_SESSION['INFO']);
 ?>
-<html lang="en">
-
     <head>
 
         <title>Singapore Tourism Attraction </title>
@@ -67,6 +64,9 @@ unset($_SESSION['INFO']);
             </div>
         </div>
     </div>
+    <?php
+    include "footer.php";
+    ?>
 </body>
 
 
