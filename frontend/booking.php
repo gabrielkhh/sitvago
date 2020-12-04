@@ -152,7 +152,7 @@
                  <!--Second Column First Row Starts Here -->
                 <div class="col-lg-4 sidebar ftco-animate pl-md-5">
                     <h1 class="hotel_selected"><?= $hotelSelected['name'] ?></h1>
-                    <label for="hotel_form">
+                    
                     <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">               
                         <div class="form-group">
                             <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
@@ -170,13 +170,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                           <input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden>
-                            <input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden>
-                            <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
+                           <label for="hotelName">
+                           <input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden></label>
+                           <input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden>
+                           <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
                             <!--<span id="error"></span>-->
                         </div>
                     </form>
-                    </label>    
+                      
                     <p>
                         <h2 id="price"></h2>
                     </p>
