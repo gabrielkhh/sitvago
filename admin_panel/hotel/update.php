@@ -282,7 +282,7 @@ and open the template in the editor.
 
             var isValid = false;
 
-            if ((collectedHotelName !== "") && (collectedArea !== "" && collectedArea !== null) && (collectedHotelDescription !== "")) {
+            if ((collectedHotelName !== "") && (collectedGeoLocation !== "" && collectedGeoLocation !== null) && (collectedHotelDescription !== "")) {
                 //Inputs are not empty
                 isValid = true;
             }
@@ -317,7 +317,7 @@ and open the template in the editor.
                         text: "Please make sure that all fields are filled up.",
                         icon: "error"
                     });
-            }
+            }   
         }
 
         var deleteHotel = function(e) {
