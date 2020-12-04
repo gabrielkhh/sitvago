@@ -133,6 +133,9 @@ and open the template in the editor.
                             </div>
                         </div>
                     <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="container">
