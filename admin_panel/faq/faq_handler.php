@@ -20,28 +20,25 @@ if ($dataFromClient['option'] === 'createFAQ')
 }
 else if ($dataFromClient['option'] === 'updateFAQ')
 {
-    // $hotel = new Hotel();
+    $faq = new FAQ();
  
-    // $hotelID = $dataFromClient['id'];
-    // $hotelName = $dataFromClient['name'];
-    // $hotelGeoLocation = $dataFromClient['geoLocation'];
-    // $hotelDescription = $dataFromClient['description'];
-    // $amounts = json_decode($dataFromClient['amounts'], true);
-    // $rating = 5.00;
-    // $userID = 1;
+    $faqQuestion = $dataFromClient['question'];
+    $faqAnswer = $dataFromClient['answer'];
+    $faqCategory = $dataFromClient['category'];
+    $userID = $dataFromClient['user_id'];
+    $faqID = $dataFromClient['faq_id'];
  
-    // $result = $hotel->updateHotel($hotelID, $hotelName, $hotelDescription, $hotelGeoLocation, $rating, $userID, $amounts);
-    // echo json_encode($result);
+    $result = $faq->updateFAQ($faqID, $faqQuestion, $faqAnswer, $userID, $faqCategory);
+    echo json_encode($result);
 }
 else if ($dataFromClient['option'] === 'deleteFAQ')
 {
-    // $hotel = new Hotel();
+    $faq = new FAQ();
  
-    // $hotelID = $dataFromClient['id'];
-    // $hotelName = $dataFromClient['name'];
+    $faqID = $dataFromClient['faq_id'];
  
-    // $result = $hotel->deleteHotel($hotelID, $hotelName);
-    // echo json_encode($result);
+    $result = $faq->deleteFAQ($faqID);
+    echo json_encode($result);
 }
 
 

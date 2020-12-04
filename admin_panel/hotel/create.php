@@ -204,6 +204,7 @@ and open the template in the editor.
                 });
                 obj["id"] = insertedHotelId;
                 obj["hotelName"] = insertedHotelName;
+                obj["option"] = "createHotel";
                 console.log(obj);
                 return obj;
                 // return out;
@@ -221,12 +222,6 @@ and open the template in the editor.
                     window.location = "index.php";
                 });
             });
-        // window.$hotelImageInputElement.on('filebatchuploaderror',
-        //     function(event, data, msg) {
-        //         console.log("lmfao");
-        //         console.log(data);
-        //         console.log(msg);
-        //     });
 
         var saveHotel = function(e) {
             var collectedHotelName = $("#inputHotelName").val();
@@ -235,22 +230,33 @@ and open the template in the editor.
 
             var collectedAmt = {};
 
+            var amtIsValid = true;
+
             $('.amount-class').each(function(i) {
                 var nameType = $(this).attr('name');
                 var val = $(this).val();
+                if (val === null || val === "")
+                {
+                    amtIsValid = false;
+                }
                 collectedAmt[nameType] = val;
             });
             console.log(collectedAmt);
 
+            var isValid = false;
+
+            if ((collectedHotelName !== "") && (collectedArea !== "" && collectedArea !== null) && (collectedHotelDescription !== ""))
+            {
+                //Inputs are not empty
+                isValid = true;
+            }
 
             var webFormData = new WebFormInfo(collectedHotelName, collectedArea, collectedHotelDescription, JSON.stringify(collectedAmt));
             var webFormDataInString = JSON.stringify(webFormData);
             console.log(webFormDataInString);
 
-            // CKEDITOR.instances['hotelDescription'].dataProcessor.toHtml("<p>Something just like this</p>");
 
-            // If statement for future validation checks.
-            if (true) {
+            if (isValid && amtIsValid) {
                 $saveHotelHandler = jQuery.ajax({
                     type: 'POST',
                     url: 'hotel_handler.php',
@@ -277,6 +283,14 @@ and open the template in the editor.
                     console.log(textStatus);
                     console.log(jqXHR);
                 });
+            }
+            else
+            {
+                swal({
+                        title: "Invalid Fields",
+                        text: "Please make sure that all fields are filled up.",
+                        icon: "error"
+                    });
             }
         }
 

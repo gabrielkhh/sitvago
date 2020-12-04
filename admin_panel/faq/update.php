@@ -1,10 +1,13 @@
 <?php
+$id = $_GET['key'];
+
 require '../../vendor/autoload.php';
 
 use sitvago\FAQ;
 
-$faqCat = new FAQ();
-$results = $faqCat->getFAQCategories();
+$faq = new FAQ();
+$rowFAQ = $faq->getSingleFAQ($id);
+$rowCategories = $faq->getFAQCategories();
 
 if (isset($_COOKIE['session_id']))
     session_id($_COOKIE['session_id']);
@@ -19,8 +22,6 @@ if (!isset($_SESSION['username'])) {
 else if($_SESSION['role_name']!= "Administrator"){
     header("location: https://sitvago.com/forbidden.php");
 }
-
-$userID = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <!--
@@ -32,7 +33,7 @@ and open the template in the editor.
 
 <head>
     <meta charset="UTF-8">
-    <title>Hotel Sitvago CMS - Create FAQ</title>
+    <title>Hotel Sitvago CMS - Update FAQ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--CSS Sources-->
@@ -53,7 +54,7 @@ and open the template in the editor.
     include "../navbar_Admin.php";
     ?>
     <main class="container main-content mt-2">
-        <h1>Add a New FAQ</h1>
+        <h1>Update FAQ details</h1>
 
         <div class="row">
             <div class="col-md-12">
@@ -69,17 +70,29 @@ and open the template in the editor.
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="inputQuestion">Question</label>
-                                                <input class="form-control" id="inputQuestion" placeholder="Why Choose Sitvago?">
+                                                <?php
+                                                echo "<input class='form-control' id='inputQuestion' placeholder='Why Choose Sitvago?' value='" . $rowFAQ['question'] . "'>";
+                                                ?>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="selectCategory">Category</label>
                                                 <select class="form-control" id="selectCategory">
-                                                    <option value="" selected disabled>Choose a category</option>
-                                                    <?php foreach ($results as $row) : ?>
-                                                        <option value="<?= $row['id'] ?>"><?= $row['category_name'] ?></option>
-                                                    <?php endforeach; ?>
+                                                    <option value="" disabled>Choose a category</option>
+                                                    <?php
+                                                    foreach ($rowCategories as $row) {
+                                                        if ($row['id'] === $rowFAQ['category_id']) {
+                                                            echo "<option value='" . $row['id'] . "' selected>";
+                                                            echo $row['category_name'];
+                                                            echo "</option>";
+                                                        } else {
+                                                            echo "<option value='" . $row['id'] . "'>";
+                                                            echo $row['category_name'];
+                                                            echo "</option>";
+                                                        }
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -89,12 +102,18 @@ and open the template in the editor.
                                         <textarea class="form-control" id="answer"></textarea>
                                         <script>
                                             CKEDITOR.replace('answer');
+                                            <?php
+                                            echo "var encodedDataDescription = '" . $rowFAQ['answer'] . "';";
+                                            echo "var decodedDataDescription = decodeURI(encodedDataDescription);";
+                                            ?>
+                                            CKEDITOR.instances['answer'].setData(decodedDataDescription);
                                         </script>
                                     </div>
                                 </form>
                                 <div class="float-right">
-                                    <button id="btnCancel" class="btn btn-danger">Cancel</button>
-                                    <button id="btnSave" class="btn btn-primary">Save FAQ</button>
+                                    <?php echo "<button id='btnDelete' class='btn btn-danger' value='" . $id . "'>Delete</button>"; ?>
+                                    <button id="btnCancel" class="btn btn-warning">Cancel</button>
+                                    <?php echo "<button id='btnSave' class='btn btn-primary' value='" . $id . "'>Save Changes</button>"; ?>
                                 </div>
                             </div>
                         </div>
@@ -110,19 +129,23 @@ and open the template in the editor.
 </body>
 
 </html>
-
+<script type="text/javascript">
+    var faqID = <?= $id; ?>;
+    var userID = <?= $_SESSION['user_id'] ?>;
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
-        var userId = <?= $userID ?>;
         var buttonSave = document.getElementById("btnSave");
+        var buttonDelete = document.getElementById("btnDelete");
         var buttonCancel = document.getElementById("btnCancel");
 
-        function WebFormInfo(faqQuestion, faqCategory, faqAnswer, userID) {
-            this.option = "createFAQ";
+        function WebFormInfo(faqQuestion, faqCategory, faqAnswer, userID, faqID) {
+            this.option = "updateFAQ";
             this.question = faqQuestion;
             this.category = faqCategory;
             this.answer = faqAnswer;
-            this.user_id = userID
+            this.user_id = userID;
+            this.faq_id = faqID
         }
 
         var saveFAQ = function(e) {
@@ -130,8 +153,7 @@ and open the template in the editor.
             var collectedCategory = $("#selectCategory").val();
             var collectedAnswer = encodeURI(CKEDITOR.instances.answer.getData());
 
-
-            var webFormData = new WebFormInfo(collectedQuestion, collectedCategory, collectedAnswer, userId);
+            var webFormData = new WebFormInfo(collectedQuestion, collectedCategory, collectedAnswer, userID, faqID);
             var webFormDataInString = JSON.stringify(webFormData);
             console.log(webFormDataInString);
 
@@ -145,7 +167,7 @@ and open the template in the editor.
 
             if (isValid) {
                 $saveFAQHandler = jQuery.ajax({
-                    type: 'POST',
+                    type: 'PUT',
                     url: 'faq_handler.php',
                     dataType: 'json',
                     contentType: 'application/json;',
@@ -154,18 +176,17 @@ and open the template in the editor.
 
                 $saveFAQHandler.done(function(data) {
                     swal({
-                        title: "Saved FAQ",
+                        title: "Updated FAQ Information",
                         text: data.message,
                         icon: "success"
                     }).then(function() {
                         window.location = "index.php";
                     });
-                    console.log(data);
                 });
                 $saveFAQHandler.fail(function(jqXHR, textStatus, error) {
                     swal({
                         title: "Something Went Wrong :(",
-                        text: "There was an error saving the FAQ into the Database.",
+                        text: textStatus,
                         icon: "error"
                     });
                 });
@@ -180,12 +201,62 @@ and open the template in the editor.
             }
         }
 
+        var deleteFAQ = function(e) {
+            function WebFormDelete(faqID) {
+                this.option = "deleteFAQ";
+                this.faq_id = faqID
+            }
+
+            var webFormData = new WebFormDelete(faqID);
+            var webFormDataInString = JSON.stringify(webFormData);
+
+            swal({
+                    title: "Are You Sure?",
+                    text: "You are about to remove this FAQ from existence.",
+                    icon: "warning",
+                    buttons: ["Nope", "I'm very sure"],
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $saveHotelHandler = jQuery.ajax({
+                            type: 'DELETE',
+                            url: 'faq_handler.php',
+                            dataType: 'json',
+                            contentType: 'application/json;',
+                            data: webFormDataInString
+                        })
+
+                        $saveHotelHandler.done(function(data) {
+                            swal({
+                                title: "Deleted!",
+                                text: data.message,
+                                icon: "success"
+                            }).then(function() {
+                                window.location = "index.php";
+                            });
+                            console.log(data);
+                        });
+                        $saveHotelHandler.fail(function(jqXHR, textStatus, error) {
+                            swal({
+                                title: "Something Went Wrong :(",
+                                text: "There seems to be a problem with deletion.",
+                                icon: "error"
+                            });
+                            console.log(error);
+                            console.log(textStatus);
+                            console.log(jqXHR);
+                        });
+                    }
+                });
+        }
+
         var cancelFAQ = function(e) {
             swal({
                     title: "Are You Sure?",
-                    text: "Leave this page and return to the previous page?",
+                    text: "You are about to discard any changes made and return back to the hotel lists page.",
                     icon: "warning",
-                    buttons: ["Nope", "Yes Of Course!"],
+                    buttons: ["Nope", "Confirm Plus Chop"],
                     dangerMode: false,
                 })
                 .then((willCancel) => {
@@ -197,5 +268,9 @@ and open the template in the editor.
 
         buttonSave.addEventListener('click', saveFAQ, false);
         buttonCancel.addEventListener('click', cancelFAQ, false);
+        buttonDelete.addEventListener('click', deleteFAQ, false);
     });
+
+
+    // Your code to save "data", usually through Ajax.
 </script>

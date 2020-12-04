@@ -53,18 +53,6 @@ class FAQ extends DB
             }
         }
 
-        //$resultsSQL = mysqli_query($this->conn, $sqlInner);
-
-        // if (mysqli_num_rows($resultsSQL) > 0) {
-        //     while ($row = mysqli_fetch_assoc($resultsSQL)) {
-        //         foreach ($resultsOuter as $catName) {
-        //             if ($row['cat_name'] === $catName) {
-        //                 $results[$catName] = $row;
-        //                 break;
-        //             }
-        //         }
-        //     }
-        // }
         return $results;
     }
 
@@ -83,6 +71,16 @@ class FAQ extends DB
             }
         }
         return $results;
+    }
+
+    public function getSingleFAQ($faqID)
+    {
+        $SQL = "SELECT FAQ.id, FAQ.question, FAQ.answer, FAQ.category_id FROM FAQ WHERE FAQ.id=" . $faqID . ";";
+
+        $resultGeoLocation = mysqli_query($this->conn, $SQL);
+        $result = mysqli_fetch_assoc($resultGeoLocation);
+
+        return $result;
     }
 
     public function addFAQ($faqQuestion, $faqAnswer, $faqCategory, $userID)
@@ -117,11 +115,66 @@ class FAQ extends DB
         return $response;
     }
 
-    public function updateFAQ($faqID)
+    public function updateFAQ($faqID, $faqQuestion, $faqAnswer, $userID, $faqCategory)
     {
+        $response = [];
+        $success = true;
+        $preparedSQL = "UPDATE FAQ SET question=?, answer=?, updated_at=now(), updated_by=?, category_id=? WHERE FAQ.id=?";
+
+        if ($this->conn->connect_error) {
+            $errorMsg = "Connection failed: " . $this->conn->connect_error;
+            $success = false;
+            $response['success'] = $success;
+            $response['message'] = $errorMsg;
+            $response['error'] = $errorMsg;
+        } else {
+            $stmt = $this->conn->prepare($preparedSQL);
+            $stmt->bind_param("ssiii", $faqQuestion, $faqAnswer, $userID, $faqCategory, $faqID);
+            if (!$stmt->execute()) {
+                $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
+                $response['success'] = $success;
+                $response['message'] = $errorMsg;
+                $response['error'] = $errorMsg;
+            } else {
+                $response['success'] = $success;
+                $response['message'] = "FAQ has been successfully updated and saved into the database!!";
+                $response['error'] = "";
+            }
+            $stmt->close();
+        }
+        $this->conn->close();
+        return $response;
     }
 
     public function deleteFAQ($faqID)
     {
+        $results = [];
+        $success = true;
+        $preparedSQL = "DELETE FROM FAQ WHERE id=?";
+
+
+        if ($this->conn->connect_error) {
+            $errorMsg = "Connection failed: " . $this->conn->connect_error;
+            $success = false;
+            $response['success'] = $success;
+            $response['message'] = "Connection Error";
+            $response['error'] = $errorMsg;
+        } else {
+            $stmt = $this->conn->prepare($preparedSQL);
+            $stmt->bind_param("i", $faqID);
+            if (!$stmt->execute()) {
+                $errorMsg = "Execute failed: (" . $stmt->errno . ")" . $stmt->error;
+                $response['success'] = $success;
+                $response['message'] = $errorMsg;
+                $response['error'] = $errorMsg;
+            } else {
+                $response['success'] = $success;
+                $response['message'] = "FAQ has been successfully deleted from the database.";
+                $response['error'] = "";
+            }
+            $stmt->close();
+        }
+        $this->conn->close();
+        return $response;
     }
 }

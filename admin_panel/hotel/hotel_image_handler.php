@@ -17,23 +17,25 @@ $dotenv->load();
 
 $hotelName = $_POST['hotelName'];
 $hotelID = $_POST['id'];
+$option = $_POST['option'];
 $results = [];
 $files = array();
 
 if (empty($_FILES['fileInput'])) {
-    //User did not add any files to upload, so we will set a default placeholder image.
-    $imgIsThumbnail = 1;
+    if ($option === "createHotel") {
+        //User did not add any files to upload, so we will set a default placeholder image.
+        $imgIsThumbnail = 1;
 
-    //Save the information into HotelImages Table
-    $url ="https://res.cloudinary.com/gabrielkok/image/upload/v1606964701/sitvago/Logo/placeholder_900x600.png";
-    $secure_url ="https://res.cloudinary.com/gabrielkok/image/upload/v1606964701/sitvago/Logo/placeholder_900x600.png";
-    $width = 900;
-    $height = 600;
-    $imgExtension = "png";
-    $originalSrc = "Team Sitvago";
-    $hotel = new Hotel();
-    $results = $hotel->addHotelImage($hotelID, $url, $secure_url, $width, $height, $imgExtension, $imgIsThumbnail, $originalSrc);
-    
+        //Save the information into HotelImages Table
+        $url = "https://res.cloudinary.com/gabrielkok/image/upload/v1606964701/sitvago/Logo/placeholder_900x600.png";
+        $secure_url = "https://res.cloudinary.com/gabrielkok/image/upload/v1606964701/sitvago/Logo/placeholder_900x600.png";
+        $width = 900;
+        $height = 600;
+        $imgExtension = "png";
+        $originalSrc = "Team Sitvago";
+        $hotel = new Hotel();
+        $results = $hotel->addHotelImage($hotelID, $url, $secure_url, $width, $height, $imgExtension, $imgIsThumbnail, $originalSrc);
+    }
 } else {
     // There is one or more files to upload, count them and add them to the database.
     $totalFiles = count($_FILES['fileInput']['name']);
