@@ -78,6 +78,10 @@ body{
     float: none; 
     width:400px;
 }
+
+card-img-top{
+    width:100%;
+}
 #card-h2{
     margin: 0 auto; 
     float: none; 
