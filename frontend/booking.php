@@ -163,7 +163,7 @@
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="TypeOfRooms" name="TypeOfRooms" required>
-                                <option value="disabled" selected disabled>Choose A Room Type</option>
+                                <option value="disabled" selected disabled placeholder="Choose A Room Type">Choose A Room Type</option>
                                 <?php foreach ($roomCategoriesResults as $row) : ?>
                                     <option id="<?= $row['id'] ?>" value="<?= $row['category_name'] ?>"><?= $row['category_name'] ?></option>
                                 <?php endforeach; ?>
@@ -173,14 +173,13 @@
                            <label for="hotelName">
                            <input class="form-control" type="text" id="hotelName" name="hotelName" value="<?= $hotelSelected['name'] ?>" hidden></label>
                            <input class="form-control" type="text" id="amountPN" name="amountPN" value="" hidden>
-                           <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button></a>
+                           <button class="btn btn-primary" type="submit" name="book_btn" id="book_btn">Book Now!</button>
                             <!--<span id="error"></span>-->
                         </div>
                     </form>
-                      
-                    <p>
-                        <h2 id="price"></h2>
-                    </p>
+                                        
+                    <p> id="price"></p>
+                   
                     <div id="descriptionArea"></div>
                     <hr />
                 </div>
@@ -210,7 +209,7 @@
                                     const now = dayjs();
                                 </script>
                                 <?php foreach ($results as $row) : ?>
-                                    <div class=reviewItem mt-3">
+                                    <div class="reviewItem mt-3">
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <p class="float-left">Posted by : &nbsp;&nbsp;&nbsp;<?= $row['username'] ?></p>
