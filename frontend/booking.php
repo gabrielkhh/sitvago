@@ -149,7 +149,8 @@
                 </div>
                 <div class="col-lg-4 sidebar ftco-animate pl-md-5">
                     <h1 class="hotel_selected"><?= $hotelSelected['name'] ?></h1>
-                    <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">
+                    <label for="hotel_form">
+                    <form action="confirmation.php" method="POST" autocomplete="off" id="hotel_form" name="hotel_form">               
                         <div class="form-group">
                             <input class="form-control" type="text" id="checkin" name="checkin" placeholder="Check-In-Date" required>
 
@@ -172,6 +173,7 @@
                             <!--<span id="error"></span>-->
                         </div>
                     </form>
+                    </label>    
                     <p>
                         <h2 id="price"></h2>
                     </p>
