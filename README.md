@@ -5,9 +5,7 @@ Hotel? Sitvago!!
 PHP Dot Env, Stripe, Cloudinary, Mailgun
 
 ### Project URLs
-[Public-facing Website (/frontend)](https://www.sitvago.com)
-
-[Admin Panel (/admin_panel)](https://admin.sitvago.com)
+[Defunct]
 
 ### Useful Git Commands:
 Check what is in the working tree (What files that you have modified/created/deleted) (Red is not added for staging yet, green is added already)  
